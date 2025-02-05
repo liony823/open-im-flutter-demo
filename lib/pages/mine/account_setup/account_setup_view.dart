@@ -76,7 +76,7 @@ class AccountSetupPage extends StatelessWidget {
                 ),
                 _buildItemView(
                   label: StrRes.clearChatHistory,
-                  textStyle: Styles.ts_FF381F_17sp,
+                  textStyle: Styles.ts_FF381F_17,
                   onTap: logic.clearChatHistory,
                   showRightArrow: true,
                   isBottomRadius: true,
@@ -118,7 +118,7 @@ class AccountSetupPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Row(
                 children: [
-                  label.toText..style = textStyle ?? Styles.ts_0C1C33_17sp,
+                  label.toText..style = textStyle ?? Styles.ts_0C1C33_17,
                   const Spacer(),
                   if (showSwitchButton)
                     CupertinoSwitch(

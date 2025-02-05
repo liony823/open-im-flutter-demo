@@ -46,7 +46,7 @@ class CustomDialog extends StatelessWidget {
                   ),
                   child: Text(
                     title ?? '',
-                    style: Styles.ts_0C1C33_17sp,
+                    style: Styles.ts_0C1C33_17,
                   ),
                 ),
                 Divider(
@@ -58,7 +58,7 @@ class CustomDialog extends StatelessWidget {
                     _button(
                       bgColor: Styles.c_FFFFFF,
                       text: leftText ?? StrRes.cancel,
-                      textStyle: Styles.ts_0C1C33_17sp,
+                      textStyle: Styles.ts_0C1C33_17,
                       onTap: onTapLeft ?? () => Get.back(result: false),
                     ),
                     Container(
@@ -69,7 +69,7 @@ class CustomDialog extends StatelessWidget {
                     _button(
                       bgColor: Styles.c_FFFFFF,
                       text: rightText ?? StrRes.determine,
-                      textStyle: Styles.ts_0089FF_17sp,
+                      textStyle: Styles.ts_0089FF_17,
                       onTap: onTapRight ?? () => Get.back(result: true),
                     ),
                   ],
@@ -133,8 +133,9 @@ class ForwardHintDialog extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                (list.length == 1 ? StrRes.sentTo : StrRes.sentSeparatelyTo).toText
-                  ..style = Styles.ts_0C1C33_17sp_medium,
+                (list.length == 1 ? StrRes.sentTo : StrRes.sentSeparatelyTo)
+                    .toText
+                  ..style = Styles.ts_0C1C33_17_medium,
                 5.verticalSpace,
                 list.length == 1
                     ? Row(
@@ -146,7 +147,7 @@ class ForwardHintDialog extends StatelessWidget {
                           10.horizontalSpace,
                           Expanded(
                             child: (list.first['nickname'] ?? '').toText
-                              ..style = Styles.ts_0C1C33_17sp
+                              ..style = Styles.ts_0C1C33_17
                               ..maxLines = 1
                               ..overflow = TextOverflow.ellipsis,
                           ),
@@ -155,7 +156,8 @@ class ForwardHintDialog extends StatelessWidget {
                     : ConstrainedBox(
                         constraints: BoxConstraints(maxHeight: 120.h),
                         child: GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 5,
                             crossAxisSpacing: 10.w,
                             mainAxisSpacing: 0,
@@ -171,7 +173,7 @@ class ForwardHintDialog extends StatelessWidget {
                               ),
                               10.horizontalSpace,
                               (list.elementAt(index)['nickname'] ?? '').toText
-                                ..style = Styles.ts_8E9AB0_10sp
+                                ..style = Styles.ts_8E9AB0_10
                                 ..maxLines = 1
                                 ..overflow = TextOverflow.ellipsis,
                             ],
@@ -180,7 +182,7 @@ class ForwardHintDialog extends StatelessWidget {
                       ),
                 5.verticalSpace,
                 title.toText
-                  ..style = Styles.ts_8E9AB0_14sp
+                  ..style = Styles.ts_8E9AB0_14
                   ..maxLines = 1
                   ..overflow = TextOverflow.ellipsis,
                 16.verticalSpace,
@@ -188,11 +190,11 @@ class ForwardHintDialog extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     StrRes.cancel.toText
-                      ..style = Styles.ts_0C1C33_17sp
+                      ..style = Styles.ts_0C1C33_17
                       ..onTap = () => Get.back(),
                     26.horizontalSpace,
                     StrRes.determine.toText
-                      ..style = Styles.ts_0089FF_17sp
+                      ..style = Styles.ts_0089FF_17
                       ..onTap = () => Get.back(result: true),
                   ],
                 )

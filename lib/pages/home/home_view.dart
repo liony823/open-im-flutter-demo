@@ -21,20 +21,24 @@ class HomePage extends StatelessWidget {
               onDoubleTap: () {
                 logic.scrollToUnreadMessage();
               },
-              child: _setupIcon(ImageRes.homeTab1Sel.toImage, logic.unreadMsgCount.value),
+              child: _setupIcon(
+                  ImageRes.homeTab1Sel.toImage, logic.unreadMsgCount.value),
             ),
-            inactiveIcon: _setupIcon(ImageRes.homeTab1Nor.toImage, logic.unreadMsgCount.value),
+            inactiveIcon: _setupIcon(
+                ImageRes.homeTab1Nor.toImage, logic.unreadMsgCount.value),
             title: StrRes.home,
-            textStyle: Styles.ts_0089FF_10sp_semibold,
+            textStyle: Styles.ts_0089FF_10_semibold,
           ),
         ),
         PersistentTabConfig(
           screen: ContactsPage(),
           item: ItemConfig(
-            icon: _setupIcon(ImageRes.homeTab2Sel.toImage, logic.unhandledCount.value),
-            inactiveIcon: _setupIcon(ImageRes.homeTab2Nor.toImage, logic.unhandledCount.value),
+            icon: _setupIcon(
+                ImageRes.homeTab2Sel.toImage, logic.unhandledCount.value),
+            inactiveIcon: _setupIcon(
+                ImageRes.homeTab2Nor.toImage, logic.unhandledCount.value),
             title: StrRes.contacts,
-            textStyle: Styles.ts_0089FF_10sp_semibold,
+            textStyle: Styles.ts_0089FF_10_semibold,
           ),
         ),
         PersistentTabConfig(
@@ -43,7 +47,7 @@ class HomePage extends StatelessWidget {
             icon: ImageRes.homeTab3Sel.toImage,
             inactiveIcon: ImageRes.homeTab3Nor.toImage,
             title: StrRes.workbench,
-            textStyle: Styles.ts_0089FF_10sp_semibold,
+            textStyle: Styles.ts_0089FF_10_semibold,
           ),
         ),
         PersistentTabConfig(
@@ -52,7 +56,7 @@ class HomePage extends StatelessWidget {
             icon: ImageRes.homeTab4Sel.toImage,
             inactiveIcon: ImageRes.homeTab4Nor.toImage,
             title: StrRes.mine,
-            textStyle: Styles.ts_0089FF_10sp_semibold,
+            textStyle: Styles.ts_0089FF_10_semibold,
           ),
         ),
       ];
@@ -86,7 +90,8 @@ class HomePage extends StatelessWidget {
             navBarDecoration: const NavBarDecoration(
               color: Colors.white,
               boxShadow: [
-                BoxShadow(color: Colors.black12, blurRadius: 0.5, spreadRadius: 0.5),
+                BoxShadow(
+                    color: Colors.black12, blurRadius: 0.5, spreadRadius: 0.5),
               ],
             ),
           ),

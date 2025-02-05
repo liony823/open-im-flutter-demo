@@ -56,7 +56,7 @@ class CustomTabBar extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: labels.elementAt(i).toText
-                    ..style = Styles.ts_0C1C33_17sp,
+                    ..style = Styles.ts_0C1C33_17,
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,

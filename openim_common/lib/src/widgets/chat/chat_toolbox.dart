@@ -104,7 +104,7 @@ class ChatToolBox extends StatelessWidget {
             ..height = 58.h
             ..onTap = onTap,
           10.verticalSpace,
-          text.toText..style = Styles.ts_0C1C33_12sp,
+          text.toText..style = Styles.ts_0C1C33_12,
         ],
       );
 }

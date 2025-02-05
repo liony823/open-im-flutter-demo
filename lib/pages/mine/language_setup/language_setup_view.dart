@@ -76,7 +76,7 @@ class LanguageSetupPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Row(
                 children: [
-                  label.toText..style = Styles.ts_0C1C33_17sp,
+                  label.toText..style = Styles.ts_0C1C33_17,
                   const Spacer(),
                   if (isChecked)
                     ImageRes.checked.toImage

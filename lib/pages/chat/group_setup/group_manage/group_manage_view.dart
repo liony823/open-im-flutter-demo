@@ -63,13 +63,13 @@ class GroupManagePage extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: text.toText..style = textStyle ?? Styles.ts_0C1C33_17sp,
+                child: text.toText..style = textStyle ?? Styles.ts_0C1C33_17,
               ),
               if (null != value)
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: 150.w),
                   child: value.toText
-                    ..style = Styles.ts_8E9AB0_14sp
+                    ..style = Styles.ts_8E9AB0_14
                     ..maxLines = 1
                     ..overflow = TextOverflow.ellipsis,
                 ),

@@ -49,10 +49,11 @@ class MyQrcodePage extends StatelessWidget {
                         height: 48.h,
                         url: logic.imLogic.userInfo.value.faceURL,
                         text: logic.imLogic.userInfo.value.nickname,
-                        textStyle: Styles.ts_FFFFFF_14sp,
+                        textStyle: Styles.ts_FFFFFF_14,
                       ),
                       12.horizontalSpace,
-                      (logic.imLogic.userInfo.value.nickname ?? '').toText..style = Styles.ts_0C1C33_20sp,
+                      (logic.imLogic.userInfo.value.nickname ?? '').toText
+                        ..style = Styles.ts_0C1C33_20,
                     ],
                   ),
                 ),
@@ -64,7 +65,7 @@ class MyQrcodePage extends StatelessWidget {
                     child: Column(
                       children: [
                         StrRes.qrcodeHint.toText
-                          ..style = Styles.ts_8E9AB0_15sp
+                          ..style = Styles.ts_8E9AB0_16
                           ..textAlign = TextAlign.center,
                         20.verticalSpace,
                         Container(
@@ -73,7 +74,8 @@ class MyQrcodePage extends StatelessWidget {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: Styles.c_FFFFFF,
-                            border: Border.all(color: Styles.c_E8EAEF, width: 4.w),
+                            border:
+                                Border.all(color: Styles.c_E8EAEF, width: 4.w),
                           ),
                           child: QrImageView(
                             data: logic.buildQRContent(),

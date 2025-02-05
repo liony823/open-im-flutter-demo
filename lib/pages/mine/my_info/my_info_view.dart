@@ -40,7 +40,9 @@ class MyInfoPage extends StatelessWidget {
                     ),
                     _buildItemView(
                       label: StrRes.gender,
-                      value: imLogic.userInfo.value.isMale ? StrRes.man : StrRes.woman,
+                      value: imLogic.userInfo.value.isMale
+                          ? StrRes.man
+                          : StrRes.woman,
                       onTap: logic.selectGender,
                     ),
                     _buildItemView(
@@ -104,7 +106,7 @@ class MyInfoPage extends StatelessWidget {
           height: 46.h,
           child: Row(
             children: [
-              label.toText..style = Styles.ts_0C1C33_17sp,
+              label.toText..style = Styles.ts_0C1C33_17,
               const Spacer(),
               if (isAvatar)
                 AvatarView(
@@ -112,13 +114,13 @@ class MyInfoPage extends StatelessWidget {
                   height: 32.h,
                   url: url,
                   text: value,
-                  textStyle: Styles.ts_FFFFFF_10sp,
+                  textStyle: Styles.ts_FFFFFF_10,
                 )
               else
                 Expanded(
                     flex: 3,
                     child: (IMUtils.emptyStrToNull(value) ?? '').toText
-                      ..style = Styles.ts_0C1C33_17sp
+                      ..style = Styles.ts_0C1C33_17
                       ..maxLines = 1
                       ..overflow = TextOverflow.ellipsis
                       ..textAlign = TextAlign.right),

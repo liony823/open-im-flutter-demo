@@ -60,9 +60,10 @@ class BlacklistPage extends StatelessWidget {
                 ),
                 12.horizontalSpace,
                 Expanded(
-                  child: (info.nickname ?? '').toText..style = Styles.ts_0C1C33_17sp,
+                  child: (info.nickname ?? '').toText
+                    ..style = Styles.ts_0C1C33_17,
                 ),
-                StrRes.remove.toText..style = Styles.ts_0089FF_17sp,
+                StrRes.remove.toText..style = Styles.ts_0089FF_17,
               ],
             ),
           ),
@@ -79,7 +80,7 @@ class BlacklistPage extends StatelessWidget {
               ..width = 120.w
               ..height = 120.h,
             22.verticalSpace,
-            StrRes.blacklistEmpty.toText..style = Styles.ts_8E9AB0_16sp,
+            StrRes.blacklistEmpty.toText..style = Styles.ts_8E9AB0_16,
           ],
         ),
       );

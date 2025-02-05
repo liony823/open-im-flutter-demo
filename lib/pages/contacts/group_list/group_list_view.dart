@@ -39,7 +39,9 @@ class GroupListPage extends StatelessWidget {
           ),
           Expanded(
             child: Obx(
-              () => logic.index.value == 0 ? _buildICreatedListView() : _buildIJoinedListView(),
+              () => logic.index.value == 0
+                  ? _buildICreatedListView()
+                  : _buildIJoinedListView(),
             ),
           ),
         ],
@@ -98,8 +100,9 @@ class GroupListPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    (info.groupName ?? '').toText..style = Styles.ts_0C1C33_17sp,
-                    sprintf(StrRes.nPerson, [info.memberCount]).toText..style = Styles.ts_8E9AB0_14sp,
+                    (info.groupName ?? '').toText..style = Styles.ts_0C1C33_17,
+                    sprintf(StrRes.nPerson, [info.memberCount]).toText
+                      ..style = Styles.ts_8E9AB0_14,
                   ],
                 ),
               ],

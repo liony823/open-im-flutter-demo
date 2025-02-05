@@ -72,7 +72,7 @@ class MinePage extends StatelessWidget {
               text: logic.imLogic.userInfo.value.nickname,
               width: 48.w,
               height: 48.h,
-              textStyle: Styles.ts_FFFFFF_14sp,
+              textStyle: Styles.ts_FFFFFF_14,
             ),
             10.horizontalSpace,
             Expanded(
@@ -80,7 +80,8 @@ class MinePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  (logic.imLogic.userInfo.value.nickname ?? '').toText..style = Styles.ts_0C1C33_17sp_medium,
+                  (logic.imLogic.userInfo.value.nickname ?? '').toText
+                    ..style = Styles.ts_0C1C33_17_medium,
                   4.verticalSpace,
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
@@ -88,7 +89,8 @@ class MinePage extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        (logic.imLogic.userInfo.value.userID ?? '').toText..style = Styles.ts_8E9AB0_14sp,
+                        (logic.imLogic.userInfo.value.userID ?? '').toText
+                          ..style = Styles.ts_8E9AB0_14,
                         ImageRes.mineCopy.toImage
                           ..width = 16.w
                           ..height = 16.h,
@@ -147,7 +149,7 @@ class MinePage extends StatelessWidget {
                     ..width = 24.w
                     ..height = 24.h,
                   11.horizontalSpace,
-                  label.toText..style = Styles.ts_0C1C33_17sp,
+                  label.toText..style = Styles.ts_0C1C33_17,
                   const Spacer(),
                   ImageRes.rightArrow.toImage
                     ..width = 24.w

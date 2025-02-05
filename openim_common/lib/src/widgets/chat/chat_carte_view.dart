@@ -33,12 +33,12 @@ class ChatCarteView extends StatelessWidget {
                       height: 44.h,
                       url: cardElem.faceURL,
                       text: cardElem.nickname,
-                      textStyle: Styles.ts_FFFFFF_14sp_medium,
+                      textStyle: Styles.ts_FFFFFF_14_medium,
                     ),
                     10.horizontalSpace,
                     Flexible(
                       child: cardElem.nickname!.toText
-                        ..style = Styles.ts_0C1C33_17sp
+                        ..style = Styles.ts_0C1C33_17
                         ..overflow = TextOverflow.ellipsis,
                     ),
                   ],
@@ -49,7 +49,7 @@ class ChatCarteView extends StatelessWidget {
             Container(
               height: 26.h,
               padding: EdgeInsets.only(top: 4.h, bottom: 4.h, left: 17.w),
-              child: StrRes.carte.toText..style = Styles.ts_8E9AB0_12sp,
+              child: StrRes.carte.toText..style = Styles.ts_8E9AB0_12,
             )
           ],
         ),

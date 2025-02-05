@@ -34,7 +34,8 @@ class MapView extends StatelessWidget {
               ),
               children: [
                 TileLayer(
-                  urlTemplate: 'https://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}',
+                  urlTemplate:
+                      'https://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}',
                   userAgentPackageName: '',
                 ),
                 MarkerLayer(
@@ -60,9 +61,9 @@ class MapView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      address1.toText..style = Styles.ts_0C1C33_17sp_semibold,
+                      address1.toText..style = Styles.ts_0C1C33_17_semibold,
                       8.verticalSpace,
-                      address2.toText..style = Styles.ts_8E9AB0_14sp,
+                      address2.toText..style = Styles.ts_8E9AB0_14,
                     ],
                   ),
                 ),

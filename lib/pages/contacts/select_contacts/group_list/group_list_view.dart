@@ -47,7 +47,7 @@ class SelectContactsFromGroupPage extends StatelessWidget {
                               child: ChatRadio(checked: logic.isSelectAll),
                             )),
                         10.horizontalSpace,
-                        StrRes.selectAll.toText..style = Styles.ts_0C1C33_17sp,
+                        StrRes.selectAll.toText..style = Styles.ts_0C1C33_17,
                       ],
                     ),
                   ),
@@ -96,11 +96,11 @@ class SelectContactsFromGroupPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         (info.groupName ?? '').toText
-                          ..style = Styles.ts_0C1C33_17sp
+                          ..style = Styles.ts_0C1C33_17
                           ..maxLines = 1
                           ..overflow = TextOverflow.ellipsis,
                         sprintf(StrRes.nPerson, [info.memberCount]).toText
-                          ..style = Styles.ts_8E9AB0_14sp,
+                          ..style = Styles.ts_8E9AB0_14,
                       ],
                     ),
                   ),

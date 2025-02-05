@@ -69,12 +69,12 @@ class CreateGroupPage extends StatelessWidget {
                 12.horizontalSpace,
                 Flexible(
                   child: TextField(
-                    style: Styles.ts_0C1C33_17sp,
+                    style: Styles.ts_0C1C33_17,
                     autofocus: true,
                     controller: logic.nameCtrl,
                     inputFormatters: [LengthLimitingTextInputFormatter(16)],
                     decoration: InputDecoration(
-                      hintStyle: Styles.ts_8E9AB0_17sp,
+                      hintStyle: Styles.ts_8E9AB0_17,
                       hintText: StrRes.plsEnterGroupNameHint,
                       border: InputBorder.none,
                     ),
@@ -96,9 +96,10 @@ class CreateGroupPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
               child: Row(
                 children: [
-                  StrRes.groupMember.toText..style = Styles.ts_8E9AB0_17sp,
+                  StrRes.groupMember.toText..style = Styles.ts_8E9AB0_17,
                   const Spacer(),
-                  sprintf(StrRes.nPerson, [logic.allList.length]).toText..style = Styles.ts_8E9AB0_17sp,
+                  sprintf(StrRes.nPerson, [logic.allList.length]).toText
+                    ..style = Styles.ts_8E9AB0_17,
                 ],
               ),
             ),
@@ -122,11 +123,11 @@ class CreateGroupPage extends StatelessWidget {
                         height: 48.h,
                         url: info.faceURL,
                         text: info.nickname,
-                        textStyle: Styles.ts_FFFFFF_14sp,
+                        textStyle: Styles.ts_FFFFFF_14,
                       ),
                       2.verticalSpace,
                       (info.nickname ?? '').toText
-                        ..style = Styles.ts_8E9AB0_10sp
+                        ..style = Styles.ts_8E9AB0_10
                         ..maxLines = 1
                         ..overflow = TextOverflow.ellipsis,
                     ],

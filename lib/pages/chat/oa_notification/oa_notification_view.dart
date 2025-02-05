@@ -39,7 +39,8 @@ class OANotificationPage extends StatelessWidget {
     );
   }
 
-  Widget _buildItemView(int index, Message message, OANotification oa) => Column(
+  Widget _buildItemView(int index, Message message, OANotification oa) =>
+      Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -48,14 +49,16 @@ class OANotificationPage extends StatelessWidget {
           ),
           Text(
             IMUtils.getChatTimeline(message.sendTime!),
-            style: Styles.ts_8E9AB0_10sp,
+            style: Styles.ts_8E9AB0_10,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AvatarView(
                 url: oa.notificationFaceURL,
-                builder: oa.notificationFaceURL == null ? () => _buildCustomAvatar() : null,
+                builder: oa.notificationFaceURL == null
+                    ? () => _buildCustomAvatar()
+                    : null,
               ),
               SizedBox(width: 12.w),
               Expanded(
@@ -63,7 +66,7 @@ class OANotificationPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(oa.notificationName!, style: Styles.ts_0C1C33_14sp),
+                    Text(oa.notificationName!, style: Styles.ts_0C1C33_14),
                     GestureDetector(
                       onTap: () {},
                       behavior: HitTestBehavior.translucent,
@@ -83,21 +86,26 @@ class OANotificationPage extends StatelessWidget {
                           children: [
                             Text(
                               oa.notificationName!,
-                              style: Styles.ts_8E9AB0_14sp,
+                              style: Styles.ts_8E9AB0_14,
                             ),
                             Text(
                               oa.text!,
-                              style: Styles.ts_8E9AB0_12sp,
+                              style: Styles.ts_8E9AB0_12,
                             ),
-                            if (oa.mixType == 1 || oa.mixType == 2 || oa.mixType == 3)
+                            if (oa.mixType == 1 ||
+                                oa.mixType == 2 ||
+                                oa.mixType == 3)
                               Container(
                                 margin: EdgeInsets.only(top: 12.h),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    if (oa.mixType == 1) _buildPictureView(message, oa, index),
-                                    if (oa.mixType == 2) _buildVideoView(message, oa, index),
-                                    if (oa.mixType == 3) _buildFileView(message, oa, index),
+                                    if (oa.mixType == 1)
+                                      _buildPictureView(message, oa, index),
+                                    if (oa.mixType == 2)
+                                      _buildVideoView(message, oa, index),
+                                    if (oa.mixType == 3)
+                                      _buildFileView(message, oa, index),
                                   ],
                                 ),
                               ),
@@ -113,7 +121,8 @@ class OANotificationPage extends StatelessWidget {
         ],
       );
 
-  Widget _buildPictureView(Message message, OANotification oa, int index) => GestureDetector(
+  Widget _buildPictureView(Message message, OANotification oa, int index) =>
+      GestureDetector(
         onTap: () async {
           final url = oa.externalUrl;
           final canLunch = await canLaunchUrlString(url!);
@@ -128,7 +137,8 @@ class OANotificationPage extends StatelessWidget {
         ),
       );
 
-  Widget _buildVideoView(Message message, OANotification oa, int index) => GestureDetector(
+  Widget _buildVideoView(Message message, OANotification oa, int index) =>
+      GestureDetector(
         onTap: () {
           IMUtils.previewMediaFile(
             context: Get.context!,
@@ -143,7 +153,8 @@ class OANotificationPage extends StatelessWidget {
         ),
       );
 
-  Widget _buildFileView(Message message, OANotification oa, int index) => GestureDetector(
+  Widget _buildFileView(Message message, OANotification oa, int index) =>
+      GestureDetector(
         onTap: () {
           IMUtils.previewFile(message);
         },

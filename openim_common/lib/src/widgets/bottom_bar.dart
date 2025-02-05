@@ -37,7 +37,8 @@ class BottomBar extends StatelessWidget {
     );
   }
 
-  Widget _buildItemView({required int i, required BottomBarItem item}) => Expanded(
+  Widget _buildItemView({required int i, required BottomBarItem item}) =>
+      Expanded(
         child: GestureDetector(
           onDoubleTap: () => item.onDoubleClick?.call(i),
           onTapDown: (_) => item.onClick?.call(i),
@@ -49,7 +50,9 @@ class BottomBar extends StatelessWidget {
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    (i == index ? item.selectedImgRes.toImage : item.unselectedImgRes.toImage)
+                    (i == index
+                        ? item.selectedImgRes.toImage
+                        : item.unselectedImgRes.toImage)
                       ..width = item.imgWidth
                       ..height = item.imgHeight,
                     Positioned(
@@ -65,8 +68,8 @@ class BottomBar extends StatelessWidget {
                 4.verticalSpace,
                 item.label.toText
                   ..style = i == index
-                      ? (item.selectedStyle ?? Styles.ts_0089FF_10sp_semibold)
-                      : (item.unselectedStyle ?? Styles.ts_8E9AB0_10sp_semibold),
+                      ? (item.selectedStyle ?? Styles.ts_0089FF_10_semibold)
+                      : (item.unselectedStyle ?? Styles.ts_8E9AB0_10_semibold),
               ],
             ),
           ),
@@ -101,8 +104,8 @@ class BottomBar extends StatelessWidget {
               4.verticalSpace,
               item.label.toText
                 ..style = i == index
-                    ? (item.selectedStyle ?? Styles.ts_0089FF_10sp_semibold)
-                    : (item.unselectedStyle ?? Styles.ts_8E9AB0_10sp_semibold),
+                    ? (item.selectedStyle ?? Styles.ts_0089FF_10_semibold)
+                    : (item.unselectedStyle ?? Styles.ts_8E9AB0_10_semibold),
             ],
           ),
         ),*/

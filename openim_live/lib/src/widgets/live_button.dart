@@ -22,7 +22,7 @@ class LiveButton extends StatelessWidget {
           ..height = 62.h
           ..onTap = onTap,
         10.verticalSpace,
-        text.toText..style = Styles.ts_FFFFFF_opacity70_14sp,
+        text.toText..style = Styles.ts_FFFFFF_14.withOpacity(0.7),
       ],
     );
   }

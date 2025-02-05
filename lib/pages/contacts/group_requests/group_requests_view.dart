@@ -52,7 +52,7 @@ class GroupRequestsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       (info.nickname ?? '').toText
-                        ..style = Styles.ts_0C1C33_17sp
+                        ..style = Styles.ts_0C1C33_17
                         ..maxLines = 1
                         ..overflow = TextOverflow.ellipsis,
                       4.verticalSpace,
@@ -60,12 +60,12 @@ class GroupRequestsPage extends StatelessWidget {
                         RichText(
                           text: TextSpan(
                             text: StrRes.applyJoin,
-                            style: Styles.ts_8E9AB0_14sp,
+                            style: Styles.ts_8E9AB0_14,
                             children: [
                               WidgetSpan(child: 2.horizontalSpace),
                               TextSpan(
                                 text: logic.getGroupName(info),
-                                style: Styles.ts_0089FF_14sp,
+                                style: Styles.ts_0089FF_14,
                               ),
                             ],
                           ),
@@ -74,27 +74,27 @@ class GroupRequestsPage extends StatelessWidget {
                         RichText(
                           text: TextSpan(
                             text: logic.getInviterNickname(info),
-                            style: Styles.ts_0089FF_14sp,
+                            style: Styles.ts_0089FF_14,
                             children: [
                               WidgetSpan(child: 2.horizontalSpace),
                               TextSpan(
                                 text: StrRes.invite,
-                                style: Styles.ts_8E9AB0_14sp,
+                                style: Styles.ts_8E9AB0_14,
                               ),
                               WidgetSpan(child: 2.horizontalSpace),
                               TextSpan(
                                 text: info.nickname,
-                                style: Styles.ts_0089FF_14sp,
+                                style: Styles.ts_0089FF_14,
                               ),
                               WidgetSpan(child: 2.horizontalSpace),
                               TextSpan(
                                 text: StrRes.joinIn,
-                                style: Styles.ts_8E9AB0_14sp,
+                                style: Styles.ts_8E9AB0_14,
                               ),
                               WidgetSpan(child: 2.horizontalSpace),
                               TextSpan(
                                 text: logic.getGroupName(info),
-                                style: Styles.ts_0089FF_14sp,
+                                style: Styles.ts_0089FF_14,
                               ),
                             ],
                           ),
@@ -102,10 +102,11 @@ class GroupRequestsPage extends StatelessWidget {
                       if (null != IMUtils.emptyStrToNull(info.reqMsg))
                         Padding(
                           padding: EdgeInsets.only(top: 4.h),
-                          child: sprintf(StrRes.applyReason, [info.reqMsg!]).toText
-                            ..style = Styles.ts_8E9AB0_14sp
-                            ..maxLines = 1
-                            ..overflow = TextOverflow.ellipsis,
+                          child:
+                              sprintf(StrRes.applyReason, [info.reqMsg!]).toText
+                                ..style = Styles.ts_8E9AB0_14
+                                ..maxLines = 1
+                                ..overflow = TextOverflow.ellipsis,
                         ),
                     ],
                   ),
@@ -120,15 +121,17 @@ class GroupRequestsPage extends StatelessWidget {
           if (info.handleResult == 0 && !isISendRequest)
             Button(
               text: StrRes.lookOver,
-              textStyle: Styles.ts_FFFFFF_14sp,
+              textStyle: Styles.ts_FFFFFF_14,
               height: 28.h,
               padding: EdgeInsets.symmetric(horizontal: 13.w),
               onTap: () => logic.handle(info),
             ),
           if (info.handleResult == 0 && isISendRequest)
-            StrRes.waitingForVerification.toText..style = Styles.ts_8E9AB0_14sp,
-          if (info.handleResult == -1) StrRes.rejected.toText..style = Styles.ts_8E9AB0_14sp,
-          if (info.handleResult == 1) StrRes.approved.toText..style = Styles.ts_8E9AB0_14sp,
+            StrRes.waitingForVerification.toText..style = Styles.ts_8E9AB0_14,
+          if (info.handleResult == -1)
+            StrRes.rejected.toText..style = Styles.ts_8E9AB0_14,
+          if (info.handleResult == 1)
+            StrRes.approved.toText..style = Styles.ts_8E9AB0_14,
         ],
       ),
     );

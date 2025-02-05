@@ -176,8 +176,8 @@ class _RichTextInputBoxState extends State<RichTextInputBox> {
         child: ChatTextField(
           controller: widget.controller,
           focusNode: widget.focusNode,
-          style: Styles.ts_0C1C33_17sp,
-          atStyle: Styles.ts_0089FF_17sp,
+          style: Styles.ts_0C1C33_17,
+          atStyle: Styles.ts_0089FF_17,
           enabled: true,
           textAlign: TextAlign.start,
         ),

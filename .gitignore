@@ -2,3 +2,12 @@
 /.flutter-plugins-dependencies
 /.packages
 /.dart_tool/
+
+# FVM Version Cache
+.fvm/
+
+.vscode/
+
+example/
+
+/build/

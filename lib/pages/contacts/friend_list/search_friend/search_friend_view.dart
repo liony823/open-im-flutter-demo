@@ -26,7 +26,8 @@ class SearchFriendPage extends StatelessWidget {
             ? _emptyListView
             : ListView.builder(
                 itemCount: logic.resultList.length,
-                itemBuilder: (_, index) => _buildItemView(logic.resultList[index]),
+                itemBuilder: (_, index) =>
+                    _buildItemView(logic.resultList[index]),
               )),
       ),
     );
@@ -49,8 +50,8 @@ class SearchFriendPage extends StatelessWidget {
                 SearchKeywordText(
                   text: info.showName,
                   keyText: logic.searchCtrl.text.trim(),
-                  style: Styles.ts_0C1C33_17sp,
-                  keyStyle: Styles.ts_0089FF_17sp,
+                  style: Styles.ts_0C1C33_17,
+                  keyStyle: Styles.ts_0089FF_17,
                 ),
               ],
             ),
@@ -64,7 +65,7 @@ class SearchFriendPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             44.verticalSpace,
-            StrRes.searchNotFound.toText..style = Styles.ts_8E9AB0_17sp,
+            StrRes.searchNotFound.toText..style = Styles.ts_8E9AB0_17,
           ],
         ),
       );

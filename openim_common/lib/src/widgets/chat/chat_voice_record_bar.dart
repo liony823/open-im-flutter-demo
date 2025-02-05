@@ -98,20 +98,28 @@ class _ChatVoiceRecordBarState extends State<ChatVoiceRecordBar> {
         Offset global = details.globalPosition;
         setState(() {
           _canCancel = global.dy < (1.sh - kInputBoxMinHeight - _offset);
-          widget.onChangedBarStatus
-              ?.call(_canCancel ? RecordBarStatus.liftFingerToCancelSend : RecordBarStatus.releaseToSend);
+          widget.onChangedBarStatus?.call(_canCancel
+              ? RecordBarStatus.liftFingerToCancelSend
+              : RecordBarStatus.releaseToSend);
         });
       },
       child: Container(
         height: kVoiceRecordBarHeight,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: widget.speakBarColor ?? (_pressing ? Styles.c_8E9AB0_opacity30 : Styles.c_FFFFFF),
+          color: widget.speakBarColor ??
+              (_pressing
+                  ? Styles.c_8E9AB0.withValues(alpha: 30 / 100)
+                  : Styles.c_FFFFFF),
           borderRadius: BorderRadius.circular(4.r),
         ),
         child: Text(
-          _pressing ? (_canCancel ? StrRes.liftFingerToCancelSend : StrRes.releaseToSend) : StrRes.holdTalk,
-          style: widget.speakTextStyle ?? Styles.ts_0C1C33_14sp_medium,
+          _pressing
+              ? (_canCancel
+                  ? StrRes.liftFingerToCancelSend
+                  : StrRes.releaseToSend)
+              : StrRes.holdTalk,
+          style: widget.speakTextStyle ?? Styles.ts_0C1C33_14_medium,
         ),
       ),
     );

@@ -23,7 +23,8 @@ class LiveLoadingView extends StatelessWidget {
       ? Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StrRes.connecting.toText..style = Styles.ts_FFFFFF_opacity70_17sp,
+            StrRes.connecting.toText
+              ..style = Styles.ts_FFFFFF_17.withOpacity(0.7),
             _loadingAnimView,
           ],
         )

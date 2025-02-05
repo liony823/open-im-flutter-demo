@@ -47,7 +47,8 @@ class ChatInputBox extends StatefulWidget {
   State<ChatInputBox> createState() => _ChatInputBoxState();
 }
 
-class _ChatInputBoxState extends State<ChatInputBox> /*with TickerProviderStateMixin */ {
+class _ChatInputBoxState
+    extends State<ChatInputBox> /*with TickerProviderStateMixin */ {
   bool _toolsVisible = false;
   bool _emojiVisible = false;
   bool _leftKeyboardButton = false;
@@ -110,7 +111,8 @@ class _ChatInputBoxState extends State<ChatInputBox> /*with TickerProviderStateM
                   children: [
                     12.horizontalSpace,
                     (_leftKeyboardButton
-                        ? (ImageRes.openKeyboard.toImage..onTap = onTapLeftKeyboard)
+                        ? (ImageRes.openKeyboard.toImage
+                          ..onTap = onTapLeftKeyboard)
                         : (ImageRes.openVoice.toImage..onTap = onTapSpeak))
                       ..width = 32.w
                       ..height = 32.h
@@ -132,13 +134,17 @@ class _ChatInputBoxState extends State<ChatInputBox> /*with TickerProviderStateM
                     ),
                     12.horizontalSpace,
                     (_rightKeyboardButton
-                        ? (ImageRes.openKeyboard.toImage..onTap = onTapRightKeyboard)
+                        ? (ImageRes.openKeyboard.toImage
+                          ..onTap = onTapRightKeyboard)
                         : (ImageRes.openEmoji.toImage..onTap = onTapEmoji))
                       ..width = 32.w
                       ..height = 32.h
                       ..opacity = _opacity,
                     12.horizontalSpace,
-                    (_sendButtonVisible ? ImageRes.sendMessage : ImageRes.openToolbox).toImage
+                    (_sendButtonVisible
+                            ? ImageRes.sendMessage
+                            : ImageRes.openToolbox)
+                        .toImage
                       ..width = 32.w
                       ..height = 32.h
                       ..opacity = _opacity
@@ -186,8 +192,8 @@ class _ChatInputBoxState extends State<ChatInputBox> /*with TickerProviderStateM
         child: ChatTextField(
           controller: widget.controller,
           focusNode: widget.focusNode,
-          style: widget.style ?? Styles.ts_0C1C33_17sp,
-          atStyle: widget.atStyle ?? Styles.ts_0089FF_17sp,
+          style: widget.style ?? Styles.ts_0C1C33_17,
+          atStyle: widget.atStyle ?? Styles.ts_0089FF_17,
           enabled: widget.enabled,
           hintText: widget.hintText,
           textAlign: widget.enabled ? TextAlign.start : TextAlign.center,
@@ -293,7 +299,7 @@ class _QuoteView extends StatelessWidget {
               Expanded(
                 child: Text(
                   content,
-                  style: Styles.ts_8E9AB0_14sp,
+                  style: Styles.ts_8E9AB0_14,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -315,7 +321,8 @@ class _SubView extends StatelessWidget {
     this.title,
     this.content,
     this.textSpan,
-  }) : assert(content != null || textSpan != null, 'Either content or textSpan must be provided.');
+  }) : assert(content != null || textSpan != null,
+            'Either content or textSpan must be provided.');
   final VoidCallback? onClose;
   final String? title;
   final String? content;
@@ -344,14 +351,14 @@ class _SubView extends StatelessWidget {
                     if (title != null)
                       Text(
                         title!,
-                        style: Styles.ts_8E9AB0_14sp,
+                        style: Styles.ts_8E9AB0_14,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
                     if (content != null)
                       Text(
                         title!,
-                        style: Styles.ts_8E9AB0_14sp,
+                        style: Styles.ts_8E9AB0_14,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),

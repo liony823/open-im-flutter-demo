@@ -38,7 +38,7 @@ class AboutUsPage extends StatelessWidget {
                   ..height = 78.h,
                 10.verticalSpace,
                 Obx(() => '${logic.displayVersion}'.toText
-                  ..style = Styles.ts_0C1C33_14sp
+                  ..style = Styles.ts_0C1C33_14
                   ..onTap = logic.copyVersion),
                 16.verticalSpace,
                 Container(
@@ -54,7 +54,8 @@ class AboutUsPage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
                       children: [
-                        StrRes.checkNewVersion.toText..style = Styles.ts_0C1C33_17sp,
+                        StrRes.checkNewVersion.toText
+                          ..style = Styles.ts_0C1C33_17,
                         const Spacer(),
                         ImageRes.rightArrow.toImage
                           ..width = 24.w
@@ -71,7 +72,8 @@ class AboutUsPage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
                       children: [
-                        StrRes.uploadErrorLog.toText..style = Styles.ts_0C1C33_17sp,
+                        StrRes.uploadErrorLog.toText
+                          ..style = Styles.ts_0C1C33_17,
                         const Spacer(),
                         ImageRes.rightArrow.toImage
                           ..width = 24.w
@@ -88,7 +90,8 @@ class AboutUsPage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
                       children: [
-                        StrRes.uploadLogWithLine.toText..style = Styles.ts_0C1C33_17sp,
+                        StrRes.uploadLogWithLine.toText
+                          ..style = Styles.ts_0C1C33_17,
                         const Spacer(),
                         ImageRes.rightArrow.toImage
                           ..width = 24.w
@@ -110,7 +113,7 @@ class AboutUsPage extends StatelessWidget {
         context: Get.context!,
         builder: (ctx) {
           return CupertinoAlertDialog(
-            title: StrRes.setLines.toText..style = Styles.ts_0C1C33_17sp,
+            title: StrRes.setLines.toText..style = Styles.ts_0C1C33_17,
             content: CupertinoTextField(
               controller: logic.lineTextController,
               placeholder: logic.lineTextController.text,
@@ -118,7 +121,7 @@ class AboutUsPage extends StatelessWidget {
             ),
             actions: [
               CupertinoButton(
-                child: StrRes.confirm.toText..style = Styles.ts_0C1C33_17sp,
+                child: StrRes.confirm.toText..style = Styles.ts_0C1C33_17,
                 onPressed: () {
                   navigator?.pop();
                   final lineStr = logic.lineTextController.text.trim();

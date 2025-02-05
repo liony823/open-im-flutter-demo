@@ -36,7 +36,8 @@ class SyncStatusView extends StatelessWidget {
                   ),
                 ),
           4.horizontalSpace,
-          statusStr.toText..style = (isFailed ? Styles.ts_FF381F_12sp : Styles.ts_0089FF_12sp),
+          statusStr.toText
+            ..style = (isFailed ? Styles.ts_FF381F_12 : Styles.ts_0089FF_12),
         ],
       ),
     );

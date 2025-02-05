@@ -86,7 +86,9 @@ class PopButton extends StatelessWidget {
       menuBuilder: () => _buildPopBgView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: menus.map((e) => _buildPopItemView(e, showLine: menus.lastOrNull != e)).toList(),
+          children: menus
+              .map((e) => _buildPopItemView(e, showLine: menus.lastOrNull != e))
+              .toList(),
         ),
       ),
     );
@@ -107,7 +109,8 @@ class PopButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(bgRadius ?? 8.r),
           boxShadow: [
             BoxShadow(
-              color: bgShadowColor ?? Styles.c_8E9AB0_opacity16,
+              color:
+                  bgShadowColor ?? Styles.c_8E9AB0.withValues(alpha: 16 / 100),
               offset: bgShadowOffset ?? Offset(0, 6.h),
               blurRadius: bgShadowBlurRadius ?? 16.r,
               spreadRadius: bgShadowSpreadRadius ?? 1.r,
@@ -117,7 +120,8 @@ class PopButton extends StatelessWidget {
         child: child,
       );
 
-  Widget _buildPopItemView(PopMenuInfo info, {bool showLine = true}) => GestureDetector(
+  Widget _buildPopItemView(PopMenuInfo info, {bool showLine = true}) =>
+      GestureDetector(
         onTap: () {
           popCtrl?.hideMenu();
           info.onTap?.call();
@@ -148,7 +152,8 @@ class PopButton extends StatelessWidget {
                         padding: EdgeInsets.only(right: 12.w),
                         child: info.iconWidget,
                       ),
-                    info.text.toText..style = (menuItemTextStyle ?? Styles.ts_0C1C33_17sp),
+                    info.text.toText
+                      ..style = (menuItemTextStyle ?? Styles.ts_0C1C33_17),
                   ],
                 )
               : Row(
@@ -161,7 +166,8 @@ class PopButton extends StatelessWidget {
                           ..width = (menuItemIconWidth ?? 20.w)
                           ..height = (menuItemIconHeight ?? 20.h),
                       ),
-                    info.text.toText..style = (menuItemTextStyle ?? Styles.ts_0C1C33_17sp),
+                    info.text.toText
+                      ..style = (menuItemTextStyle ?? Styles.ts_0C1C33_17),
                   ],
                 ),
         ),

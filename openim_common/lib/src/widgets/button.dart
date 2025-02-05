@@ -38,7 +38,9 @@ class Button extends StatelessWidget {
         child: Ink(
           height: height ?? 44.h,
           decoration: BoxDecoration(
-            color: enabled ? enabledColor ?? Styles.c_0089FF : disabledColor ?? Styles.c_0089FF_opacity50,
+            color: enabled
+                ? enabledColor ?? Styles.c_0089FF
+                : disabledColor ?? Styles.c_0089FF.withValues(alpha: 50 / 100),
             borderRadius: BorderRadius.circular(radius ?? 4.r),
           ),
           child: InkWell(
@@ -49,7 +51,7 @@ class Button extends StatelessWidget {
               padding: padding,
               child: Text(
                 text,
-                style: textStyle ?? Styles.ts_FFFFFF_17sp_semibold,
+                style: textStyle ?? Styles.ts_FFFFFF_17_semibold,
                 maxLines: 1,
               ),
             ),
@@ -88,7 +90,7 @@ class ImageTextButton extends StatelessWidget {
       : icon = ImageRes.message,
         text = StrRes.sendMessage,
         color = Styles.c_0089FF,
-        textStyle = Styles.ts_FFFFFF_17sp,
+        textStyle = Styles.ts_FFFFFF_17,
         height = null;
 
   @override
@@ -109,7 +111,7 @@ class ImageTextButton extends StatelessWidget {
                 ..width = 20.w
                 ..height = 20.h,
               6.horizontalSpace,
-              text.toText..style = textStyle ?? Styles.ts_0C1C33_17sp,
+              text.toText..style = textStyle ?? Styles.ts_0C1C33_17,
             ],
           ),
         ),

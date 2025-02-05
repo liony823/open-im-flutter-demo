@@ -48,7 +48,7 @@ class AvatarView extends StatelessWidget {
 
   double get _avatarSize => min(width ?? 44.w, height ?? 44.h);
 
-  TextStyle get _textStyle => textStyle ?? Styles.ts_FFFFFF_16sp;
+  TextStyle get _textStyle => textStyle ?? Styles.ts_FFFFFF_16;
 
   Color get _textAvatarBgColor => Styles.c_0089FF;
 
@@ -69,10 +69,12 @@ class AvatarView extends StatelessWidget {
       behavior: HitTestBehavior.translucent,
       onTap: onTap ??
           ((enabledPreview && isUrlValid)
-              ? () => IMUtils.previewUrlPicture([MediaSource(thumbnail: url!, url: url)])
+              ? () => IMUtils.previewUrlPicture(
+                  [MediaSource(thumbnail: url!, url: url)])
               : null),
       onLongPress: onLongPress,
-      child: builder?.call() ?? (nineGridUrl.isNotEmpty ? _nineGridAvatar() : _normalAvatar()),
+      child: builder?.call() ??
+          (nineGridUrl.isNotEmpty ? _nineGridAvatar() : _normalAvatar()),
     );
     return Hero(
       tag: tag,
@@ -98,7 +100,9 @@ class AvatarView extends StatelessWidget {
         child: null == _showName
             ? (showDefaultAvatar
                 ? FaIcon(
-                    isGroup ? FontAwesomeIcons.userGroup : FontAwesomeIcons.solidUser,
+                    isGroup
+                        ? FontAwesomeIcons.userGroup
+                        : FontAwesomeIcons.solidUser,
                     color: Colors.white,
                     size: _avatarSize / 2,
                   )

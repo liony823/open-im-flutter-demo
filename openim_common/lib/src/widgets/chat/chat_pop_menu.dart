@@ -32,7 +32,7 @@ class ChatLongPressMenu extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(maxWidth: 256.w, maxHeight: 122.h),
       decoration: BoxDecoration(
-        color: Styles.c_0C1C33_opacity85,
+        color: Styles.c_0C1C33.withValues(alpha: 85 / 100),
         borderRadius: BorderRadius.circular(15.r),
       ),
       child: Container(
@@ -107,7 +107,7 @@ class _MenuItemView extends StatelessWidget {
           ..width = 28.w
           ..height = 28.h,
         label.toText
-          ..style = Styles.ts_FFFFFF_10sp
+          ..style = Styles.ts_FFFFFF_10
           ..maxLines = 1
           ..overflow = TextOverflow.ellipsis,
       ],

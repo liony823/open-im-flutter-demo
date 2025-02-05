@@ -69,7 +69,7 @@ class UnlockSetupPage extends StatelessWidget {
         ),
         child: Row(
           children: [
-            label.toText..style = Styles.ts_0C1C33_17sp,
+            label.toText..style = Styles.ts_0C1C33_17,
             const Spacer(),
             CupertinoSwitch(
               value: switchOn,

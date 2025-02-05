@@ -28,7 +28,8 @@ class SearchGroupPage extends StatelessWidget {
             ? _emptyListView
             : ListView.builder(
                 itemCount: logic.resultList.length,
-                itemBuilder: (_, index) => _buildItemView(logic.resultList[index]),
+                itemBuilder: (_, index) =>
+                    _buildItemView(logic.resultList[index]),
               )),
       ),
     );
@@ -56,10 +57,11 @@ class SearchGroupPage extends StatelessWidget {
                     SearchKeywordText(
                       text: info.groupName ?? '',
                       keyText: logic.searchCtrl.text.trim(),
-                      style: Styles.ts_0C1C33_17sp,
-                      keyStyle: Styles.ts_0089FF_17sp,
+                      style: Styles.ts_0C1C33_17,
+                      keyStyle: Styles.ts_0089FF_17,
                     ),
-                    sprintf(StrRes.nPerson, [info.memberCount]).toText..style = Styles.ts_8E9AB0_14sp,
+                    sprintf(StrRes.nPerson, [info.memberCount]).toText
+                      ..style = Styles.ts_8E9AB0_14,
                   ],
                 ),
               ],
@@ -74,7 +76,7 @@ class SearchGroupPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             44.verticalSpace,
-            StrRes.searchNotFound.toText..style = Styles.ts_8E9AB0_17sp,
+            StrRes.searchNotFound.toText..style = Styles.ts_8E9AB0_17,
           ],
         ),
       );

@@ -81,10 +81,10 @@ class FriendSetupPage extends StatelessWidget {
               alignment: isDelFriendButton ? Alignment.center : null,
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: isDelFriendButton
-                  ? (StrRes.unfriend.toText..style = Styles.ts_FF381F_17sp)
+                  ? (StrRes.unfriend.toText..style = Styles.ts_FF381F_17)
                   : Row(
                       children: [
-                        (label ?? '').toText..style = Styles.ts_0C1C33_17sp,
+                        (label ?? '').toText..style = Styles.ts_0C1C33_17,
                         const Spacer(),
                         if (showRightArrow)
                           ImageRes.rightArrow.toImage

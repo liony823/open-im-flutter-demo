@@ -31,7 +31,7 @@ class ChatSetupPage extends StatelessWidget {
                 10.verticalSpace,
                 _buildItemView(
                   text: StrRes.clearChatHistory,
-                  textStyle: Styles.ts_FF381F_17sp,
+                  textStyle: Styles.ts_FF381F_17,
                   onTap: logic.clearChatHistory,
                   showRightArrow: true,
                   isTopRadius: true,
@@ -67,7 +67,7 @@ class ChatSetupPage extends StatelessWidget {
                     ),
                     8.verticalSpace,
                     (logic.conversationInfo.value.showName ?? '').toText
-                      ..style = Styles.ts_8E9AB0_14sp
+                      ..style = Styles.ts_8E9AB0_14
                       ..maxLines = 1
                       ..overflow = TextOverflow.ellipsis,
                   ],
@@ -84,7 +84,7 @@ class ChatSetupPage extends StatelessWidget {
                     ..onTap = logic.createGroup,
                   8.verticalSpace,
                   ''.toText
-                    ..style = Styles.ts_8E9AB0_14sp
+                    ..style = Styles.ts_8E9AB0_14
                     ..maxLines = 1
                     ..overflow = TextOverflow.ellipsis,
                 ],
@@ -130,13 +130,13 @@ class ChatSetupPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        text.toText..style = textStyle ?? Styles.ts_0C1C33_17sp,
-                        hintText.toText..style = Styles.ts_8E9AB0_14sp,
+                        text.toText..style = textStyle ?? Styles.ts_0C1C33_17,
+                        hintText.toText..style = Styles.ts_8E9AB0_14,
                       ],
                     )
-                  : (text.toText..style = textStyle ?? Styles.ts_0C1C33_17sp),
+                  : (text.toText..style = textStyle ?? Styles.ts_0C1C33_17),
               const Spacer(),
-              if (null != value) value.toText..style = Styles.ts_8E9AB0_14sp,
+              if (null != value) value.toText..style = Styles.ts_8E9AB0_14,
               if (showSwitchButton)
                 CupertinoSwitch(
                   value: switchOn,

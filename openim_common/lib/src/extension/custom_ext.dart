@@ -1,8 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:openim_common/openim_common.dart';
 import 'package:rxdart/rxdart.dart';
+
+extension TextStyleExt on TextStyle {
+  TextStyle withOpacity(double opacity) =>
+      copyWith(color: color?.withValues(alpha: opacity));
+}
 
 extension SubjectExt<T> on Subject<T> {
   T addSafely(T data) {
@@ -87,6 +94,37 @@ class LottieView extends StatelessWidget {
       fit: fit,
     );
   }
+}
+
+class IcoView extends StatelessWidget {
+  IcoView({
+    super.key,
+    required this.name,
+    this.width,
+    this.height,
+    this.color,
+    this.opacity = 1,
+    this.onTap,
+    this.fit,
+  });
+  final String name;
+  double? width;
+  double? height;
+  Color? color;
+  double opacity;
+  BoxFit? fit;
+  Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) => SvgPicture.asset(
+        name,
+        width: width,
+        height: height,
+        fit: fit ?? BoxFit.contain,
+        colorFilter:
+            ColorFilter.mode(color ?? Styles.c_FFFFFF, BlendMode.srcIn),
+        package: 'openim_common',
+      );
 }
 
 class TextView extends StatelessWidget {

@@ -38,7 +38,8 @@ class UserProfilePanelPage extends StatelessWidget {
                     if (logic.isGroupMemberPage) _buildEnterGroupMethodView(),
                     if (logic.isFriendship ||
                         logic.isMyself ||
-                        logic.isGroupMemberPage && !logic.notAllowLookGroupMemberProfiles.value)
+                        logic.isGroupMemberPage &&
+                            !logic.notAllowLookGroupMemberProfiles.value)
                       _buildItemView(
                         label: StrRes.personalInfo,
                         showRightArrow: true,
@@ -48,7 +49,9 @@ class UserProfilePanelPage extends StatelessWidget {
                   ],
                 ),
               ),
-              if ((logic.isFriendship || logic.allowSendMsgNotFriend) && !logic.isMyself) _buildButtonGroup(),
+              if ((logic.isFriendship || logic.allowSendMsgNotFriend) &&
+                  !logic.isMyself)
+                _buildButtonGroup(),
             ],
           ),
         ),
@@ -68,7 +71,7 @@ class UserProfilePanelPage extends StatelessWidget {
               text: logic.userInfo.value.nickname,
               width: 48.w,
               height: 48.h,
-              textStyle: Styles.ts_FFFFFF_14sp,
+              textStyle: Styles.ts_FFFFFF_14,
               enabledPreview: true,
             ),
             12.horizontalSpace,
@@ -78,14 +81,16 @@ class UserProfilePanelPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   logic.getShowName().toText
-                    ..style = Styles.ts_0C1C33_17sp_medium
+                    ..style = Styles.ts_0C1C33_17_medium
                     ..maxLines = 1
                     ..overflow = TextOverflow.ellipsis,
-                  if (!logic.isGroupMemberPage || logic.isGroupMemberPage && !logic.notAllowAddGroupMemberFriend.value)
+                  if (!logic.isGroupMemberPage ||
+                      logic.isGroupMemberPage &&
+                          !logic.notAllowAddGroupMemberFriend.value)
                     Padding(
                       padding: EdgeInsets.only(top: 4.h),
                       child: (logic.userInfo.value.userID ?? '').toText
-                        ..style = Styles.ts_8E9AB0_14sp
+                        ..style = Styles.ts_8E9AB0_14
                         ..onTap = logic.copyID,
                     ),
                 ],
@@ -96,7 +101,8 @@ class UserProfilePanelPage extends StatelessWidget {
                 !logic.isFriendship &&
                 (!logic.isGroupMemberPage ||
                     logic.forceCanAdd == true ||
-                    logic.isGroupMemberPage && !logic.notAllowAddGroupMemberFriend.value))
+                    logic.isGroupMemberPage &&
+                        !logic.notAllowAddGroupMemberFriend.value))
               Material(
                 child: Ink(
                   decoration: BoxDecoration(
@@ -117,7 +123,7 @@ class UserProfilePanelPage extends StatelessWidget {
                             ..height = 21.h
                             ..color = Styles.c_FFFFFF,
                           2.horizontalSpace,
-                          StrRes.add.toText..style = Styles.ts_FFFFFF_14sp,
+                          StrRes.add.toText..style = Styles.ts_FFFFFF_14,
                         ],
                       ),
                     ),
@@ -168,14 +174,14 @@ class UserProfilePanelPage extends StatelessWidget {
             child: Container(
               constraints: BoxConstraints(minHeight: 40.h),
               alignment: Alignment.centerLeft,
-              child: label.toText..style = Styles.ts_8E9AB0_17sp,
+              child: label.toText..style = Styles.ts_8E9AB0_17,
             ),
           ),
           TableCell(
             child: Container(
               constraints: BoxConstraints(minHeight: 40.h),
               alignment: Alignment.centerLeft,
-              child: (value ?? '').toText..style = Styles.ts_0C1C33_17sp,
+              child: (value ?? '').toText..style = Styles.ts_0C1C33_17,
             ),
           ),
         ],
@@ -202,7 +208,7 @@ class UserProfilePanelPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Row(
                 children: [
-                  label.toText..style = Styles.ts_0C1C33_17sp,
+                  label.toText..style = Styles.ts_0C1C33_17,
                   const Spacer(),
                   if (showSwitchButton)
                     CupertinoSwitch(
@@ -210,7 +216,7 @@ class UserProfilePanelPage extends StatelessWidget {
                       activeColor: Styles.c_0089FF,
                       onChanged: onChanged,
                     ),
-                  if (null != value) value.toText..style = Styles.ts_0C1C33_17sp,
+                  if (null != value) value.toText..style = Styles.ts_0C1C33_17,
                   if (showRightArrow)
                     ImageRes.rightArrow.toImage
                       ..width = 24.w

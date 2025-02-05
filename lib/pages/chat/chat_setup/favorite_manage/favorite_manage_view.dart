@@ -18,7 +18,7 @@ class FavoriteManagePage extends StatelessWidget {
             title: StrRes.favoriteFace,
             right: StrRes.favoriteManage.toText
               ..onTap = logic.manage
-              ..style = Styles.ts_0C1C33_17sp,
+              ..style = Styles.ts_0C1C33_17,
           ),
           body: Column(
             children: [
@@ -46,7 +46,9 @@ class FavoriteManagePage extends StatelessWidget {
                     }
                     var url = logic.cacheLogic.urlList.elementAt(index - 1);
                     return GestureDetector(
-                      onTap: logic.isMultiModel.value ? () => logic.updateSelectedStatus(url) : null,
+                      onTap: logic.isMultiModel.value
+                          ? () => logic.updateSelectedStatus(url)
+                          : null,
                       child: Stack(
                         children: [
                           ImageUtil.networkImage(
@@ -84,13 +86,17 @@ class FavoriteManagePage extends StatelessWidget {
         ),
         child: Row(
           children: [
-            sprintf(StrRes.favoriteCount, [logic.cacheLogic.favoriteList.length]).toText..style = Styles.ts_8E9AB0_16sp,
+            sprintf(StrRes.favoriteCount,
+                [logic.cacheLogic.favoriteList.length]).toText
+              ..style = Styles.ts_8E9AB0_16,
             const Spacer(),
             if (logic.isMultiModel.value)
               GestureDetector(
                 onTap: logic.delete,
                 behavior: HitTestBehavior.translucent,
-                child: sprintf(StrRes.favoriteDel, [logic.selectedList.length]).toText..style = Styles.ts_0089FF_16sp,
+                child: sprintf(StrRes.favoriteDel, [logic.selectedList.length])
+                    .toText
+                  ..style = Styles.ts_0089FF_16,
               ),
           ],
         ),

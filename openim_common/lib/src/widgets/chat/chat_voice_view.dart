@@ -22,7 +22,7 @@ class ChatVoiceView extends StatelessWidget {
     return isISend
         ? Row(
             children: [
-              '${duration ?? 0}``'.toText..style = Styles.ts_0089FF_17sp,
+              '${duration ?? 0}``'.toText..style = Styles.ts_0089FF_17,
               4.horizontalSpace,
               RotatedBox(
                 quarterTurns: 90,
@@ -50,7 +50,7 @@ class ChatVoiceView extends StatelessWidget {
                   ..width = 24.w
                   ..height = 24.h,
               4.horizontalSpace,
-              '${duration ?? 0}``'.toText..style = Styles.ts_0089FF_17sp,
+              '${duration ?? 0}``'.toText..style = Styles.ts_0089FF_17,
             ],
           );
   }

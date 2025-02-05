@@ -18,18 +18,24 @@ class VerifyPhonePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            sprintf(StrRes.enterVerificationCode, [logic.email?.isNotEmpty == true ? StrRes.email : StrRes.phoneNumber])
-                .toText
-              ..style = Styles.ts_0089FF_22sp_semibold,
+            sprintf(StrRes.enterVerificationCode, [
+              logic.email?.isNotEmpty == true
+                  ? StrRes.email
+                  : StrRes.phoneNumber
+            ]).toText
+              ..style = Styles.ts_0089FF_20_semibold,
             10.verticalSpace,
-            '${logic.account} ${sprintf(StrRes.defaultVerificationCode, ['666666'])}'.toText
-              ..style = Styles.ts_8E9AB0_12sp,
+            '${logic.account} ${sprintf(StrRes.defaultVerificationCode, [
+                  '666666'
+                ])}'
+                .toText
+              ..style = Styles.ts_8E9AB0_12,
             35.verticalSpace,
             PinCodeTextField(
               appContext: context,
               controller: logic.codeEditCtrl,
               autoFocus: true,
-              textStyle: Styles.ts_0C1C33_20sp_semibold,
+              textStyle: Styles.ts_0C1C33_20_semibold,
               length: 6,
               obscureText: false,
               blinkWhenObscuring: true,

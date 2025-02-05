@@ -37,16 +37,17 @@ class ProcessGroupRequestsPage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    (logic.applicationInfo.nickname ?? '').toText..style = Styles.ts_0C1C33_17sp,
+                    (logic.applicationInfo.nickname ?? '').toText
+                      ..style = Styles.ts_0C1C33_17,
                     RichText(
                       text: TextSpan(
                         text: StrRes.applyJoin,
-                        style: Styles.ts_8E9AB0_14sp,
+                        style: Styles.ts_8E9AB0_14,
                         children: [
                           WidgetSpan(child: 2.horizontalSpace),
                           TextSpan(
                             text: logic.groupName,
-                            style: Styles.ts_0089FF_14sp,
+                            style: Styles.ts_0089FF_14,
                           ),
                         ],
                       ),
@@ -62,7 +63,7 @@ class ProcessGroupRequestsPage extends StatelessWidget {
                 width: 343.w,
                 margin: EdgeInsets.only(bottom: 12.h),
                 decoration: BoxDecoration(
-                  color: Styles.c_E8EAEF_opacity50,
+                  color: Styles.c_E8EAEF.withValues(alpha: 50 / 100),
                   borderRadius: BorderRadius.circular(6.r),
                 ),
                 child: SingleChildScrollView(
@@ -73,7 +74,8 @@ class ProcessGroupRequestsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      (logic.applicationInfo.reqMsg ?? '').toText..style = Styles.ts_0C1C33_17sp,
+                      (logic.applicationInfo.reqMsg ?? '').toText
+                        ..style = Styles.ts_0C1C33_17,
                     ],
                   ),
                 ),
@@ -81,7 +83,8 @@ class ProcessGroupRequestsPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                sprintf(StrRes.sourceFrom, [logic.sourceFrom]).toText..style = Styles.ts_8E9AB0_14sp
+                sprintf(StrRes.sourceFrom, [logic.sourceFrom]).toText
+                  ..style = Styles.ts_8E9AB0_14
               ],
             ),
             12.verticalSpace,
@@ -93,7 +96,7 @@ class ProcessGroupRequestsPage extends StatelessWidget {
                   child: Button(
                     onTap: logic.approve,
                     text: StrRes.accept,
-                    textStyle: Styles.ts_FFFFFF_17sp,
+                    textStyle: Styles.ts_FFFFFF_17,
                   ),
                 ),
               ],
@@ -119,7 +122,7 @@ class ProcessGroupRequestsPage extends StatelessWidget {
             onTap: logic.reject,
             child: Container(
               alignment: Alignment.center,
-              child: StrRes.reject.toText..style = Styles.ts_0C1C33_17sp,
+              child: StrRes.reject.toText..style = Styles.ts_0C1C33_17,
             ),
           ),
         ),

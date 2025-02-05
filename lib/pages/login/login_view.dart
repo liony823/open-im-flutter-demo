@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
               ImageRes.loginLogo.toImage
                 ..width = 64.w
                 ..height = 64.h,
-              StrRes.welcome.toText..style = Styles.ts_0089FF_17sp_semibold,
+              StrRes.welcome.toText..style = Styles.ts_0089FF_17_semibold,
               51.verticalSpace,
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32.w),
@@ -46,12 +46,13 @@ class LoginPage extends StatelessWidget {
                   child: RichText(
                     text: TextSpan(
                       text: StrRes.noAccountYet,
-                      style: Styles.ts_8E9AB0_12sp,
+                      style: Styles.ts_8E9AB0_12,
                       children: [
                         TextSpan(
                           text: StrRes.registerNow,
-                          style: Styles.ts_0089FF_12sp,
-                          recognizer: TapGestureRecognizer()..onTap = _showRegisterBottomSheet,
+                          style: Styles.ts_0089FF_12,
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = _showRegisterBottomSheet,
                         )
                       ],
                     ),
@@ -59,7 +60,8 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               32.verticalSpace,
-              Obx(() => logic.versionInfo.value.toText..style = Styles.ts_0C1C33_14sp),
+              Obx(() =>
+                  logic.versionInfo.value.toText..style = Styles.ts_0C1C33_14),
             ],
           ),
         ),
@@ -117,10 +119,13 @@ class LoginPage extends StatelessWidget {
           label: '',
           hintText: type.hintText,
           code: logic.areaCode.value,
-          onAreaCode: type == LoginType.phone ? logic.openCountryCodePicker : null,
+          onAreaCode:
+              type == LoginType.phone ? logic.openCountryCodePicker : null,
           controller: logic.phoneCtrl,
           focusNode: logic.accountFocus,
-          keyBoardType: type == LoginType.phone ? TextInputType.phone : TextInputType.text,
+          keyBoardType: type == LoginType.phone
+              ? TextInputType.phone
+              : TextInputType.text,
         ),
         8.verticalSpace,
         Offstage(
@@ -145,11 +150,14 @@ class LoginPage extends StatelessWidget {
         Row(
           children: [
             StrRes.forgetPassword.toText
-              ..style = Styles.ts_8E9AB0_12sp
+              ..style = Styles.ts_8E9AB0_12
               ..onTap = logic.forgetPassword,
             const Spacer(),
-            (logic.isPasswordLogin.value ? StrRes.verificationCodeLogin : StrRes.passwordLogin).toText
-              ..style = Styles.ts_0089FF_12sp
+            (logic.isPasswordLogin.value
+                    ? StrRes.verificationCodeLogin
+                    : StrRes.passwordLogin)
+                .toText
+              ..style = Styles.ts_0089FF_12
               ..onTap = logic.togglePasswordType,
           ],
         ),

@@ -111,15 +111,21 @@ class _ChatVoiceRecordLayoutState extends State<ChatVoiceRecordLayout> {
                   height: 124.h,
                   padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
                   decoration: BoxDecoration(
-                    color: _isCancelSend ? Styles.c_FF381F_opacity70 : Styles.c_0C1C33_opacity60,
+                    color: _isCancelSend
+                        ? Styles.c_FF381F.withValues(alpha: 70 / 100)
+                        : Styles.c_0C1C33.withValues(alpha: 60 / 100),
                     borderRadius: BorderRadius.circular(6.r),
                   ),
                   child: Column(
                     children: [
-                      IMUtils.seconds2HMS(sec).toText..style = Styles.ts_FFFFFF_12sp,
+                      IMUtils.seconds2HMS(sec).toText
+                        ..style = Styles.ts_FFFFFF_12,
                       Expanded(child: _lottieAnimWidget),
-                      (_isCancelSend ? StrRes.liftFingerToCancelSend : StrRes.releaseToSendSwipeUpToCancel).toText
-                        ..style = Styles.ts_FFFFFF_12sp,
+                      (_isCancelSend
+                              ? StrRes.liftFingerToCancelSend
+                              : StrRes.releaseToSendSwipeUpToCancel)
+                          .toText
+                        ..style = Styles.ts_FFFFFF_12,
                     ],
                   ),
                 ),

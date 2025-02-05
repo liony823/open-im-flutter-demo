@@ -54,7 +54,7 @@ class FriendListPage extends StatelessWidget {
                   text: info.showName,
                 ),
                 10.horizontalSpace,
-                info.showName.toText..style = Styles.ts_0C1C33_17sp,
+                info.showName.toText..style = Styles.ts_0C1C33_17,
               ],
             ),
           ),

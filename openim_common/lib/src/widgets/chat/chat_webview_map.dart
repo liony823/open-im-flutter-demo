@@ -58,7 +58,8 @@ class _ChatWebViewMapState extends State<ChatWebViewMap> {
 
   void _configUrl() {
     locationUrl = "$host?key=$webKey&serverKey=$webServerKey#/";
-    previewLocationUrl = "$host?key=$webKey&serverKey=$webServerKey&location=$longitude,$latitude#/";
+    previewLocationUrl =
+        "$host?key=$webKey&serverKey=$webServerKey&location=$longitude,$latitude#/";
   }
 
   String getStaticMapURL(double longitude, double latitude) {
@@ -96,7 +97,8 @@ class _ChatWebViewMapState extends State<ChatWebViewMap> {
         params = const PlatformWebViewControllerCreationParams();
       }
 
-      final WebViewController controller = WebViewController.fromPlatformCreationParams(params);
+      final WebViewController controller =
+          WebViewController.fromPlatformCreationParams(params);
 
       controller
         ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -127,7 +129,8 @@ class _ChatWebViewMapState extends State<ChatWebViewMap> {
               return NavigationDecision.navigate;
             },
             onHttpError: (HttpResponseError error) {
-              debugPrint('Error occurred on page: ${error.response?.statusCode}');
+              debugPrint(
+                  'Error occurred on page: ${error.response?.statusCode}');
             },
             onUrlChange: (UrlChange change) {
               debugPrint('url change to ${change.url}');
@@ -172,7 +175,8 @@ class _ChatWebViewMapState extends State<ChatWebViewMap> {
       if (controller.platform is AndroidWebViewController) {
         AndroidWebViewController.enableDebugging(true);
 
-        (controller.platform as AndroidWebViewController).setMediaPlaybackRequiresUserGesture(false);
+        (controller.platform as AndroidWebViewController)
+            .setMediaPlaybackRequiresUserGesture(false);
       }
 
       setState(() {
@@ -199,7 +203,8 @@ class _ChatWebViewMapState extends State<ChatWebViewMap> {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return Future.error('Location permissions are permanently denied, we cannot request permissions.');
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
     }
 
     return await Geolocator.getCurrentPosition();
@@ -215,14 +220,16 @@ class _ChatWebViewMapState extends State<ChatWebViewMap> {
       await showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          title: StrRes.plsSelectLocation.toText..style = Styles.ts_0C1C33_17sp_semibold,
+          title: StrRes.plsSelectLocation.toText
+            ..style = Styles.ts_0C1C33_17_semibold,
           actions: [
             GestureDetector(
               onTap: () => Navigator.pop(context),
               behavior: HitTestBehavior.translucent,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                child: StrRes.determine.toText..style = Styles.ts_0089FF_17sp_semibold,
+                child: StrRes.determine.toText
+                  ..style = Styles.ts_0089FF_17_semibold,
               ),
             ),
           ],

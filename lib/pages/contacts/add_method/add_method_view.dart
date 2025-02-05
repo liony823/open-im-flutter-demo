@@ -86,9 +86,9 @@ class AddContactsMethodPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              text.toText..style = Styles.ts_0C1C33_17sp,
+                              text.toText..style = Styles.ts_0C1C33_17,
                               4.verticalSpace,
-                              hintText.toText..style = Styles.ts_8E9AB0_12sp,
+                              hintText.toText..style = Styles.ts_8E9AB0_12,
                             ],
                           ),
                         ),

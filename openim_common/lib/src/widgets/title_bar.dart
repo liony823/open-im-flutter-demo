@@ -131,7 +131,7 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
                       flex: 5,
                       child: Container(
                         child: title.trim().toText
-                          ..style = Styles.ts_0C1C33_17sp_semibold
+                          ..style = Styles.ts_0C1C33_17_semibold
                           ..maxLines = 1
                           ..overflow = TextOverflow.ellipsis
                           ..textAlign = TextAlign.center,
@@ -141,7 +141,7 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
                         flex: 2,
                         child: Container(
                             child: member.toText
-                              ..style = Styles.ts_0C1C33_17sp_semibold
+                              ..style = Styles.ts_0C1C33_17_semibold
                               ..maxLines = 1))
                 ],
               ),
@@ -159,7 +159,7 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
                         color: isOnline ? Styles.c_18E875 : Styles.c_8E9AB0,
                       ),
                     ),
-                  subTitle!.toText..style = Styles.ts_8E9AB0_10sp,
+                  subTitle!.toText..style = Styles.ts_8E9AB0_10,
                 ],
               ),
           ],
@@ -168,7 +168,7 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
             width: showCallBtn ? 48.w : 24.w,
             child: isMultiModel
                 ? (StrRes.cancel.toText
-                  ..style = Styles.ts_0C1C33_17sp
+                  ..style = Styles.ts_0C1C33_17
                   ..onTap = onCloseMultiModel)
                 : (ImageRes.backBlack.toImage
                   ..width = 24.w
@@ -209,7 +209,7 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor = backgroundColor ?? Styles.c_FFFFFF,
         center = Expanded(
             child: (title ?? '').toText
-              ..style = (titleStyle ?? Styles.ts_0C1C33_17sp_semibold)
+              ..style = (titleStyle ?? Styles.ts_0C1C33_17_semibold)
               ..textAlign = TextAlign.center),
         left = GestureDetector(
           behavior: HitTestBehavior.translucent,
@@ -221,7 +221,9 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
                 ..width = 24.w
                 ..height = 24.h
                 ..color = backIconColor,
-              if (null != leftTitle) leftTitle.toText..style = (leftTitleStyle ?? Styles.ts_0C1C33_17sp_semibold),
+              if (null != leftTitle)
+                leftTitle.toText
+                  ..style = (leftTitleStyle ?? Styles.ts_0C1C33_17_semibold),
             ],
           ),
         );
@@ -233,7 +235,7 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
   })  : height = 44.h,
         backgroundColor = Styles.c_FFFFFF,
         center = Spacer(),
-        left = StrRes.contacts.toText..style = Styles.ts_0C1C33_20sp_semibold,
+        left = StrRes.contacts.toText..style = Styles.ts_0C1C33_20_semibold,
         right = Row(
           children: [
             16.horizontalSpace,
@@ -250,7 +252,7 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
   })  : height = 44.h,
         backgroundColor = Styles.c_FFFFFF,
         center = null,
-        left = StrRes.workbench.toText..style = Styles.ts_0C1C33_20sp_semibold,
+        left = StrRes.workbench.toText..style = Styles.ts_0C1C33_20_semibold,
         right = null;
 
   TitleBar.search({

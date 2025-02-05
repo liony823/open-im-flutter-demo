@@ -35,7 +35,7 @@ class WrapAzListView<T extends ISuspensionBean> extends StatelessWidget {
       indexBarData: SuspensionUtil.getTagIndexList(data),
       indexBarOptions: IndexBarOptions(
         needRebuild: true,
-        selectTextStyle: Styles.ts_FFFFFF_12sp,
+        selectTextStyle: Styles.ts_FFFFFF_12,
         indexHintWidth: 96,
         indexHintHeight: 97,
         indexHintDecoration: const BoxDecoration(
@@ -45,7 +45,7 @@ class WrapAzListView<T extends ISuspensionBean> extends StatelessWidget {
           ),
         ),
         indexHintAlignment: Alignment.centerRight,
-        indexHintTextStyle: Styles.ts_0C1C33_20sp_semibold,
+        indexHintTextStyle: Styles.ts_0C1C33_20_semibold,
         indexHintOffset: const Offset(-30, 0),
       ),
     );
@@ -57,6 +57,6 @@ class WrapAzListView<T extends ISuspensionBean> extends StatelessWidget {
         alignment: Alignment.centerLeft,
         width: 1.sw,
         color: Styles.c_E8EAEF,
-        child: tag.toText..style = Styles.ts_8E9AB0_14sp,
+        child: tag.toText..style = Styles.ts_8E9AB0_14,
       );
 }

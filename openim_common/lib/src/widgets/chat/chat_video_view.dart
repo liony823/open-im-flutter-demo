@@ -74,7 +74,8 @@ class _ChatVideoViewState extends State<ChatVideoView> {
   bool? get isValidPath => _message.exMap['validPath_$_snapshotPath'];
 
   _createThumbView() async {
-    if (widget.isISend && (isValidPath == true || isValidPath == null && await _checkingPath())) {
+    if (widget.isISend &&
+        (isValidPath == true || isValidPath == null && await _checkingPath())) {
       _child = ImageUtil.fileImage(
         file: File(_snapshotPath!),
         height: _trulyHeight,
@@ -112,7 +113,9 @@ class _ChatVideoViewState extends State<ChatVideoView> {
                 Positioned(
                   bottom: 2.h,
                   right: 3.w,
-                  child: IMUtils.seconds2HMS(_message.videoElem!.duration!).toText..style = Styles.ts_FFFFFF_12sp,
+                  child:
+                      IMUtils.seconds2HMS(_message.videoElem!.duration!).toText
+                        ..style = Styles.ts_FFFFFF_12,
                 ),
             ],
           ),

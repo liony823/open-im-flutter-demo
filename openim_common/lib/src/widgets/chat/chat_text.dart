@@ -31,9 +31,9 @@ class ChatText extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MatchTextView(
         text: text,
-        textStyle: textStyle ??
-            (isISend ? Styles.ts_FFFFFF_17sp : Styles.ts_0C1C33_17sp),
-        matchTextStyle: Styles.ts_0089FF_17sp,
+        textStyle:
+            textStyle ?? (isISend ? Styles.ts_FFFFFF_17 : Styles.ts_0C1C33_17),
+        matchTextStyle: Styles.ts_0089FF_17,
         prefixSpan: prefixSpan,
         textAlign: textAlign,
         overflow: overflow,

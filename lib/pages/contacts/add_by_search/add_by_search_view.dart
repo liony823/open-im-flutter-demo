@@ -25,7 +25,9 @@ class AddContactsBySearchPage extends StatelessWidget {
           SearchBox(
             focusNode: logic.focusNode,
             controller: logic.searchCtrl,
-            hintText: logic.isSearchUser ? StrRes.searchByPhoneAndUid : StrRes.searchIDAddGroup,
+            hintText: logic.isSearchUser
+                ? StrRes.searchByPhoneAndUid
+                : StrRes.searchIDAddGroup,
             enabled: true,
             autofocus: true,
             margin: EdgeInsets.symmetric(horizontal: 17.w, vertical: 10.h),
@@ -49,9 +51,9 @@ class AddContactsBySearchPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        StrRes.scan.toText..style = Styles.ts_0C1C33_17sp_medium,
+                        StrRes.scan.toText..style = Styles.ts_0C1C33_17_medium,
                         8.verticalSpace,
-                        StrRes.scanHint.toText..style = Styles.ts_8E9AB0_12sp,
+                        StrRes.scanHint.toText..style = Styles.ts_8E9AB0_12,
                       ],
                     ),
                   ],
@@ -60,11 +62,15 @@ class AddContactsBySearchPage extends StatelessWidget {
             ),
           Obx(() => Expanded(
                 child: logic.isSearchUser
-                    ? (logic.isNotFoundUser ? _buildNotFoundView() : _buildUserListView())
+                    ? (logic.isNotFoundUser
+                        ? _buildNotFoundView()
+                        : _buildUserListView())
                     : (logic.isNotFoundGroup
                         ? _buildNotFoundView()
                         : (Column(
-                            children: logic.groupInfoList.map((e) => _buildItemView(e)).toList(),
+                            children: logic.groupInfoList
+                                .map((e) => _buildItemView(e))
+                                .toList(),
                           ))),
               ))
         ],
@@ -99,12 +105,15 @@ class AddContactsBySearchPage extends StatelessWidget {
           height: 49.h,
           child: Row(
             children: [
-              (logic.isSearchUser ? ImageRes.searchPersonIcon : ImageRes.searchGroupIcon).toImage
+              (logic.isSearchUser
+                      ? ImageRes.searchPersonIcon
+                      : ImageRes.searchGroupIcon)
+                  .toImage
                 ..width = 24.w
                 ..height = 24.h,
               12.horizontalSpace,
               logic.getShowTitle(info).toText
-                ..style = Styles.ts_0089FF_17sp
+                ..style = Styles.ts_0089FF_17
                 ..maxLines = 1
                 ..overflow = TextOverflow.ellipsis,
             ],
@@ -114,6 +123,8 @@ class AddContactsBySearchPage extends StatelessWidget {
 
   Widget _buildNotFoundView() => Container(
         padding: EdgeInsets.symmetric(vertical: 12.h),
-        child: (logic.isSearchUser ? StrRes.noFoundUser : StrRes.noFoundGroup).toText..style = Styles.ts_8E9AB0_17sp,
+        child: (logic.isSearchUser ? StrRes.noFoundUser : StrRes.noFoundGroup)
+            .toText
+          ..style = Styles.ts_8E9AB0_17,
       );
 }

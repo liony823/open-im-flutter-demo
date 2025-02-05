@@ -16,7 +16,7 @@ class EditMyInfoPage extends StatelessWidget {
       appBar: TitleBar.back(
         title: logic.title,
         right: StrRes.save.toText
-          ..style = Styles.ts_0C1C33_17sp
+          ..style = Styles.ts_0C1C33_17
           ..onTap = logic.save,
       ),
       backgroundColor: Styles.c_FFFFFF,
@@ -31,10 +31,12 @@ class EditMyInfoPage extends StatelessWidget {
             ),
             child: TextField(
               controller: logic.inputCtrl,
-              style: Styles.ts_0C1C33_17sp,
+              style: Styles.ts_0C1C33_17,
               autofocus: true,
               keyboardType: logic.keyboardType,
-              inputFormatters: [LengthLimitingTextInputFormatter(logic.maxLength)],
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(logic.maxLength)
+              ],
               decoration: InputDecoration(
                 border: InputBorder.none,
                 isDense: true,

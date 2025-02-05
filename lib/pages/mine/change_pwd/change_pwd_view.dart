@@ -17,7 +17,7 @@ class ChangePwdPage extends StatelessWidget {
         appBar: TitleBar.back(
           title: StrRes.changePassword,
           right: StrRes.determine.toText
-            ..style = Styles.ts_0C1C33_17sp
+            ..style = Styles.ts_0C1C33_17
             ..onTap = logic.confirm,
         ),
         backgroundColor: Styles.c_F8F9FA,
@@ -79,14 +79,14 @@ class ChangePwdPage extends StatelessWidget {
         ),
         child: Row(
           children: [
-            label.toText..style = Styles.ts_0C1C33_17sp,
+            label.toText..style = Styles.ts_0C1C33_17,
             Expanded(
               child: TextField(
                 controller: controller,
                 autofocus: autofocus,
                 textInputAction: TextInputAction.next,
                 textAlign: TextAlign.end,
-                style: Styles.ts_0C1C33_17sp,
+                style: Styles.ts_0C1C33_17,
                 decoration: const InputDecoration(
                   isDense: true,
                   border: InputBorder.none,

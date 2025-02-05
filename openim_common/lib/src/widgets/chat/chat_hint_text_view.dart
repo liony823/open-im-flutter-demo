@@ -13,7 +13,9 @@ class ChatHintTextView extends StatelessWidget {
     required this.onTapUserProfile,
   });
   final Message message;
-  final ValueChanged<({String userID, String name, String? faceURL, String? groupID})> onTapUserProfile;
+  final ValueChanged<
+          ({String userID, String name, String? faceURL, String? groupID})>
+      onTapUserProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class ChatHintTextView extends StatelessWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: IMUtils.getGroupMemberShowName(ntf.opUser!),
-                style: Styles.ts_0089FF_12sp,
+                style: Styles.ts_0089FF_12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => onTapUserProfile((
                         userID: ntf.opUser!.userID!,
@@ -41,7 +43,7 @@ class ChatHintTextView extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: sprintf(StrRes.createGroupNtf, ['']),
-                    style: Styles.ts_8E9AB0_12sp,
+                    style: Styles.ts_8E9AB0_12,
                   ),
                 ],
               ),
@@ -55,7 +57,7 @@ class ChatHintTextView extends StatelessWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: IMUtils.getGroupMemberShowName(ntf.opUser!),
-                style: Styles.ts_0089FF_12sp,
+                style: Styles.ts_0089FF_12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => onTapUserProfile((
                         userID: ntf.opUser!.userID!,
@@ -66,7 +68,7 @@ class ChatHintTextView extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: sprintf(StrRes.editGroupInfoNtf, ['']),
-                    style: Styles.ts_8E9AB0_12sp,
+                    style: Styles.ts_8E9AB0_12,
                   ),
                 ],
               ),
@@ -80,7 +82,7 @@ class ChatHintTextView extends StatelessWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: IMUtils.getGroupMemberShowName(ntf.quitUser!),
-                style: Styles.ts_0089FF_12sp,
+                style: Styles.ts_0089FF_12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => onTapUserProfile((
                         userID: ntf.quitUser!.userID!,
@@ -91,7 +93,7 @@ class ChatHintTextView extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: sprintf(StrRes.quitGroupNtf, ['']),
-                    style: Styles.ts_8E9AB0_12sp,
+                    style: Styles.ts_8E9AB0_12,
                   ),
                 ],
               ),
@@ -104,7 +106,8 @@ class ChatHintTextView extends StatelessWidget {
             final infoMap = <String, GroupMembersInfo>{};
             final ntf = InvitedJoinGroupNotification.fromJson(map);
 
-            aMap[ntf.opUser!.userID!] = IMUtils.getGroupMemberShowName(ntf.opUser!);
+            aMap[ntf.opUser!.userID!] =
+                IMUtils.getGroupMemberShowName(ntf.opUser!);
             infoMap[ntf.opUser!.userID!] = ntf.opUser!;
 
             for (var user in ntf.invitedUserList!) {
@@ -126,7 +129,7 @@ class ChatHintTextView extends StatelessWidget {
                 final info = infoMap[text];
                 children.add(TextSpan(
                   text: value,
-                  style: Styles.ts_0089FF_12sp,
+                  style: Styles.ts_0089FF_12,
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => onTapUserProfile((
                           userID: info?.userID ?? '',
@@ -138,7 +141,7 @@ class ChatHintTextView extends StatelessWidget {
                 return '';
               },
               onNonMatch: (text) {
-                children.add(TextSpan(text: text, style: Styles.ts_8E9AB0_12sp));
+                children.add(TextSpan(text: text, style: Styles.ts_8E9AB0_12));
                 return '';
               },
             );
@@ -155,7 +158,8 @@ class ChatHintTextView extends StatelessWidget {
             final infoMap = <String, GroupMembersInfo>{};
             final ntf = KickedGroupMemeberNotification.fromJson(map);
 
-            aMap[ntf.opUser!.userID!] = IMUtils.getGroupMemberShowName(ntf.opUser!);
+            aMap[ntf.opUser!.userID!] =
+                IMUtils.getGroupMemberShowName(ntf.opUser!);
             infoMap[ntf.opUser!.userID!] = ntf.opUser!;
 
             for (var user in ntf.kickedUserList!) {
@@ -177,7 +181,7 @@ class ChatHintTextView extends StatelessWidget {
                 final info = infoMap[text];
                 children.add(TextSpan(
                   text: value,
-                  style: Styles.ts_0089FF_12sp,
+                  style: Styles.ts_0089FF_12,
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => onTapUserProfile((
                           userID: info?.userID ?? '',
@@ -189,7 +193,7 @@ class ChatHintTextView extends StatelessWidget {
                 return '';
               },
               onNonMatch: (text) {
-                children.add(TextSpan(text: text, style: Styles.ts_8E9AB0_12sp));
+                children.add(TextSpan(text: text, style: Styles.ts_8E9AB0_12));
                 return '';
               },
             );
@@ -207,7 +211,7 @@ class ChatHintTextView extends StatelessWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: IMUtils.getGroupMemberShowName(ntf.entrantUser!),
-                style: Styles.ts_0089FF_12sp,
+                style: Styles.ts_0089FF_12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => onTapUserProfile((
                         userID: ntf.entrantUser!.userID!,
@@ -218,7 +222,7 @@ class ChatHintTextView extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: sprintf(StrRes.joinGroupNtf, ['']),
-                    style: Styles.ts_8E9AB0_12sp,
+                    style: Styles.ts_8E9AB0_12,
                   ),
                 ],
               ),
@@ -232,7 +236,7 @@ class ChatHintTextView extends StatelessWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: IMUtils.getGroupMemberShowName(ntf.opUser!),
-                style: Styles.ts_0089FF_12sp,
+                style: Styles.ts_0089FF_12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => onTapUserProfile((
                         userID: ntf.opUser!.userID!,
@@ -243,7 +247,7 @@ class ChatHintTextView extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: sprintf(StrRes.dismissGroupNtf, ['']),
-                    style: Styles.ts_8E9AB0_12sp,
+                    style: Styles.ts_8E9AB0_12,
                   ),
                 ],
               ),
@@ -261,10 +265,12 @@ class ChatHintTextView extends StatelessWidget {
               RegExp('($a|$b)'),
               onMatch: (match) {
                 final text = match[0]!;
-                final info = text == ntf.opUser!.userID ? ntf.opUser! : ntf.newGroupOwner!;
+                final info = text == ntf.opUser!.userID
+                    ? ntf.opUser!
+                    : ntf.newGroupOwner!;
                 children.add(TextSpan(
                   text: IMUtils.getGroupMemberShowName(info),
-                  style: Styles.ts_0089FF_12sp,
+                  style: Styles.ts_0089FF_12,
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => onTapUserProfile((
                           userID: info.userID!,
@@ -276,7 +282,7 @@ class ChatHintTextView extends StatelessWidget {
                 return '';
               },
               onNonMatch: (text) {
-                children.add(TextSpan(text: text, style: Styles.ts_8E9AB0_12sp));
+                children.add(TextSpan(text: text, style: Styles.ts_8E9AB0_12));
                 return '';
               },
             );
@@ -298,10 +304,11 @@ class ChatHintTextView extends StatelessWidget {
               RegExp('($a|$b)'),
               onMatch: (match) {
                 final text = match[0]!;
-                final info = text == ntf.opUser!.userID ? ntf.opUser! : ntf.mutedUser!;
+                final info =
+                    text == ntf.opUser!.userID ? ntf.opUser! : ntf.mutedUser!;
                 children.add(TextSpan(
                   text: IMUtils.getGroupMemberShowName(info),
-                  style: Styles.ts_0089FF_12sp,
+                  style: Styles.ts_0089FF_12,
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => onTapUserProfile((
                           userID: info.userID!,
@@ -313,7 +320,7 @@ class ChatHintTextView extends StatelessWidget {
                 return '';
               },
               onNonMatch: (text) {
-                children.add(TextSpan(text: text, style: Styles.ts_8E9AB0_12sp));
+                children.add(TextSpan(text: text, style: Styles.ts_8E9AB0_12));
                 return '';
               },
             );
@@ -334,10 +341,11 @@ class ChatHintTextView extends StatelessWidget {
               RegExp('($a|$b)'),
               onMatch: (match) {
                 final text = match[0]!;
-                final info = text == ntf.opUser!.userID ? ntf.opUser! : ntf.mutedUser!;
+                final info =
+                    text == ntf.opUser!.userID ? ntf.opUser! : ntf.mutedUser!;
                 children.add(TextSpan(
                   text: IMUtils.getGroupMemberShowName(info),
-                  style: Styles.ts_0089FF_12sp,
+                  style: Styles.ts_0089FF_12,
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => onTapUserProfile((
                           userID: info.userID!,
@@ -349,7 +357,7 @@ class ChatHintTextView extends StatelessWidget {
                 return '';
               },
               onNonMatch: (text) {
-                children.add(TextSpan(text: text, style: Styles.ts_8E9AB0_12sp));
+                children.add(TextSpan(text: text, style: Styles.ts_8E9AB0_12));
                 return '';
               },
             );
@@ -367,7 +375,7 @@ class ChatHintTextView extends StatelessWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: IMUtils.getGroupMemberShowName(ntf.opUser!),
-                style: Styles.ts_0089FF_12sp,
+                style: Styles.ts_0089FF_12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => onTapUserProfile((
                         userID: ntf.opUser!.userID!,
@@ -378,7 +386,7 @@ class ChatHintTextView extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: sprintf(StrRes.muteGroupNtf, ['']),
-                    style: Styles.ts_8E9AB0_12sp,
+                    style: Styles.ts_8E9AB0_12,
                   ),
                 ],
               ),
@@ -392,7 +400,7 @@ class ChatHintTextView extends StatelessWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: IMUtils.getGroupMemberShowName(ntf.opUser!),
-                style: Styles.ts_0089FF_12sp,
+                style: Styles.ts_0089FF_12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => onTapUserProfile((
                         userID: ntf.opUser!.userID!,
@@ -403,7 +411,7 @@ class ChatHintTextView extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: sprintf(StrRes.muteCancelGroupNtf, ['']),
-                    style: Styles.ts_8E9AB0_12sp,
+                    style: Styles.ts_8E9AB0_12,
                   ),
                 ],
               ),
@@ -411,14 +419,17 @@ class ChatHintTextView extends StatelessWidget {
           }
         case MessageType.friendApplicationApprovedNotification:
           {
-            return StrRes.friendAddedNtf.toText..style = Styles.ts_8E9AB0_12sp;
+            return StrRes.friendAddedNtf.toText..style = Styles.ts_8E9AB0_12;
           }
         case MessageType.burnAfterReadingNotification:
           {
             final ntf = BurnAfterReadingNotification.fromJson(map);
 
-            return (ntf.isPrivate == true ? StrRes.openPrivateChatNtf : StrRes.closePrivateChatNtf).toText
-              ..style = Styles.ts_8E9AB0_12sp;
+            return (ntf.isPrivate == true
+                    ? StrRes.openPrivateChatNtf
+                    : StrRes.closePrivateChatNtf)
+                .toText
+              ..style = Styles.ts_8E9AB0_12;
           }
         case MessageType.groupMemberInfoChangedNotification:
           final ntf = GroupMemberInfoChangedNotification.fromJson(map);
@@ -427,7 +438,7 @@ class ChatHintTextView extends StatelessWidget {
             textAlign: TextAlign.center,
             text: TextSpan(
               text: IMUtils.getGroupMemberShowName(ntf.opUser!),
-              style: Styles.ts_0089FF_12sp,
+              style: Styles.ts_0089FF_12,
               recognizer: TapGestureRecognizer()
                 ..onTap = () => onTapUserProfile((
                       userID: ntf.opUser!.userID!,
@@ -438,7 +449,7 @@ class ChatHintTextView extends StatelessWidget {
               children: [
                 TextSpan(
                   text: sprintf(StrRes.memberInfoChangedNtf, ['']),
-                  style: Styles.ts_8E9AB0_12sp,
+                  style: Styles.ts_8E9AB0_12,
                 ),
               ],
             ),
@@ -449,7 +460,7 @@ class ChatHintTextView extends StatelessWidget {
             textAlign: TextAlign.center,
             text: TextSpan(
               text: IMUtils.getGroupMemberShowName(ntf.opUser!),
-              style: Styles.ts_0089FF_12sp,
+              style: Styles.ts_0089FF_12,
               recognizer: TapGestureRecognizer()
                 ..onTap = () => onTapUserProfile((
                       userID: ntf.opUser!.userID!,
@@ -459,8 +470,9 @@ class ChatHintTextView extends StatelessWidget {
                     )),
               children: [
                 TextSpan(
-                  text: sprintf(StrRes.whoModifyGroupName, ['', ntf.group?.groupName ?? ""]),
-                  style: Styles.ts_8E9AB0_12sp,
+                  text: sprintf(StrRes.whoModifyGroupName,
+                      ['', ntf.group?.groupName ?? ""]),
+                  style: Styles.ts_8E9AB0_12,
                 ),
               ],
             ),

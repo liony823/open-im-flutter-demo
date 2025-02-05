@@ -15,15 +15,15 @@ class EditGroupNamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     if (logic.type == EditNameType.groupNickname) {
       return Scaffold(
-        backgroundColor: Colors.white,
+          backgroundColor: Colors.white,
           appBar: TitleBar.back(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               67.verticalSpace,
-              StrRes.editGroupName.toText..style = Styles.ts_0C1C33_20sp,
+              StrRes.editGroupName.toText..style = Styles.ts_0C1C33_20,
               10.verticalSpace,
-              StrRes.editGroupTips.toText..style = Styles.ts_8E9AB0_15sp,
+              StrRes.editGroupTips.toText..style = Styles.ts_8E9AB0_16,
               37.verticalSpace,
               Row(
                 children: [
@@ -35,7 +35,7 @@ class EditGroupNamePage extends StatelessWidget {
                   Expanded(
                     child: TextField(
                       controller: logic.inputCtrl,
-                      style: Styles.ts_0C1C33_17sp,
+                      style: Styles.ts_0C1C33_17,
                       autofocus: true,
                       inputFormatters: [LengthLimitingTextInputFormatter(16)],
                       decoration: InputDecoration(
@@ -65,7 +65,7 @@ class EditGroupNamePage extends StatelessWidget {
       appBar: TitleBar.back(
         title: logic.title,
         right: StrRes.save.toText
-          ..style = Styles.ts_0C1C33_17sp
+          ..style = Styles.ts_0C1C33_17
           ..onTap = logic.save,
       ),
       backgroundColor: Styles.c_FFFFFF,
@@ -80,7 +80,7 @@ class EditGroupNamePage extends StatelessWidget {
             ),
             child: TextField(
               controller: logic.inputCtrl,
-              style: Styles.ts_0C1C33_17sp,
+              style: Styles.ts_0C1C33_17,
               autofocus: true,
               inputFormatters: [LengthLimitingTextInputFormatter(16)],
               decoration: InputDecoration(

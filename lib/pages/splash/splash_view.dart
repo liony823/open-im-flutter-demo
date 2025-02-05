@@ -15,7 +15,10 @@ class SplashPage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Styles.c_0089FF_opacity10, Styles.c_FFFFFF_opacity0],
+          colors: [
+            Styles.c_0089FF.withValues(alpha: 10 / 100),
+            Styles.c_FFFFFF.withValues(alpha: 0 / 100)
+          ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),

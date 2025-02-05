@@ -16,7 +16,7 @@ class SetSelfInfoPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            StrRes.plsCompleteInfo.toText..style = Styles.ts_0089FF_22sp_semibold,
+            StrRes.plsCompleteInfo.toText..style = Styles.ts_0089FF_20_semibold,
             _buildInputItemView(
               label: StrRes.nickname,
               controller: logic.nicknameCtrl,
@@ -58,9 +58,10 @@ class SetSelfInfoPage extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              label.toText..style = Styles.ts_8E9AB0_17sp,
+              label.toText..style = Styles.ts_8E9AB0_17,
               const Spacer(),
-              if (null != value && !isAvatar) value.toText..style = Styles.ts_0C1C33_17sp,
+              if (null != value && !isAvatar)
+                value.toText..style = Styles.ts_0C1C33_17,
               if (isAvatar)
                 AvatarView(
                   width: 42.w,
@@ -96,7 +97,7 @@ class SetSelfInfoPage extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            label.toText..style = Styles.ts_8E9AB0_17sp,
+            label.toText..style = Styles.ts_8E9AB0_17,
             Expanded(
               child: SizedBox(
                 height: 36.h,
@@ -104,7 +105,7 @@ class SetSelfInfoPage extends StatelessWidget {
                   controller: controller,
                   textAlign: TextAlign.end,
                   maxLength: 16,
-                  style: Styles.ts_0C1C33_17sp,
+                  style: Styles.ts_0C1C33_17,
                   maxLines: 1,
                   decoration: const InputDecoration(
                     border: InputBorder.none,

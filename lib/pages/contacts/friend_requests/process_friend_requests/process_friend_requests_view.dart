@@ -31,7 +31,7 @@ class ProcessFriendRequestsPage extends StatelessWidget {
                 ),
                 10.horizontalSpace,
                 (logic.applicationInfo.fromNickname ?? '').toText
-                  ..style = Styles.ts_0C1C33_17sp,
+                  ..style = Styles.ts_0C1C33_17,
               ],
             ),
             12.verticalSpace,
@@ -41,7 +41,7 @@ class ProcessFriendRequestsPage extends StatelessWidget {
                 width: 343.w,
                 margin: EdgeInsets.only(bottom: 12.h),
                 decoration: BoxDecoration(
-                  color: Styles.c_E8EAEF_opacity50,
+                  color: Styles.c_E8EAEF.withValues(alpha: 50 / 100),
                   borderRadius: BorderRadius.circular(6.r),
                 ),
                 child: SingleChildScrollView(
@@ -53,7 +53,7 @@ class ProcessFriendRequestsPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       (logic.applicationInfo.reqMsg ?? '').toText
-                        ..style = Styles.ts_0C1C33_17sp,
+                        ..style = Styles.ts_0C1C33_17,
                     ],
                   ),
                 ),
@@ -65,7 +65,7 @@ class ProcessFriendRequestsPage extends StatelessWidget {
                 Flexible(
                   child: Button(
                     text: StrRes.accept,
-                    textStyle: Styles.ts_FFFFFF_17sp,
+                    textStyle: Styles.ts_FFFFFF_17,
                     onTap: logic.acceptFriendApplication,
                   ),
                 ),
@@ -92,7 +92,7 @@ class ProcessFriendRequestsPage extends StatelessWidget {
             onTap: logic.refuseFriendApplication,
             child: Container(
               alignment: Alignment.center,
-              child: StrRes.reject.toText..style = Styles.ts_0C1C33_17sp,
+              child: StrRes.reject.toText..style = Styles.ts_0C1C33_17,
             ),
           ),
         ),

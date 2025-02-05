@@ -19,18 +19,18 @@ class ChatFriendRelationshipAbnormalHintView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (blockedByFriend) {
-      return StrRes.blockedByFriendHint.toText..style = Styles.ts_8E9AB0_12sp;
+      return StrRes.blockedByFriendHint.toText..style = Styles.ts_8E9AB0_12;
     } else if (deletedByFriend) {
       return Container(
         constraints: BoxConstraints(maxWidth: maxWidth),
         child: RichText(
           text: TextSpan(
             text: sprintf(StrRes.deletedByFriendHint, [name]),
-            style: Styles.ts_8E9AB0_12sp,
+            style: Styles.ts_8E9AB0_12,
             children: [
               TextSpan(
                 text: StrRes.sendFriendVerification,
-                style: Styles.ts_0089FF_12sp,
+                style: Styles.ts_0089FF_12,
                 recognizer: TapGestureRecognizer()..onTap = onTap,
               ),
             ],

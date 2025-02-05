@@ -66,14 +66,14 @@ class SearchGroupMemberPage extends StatelessWidget {
                 child: SearchKeywordText(
                   text: membersInfo.nickname ?? '',
                   keyText: logic.searchCtrl.text.trim(),
-                  style: Styles.ts_0C1C33_17sp,
-                  keyStyle: Styles.ts_0089FF_17sp,
+                  style: Styles.ts_0C1C33_17,
+                  keyStyle: Styles.ts_0089FF_17,
                 ),
               ),
               if (membersInfo.roleLevel == GroupRoleLevel.owner)
-                StrRes.groupOwner.toText..style = Styles.ts_8E9AB0_17sp,
+                StrRes.groupOwner.toText..style = Styles.ts_8E9AB0_17,
               if (membersInfo.roleLevel == GroupRoleLevel.admin)
-                StrRes.groupAdmin.toText..style = Styles.ts_8E9AB0_17sp,
+                StrRes.groupAdmin.toText..style = Styles.ts_8E9AB0_17,
             ],
           ),
         ),
@@ -85,7 +85,7 @@ class SearchGroupMemberPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             44.verticalSpace,
-            StrRes.searchNotFound.toText..style = Styles.ts_8E9AB0_17sp,
+            StrRes.searchNotFound.toText..style = Styles.ts_8E9AB0_17,
           ],
         ),
       );

@@ -1,27 +1,16 @@
 import 'dart:async';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_openim_sdk/flutter_openim_sdk.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:openim_common/openim_common.dart';
+import 'package:openim_live/openim_live.dart';
 import 'package:openim_live/src/widgets/live_button.dart';
+import 'package:openim_live/src/widgets/loading_view.dart';
 import 'package:synchronized/synchronized.dart';
-
-import '../../../live_client.dart';
-import '../../../widgets/loading_view.dart';
-
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
-import 'package:livekit_client/livekit_client.dart';
-import 'package:openim_common/openim_common.dart';
-import 'package:openim_live/src/widgets/live_button.dart';
-import 'package:synchronized/synchronized.dart';
 
-import '../../../live_client.dart';
 class ControlsView extends StatefulWidget {
   const ControlsView({
     Key? key,
@@ -105,7 +94,8 @@ class _ControlsViewState extends State<ControlsView> {
     _roomDidUpdateSub = widget.roomDidUpdateStream.listen(_roomDidUpdate);
     // _queryUserInfo();
 
-    _deviceChangeSub = Hardware.instance.onDeviceChange.stream.listen(_loadDevices);
+    _deviceChangeSub =
+        Hardware.instance.onDeviceChange.stream.listen(_loadDevices);
     Hardware.instance.enumerateDevices().then(_loadDevices);
     super.initState();
   }
@@ -197,7 +187,8 @@ class _ControlsViewState extends State<ControlsView> {
   }
 
   Future<void> _enableVideo() async {
-    await _participant?.setCameraEnabled(true, cameraCaptureOptions: CameraCaptureOptions(cameraPosition: position));
+    await _participant?.setCameraEnabled(true,
+        cameraCaptureOptions: CameraCaptureOptions(cameraPosition: position));
   }
 
   Future<void> _disableSpeaker() async {
@@ -261,10 +252,15 @@ class _ControlsViewState extends State<ControlsView> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      (_participant!.isCameraEnabled() ? ImageRes.liveCameraOff : ImageRes.liveCameraOn).toImage
+                      (_participant!.isCameraEnabled()
+                              ? ImageRes.liveCameraOff
+                              : ImageRes.liveCameraOn)
+                          .toImage
                         ..width = 30.w
                         ..height = 30.h
-                        ..onTap = (_participant!.isCameraEnabled() ? _disableVideo : _enableVideo),
+                        ..onTap = (_participant!.isCameraEnabled()
+                            ? _disableVideo
+                            : _enableVideo),
                       16.horizontalSpace,
                       ImageRes.liveSwitchCamera.toImage
                         ..width = 30.w
@@ -299,13 +295,17 @@ class _ControlsViewState extends State<ControlsView> {
       );
 
   List<Widget> get _buttonGroup {
-    if (_callState == CallState.call || _callState == CallState.connecting && widget.initState == CallState.call) {
+    if (_callState == CallState.call ||
+        _callState == CallState.connecting &&
+            widget.initState == CallState.call) {
       return [
         LiveButton.microphone(on: _enabledMicrophone, onTap: _toggleAudio),
         LiveButton.cancel(onTap: widget.onCancel),
         LiveButton.speaker(on: _enabledSpeaker, onTap: _toggleSpeaker),
       ];
-    } else if (_callState == CallState.beCalled || _callState == CallState.connecting && widget.initState == CallState.beCalled) {
+    } else if (_callState == CallState.beCalled ||
+        _callState == CallState.connecting &&
+            widget.initState == CallState.beCalled) {
       return [
         LiveButton.reject(onTap: widget.onReject),
         LiveButton.pickUp(onTap: widget.onPickUp),
@@ -326,22 +326,26 @@ class _ControlsViewState extends State<ControlsView> {
 
   Widget get _videoCallingDurationView => Visibility(
         visible: isVideo && isCalling,
-        child: _callingDurationStr.toText..style = Styles.ts_FFFFFF_opacity70_17sp,
+        child: _callingDurationStr.toText
+          ..style = Styles.ts_FFFFFF_17.withOpacity(0.7),
       );
 
   Widget get _userInfoView {
     String text;
     if (_callState == CallState.call) {
-      text = isVideo ? StrRes.waitingVideoCallHint : StrRes.waitingVoiceCallHint;
+      text =
+          isVideo ? StrRes.waitingVideoCallHint : StrRes.waitingVoiceCallHint;
     } else if (_callState == CallState.beCalled) {
-      text = isVideo ? StrRes.invitedVideoCallHint : StrRes.invitedVoiceCallHint;
+      text =
+          isVideo ? StrRes.invitedVideoCallHint : StrRes.invitedVoiceCallHint;
     } else if (_callState == CallState.connecting) {
       text = StrRes.connecting;
     } else {
       text = isVideo ? '' : _callingDurationStr;
     }
 
-    String? nickname = IMUtils.emptyStrToNull(widget.userInfo!.remark) ?? widget.userInfo!.nickname;
+    String? nickname = IMUtils.emptyStrToNull(widget.userInfo!.remark) ??
+        widget.userInfo!.nickname;
     String? faceURL = widget.userInfo!.faceURL;
 
     return Visibility(
@@ -350,12 +354,12 @@ class _ControlsViewState extends State<ControlsView> {
         children: [
           AvatarView(width: 70.w, height: 70.h, text: nickname, url: faceURL),
           10.verticalSpace,
-          (nickname ?? '').toText..style = Styles.ts_FFFFFF_20sp_medium,
+          (nickname ?? '').toText..style = Styles.ts_FFFFFF_20_medium,
           10.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: text.toText
-              ..style = Styles.ts_FFFFFF_opacity70_17sp
+              ..style = Styles.ts_FFFFFF_17.withOpacity(0.7)
               ..maxLines = 1
               ..overflow = TextOverflow.ellipsis,
           ),

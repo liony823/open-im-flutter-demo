@@ -65,7 +65,8 @@ class _SearchBoxState extends State<SearchBox> {
       margin: widget.margin,
       padding: widget.padding ?? EdgeInsets.symmetric(horizontal: 14.w),
       decoration: BoxDecoration(
-        color: widget.backgroundColor ?? Styles.c_8E9AB0_opacity15,
+        color: widget.backgroundColor ??
+            Styles.c_8E9AB0.withValues(alpha: 15 / 100),
         borderRadius: BorderRadius.circular(6.r),
       ),
       child: Row(
@@ -79,13 +80,13 @@ class _SearchBoxState extends State<SearchBox> {
             child: TextField(
               controller: widget.controller,
               focusNode: widget.focusNode,
-              style: widget.textStyle ?? Styles.ts_0C1C33_17sp,
+              style: widget.textStyle ?? Styles.ts_0C1C33_17,
               autofocus: widget.autofocus,
               enabled: widget.enabled,
               textInputAction: TextInputAction.search,
               decoration: InputDecoration(
                 hintText: widget.hintText ?? StrRes.search,
-                hintStyle: widget.hintStyle ?? Styles.ts_8E9AB0_17sp,
+                hintStyle: widget.hintStyle ?? Styles.ts_8E9AB0_17,
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
                 border: InputBorder.none,

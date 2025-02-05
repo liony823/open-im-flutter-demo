@@ -90,10 +90,11 @@ class ChatItemContainer extends StatelessWidget {
             menus: menus ?? allMenus,
           ),
           pressType: PressType.longPress,
-          arrowColor: Styles.c_0C1C33_opacity85,
+          arrowColor: Styles.c_0C1C33.withValues(alpha: 85 / 100),
           barrierColor: Colors.transparent,
           verticalMargin: 0,
-          child: isBubbleBg ? ChatBubble(bubbleType: type, child: child) : child,
+          child:
+              isBubbleBg ? ChatBubble(bubbleType: type, child: child) : child,
         );
 
   Widget _buildLeftView() => Row(
@@ -103,7 +104,7 @@ class ChatItemContainer extends StatelessWidget {
           AvatarView(
             width: 44.w,
             height: 44.h,
-            textStyle: Styles.ts_FFFFFF_14sp_medium,
+            textStyle: Styles.ts_FFFFFF_14_medium,
             url: leftFaceUrl,
             text: leftNickname,
             onTap: onTapLeftAvatar,
@@ -165,7 +166,7 @@ class ChatItemContainer extends StatelessWidget {
           AvatarView(
             width: 44.w,
             height: 44.h,
-            textStyle: Styles.ts_FFFFFF_14sp_medium,
+            textStyle: Styles.ts_FFFFFF_14_medium,
             url: rightFaceUrl,
             text: rightNickname,
             onTap: onTapRightAvatar,

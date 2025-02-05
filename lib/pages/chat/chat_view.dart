@@ -85,13 +85,23 @@ class ChatPage extends StatelessWidget {
         onTapUserProfile: handleUserProfileTap,
       );
 
-  void handleUserProfileTap(({String userID, String name, String? faceURL, String? groupID}) userProfile) {
-    final userInfo = UserInfo(userID: userProfile.userID, nickname: userProfile.name, faceURL: userProfile.faceURL);
+  void handleUserProfileTap(
+      ({
+        String userID,
+        String name,
+        String? faceURL,
+        String? groupID
+      }) userProfile) {
+    final userInfo = UserInfo(
+        userID: userProfile.userID,
+        nickname: userProfile.name,
+        faceURL: userProfile.faceURL);
     logic.viewUserInfo(userInfo);
   }
 
   Widget? _buildMediaItem(BuildContext context, Message message) {
-    if (message.contentType != MessageType.picture && message.contentType != MessageType.video) {
+    if (message.contentType != MessageType.picture &&
+        message.contentType != MessageType.video) {
       return null;
     }
 
@@ -124,7 +134,8 @@ class ChatPage extends StatelessWidget {
       child: Hero(
         tag: message.clientMsgID!,
         child: _buildMediaContent(message),
-        placeholderBuilder: (BuildContext context, Size heroSize, Widget child) => child,
+        placeholderBuilder:
+            (BuildContext context, Size heroSize, Widget child) => child,
       ),
     );
   }
@@ -154,7 +165,8 @@ class ChatPage extends StatelessWidget {
         final content = data['content'];
         final view = ChatCallItemView(type: type, content: content);
         return CustomTypeInfo(view);
-      } else if (viewType == CustomMessageType.deletedByFriend || viewType == CustomMessageType.blockedByFriend) {
+      } else if (viewType == CustomMessageType.deletedByFriend ||
+          viewType == CustomMessageType.blockedByFriend) {
         final view = ChatFriendRelationshipAbnormalHintView(
           name: logic.nickname.value,
           onTap: logic.sendFriendVerification,
@@ -164,13 +176,13 @@ class ChatPage extends StatelessWidget {
         return CustomTypeInfo(view, false, false);
       } else if (viewType == CustomMessageType.removedFromGroup) {
         return CustomTypeInfo(
-          StrRes.removedFromGroupHint.toText..style = Styles.ts_8E9AB0_12sp,
+          StrRes.removedFromGroupHint.toText..style = Styles.ts_8E9AB0_12,
           false,
           false,
         );
       } else if (viewType == CustomMessageType.groupDisbanded) {
         return CustomTypeInfo(
-          StrRes.groupDisbanded.toText..style = Styles.ts_8E9AB0_12sp,
+          StrRes.groupDisbanded.toText..style = Styles.ts_8E9AB0_12,
           false,
           false,
         );
