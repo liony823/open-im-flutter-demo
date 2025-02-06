@@ -1,5 +1,6 @@
 const Map<String, String> zh_CN = {
   "appName": "飞宏",
+  "userID": "用户 ID",
   "welcome": "欢迎使用飞宏IM",
   "loginWithUser": "用户名登录",
   "loginWithPhone": "手机号登录",
@@ -52,6 +53,7 @@ const Map<String, String> zh_CN = {
   "confirmPassword": "确认密码",
   "wrongPasswordFormat": "密码格式错误",
   "plsCompleteInfo": "请完善个人信息",
+  "plsSetAvatar": "点击更换头像",
   "plsEnterYourNickname": "请输入您的昵称",
   "setInfo": "设置信息",
   "loginPwdFormat": "6～20位，至少包含数字、字母",

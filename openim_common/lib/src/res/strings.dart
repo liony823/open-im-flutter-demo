@@ -19,10 +19,25 @@ class TranslationService extends Translations {
 class StrRes {
   StrRes._();
 
+  static String get appName => 'appName'.tr;
+
   static String get welcome => 'welcome'.tr;
 
-  static String get phoneNumber => 'phoneNumber'.tr;
   static String get userID => 'userID'.tr;
+
+  static String get loginWithUser => 'loginWithUser'.tr;
+
+  static String get loginWithAutoRegister => 'loginWithAutoRegister'.tr;
+
+  static String get registerWithPhone => 'registerWithPhone'.tr;
+
+  static String get registerWithUser => 'registerWithUser'.tr;
+
+  static String get loginWithAutoRegisterHint => 'loginWithAutoRegisterHint'.tr;
+
+  static String get loginWithPhone => 'loginWithPhone'.tr;
+
+  static String get phoneNumber => 'phoneNumber'.tr;
 
   static String get plsEnterPhoneNumber => 'plsEnterPhoneNumber'.tr;
 
@@ -30,11 +45,17 @@ class StrRes {
 
   static String get plsEnterPassword => 'plsEnterPassword'.tr;
 
+  static String get passwordFormatError => 'passwordFormatError'.tr;
+
   static String get account => 'account'.tr;
 
   static String get plsEnterAccount => 'plsEnterAccount'.tr;
 
-  static String get plsEnterEmail => 'plsEnterEmail'.tr;
+  static String get accountFormatError => 'accountFormatError'.tr;
+
+  static String get plsEnterNickname => 'plsEnterNickname'.tr;
+
+  static String get nicknameFormatError => 'nicknameFormatError'.tr;
 
   static String get forgetPassword => 'forgetPassword'.tr;
 
@@ -42,7 +63,22 @@ class StrRes {
 
   static String get login => 'login'.tr;
 
+  static String get registerTitle => 'registerTitle'.tr;
+
+  static String get agreementText => 'agreementText'.tr;
+
+  static String get userAgreement => 'userAgreement'.tr;
+
+  static String get and => 'and'.tr;
+
+  static String get privacyPolicy => 'privacyPolicy'.tr;
+
   static String get noAccountYet => 'noAccountYet'.tr;
+
+  static String get alertDialogAgreementTitle => 'alertDialogAgreementTitle'.tr;
+
+  static String get alertDialogAgreementContent =>
+      'alertDialogAgreementContent'.tr;
 
   static String get loginNow => 'loginNow'.tr;
 
@@ -58,7 +94,8 @@ class StrRes {
 
   static String get resendVerificationCode => 'resendVerificationCode'.tr;
 
-  static String get verificationCodeTimingReminder => 'verificationCodeTimingReminder'.tr;
+  static String get verificationCodeTimingReminder =>
+      'verificationCodeTimingReminder'.tr;
 
   static String get defaultVerificationCode => 'defaultVerificationCode'.tr;
 
@@ -87,6 +124,8 @@ class StrRes {
   static String get wrongPasswordFormat => 'wrongPasswordFormat'.tr;
 
   static String get plsCompleteInfo => 'plsCompleteInfo'.tr;
+
+  static String get plsSetAvatar => 'plsSetAvatar'.tr;
 
   static String get plsEnterYourNickname => 'plsEnterYourNickname'.tr;
 
@@ -276,7 +315,8 @@ class StrRes {
 
   static String get releaseToSend => 'releaseToSend'.tr;
 
-  static String get releaseToSendSwipeUpToCancel => 'releaseToSendSwipeUpToCancel'.tr;
+  static String get releaseToSendSwipeUpToCancel =>
+      'releaseToSendSwipeUpToCancel'.tr;
 
   static String get liftFingerToCancelSend => 'liftFingerToCancelSend'.tr;
 
@@ -704,7 +744,8 @@ class StrRes {
 
   static String get confirm => 'confirm'.tr;
 
-  static String get confirmTransferGroupToUser => 'confirmTransferGroupToUser'.tr;
+  static String get confirmTransferGroupToUser =>
+      'confirmTransferGroupToUser'.tr;
 
   static String get removeGroupMember => 'removeGroupMember'.tr;
 
@@ -960,7 +1001,8 @@ class StrRes {
 
   static String get confirmTheChanges => 'confirmTheChanges'.tr;
 
-  static String get invitesYouToVideoConference => 'invitesYouToVideoConference'.tr;
+  static String get invitesYouToVideoConference =>
+      'invitesYouToVideoConference'.tr;
 
   static String get over => 'over'.tr;
 
@@ -1064,7 +1106,8 @@ class StrRes {
 
   static String get sendAnother => 'sendAnother'.tr;
 
-  static String get confirmDelTagNotificationHint => 'confirmDelTagNotificationHint'.tr;
+  static String get confirmDelTagNotificationHint =>
+      'confirmDelTagNotificationHint'.tr;
 
   static String get contentNotBlank => 'contentNotBlank'.tr;
 
@@ -1076,11 +1119,13 @@ class StrRes {
 
   static String get groupRequestHandled => 'groupRequestHandled'.tr;
 
-  static String get burnAfterReadingDescription => 'burnAfterReadingDescription'.tr;
+  static String get burnAfterReadingDescription =>
+      'burnAfterReadingDescription'.tr;
 
   static String get periodicallyDeleteMessage => 'periodicallyDeleteMessage'.tr;
 
-  static String get periodicallyDeleteMessageDescription => 'periodicallyDeleteMessageDescription'.tr;
+  static String get periodicallyDeleteMessageDescription =>
+      'periodicallyDeleteMessageDescription'.tr;
 
   static String get nDay => 'nDay'.tr;
 

@@ -16,13 +16,13 @@ class DiscoverLogic extends GetxController {
     final temp = appLogic.clientConfigMap['discoverPageURL'];
 
     if (temp == null) {
-      appLogic.queryClientConfig().then((value) {
-        if (value['discoverPageURL'] == null) {
-          url.value = 'https://www.openim.io';
-        } else {
-          url.value = value['discoverPageURL'];
-        }
-      });
+      // appLogic.queryClientConfig().then((value) {
+      //   if (value['discoverPageURL'] == null) {
+      //     url.value = 'https://www.openim.io';
+      //   } else {
+      //     url.value = value['discoverPageURL'];
+      //   }
+      // });
     } else {
       url.value = temp;
     }

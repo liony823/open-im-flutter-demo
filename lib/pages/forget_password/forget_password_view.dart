@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:openim/pages/login/login_logic.dart';
 import 'package:openim/widgets/register_page_bg.dart';
 import 'package:openim_common/openim_common.dart';
 
@@ -21,13 +20,9 @@ class ForgetPasswordPage extends StatelessWidget {
                   ..style = Styles.ts_0089FF_20_semibold,
                 29.verticalSpace,
                 InputBox.account(
-                  label: logic.loginController.operateType.name,
-                  hintText: logic.loginController.operateType.hintText,
+                  label: "email",
                   code: logic.areaCode.value,
-                  onAreaCode:
-                      logic.loginController.operateType == LoginType.phone
-                          ? logic.openCountryCodePicker
-                          : null,
+                  onAreaCode: logic.openCountryCodePicker,
                   controller: logic.phoneCtrl,
                 ),
                 16.verticalSpace,

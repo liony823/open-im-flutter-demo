@@ -1,5 +1,6 @@
 import 'package:flutter_openim_sdk/flutter_openim_sdk.dart';
 import 'package:get/get.dart';
+import 'package:openim/pages/ua/ua_logic.dart';
 import 'package:openim_common/openim_common.dart';
 
 import '../pages/chat/group_setup/edit_name/edit_name_logic.dart';
@@ -21,14 +22,16 @@ class AppNavigator {
     Get.until((route) => Get.currentRoute == AppRoutes.login);
   }
 
-  static void startMain({bool isAutoLogin = false, List<ConversationInfo>? conversations}) {
+  static void startMain(
+      {bool isAutoLogin = false, List<ConversationInfo>? conversations}) {
     Get.offAllNamed(
       AppRoutes.home,
       arguments: {'isAutoLogin': isAutoLogin, 'conversations': conversations},
     );
   }
 
-  static void startSplashToMain({bool isAutoLogin = false, List<ConversationInfo>? conversations}) {
+  static void startSplashToMain(
+      {bool isAutoLogin = false, List<ConversationInfo>? conversations}) {
     Get.offAndToNamed(
       AppRoutes.home,
       arguments: {'isAutoLogin': isAutoLogin, 'conversations': conversations},
@@ -82,7 +85,8 @@ class AppNavigator {
         popGesture: true,
       ));
 
-  static startAddContactsBySearch({required SearchType searchType}) => Get.toNamed(
+  static startAddContactsBySearch({required SearchType searchType}) =>
+      Get.toNamed(
         AppRoutes.addContactsBySearch,
         arguments: {"searchType": searchType},
       );
@@ -130,7 +134,8 @@ class AppNavigator {
         'userID': userID,
       });
 
-  static startSetFriendRemark() => Get.toNamed(AppRoutes.setFriendRemark, arguments: {});
+  static startSetFriendRemark() =>
+      Get.toNamed(AppRoutes.setFriendRemark, arguments: {});
 
   static startSendVerificationApplication({
     String? userID,
@@ -161,7 +166,8 @@ class AppNavigator {
   static startMyInfo() => Get.toNamed(AppRoutes.myInfo);
 
   static startEditMyInfo({EditAttr attr = EditAttr.nickname, int? maxLength}) =>
-      Get.toNamed(AppRoutes.editMyInfo, arguments: {'editAttr': attr, 'maxLength': maxLength});
+      Get.toNamed(AppRoutes.editMyInfo,
+          arguments: {'editAttr': attr, 'maxLength': maxLength});
 
   static startAccountSetup() => Get.toNamed(AppRoutes.accountSetup);
 
@@ -206,10 +212,12 @@ class AppNavigator {
     required GroupInfo groupInfo,
     GroupMemberOpType opType = GroupMemberOpType.view,
   }) =>
-      Get.toNamed(AppRoutes.groupMemberList, preventDuplicates: false, arguments: {
-        'groupInfo': groupInfo,
-        'opType': opType,
-      });
+      Get.toNamed(AppRoutes.groupMemberList,
+          preventDuplicates: false,
+          arguments: {
+            'groupInfo': groupInfo,
+            'opType': opType,
+          });
 
   static startSearchGroupMember({
     required GroupInfo groupInfo,
@@ -267,15 +275,20 @@ class AppNavigator {
         'ex': ex,
       });
 
-  static startSelectContactsFromFriends() => Get.toNamed(AppRoutes.selectContactsFromFriends);
+  static startSelectContactsFromFriends() =>
+      Get.toNamed(AppRoutes.selectContactsFromFriends);
 
-  static startSelectContactsFromGroup() => Get.toNamed(AppRoutes.selectContactsFromGroup);
+  static startSelectContactsFromGroup() =>
+      Get.toNamed(AppRoutes.selectContactsFromGroup);
 
-  static startSelectContactsFromSearchFriends() => Get.toNamed(AppRoutes.selectContactsFromSearchFriends);
+  static startSelectContactsFromSearchFriends() =>
+      Get.toNamed(AppRoutes.selectContactsFromSearchFriends);
 
-  static startSelectContactsFromSearchGroup() => Get.toNamed(AppRoutes.selectContactsFromSearchGroup);
+  static startSelectContactsFromSearchGroup() =>
+      Get.toNamed(AppRoutes.selectContactsFromSearchGroup);
 
-  static startSelectContactsFromSearch() => Get.toNamed(AppRoutes.selectContactsFromSearch);
+  static startSelectContactsFromSearch() =>
+      Get.toNamed(AppRoutes.selectContactsFromSearch);
 
   static startCreateGroup({
     List<UserInfo> defaultCheckedList = const [],
@@ -288,7 +301,10 @@ class AppNavigator {
     if (list is List<UserInfo>) {
       return Get.toNamed(
         AppRoutes.createGroup,
-        arguments: {'checkedList': list, 'defaultCheckedList': defaultCheckedList},
+        arguments: {
+          'checkedList': list,
+          'defaultCheckedList': defaultCheckedList
+        },
       );
     }
     return null;
@@ -308,18 +324,20 @@ class AppNavigator {
   static startRegister() => Get.toNamed(AppRoutes.register);
 
   static void startVerifyPhone({
-    String? phoneNumber,
-    String? email,
+    required String phoneNumber,
     required String areaCode,
     required int usedFor,
+    String? password,
     String? invitationCode,
+    RegisterType? registerType,
   }) =>
       Get.toNamed(AppRoutes.verifyPhone, arguments: {
         'phoneNumber': phoneNumber,
-        'email': email,
         'areaCode': areaCode,
+        'password': password,
         'usedFor': usedFor,
         'invitationCode': invitationCode,
+        'registerType': registerType,
       });
 
   static void startSetPassword({
@@ -334,27 +352,6 @@ class AppNavigator {
         'phoneNumber': phoneNumber,
         'email': email,
         'areaCode': areaCode,
-        'usedFor': usedFor,
-        'verificationCode': verificationCode,
-        'invitationCode': invitationCode
-      });
-
-  static void startSetSelfInfo({
-    String? phoneNumber,
-    String? email,
-    String? account,
-    required String areaCode,
-    required password,
-    required int usedFor,
-    required String verificationCode,
-    String? invitationCode,
-  }) =>
-      Get.toNamed(AppRoutes.setSelfInfo, arguments: {
-        'phoneNumber': phoneNumber,
-        'email': email,
-        'account': account,
-        'areaCode': areaCode,
-        'password': password,
         'usedFor': usedFor,
         'verificationCode': verificationCode,
         'invitationCode': invitationCode
@@ -378,5 +375,41 @@ class AppNavigator {
         'verificationCode': verificationCode,
       });
 
-  static startSelectContactsFromTag() => Get.toNamed(AppRoutes.selectContactsFromTag);
+  static startSelectContactsFromTag() =>
+      Get.toNamed(AppRoutes.selectContactsFromTag);
+
+  static void startSetSelfInfo() => Get.offAndToNamed(AppRoutes.setSelfInfo);
+
+  static startSetInfo({required String field, required String value}) =>
+      Get.toNamed(AppRoutes.setInfo,
+          arguments: {'field': field, 'value': value});
+
+  static void startUa({required UaType type}) {
+    Get.toNamed(AppRoutes.ua, arguments: {'type': type});
+  }
+
+  static void startLanguage() {
+    Get.toNamed(AppRoutes.language);
+  }
+
+  //   static void startSetSelfInfo({
+  //   String? phoneNumber,
+  //   String? email,
+  //   String? account,
+  //   required String areaCode,
+  //   required password,
+  //   required int usedFor,
+  //   required String verificationCode,
+  //   String? invitationCode,
+  // }) =>
+  //     Get.toNamed(AppRoutes.setSelfInfo, arguments: {
+  //       'phoneNumber': phoneNumber,
+  //       'email': email,
+  //       'account': account,
+  //       'areaCode': areaCode,
+  //       'password': password,
+  //       'usedFor': usedFor,
+  //       'verificationCode': verificationCode,
+  //       'invitationCode': invitationCode
+  //     });
 }

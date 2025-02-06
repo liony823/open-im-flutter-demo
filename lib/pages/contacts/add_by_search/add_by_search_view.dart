@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:openim/routes/app_navigator.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:pull_to_refresh_new/pull_to_refresh.dart';
-import 'package:sprintf/sprintf.dart';
 
 import 'add_by_search_logic.dart';
 

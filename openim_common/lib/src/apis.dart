@@ -1,14 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
-
-import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_openim_sdk/flutter_openim_sdk.dart';
 import 'package:get/get.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:sprintf/sprintf.dart';
 
-import 'utils/api_service.dart';
 
 class Apis {
   static Options get imTokenOptions => Options(headers: {'token': DataSp.imToken});
@@ -27,19 +23,20 @@ class Apis {
     String? areaCode,
     String? phoneNumber,
     String? account,
-    String? email,
     String? password,
     String? verificationCode,
+        RegisterType? registerType,
   }) async {
     try {
       var data = await HttpUtil.post(Urls.login, data: {
         "areaCode": areaCode,
-        'account': account,
         'phoneNumber': phoneNumber,
-        'email': email,
-        'password': null != password ? IMUtils.generateMD5(password) : null,
+        'account': account,
+        'password': password,
+        'deviceID': DataSp.getDeviceID(),
         'platform': IMUtils.getPlatform(),
         'verifyCode': verificationCode,
+        'registerType': registerType?.value,
       });
       final cert = LoginCertificate.fromJson(data!);
       ApiService().setToken(cert.imToken);
@@ -67,12 +64,12 @@ class Apis {
     String? faceURL,
     String? areaCode,
     String? phoneNumber,
-    String? email,
     String? account,
     int birth = 0,
     int gender = 1,
-    required String verificationCode,
+    String? verificationCode,
     String? invitationCode,
+    RegisterType? registerType,
   }) async {
     try {
       var data = await HttpUtil.post(Urls.register, data: {
@@ -83,14 +80,14 @@ class Apis {
         'autoLogin': true,
         'user': {
           "nickname": nickname,
+          "account": account,
           "faceURL": faceURL,
           'birth': birth,
           'gender': gender,
-          'email': email,
           "areaCode": areaCode,
           'phoneNumber': phoneNumber,
-          'account': account,
-          'password': IMUtils.generateMD5(password),
+          'password': password,
+          'registerType': registerType?.value,
         },
       });
 

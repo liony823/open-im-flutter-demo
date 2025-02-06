@@ -30,6 +30,12 @@ class IMController extends GetxController with IMCallback, OpenIMLive {
   }
 
   void initOpenIM() async {
+    if (Get.context == null) {
+      Logger.print('Context is null, waiting for next frame');
+      await Future.delayed(const Duration(milliseconds: 100));
+      initOpenIM();
+      return;
+    }
     final initialized = await OpenIM.iMManager.initSDK(
       platformID: IMUtils.getPlatform(),
       apiAddr: Config.imApiUrl,

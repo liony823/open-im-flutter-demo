@@ -77,20 +77,6 @@ class EditMyInfoLogic extends GetxController {
       imLogic.userInfo.update((val) {
         val?.phoneNumber = value;
       });
-    } else if (editAttr == EditAttr.email) {
-      if (defaultValue?.isNotEmpty == true && value.isEmpty) {
-        IMViews.showToast(StrRes.plsEnterEmail);
-        return;
-      }
-      await LoadingView.singleton.wrap(
-        asyncFunction: () => Apis.updateUserInfo(
-          userID: OpenIM.iMManager.userID,
-          email: value,
-        ),
-      );
-      imLogic.userInfo.update((val) {
-        val?.email = value;
-      });
     }
     Get.back();
   }

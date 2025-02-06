@@ -41,9 +41,11 @@ abstract class AppRoutes {
   static const searchGroup = '/search_group';
   static const selectContacts = '/select_contacts';
   static const selectContactsFromFriends = '/select_contacts_from_friends';
-  static const selectContactsFromSearchFriends = '/select_contacts_from_search_friends';
+  static const selectContactsFromSearchFriends =
+      '/select_contacts_from_search_friends';
   static const selectContactsFromGroup = '/select_contacts_from_group';
-  static const selectContactsFromSearchGroup = '/select_contacts_from_search_group';
+  static const selectContactsFromSearchGroup =
+      '/select_contacts_from_search_group';
   static const selectContactsFromSearch = '/select_contacts_from_search';
   static const createGroup = '/create_group';
   static const globalSearch = '/global_search';
@@ -52,10 +54,14 @@ abstract class AppRoutes {
   static const verifyPhone = '/verify_phone';
   static const setPassword = '/set_password';
   static const setSelfInfo = '/set_self_info';
+  static const setInfo = '/set_info';
   static const forgetPassword = '/forget_password';
   static const resetPassword = '/reset_password';
   static const selectContactsFromTag = '/select_contacts_from_tag';
   static const oaNotificationList = "/oa_notification_list";
+
+  static const ua = '/ua';
+  static const language = '/language';
 }
 
 extension RoutesExtension on String {

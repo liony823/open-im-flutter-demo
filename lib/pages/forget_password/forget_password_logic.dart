@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:openim/pages/auth/login/login_logic.dart';
 import 'package:openim/routes/app_navigator.dart';
 import 'package:openim_common/openim_common.dart';
 
-import '../login/login_logic.dart';
 
 class ForgetPasswordLogic extends GetxController {
   final phoneCtrl = TextEditingController();
@@ -11,8 +11,8 @@ class ForgetPasswordLogic extends GetxController {
   final areaCode = "+86".obs;
   final enabled = false.obs;
   final loginController = Get.find<LoginLogic>();
-  String? get email => loginController.operateType == LoginType.email ? phoneCtrl.text.trim() : null;
-  String? get phone => loginController.operateType == LoginType.phone ? phoneCtrl.text.trim() : null;
+  String? get email => phoneCtrl.text.trim();
+  String? get phone => phoneCtrl.text.trim();
   @override
   void onClose() {
     phoneCtrl.dispose();

@@ -9,7 +9,7 @@ import 'package:openim_common/openim_common.dart';
 import '../core/controller/app_controller.dart';
 
 class AppView extends StatelessWidget {
-  const AppView({Key? key, required this.builder}) : super(key: key);
+  const AppView({super.key, required this.builder});
   final Widget Function(Locale? locale, TransitionBuilder builder) builder;
 
   @override
@@ -35,7 +35,7 @@ class AppView extends StatelessWidget {
       builder: (context, widget) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(
-            textScaleFactor: Config.textScaleFactor,
+            textScaler: const TextScaler.linear(Config.textScaleFactor),
           ),
           child: widget!,
         );

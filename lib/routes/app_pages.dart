@@ -1,4 +1,16 @@
 import 'package:get/get.dart';
+import 'package:openim/pages/auth/login/login_binding.dart';
+import 'package:openim/pages/auth/login/login_view.dart';
+import 'package:openim/pages/auth/register/register_binding.dart';
+import 'package:openim/pages/auth/register/register_view.dart';
+import 'package:openim/pages/auth/set_self_info/set_self_info_binding.dart';
+import 'package:openim/pages/auth/set_self_info/set_self_info_view.dart';
+import 'package:openim/pages/auth/verify_phone/verify_phone_binding.dart';
+import 'package:openim/pages/auth/verify_phone/verify_phone_view.dart';
+import 'package:openim/pages/language/language_binding.dart';
+import 'package:openim/pages/language/language_view.dart';
+import 'package:openim/pages/ua/ua_binding.dart';
+import 'package:openim/pages/ua/ua_view.dart';
 
 import '../pages/chat/chat_binding.dart';
 import '../pages/chat/chat_setup/chat_setup_binding.dart';
@@ -74,8 +86,6 @@ import '../pages/global_search/global_search_binding.dart';
 import '../pages/global_search/global_search_view.dart';
 import '../pages/home/home_binding.dart';
 import '../pages/home/home_view.dart';
-import '../pages/login/login_binding.dart';
-import '../pages/login/login_view.dart';
 import '../pages/mine/about_us/about_us_binding.dart';
 import '../pages/mine/about_us/about_us_view.dart';
 import '../pages/mine/account_setup/account_setup_binding.dart';
@@ -94,14 +104,6 @@ import '../pages/mine/my_qrcode/my_qrcode_binding.dart';
 import '../pages/mine/my_qrcode/my_qrcode_view.dart';
 import '../pages/mine/unlock_setup/unlock_setup_binding.dart';
 import '../pages/mine/unlock_setup/unlock_setup_view.dart';
-import '../pages/register/register_binding.dart';
-import '../pages/register/register_view.dart';
-import '../pages/register/set_password/set_password_binding.dart';
-import '../pages/register/set_password/set_password_view.dart';
-import '../pages/register/set_self_info/set_self_info_binding.dart';
-import '../pages/register/set_self_info/set_self_info_view.dart';
-import '../pages/register/verify_phone/verify_phone_binding.dart';
-import '../pages/register/verify_phone/verify_phone_view.dart';
 import '../pages/splash/splash_binding.dart';
 import '../pages/splash/splash_view.dart';
 
@@ -362,11 +364,12 @@ class AppPages {
       page: () => VerifyPhonePage(),
       binding: VerifyPhoneBinding(),
     ),
-    _pageBuilder(
-      name: AppRoutes.setPassword,
-      page: () => SetPasswordPage(),
-      binding: SetPasswordBinding(),
-    ),
+    //TODO 设置密码页面
+    // _pageBuilder(
+    //   name: AppRoutes.setPassword,
+    //   page: () => SetPasswordPage(),
+    //   binding: SetPasswordBinding(),
+    // ),
     _pageBuilder(
       name: AppRoutes.setSelfInfo,
       page: () => SetSelfInfoPage(),
@@ -386,6 +389,16 @@ class AppPages {
       name: AppRoutes.oaNotificationList,
       page: () => OANotificationPage(),
       binding: OANotificationBinding(),
+    ),
+    _pageBuilder(
+      name: AppRoutes.ua,
+      page: () => UaPage(),
+      binding: UaBinding(),
+    ),
+    _pageBuilder(
+      name: AppRoutes.language,
+      page: () => LanguagePage(),
+      binding: LanguageBinding(),
     ),
   ];
 }

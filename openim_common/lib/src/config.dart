@@ -48,6 +48,8 @@ class Config {
 
   static const double textScaleFactor = 1.0;
 
+  static const secret = 'feihongim';
+
   static const discoverPageURL = 'https://docs.openim.io/';
   static const allowSendMsgNotFriend = '1';
   // amap key

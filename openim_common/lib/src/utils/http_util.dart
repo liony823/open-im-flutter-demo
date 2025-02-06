@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart' as Get;
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
@@ -71,19 +72,17 @@ class HttpUtil {
         return resp.data;
       } else {
         if (showErrorToast) {
-          IMViews.showToast(resp.errDlt);
+          IMViews.showToast(ApiError.getMsg(resp.errCode));
         }
 
         return Future.error((resp.errCode, resp.errMsg));
       }
     } catch (error) {
       if (error is DioException) {
-        final errorMsg = '接口：$path  信息：${error.message}';
-        if (showErrorToast) IMViews.showToast(errorMsg);
-        return Future.error(errorMsg);
+        if (error.type != DioExceptionType.cancel) {
+          if (showErrorToast) IMViews.showToast(error.type.name.toString().tr);
+        }
       }
-      final errorMsg = '接口：$path  信息：${error.toString()}';
-      if (showErrorToast) IMViews.showToast(errorMsg);
       return Future.error(error);
     }
   }

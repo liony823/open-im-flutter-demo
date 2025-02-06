@@ -15,17 +15,20 @@ import 'package:sound_mode/sound_mode.dart';
 import 'package:sound_mode/utils/ringer_mode_statuses.dart';
 import 'package:vibration/vibration.dart';
 
-import '../../utils/upgrade_manager.dart';
+import '../mixin/client_config.dart';
+import '../mixin/upgrade_manager.dart';
 import 'im_controller.dart';
 
-class AppController extends GetxController with UpgradeManger {
+class AppController extends GetxController with UpgradeManger, ClientConfig {
   var isRunningBackground = false;
 
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  final initializationSettingsAndroid = const AndroidInitializationSettings('@mipmap/ic_launcher');
+  final initializationSettingsAndroid =
+      const AndroidInitializationSettings('@mipmap/ic_launcher');
 
-  final DarwinInitializationSettings initializationSettingsDarwin = const DarwinInitializationSettings(
+  final DarwinInitializationSettings initializationSettingsDarwin =
+      const DarwinInitializationSettings(
     requestAlertPermission: false,
     requestBadgePermission: false,
     requestSoundPermission: false,
@@ -35,7 +38,8 @@ class AppController extends GetxController with UpgradeManger {
 
   bool get shouldMuted =>
       rtcBridge?.hasConnection == true ||
-      Get.find<IMController>().imSdkStatusSubject.values.last.status != IMSdkStatus.syncEnded;
+      Get.find<IMController>().imSdkStatusSubject.values.last.status !=
+          IMSdkStatus.syncEnded;
 
   final _ring = 'assets/audio/message_ring.wav';
   final _audioPlayer = AudioPlayer();
@@ -51,8 +55,7 @@ class AppController extends GetxController with UpgradeManger {
   late AudioSession session;
 
   late BaseDeviceInfo deviceInfo;
-
-  final clientConfigMap = <String, dynamic>{}.obs;
+  late String deviceId;
 
   Future<void> runningBackground(bool run) async {
     Logger.print('-----App running background : $run-------------');
@@ -66,7 +69,9 @@ class AppController extends GetxController with UpgradeManger {
 
   @override
   void onInit() async {
+    _requestPermissions();
     _initPlayer();
+    initClientConfig();
     final initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsDarwin,
@@ -82,10 +87,12 @@ class AppController extends GetxController with UpgradeManger {
 
   void _requestPermissions() {
     flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
     flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>()
         ?.requestPermissions(
           alert: true,
           badge: true,
@@ -93,14 +100,17 @@ class AppController extends GetxController with UpgradeManger {
         );
   }
 
-  Future<void> showNotification(im.Message message, {bool showNotification = true}) async {
+  Future<void> showNotification(im.Message message,
+      {bool showNotification = true}) async {
     if (_isGlobalNotDisturb() ||
         message.attachedInfoElem?.notSenderNotificationPush == true ||
         message.contentType == im.MessageType.typing ||
         message.sendID == OpenIM.iMManager.userID ||
         (message.contentType! >= 1000 && message.contentType != 1400)) return;
 
-    var sourceID = message.sessionType == ConversationType.single ? message.sendID : message.groupID;
+    var sourceID = message.sessionType == ConversationType.single
+        ? message.sendID
+        : message.groupID;
     if (sourceID != null && message.sessionType != null) {
       var i = await OpenIM.iMManager.conversationManager.getOneConversation(
         sourceID: sourceID,
@@ -115,7 +125,8 @@ class AppController extends GetxController with UpgradeManger {
   }
 
   Future<void> promptSoundOrNotification(int seq) async {
-    if (Get.find<IMController>().imSdkStatusSubject.values.lastOrNull?.status != IMSdkStatus.syncEnded) {
+    if (Get.find<IMController>().imSdkStatusSubject.values.lastOrNull?.status !=
+        IMSdkStatus.syncEnded) {
       return;
     }
     if (!isRunningBackground) {
@@ -124,11 +135,16 @@ class AppController extends GetxController with UpgradeManger {
       if (Platform.isAndroid) {
         final id = seq;
 
-        const androidPlatformChannelSpecifics = AndroidNotificationDetails('chat', 'OpenIM聊天消息',
-            channelDescription: '来自OpenIM的信息', importance: Importance.max, priority: Priority.high, ticker: 'ticker');
+        const androidPlatformChannelSpecifics = AndroidNotificationDetails(
+            'chat', 'OpenIM聊天消息',
+            channelDescription: '来自OpenIM的信息',
+            importance: Importance.max,
+            priority: Priority.high,
+            ticker: 'ticker');
         const NotificationDetails platformChannelSpecifics =
             NotificationDetails(android: androidPlatformChannelSpecifics);
-        await flutterLocalNotificationsPlugin.show(id, '您收到了一条新消息', '消息内容：.....', platformChannelSpecifics,
+        await flutterLocalNotificationsPlugin.show(
+            id, '您收到了一条新消息', '消息内容：.....', platformChannelSpecifics,
             payload: '');
       }
     }
@@ -140,18 +156,24 @@ class AppController extends GetxController with UpgradeManger {
 
   Future<void> _startForegroundService() async {
     await getAppInfo();
-    const androidPlatformChannelSpecifics = AndroidNotificationDetails('pro', 'OpenIM后台进程',
-        channelDescription: '保证app能收到信息', importance: Importance.max, priority: Priority.high, ticker: 'ticker');
+    const androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'pro', 'OpenIM后台进程',
+        channelDescription: '保证app能收到信息',
+        importance: Importance.max,
+        priority: Priority.high,
+        ticker: 'ticker');
 
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.startForegroundService(1, packageInfo!.appName, '正在运行...',
             notificationDetails: androidPlatformChannelSpecifics, payload: '');
   }
 
   Future<void> _stopForegroundService() async {
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.stopForegroundService();
   }
 
@@ -194,7 +216,6 @@ class AppController extends GetxController with UpgradeManger {
 
   @override
   void onReady() {
-    queryClientConfig();
     _getDeviceInfo();
     _cancelAllNotifications();
     super.onReady();
@@ -244,12 +265,14 @@ class AppController extends GetxController with UpgradeManger {
 
     RingerModeStatus ringerStatus = await SoundMode.ringerModeStatus;
 
-    Logger.print('System ringer status: $ringerStatus, user is allow beep: $isAllowBeep',
+    Logger.print(
+        'System ringer status: $ringerStatus, user is allow beep: $isAllowBeep',
         fileName: 'app_controller.dart');
 
     if (!_audioPlayer.playerState.playing &&
         isAllowBeep &&
-        (ringerStatus == RingerModeStatus.normal || ringerStatus == RingerModeStatus.unknown)) {
+        (ringerStatus == RingerModeStatus.normal ||
+            ringerStatus == RingerModeStatus.unknown)) {
       await session.setActive(true);
       _audioPlayer.setAsset(_ring, package: 'openim_common');
       _audioPlayer.setLoopMode(LoopMode.off);
@@ -277,12 +300,5 @@ class AppController extends GetxController with UpgradeManger {
   void _getDeviceInfo() async {
     final deviceInfoPlugin = DeviceInfoPlugin();
     deviceInfo = await deviceInfoPlugin.deviceInfo;
-  }
-
-  Future queryClientConfig() async {
-    final map = await Apis.getClientConfig();
-    clientConfigMap.assignAll(map);
-
-    return clientConfigMap;
   }
 }
