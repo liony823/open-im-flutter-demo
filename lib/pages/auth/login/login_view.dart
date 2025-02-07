@@ -31,8 +31,9 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     SwapLangButton(
-                      text:
-                          context.maybeLocale?.language.namesNative.firstOrNull,
+                      text: context
+                          .maybeLocale?.language.namesNative.firstOrNull
+                          ?.replaceFirst(RegExp(r'\([^)]*\)'), ''),
                       onTap: logic.toLanguage,
                     ),
                     16.horizontalSpace,

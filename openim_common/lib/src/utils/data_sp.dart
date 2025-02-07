@@ -57,7 +57,11 @@ class DataSp {
     return SpUtil().getObject(_loginAccount);
   }
 
-  static Future<bool>? putServerConfig(Map<String, String> config) {
+  static Future<bool>? clearServerConfig() {
+    return SpUtil().remove(_server);
+  }
+
+  static Future<bool>? putServerConfig(Map<String, dynamic> config) {
     return SpUtil().putObject(_server, config);
   }
 

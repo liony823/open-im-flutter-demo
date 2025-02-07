@@ -26,6 +26,7 @@
 .pub-cache/
 .pub/
 /build/
+pubspec.lock
 
 
 # Miscellaneous
@@ -47,3 +48,5 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
+
+.DS_Store

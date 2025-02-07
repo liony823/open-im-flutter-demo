@@ -71,7 +71,6 @@ class AppController extends GetxController with UpgradeManger, ClientConfig {
   void onInit() async {
     _requestPermissions();
     _initPlayer();
-    initClientConfig();
     final initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsDarwin,
@@ -80,7 +79,7 @@ class AppController extends GetxController with UpgradeManger, ClientConfig {
       initializationSettings,
       onDidReceiveNotificationResponse: (notificationResponse) {},
     );
-
+    initClientConfig();
     autoCheckVersionUpgrade();
     super.onInit();
   }

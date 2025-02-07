@@ -11,15 +11,16 @@ class SwapLangButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AdaptiveButton.small(
+      height: 26.w,
+      padding: EdgeInsets.symmetric(horizontal: 8.w),
       onTap: onTap,
-      enabledColor: const Color.fromARGB(255, 172, 210, 244),
       block: false,
       radius: 24.r,
       child: Row(
         children: [
-          (text ?? '').toText..style = Styles.ts_FFFFFF_12,
+          (text ?? '').toText..style = Styles.ts_FFFFFF_10,
           3.horizontalSpace,
-          Icon(EvaIcons.swapOutline, size: 16.r, color: Styles.c_FFFFFF),
+          Icon(EvaIcons.swapOutline, size: 12.r, color: Styles.c_FFFFFF),
         ],
       ),
     );

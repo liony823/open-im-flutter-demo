@@ -8,14 +8,19 @@ import 'package:media_kit/media_kit.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class Config {
   static Future init(Function() runApp) async {
-    WidgetsFlutterBinding.ensureInitialized();
+    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+    await DataSp.init();
+    await initServerConfig();
+    FlutterNativeSplash.remove();
+
     try {
       final path = (await getApplicationDocumentsDirectory()).path;
       cachePath = '$path/';
-      await DataSp.init();
       await Hive.initFlutter(path);
       MediaKit.ensureInitialized();
       HttpUtil.init();
@@ -68,17 +73,10 @@ class Config {
 
   static const _host = "127.0.0.1";
 
-  static const _ipRegex =
-      '((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)';
-
-  static bool get _isIP => RegExp(_ipRegex).hasMatch(_host);
+  static bool get _isIP => IP_REG.hasMatch(_host);
 
   static String get serverIp {
-    String? ip;
-    var server = DataSp.getServerConfig();
-    if (null != server) {
-      ip = server['serverIP'];
-    }
+    var ip = DataSp.getServerIP();
     return ip ?? _host;
   }
 
@@ -88,7 +86,7 @@ class Config {
     if (null != server) {
       url = server['chatTokenUrl'];
     }
-    return url ?? (_isIP ? "http://$_host:10009" : "https://$_host/chat");
+    return url ?? (_isIP ? "http://$serverIp:10009" : "https://$serverIp/chat");
   }
 
   static String get appAuthUrl {
@@ -97,7 +95,7 @@ class Config {
     if (null != server) {
       url = server['authUrl'];
     }
-    return url ?? (_isIP ? "http://$_host:10008" : "https://$_host/chat");
+    return url ?? (_isIP ? "http://$serverIp:10008" : "https://$serverIp/chat");
   }
 
   static String get imApiUrl {
@@ -106,7 +104,7 @@ class Config {
     if (null != server) {
       url = server['apiUrl'];
     }
-    return url ?? (_isIP ? 'http://$_host:10002' : "https://$_host/api");
+    return url ?? (_isIP ? 'http://$serverIp:10002' : "https://$serverIp/api");
   }
 
   static String get imWsUrl {
@@ -115,15 +113,55 @@ class Config {
     if (null != server) {
       url = server['wsUrl'];
     }
-    return url ?? (_isIP ? "ws://$_host:10001" : "wss://$_host/msg_gateway");
+    return url ?? (_isIP ? "ws://$serverIp:10001" : "wss://$serverIp/msg_gateway");
   }
 
   static int get logLevel {
     String? level;
     var server = DataSp.getServerConfig();
     if (null != server) {
-      level = server['logLevel'];
+      level = server['logLevel'].toString();
     }
     return level == null ? 5 : int.parse(level);
+  }
+
+
+
+  static Future<bool> pingServer(String host) async {
+    try {
+      final url = IP_REG.hasMatch(host) ? 'http://$host:10008' : 'https://$host/chat';
+      return await Apis.pingServer(url);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  static presetServer(Map<String,dynamic> config)async {
+    if (config['server'] != null) {
+      final servers = List<Map<String, dynamic>>.from(config['server']);
+      for (var server in servers) {
+        final isAlive = await pingServer(server['serverIP']);
+        if (isAlive) {
+          final ip = server['serverIP'];
+
+          final config = {
+            'logLevel': server['logLevel'],
+            'chatTokenUrl': IP_REG.hasMatch(ip) ? 'http://$ip:10009' : 'https://$ip/chat',
+            'authUrl': IP_REG.hasMatch(ip) ? 'http://$ip:10008' : 'https://$ip/chat',
+            'apiUrl': IP_REG.hasMatch(ip) ? 'http://$ip:10002' : 'https://$ip/api',
+            'wsUrl': IP_REG.hasMatch(ip) ? 'ws://$ip:10001' : 'wss://$ip/msg_gateway',
+          };
+ 
+          DataSp.putServerConfig(config);
+          DataSp.putServerIP(ip);
+          return;
+        }
+      }
+    }
+  }
+
+  static Future initServerConfig() async {
+    final config = await Apis.getServerConfig();
+    await presetServer(config);
   }
 }

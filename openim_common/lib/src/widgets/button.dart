@@ -22,6 +22,7 @@ class AdaptiveButton extends StatelessWidget {
     this.margin,
     this.padding,
     this.radius = 8.0,
+    this.height,
     this.enabledColor,
     this.disabledColor = CupertinoColors.tertiarySystemFill,
     this.textStyle,
@@ -40,6 +41,7 @@ class AdaptiveButton extends StatelessWidget {
     this.margin,
     this.padding,
     this.radius = 8.0,
+    this.height,
     this.enabledColor,
     this.disabledColor = CupertinoColors.tertiarySystemFill,
     this.textStyle,
@@ -50,6 +52,8 @@ class AdaptiveButton extends StatelessWidget {
   final String? text;
 
   final Widget? child;
+
+  final double? height;
 
   /// 点击回调
   final VoidCallback? onTap;
@@ -90,11 +94,11 @@ class AdaptiveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final platform = Theme.of(context).platform;
-    double height = 44.h;
+    double h = 44.h;
     if (size == ButtonSize.small) {
-      height = 32.h;
+      h = 32.h;
     } else if (size == ButtonSize.large) {
-      height = 50.h;
+      h = 50.h;
     }
     if (platform == TargetPlatform.iOS) {
       CupertinoButtonSize sizeStyle = CupertinoButtonSize.medium;
@@ -107,7 +111,7 @@ class AdaptiveButton extends StatelessWidget {
       }
       return Container(
         width: block ? double.infinity : null,
-        height: height,
+        height: height ?? h,
         margin: margin,
         child: CupertinoButton(
           onPressed: !enabled
@@ -117,7 +121,7 @@ class AdaptiveButton extends StatelessWidget {
                   onTap?.call();
                 },
           pressedOpacity: 0.8,
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: padding ?? EdgeInsets.symmetric(horizontal: 16.w),
           color: enabledColor ?? Styles.c_0089FF,
           disabledColor: disabledColor ?? CupertinoColors.tertiarySystemFill,
           sizeStyle: sizeStyle,

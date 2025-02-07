@@ -1,20 +1,25 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_openim_sdk/flutter_openim_sdk.dart';
 import 'package:get/get.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:sprintf/sprintf.dart';
 
-
 class Apis {
-  static Options get imTokenOptions => Options(headers: {'token': DataSp.imToken});
+  static Options get imTokenOptions =>
+      Options(headers: {'token': DataSp.imToken});
 
-  static Options get chatTokenOptions => Options(headers: {'token': DataSp.chatToken});
+  static Options get chatTokenOptions =>
+      Options(headers: {'token': DataSp.chatToken});
 
   static StreamController kickoffController = StreamController<int>.broadcast();
 
   static void _kickoff(int? errCode) {
-    if (errCode == 1501 || errCode == 1503 || errCode == 1504 || errCode == 1505) {
+    if (errCode == 1501 ||
+        errCode == 1503 ||
+        errCode == 1504 ||
+        errCode == 1505) {
       kickoffController.sink.add(errCode);
     }
   }
@@ -25,7 +30,7 @@ class Apis {
     String? account,
     String? password,
     String? verificationCode,
-        RegisterType? registerType,
+    RegisterType? registerType,
   }) async {
     try {
       var data = await HttpUtil.post(Urls.login, data: {
@@ -248,7 +253,9 @@ class Apis {
         options: chatTokenOptions,
       );
       if (data['users'] is List) {
-        return (data['users'] as List).map((e) => FriendInfo.fromJson(e)).toList();
+        return (data['users'] as List)
+            .map((e) => FriendInfo.fromJson(e))
+            .toList();
       }
       return [];
     } catch (e, s) {
@@ -277,7 +284,9 @@ class Apis {
         options: chatTokenOptions,
       );
       if (data['users'] is List) {
-        return (data['users'] as List).map((e) => UserFullInfo.fromJson(e)).toList();
+        return (data['users'] as List)
+            .map((e) => UserFullInfo.fromJson(e))
+            .toList();
       }
       return null;
     } catch (e, s) {
@@ -305,7 +314,9 @@ class Apis {
         options: chatTokenOptions,
       );
       if (data['users'] is List) {
-        return (data['users'] as List).map((e) => UserFullInfo.fromJson(e)).toList();
+        return (data['users'] as List)
+            .map((e) => UserFullInfo.fromJson(e))
+            .toList();
       }
       return null;
     } catch (e, s) {
@@ -350,7 +361,8 @@ class Apis {
     });
   }
 
-  static Future<SignalingCertificate> getTokenForRTC(String roomID, String userID) async {
+  static Future<SignalingCertificate> getTokenForRTC(
+      String roomID, String userID) async {
     return HttpUtil.post(
       Urls.getTokenForRTC,
       data: {
@@ -406,8 +418,50 @@ class Apis {
     });
   }
 
-  static Future<Map<String, dynamic>> getClientConfig() async {
-    return {'discoverPageURL': Config.discoverPageURL, 'allowSendMsgNotFriend': Config.allowSendMsgNotFriend};
+  static Future<Map<String, dynamic>> getClientConfig() {
+    try {
+      return HttpUtil.post(
+        Urls.getClientConfig,
+        options: chatTokenOptions,
+      ).then((value) {
+        return value['config'] as Map<String, dynamic>;
+      });
+    } catch (e, s) {
+      return Future.error(e);
+    }
+  }
+
+  static Future<Map<String, dynamic>> getServerConfig() async {
+    try {
+      return dio
+          .get(
+        "http://43.163.80.39/PresetConfig.json",
+      )
+          .then((value) {
+        return json.decode(value.toString());
+      });
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  static Future<bool> pingServer(String host) async {
+    try {
+      final data = await dio.get(
+        '$host/ping',
+        options: Options(
+          sendTimeout: const Duration(seconds: 2),
+          receiveTimeout: const Duration(seconds: 2),
+        ),
+      );
+      var resp = ApiResp.fromJson(data.data!);
+      if (resp.errCode != 0) {
+        return false;
+      }
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   static void _catchError(Object e, StackTrace s, {bool forceBack = true}) {
