@@ -45,18 +45,42 @@ class SetSelfInfoPage extends StatelessWidget {
         ),
       );
 
+  Widget _buildAvatarMask() => Container(
+        width: 66.w,
+        height: 66.w,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.black54,
+        ),
+        child: Center(
+          child: Icon(
+            EvaIcons.imageOutline,
+            size: 22.r,
+            color: Styles.c_FFFFFF,
+          ),
+        ),
+      );
+
+    
+
   Widget _buildAvatarView() => GestureDetector(
         onTap: () => logic.openPhotoSheet(),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: 12.w,
           children: [
-            AvatarView(
-              width: 88.w,
-              height: 88.w,
-              url: logic.userInfo.value.faceURL,
-              text: logic.userInfo.value.nickname,
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                AvatarView(
+                  width: 68.w,
+                  height: 68.w,
+                  url: logic.userInfo.value.faceURL,
+                  text: logic.userInfo.value.nickname,
+                  isCircle: true,
+                ),
+                Positioned(child: _buildAvatarMask()),
+              ],
             ),
-            12.verticalSpace,
             StrRes.plsSetAvatar.toText
               ..style = Styles.ts_0089FF_16_medium
               ..textAlign = TextAlign.center,

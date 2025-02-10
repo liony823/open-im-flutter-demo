@@ -6,8 +6,10 @@ import '../contacts/contacts_view.dart';
 import '../conversation/conversation_view.dart';
 import '../mine/mine_view.dart';
 import '../discover/discover_view.dart';
+import '../feed/feed_view.dart';
 import 'home_logic.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
 class HomePage extends StatelessWidget {
   final logic = Get.find<HomeLogic>();
@@ -22,10 +24,10 @@ class HomePage extends StatelessWidget {
                 logic.scrollToUnreadMessage();
               },
               child: _setupIcon(
-                  ImageRes.homeTab1Sel.toImage, logic.unreadMsgCount.value),
+                  _buildIcon(EvaIcons.messageCircle, Styles.c_0089FF), logic.unreadMsgCount.value),
             ),
             inactiveIcon: _setupIcon(
-                ImageRes.homeTab1Nor.toImage, logic.unreadMsgCount.value),
+               _buildIcon(EvaIcons.messageCircleOutline, Styles.c_8E9AB0), logic.unreadMsgCount.value),
             title: StrRes.home,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
@@ -34,9 +36,9 @@ class HomePage extends StatelessWidget {
           screen: ContactsPage(),
           item: ItemConfig(
             icon: _setupIcon(
-                ImageRes.homeTab2Sel.toImage, logic.unhandledCount.value),
+                _buildIcon(EvaIcons.people, Styles.c_0089FF), logic.unhandledCount.value),
             inactiveIcon: _setupIcon(
-                ImageRes.homeTab2Nor.toImage, logic.unhandledCount.value),
+                _buildIcon(EvaIcons.peopleOutline, Styles.c_8E9AB0), logic.unhandledCount.value),
             title: StrRes.contacts,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
@@ -44,22 +46,39 @@ class HomePage extends StatelessWidget {
         PersistentTabConfig(
           screen: DiscoverPage(),
           item: ItemConfig(
-            icon: ImageRes.homeTab3Sel.toImage,
-            inactiveIcon: ImageRes.homeTab3Nor.toImage,
-            title: StrRes.workbench,
+            icon: _buildIcon(EvaIcons.globe, Styles.c_0089FF),
+            inactiveIcon: _buildIcon(EvaIcons.globe2Outline, Styles.c_8E9AB0),
+            title: StrRes.miniProgram,
+            textStyle: Styles.ts_0089FF_10_semibold,
+          ),
+        ),
+        PersistentTabConfig(
+          screen: FeedPage(),
+          item: ItemConfig(
+            icon: _buildIcon(EvaIcons.compass, Styles.c_0089FF),
+            inactiveIcon: _buildIcon(EvaIcons.compassOutline, Styles.c_8E9AB0),
+            title: StrRes.feed,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
         ),
         PersistentTabConfig(
           screen: MinePage(),
           item: ItemConfig(
-            icon: ImageRes.homeTab4Sel.toImage,
-            inactiveIcon: ImageRes.homeTab4Nor.toImage,
+            icon: _buildIcon(EvaIcons.person, Styles.c_0089FF),
+            inactiveIcon: _buildIcon(EvaIcons.personOutline, Styles.c_8E9AB0),
             title: StrRes.mine,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
         ),
       ];
+
+  Icon _buildIcon(IconData icon, Color color) {
+    return Icon(
+      icon,
+      size: 24,
+      color: color,
+    );
+  }
 
   Widget _setupIcon(Widget icon, int unReadCount) {
     return Stack(

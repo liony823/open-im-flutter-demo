@@ -61,6 +61,8 @@ const Map<String, String> zh_CN = {
   'through': '通过%s',
   "home": "OpenIM",
   "contacts": "通讯录",
+  "miniProgram": "小程序",
+  "feed": "发现",
   "workbench": "发现",
   "mine": "我的",
   "draftText": "草稿",
@@ -519,7 +521,6 @@ const Map<String, String> zh_CN = {
   'screenShareHint': '共享屏幕中...',
   'meetingClosedHint': '会议已关闭或已断开链接，确定离开吗？',
   'meetingIsOver': '会议已经结束！',
-  'networkError': '网络异常请稍后再试！',
   'shareSuccessfully': '分享成功！',
   'notFoundMinP': '暂未发布小程序',
   'notSendMessageNotInGroup': '无法在已退出的群聊中发送消息',
@@ -649,5 +650,15 @@ const Map<String, String> zh_CN = {
   "err_20014": "邮箱已注册",
   "err_20015": "令牌错误",
   "err_20016": "未启用令牌",
-  "err_20101": "token 不存在"
+  "err_20101": "token 不存在",
+
+  // 网络错误
+  "networkError":"网络连接超时，请检查网络或者代理",
+  "connectionTimeout": "网络连接超时，请检查网络或者代理",
+  "sendTimeout": "网络请求超时，请检查网络或者代理",
+  "receiveTimeout": "网络请求超时，请检查网络或者代理",
+  "badCertificate": "证书错误，请联系管理员",
+  "badResponse": "服务器错误，请联系管理员",
+  "connectionError": "与服务器无法建立连接，请检查网络或者代理",
+  "unknown": "服务器错误，请联系管理员",
 };

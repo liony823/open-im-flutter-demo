@@ -48,7 +48,7 @@ class AvatarView extends StatelessWidget {
 
   double get _avatarSize => min(width ?? 44.w, height ?? 44.h);
 
-  TextStyle get _textStyle => textStyle ?? Styles.ts_FFFFFF_16;
+  TextStyle get _textStyle => textStyle ?? Styles.ts_FFFFFF_17;
 
   Color get _textAvatarBgColor => Styles.c_0089FF;
 

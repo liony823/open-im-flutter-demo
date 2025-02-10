@@ -141,6 +141,10 @@ class StrRes {
 
   static String get contacts => 'contacts'.tr;
 
+  static String get miniProgram => 'miniProgram'.tr;
+
+  static String get feed => 'feed'.tr;
+
   static String get workbench => 'workbench'.tr;
 
   static String get mine => 'mine'.tr;
