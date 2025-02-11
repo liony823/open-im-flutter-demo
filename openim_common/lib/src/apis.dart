@@ -445,6 +445,41 @@ class Apis {
     }
   }
 
+  static Future<List<AppletInfo>> getAppletList() async {
+    try {
+      final data = await HttpUtil.post(
+        Urls.getApplets,
+        options: chatTokenOptions,
+      );
+      if (data['applets'] is List) {
+        return (data['applets'] as List)
+            .map((e) => AppletInfo.fromJson(e))
+            .toList();
+      }
+      return [];
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  static Future<AppletInfo?> getApplet(String appID) async {
+    try {
+      final data = await HttpUtil.post(
+        Urls.getApplets,
+        data: {
+          "appID": appID
+        },
+        options: chatTokenOptions,
+      );
+      if (data['applet'] != null){
+        return AppletInfo.fromJson(data['applet']);
+      }
+      return null;
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
   static Future<bool> pingServer(String host) async {
     try {
       final data = await dio.get(

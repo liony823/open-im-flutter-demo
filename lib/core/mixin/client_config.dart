@@ -22,6 +22,24 @@ mixin ClientConfig {
   String get privacyPolicy =>
       clientConfigMap[ClientConfigs.appPrivacyPolicyContent] ?? '';
 
+  // 小程序页
+  bool get miniProgramVisible =>
+      clientConfigMap[ClientConfigs.appMiniProgramVisible] ==
+      ClientConfigs.commonAllow;
+  
+  // 发现页
+  bool get discoveryVisible =>
+      clientConfigMap[ClientConfigs.appDiscoveryVisible] ==
+      ClientConfigs.commonAllow;
+
+  // 签到红包模块
+  bool get signRedEnvelopeVisible =>
+      clientConfigMap[ClientConfigs.appSignRedEnvelopeVisible] ==
+      ClientConfigs.commonAllow;
+
+  // 好友分享
+  bool get momentsVisible =>  clientConfigMap[ClientConfigs.appMomentsVisible] == ClientConfigs.commonAllow;
+
   void initClientConfig() async {
     final config = await Apis.getClientConfig();
     clientConfigMap.value = config;

@@ -187,4 +187,8 @@ class ImageRes {
   static const momentsIcon = "$_dir/ic_moments.webp";
   static const forwardIcon = '$_dir/ic_forward_icon.webp';
   static const saveIcon = '$_dir/ic_save_icon.webp';
+
+  static const feedMoments = "$_dir/feed_share.png";
+  static const feedScan = "$_dir/feed_scan.png";
+  static const feedHongbao = "$_dir/feed_hongbao.png";
 }

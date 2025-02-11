@@ -19,4 +19,7 @@ class Urls {
   static String get upgrade => "${Config.appAuthUrl}/app/check";
   static String get getClientConfig => '${Config.appAuthUrl}/client_config/get';
   static String get getTokenForRTC => "${Config.appAuthUrl}/user/rtc/get_token";
+
+  static String get getApplets => "${Config.appAuthUrl}/applet/find";
+  static String get getApplet => "${Config.appAuthUrl}/applet/get";
 }

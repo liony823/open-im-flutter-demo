@@ -14,7 +14,7 @@ export 'src/models/group_info.dart';
 export 'src/models/group_member_info.dart';
 export 'src/models/login_certificate.dart';
 export 'src/models/online_status.dart';
-export 'src/models/uni_mp_info.dart';
+export 'src/models/applet_info.dart';
 export 'src/models/upgrade_info.dart';
 export 'src/models/user_full_info.dart';
 export 'src/models/user_info.dart';

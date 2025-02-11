@@ -4,6 +4,7 @@ import 'package:flutter_screen_lock/flutter_screen_lock.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:openim_common/openim_common.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../core/controller/app_controller.dart';
@@ -22,6 +23,8 @@ class HomeLogic extends SuperController {
   final unhandledFriendApplicationCount = 0.obs;
   final unhandledGroupApplicationCount = 0.obs;
   final unhandledCount = 0.obs;
+  final defaultApplet = Rxn<AppletInfo>();
+  final appletList = <AppletInfo>[].obs;
   String? _lockScreenPwd;
   bool _isShowScreenLock = false;
   bool? _isAutoLogin;
@@ -29,7 +32,16 @@ class HomeLogic extends SuperController {
   final _errorController = PublishSubject<String>();
   var conversationsAtFirstPage = <ConversationInfo>[];
 
+  PersistentTabController tabController = PersistentTabController();
+
   Function()? onScrollToUnreadMessage;
+
+  bool get miniprogramVisible =>
+      initLogic.clientConfigMap[ClientConfigs.appMiniProgramVisible] ==
+      ClientConfigs.commonAllow;
+  bool get discoveryVisible =>
+      initLogic.clientConfigMap[ClientConfigs.appDiscoveryVisible] ==
+      ClientConfigs.commonAllow;
 
   switchTab(index) {
     this.index.value = index;
@@ -48,7 +60,8 @@ class HomeLogic extends SuperController {
 
   void getUnhandledFriendApplicationCount() async {
     var i = 0;
-    var list = await OpenIM.iMManager.friendshipManager.getFriendApplicationListAsRecipient();
+    var list = await OpenIM.iMManager.friendshipManager
+        .getFriendApplicationListAsRecipient();
     var haveReadList = DataSp.getHaveReadUnHandleFriendApplication();
     haveReadList ??= <String>[];
     for (var info in list) {
@@ -63,7 +76,8 @@ class HomeLogic extends SuperController {
 
   void getUnhandledGroupApplicationCount() async {
     var i = 0;
-    var list = await OpenIM.iMManager.groupManager.getGroupApplicationListAsRecipient();
+    var list = await OpenIM.iMManager.groupManager
+        .getGroupApplicationListAsRecipient();
     var haveReadList = DataSp.getHaveReadUnHandleGroupApplication();
     haveReadList ??= <String>[];
     for (var info in list) {
@@ -76,8 +90,29 @@ class HomeLogic extends SuperController {
     unhandledCount.value = unhandledFriendApplicationCount.value + i;
   }
 
+  void _initApplet() async {
+    if (initLogic.miniProgramVisible) {
+      final applet = DataSp.getApplet();
+      if (applet != null) {
+        defaultApplet.value = applet;
+        defaultApplet.refresh();
+      } else {
+        final list = await Apis.getAppletList();
+        for (var item in list) {
+          if (item.isDefault == 1) {
+            defaultApplet.value = item;
+            defaultApplet.refresh();
+            DataSp.putApplet(item);
+          }
+        }
+        appletList.addAll(list);
+      }
+    }
+  }
+
   @override
   void onInit() {
+    _initApplet();
     _isAutoLogin = Get.arguments != null ? Get.arguments['isAutoLogin'] : false;
     if (_isAutoLogin == true) {
       WidgetsBinding.instance.addPostFrameCallback((_) => _showLockScreenPwd());
@@ -106,6 +141,7 @@ class HomeLogic extends SuperController {
       PushController.logout();
       AppNavigator.startLogin();
     });
+
     super.onInit();
   }
 

@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:openim_common/openim_common.dart';
 
-import 'discover_logic.dart';
+import 'applet_logic.dart';
 
-class DiscoverPage extends StatelessWidget {
-  final logic = Get.find<DiscoverLogic>();
+class AppletPage extends StatelessWidget {
+  final logic = Get.find<AppletLogic>();
 
-  DiscoverPage({super.key});
+  AppletPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TitleBar.workbench(),
       backgroundColor: Styles.c_F8F9FA,
-      body: _buildBody(),
+      body: _buildH5Body(),
     );
   }
 
-  Widget _buildBody() {
-    return Obx(() => H5Container(url: logic.url.value));
+  Widget _buildH5Body() {
+    return H5Container(url: logic.applet.value!.url!);
   }
 }

@@ -1208,4 +1208,9 @@ class StrRes {
   static String get callingInterruption => 'callingInterruption'.tr;
   static String get meeting => 'meeting'.tr;
   static String get directedTo => 'directedTo'.tr;
+
+  // 发现页
+  static String get friendShare => 'friendShare'.tr;
+  static String get scanQrCode => 'scanQrCode'.tr;
+  static String get signRedEnvelope => 'signRedPacket'.tr;
 }

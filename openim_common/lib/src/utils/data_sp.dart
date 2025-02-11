@@ -21,6 +21,8 @@ class DataSp {
   static const _loginType = 'loginType';
   static const _meetingInProgress = '%_meetingInProgress';
 
+  static const _applet = "%s_applet";
+
   DataSp._();
 
   static init() async {
@@ -185,5 +187,18 @@ class DataSp {
 
   static Future<bool>? removeMeetingInProgress() {
     return SpUtil().remove(getKey(_meetingInProgress));
+  }
+
+  static Future<bool>? putApplet(AppletInfo applet){
+    return SpUtil().putObject(getKey(_applet), applet);
+  }
+
+    static AppletInfo? getApplet() {
+    return SpUtil().getObj(
+      getKey(_applet),
+      ((Map<dynamic,dynamic> map){
+        return AppletInfo.fromJson(map as Map<String,dynamic>);
+      })
+    );
   }
 }

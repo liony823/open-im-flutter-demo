@@ -91,4 +91,9 @@ class ClientConfigs {
   static const String appUserAgreementContent = "app_user_agreement_content";
   // 隐私政策
   static const String appPrivacyPolicyContent = "app_privacy_policy_content";
+
+  // 好友分享
+  static const String appMomentsVisible = "app_moments_visible";
+
+  // 
 }

@@ -55,7 +55,6 @@ class Config {
 
   static const secret = 'feihongim';
 
-  static const discoverPageURL = 'https://docs.openim.io/';
   static const allowSendMsgNotFriend = '1';
   // amap key
   static const webKey = 'webKey';

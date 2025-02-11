@@ -5,7 +5,7 @@ import 'package:openim_common/openim_common.dart';
 import '../contacts/contacts_view.dart';
 import '../conversation/conversation_view.dart';
 import '../mine/mine_view.dart';
-import '../discover/discover_view.dart';
+import '../applet/applet_view.dart';
 import '../feed/feed_view.dart';
 import 'home_logic.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
   final logic = Get.find<HomeLogic>();
   HomePage({super.key});
 
-  List<PersistentTabConfig> _tabs() => [
+  List<PersistentTabConfig> _buildTabs() => [
         PersistentTabConfig(
           screen: ConversationPage(),
           item: ItemConfig(
@@ -24,10 +24,12 @@ class HomePage extends StatelessWidget {
                 logic.scrollToUnreadMessage();
               },
               child: _setupIcon(
-                  _buildIcon(EvaIcons.messageCircle, Styles.c_0089FF), logic.unreadMsgCount.value),
+                  _buildIcon(EvaIcons.messageCircle, Styles.c_0089FF),
+                  logic.unreadMsgCount.value),
             ),
             inactiveIcon: _setupIcon(
-               _buildIcon(EvaIcons.messageCircleOutline, Styles.c_8E9AB0), logic.unreadMsgCount.value),
+                _buildIcon(EvaIcons.messageCircleOutline, Styles.c_8E9AB0),
+                logic.unreadMsgCount.value),
             title: StrRes.home,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
@@ -35,16 +37,17 @@ class HomePage extends StatelessWidget {
         PersistentTabConfig(
           screen: ContactsPage(),
           item: ItemConfig(
-            icon: _setupIcon(
-                _buildIcon(EvaIcons.people, Styles.c_0089FF), logic.unhandledCount.value),
+            icon: _setupIcon(_buildIcon(EvaIcons.people, Styles.c_0089FF),
+                logic.unhandledCount.value),
             inactiveIcon: _setupIcon(
-                _buildIcon(EvaIcons.peopleOutline, Styles.c_8E9AB0), logic.unhandledCount.value),
+                _buildIcon(EvaIcons.peopleOutline, Styles.c_8E9AB0),
+                logic.unhandledCount.value),
             title: StrRes.contacts,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
         ),
         PersistentTabConfig(
-          screen: DiscoverPage(),
+          screen: AppletPage(),
           item: ItemConfig(
             icon: _buildIcon(EvaIcons.globe, Styles.c_0089FF),
             inactiveIcon: _buildIcon(EvaIcons.globe2Outline, Styles.c_8E9AB0),
@@ -69,7 +72,7 @@ class HomePage extends StatelessWidget {
             title: StrRes.mine,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
-        ),
+        )
       ];
 
   Icon _buildIcon(IconData icon, Color color) {
@@ -99,11 +102,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Styles.c_FFFFFF,
-      body: Obx(
-        () => PersistentTabView(
-          tabs: _tabs(),
+    return Obx(() => PersistentTabView(
+          controller: logic.tabController,
+          tabs: _buildTabs(),
           navBarBuilder: (navBarConfig) => Style1BottomNavBar(
             navBarConfig: navBarConfig,
             navBarDecoration: const NavBarDecoration(
@@ -116,8 +117,6 @@ class HomePage extends StatelessWidget {
           ),
           navBarOverlap: const NavBarOverlap.none(),
           screenTransitionAnimation: const ScreenTransitionAnimation.none(),
-        ),
-      ),
-    );
+        ));
   }
 }

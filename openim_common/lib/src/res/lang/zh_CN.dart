@@ -59,7 +59,7 @@ const Map<String, String> zh_CN = {
   "loginPwdFormat": "6～20位，至少包含数字、字母",
   "passwordLogin": "密码登录",
   'through': '通过%s',
-  "home": "OpenIM",
+  "home": "消息",
   "contacts": "通讯录",
   "miniProgram": "小程序",
   "feed": "发现",
@@ -661,4 +661,10 @@ const Map<String, String> zh_CN = {
   "badResponse": "服务器错误，请联系管理员",
   "connectionError": "与服务器无法建立连接，请检查网络或者代理",
   "unknown": "服务器错误，请联系管理员",
+
+
+  // 发现页
+  "friendShare": "好友分享",
+  "scanQrCode": "扫一扫",
+  "signRedEnvelope":"签到红包",
 };

@@ -1,38 +1,35 @@
 import 'dart:convert';
 
-class UniMPInfo {
+class AppletInfo {
   String? id;
   String? appID;
   String? name;
   String? icon;
   String? url;
-  String? md5;
-  int? size;
-  String? version;
-  int? progress;
+  int? status;
+  int? isDefault;
+  int? priority;
 
-  UniMPInfo({
+  AppletInfo({
     this.id,
     this.appID,
     this.name,
     this.icon,
     this.url,
-    this.md5,
-    this.size,
-    this.version,
-    this.progress,
+    this.status,
+    this.isDefault,
+    this.priority
   });
 
-  UniMPInfo.fromJson(Map<String, dynamic> json) {
+  AppletInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     appID = json['appID'];
     name = json['name'];
     icon = json['icon'];
     url = json['url'];
-    md5 = json['md5'];
-    size = json['size'];
-    version = json['version'];
-    progress = json['progress'];
+    status = json['status'];
+    isDefault = json['isDefault'];
+    priority = json['priority'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,11 +39,9 @@ class UniMPInfo {
     data['name'] = name;
     data['icon'] = icon;
     data['url'] = url;
-    data['progress'] = progress;
-    data['md5'] = md5;
-    data['size'] = size;
-    data['version'] = version;
-    data['progress'] = progress;
+    data['status'] = status;
+    data['isDefault'] = isDefault;
+    data['priority'] = priority;
     return data;
   }
 
