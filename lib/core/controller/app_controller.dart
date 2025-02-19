@@ -54,8 +54,8 @@ class AppController extends GetxController with UpgradeManger, ClientConfig {
   );
   late AudioSession session;
 
-  late BaseDeviceInfo deviceInfo;
-  late String deviceId;
+  final deviceName = ''.obs;
+  final deviceID = ''.obs;
 
   Future<void> runningBackground(bool run) async {
     Logger.print('-----App running background : $run-------------');
@@ -79,7 +79,6 @@ class AppController extends GetxController with UpgradeManger, ClientConfig {
       initializationSettings,
       onDidReceiveNotificationResponse: (notificationResponse) {},
     );
-    initClientConfig();
     autoCheckVersionUpgrade();
     super.onInit();
   }
@@ -181,10 +180,10 @@ class AppController extends GetxController with UpgradeManger, ClientConfig {
 
     if (count == 0) {
       removeBadge();
-      PushController.resetBadge();
+      // PushController.resetBadge();
     } else {
-      FlutterNewBadger.setBadge(count);
-      PushController.setBadge(count);
+      // FlutterNewBadger.setBadge(count);
+      // PushController.setBadge(count);
     }
   }
 
@@ -298,6 +297,16 @@ class AppController extends GetxController with UpgradeManger, ClientConfig {
 
   void _getDeviceInfo() async {
     final deviceInfoPlugin = DeviceInfoPlugin();
-    deviceInfo = await deviceInfoPlugin.deviceInfo;
+    if (Platform.isIOS) {
+      IosDeviceInfo iosDeviceInfo = await deviceInfoPlugin.iosInfo;
+      deviceName.value = iosDeviceInfo.modelName;
+      deviceID.value = iosDeviceInfo.identifierForVendor ?? '';
+    } else if (Platform.isAndroid) {
+      AndroidDeviceInfo androidDeviceInfo = await deviceInfoPlugin.androidInfo;
+      deviceName.value = androidDeviceInfo.model;
+      deviceID.value = androidDeviceInfo.serialNumber;
+    }
+    DataSp.putDeviceID(deviceID.value);
+    DataSp.putDeviceName(deviceName.value);
   }
 }

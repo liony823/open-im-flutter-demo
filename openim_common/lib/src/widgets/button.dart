@@ -43,7 +43,7 @@ class AdaptiveButton extends StatelessWidget {
     this.radius = 8.0,
     this.height,
     this.enabledColor,
-    this.disabledColor = CupertinoColors.tertiarySystemFill,
+    this.disabledColor = CupertinoColors.quaternarySystemFill,
     this.textStyle,
     this.disabledTextStyle,
   });
@@ -123,7 +123,7 @@ class AdaptiveButton extends StatelessWidget {
           pressedOpacity: 0.8,
           padding: padding ?? EdgeInsets.symmetric(horizontal: 16.w),
           color: enabledColor ?? Styles.c_0089FF,
-          disabledColor: disabledColor ?? CupertinoColors.tertiarySystemFill,
+          disabledColor: disabledColor ?? CupertinoColors.quaternarySystemFill,
           sizeStyle: sizeStyle,
           borderRadius: BorderRadius.circular(radius.r),
           child: AnimatedSwitcher(

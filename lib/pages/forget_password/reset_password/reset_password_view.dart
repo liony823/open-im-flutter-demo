@@ -34,7 +34,7 @@ class ResetPasswordPage extends StatelessWidget {
                   inputFormatters: [IMUtils.getPasswordFormatter()],
                 ),
                 129.verticalSpace,
-                Button(
+                AdaptiveButton(
                   text: StrRes.confirmTheChanges,
                   enabled: logic.enabled.value,
                   onTap: logic.confirmTheChanges,

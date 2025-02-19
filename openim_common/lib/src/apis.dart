@@ -30,7 +30,7 @@ class Apis {
     String? account,
     String? password,
     String? verificationCode,
-    RegisterType? registerType,
+    LoginType? loginType,
   }) async {
     try {
       var data = await HttpUtil.post(Urls.login, data: {
@@ -39,10 +39,12 @@ class Apis {
         'account': account,
         'password': password,
         'deviceID': DataSp.getDeviceID(),
+        'deviceName': DataSp.getDeviceName(),
         'platform': IMUtils.getPlatform(),
         'verifyCode': verificationCode,
-        'registerType': registerType?.value,
+        'loginType': loginType?.value,
       });
+
       final cert = LoginCertificate.fromJson(data!);
       ApiService().setToken(cert.imToken);
 
@@ -79,6 +81,7 @@ class Apis {
     try {
       var data = await HttpUtil.post(Urls.register, data: {
         'deviceID': DataSp.getDeviceID(),
+        'deviceName': DataSp.getDeviceName(),
         'verifyCode': verificationCode,
         'platform': IMUtils.getPlatform(),
         'invitationCode': invitationCode,
@@ -329,9 +332,9 @@ class Apis {
     }
   }
 
-  static Future<UserFullInfo?> queryMyFullInfo() async {
+  static Future<UserFullInfo?> queryMyFullInfo({String? userID}) async {
     final list = await Apis.getUserFullInfo(
-      userIDList: [OpenIM.iMManager.userID],
+      userIDList: [userID ?? OpenIM.iMManager.userID],
     );
     return list?.firstOrNull;
   }
@@ -339,7 +342,6 @@ class Apis {
   static Future<bool> requestVerificationCode({
     String? areaCode,
     String? phoneNumber,
-    String? email,
     required int usedFor,
     String? invitationCode,
   }) async {
@@ -348,7 +350,6 @@ class Apis {
       data: {
         "areaCode": areaCode,
         "phoneNumber": phoneNumber,
-        "email": email,
         'usedFor': usedFor,
         'invitationCode': invitationCode
       },
@@ -466,12 +467,10 @@ class Apis {
     try {
       final data = await HttpUtil.post(
         Urls.getApplets,
-        data: {
-          "appID": appID
-        },
+        data: {"appID": appID},
         options: chatTokenOptions,
       );
-      if (data['applet'] != null){
+      if (data['applet'] != null) {
         return AppletInfo.fromJson(data['applet']);
       }
       return null;

@@ -19,7 +19,7 @@ class LoginTabBar extends StatelessWidget {
       child: TabBar(
           controller: controller,
           padding: EdgeInsets.symmetric(horizontal: 8.w),
-          labelPadding: EdgeInsets.symmetric(horizontal: 16.w),
+          labelPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.w),
           tabAlignment: TabAlignment.start,
           isScrollable: true,
           dividerHeight: 0,
@@ -30,7 +30,7 @@ class LoginTabBar extends StatelessWidget {
               colors: [Styles.c_0089FF, Styles.c_F3F3F3],
             ),
             leftPadding: 2.w,
-            bottomPadding: 8.h,
+            bottomPadding: 13.h,
             width: 56.w,
             height: 6.h,
           ),

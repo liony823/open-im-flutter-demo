@@ -378,11 +378,10 @@ class AppNavigator {
   static startSelectContactsFromTag() =>
       Get.toNamed(AppRoutes.selectContactsFromTag);
 
-  static void startSetSelfInfo() => Get.offAndToNamed(AppRoutes.setSelfInfo);
-
-  static startSetInfo({required String field, required String value}) =>
-      Get.toNamed(AppRoutes.setInfo,
-          arguments: {'field': field, 'value': value});
+  static void startSetSelfInfo(UserFullInfo? userFullInfo) =>
+      Get.offAndToNamed(AppRoutes.setSelfInfo, arguments: {
+        'userFullInfo': userFullInfo,
+      });
 
   static void startUa({required UaType type}) {
     Get.toNamed(AppRoutes.ua, arguments: {'type': type});

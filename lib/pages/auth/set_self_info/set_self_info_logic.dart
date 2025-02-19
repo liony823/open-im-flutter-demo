@@ -1,48 +1,44 @@
-import 'package:openim/core/controller/im_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_openim_sdk/flutter_openim_sdk.dart';
 import 'package:openim/routes/app_navigator.dart';
 import 'package:get/get.dart';
 import 'package:openim_common/openim_common.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class SetSelfInfoLogic extends GetxController {
-  final imLogic = Get.find<IMController>();
-  late Rx<UserFullInfo> userInfo;
-
+  final formKey = GlobalKey<FormBuilderState>();
   final loading = false.obs;
-
+  late UserFullInfo userFullInfo;
+  final faceURL = ''.obs;
   void openPhotoSheet() {
     IMViews.openPhotoSheet(onData: (path, url) async {
       if (url != null) {
         Logger.print('---------update user info-------$url');
-        userInfo.value.faceURL = url;
-        userInfo.refresh();
+        faceURL.value = url;
       }
     });
   }
 
-  void toSetInfo({required String field, required String value}) async {
-    final res = await AppNavigator.startSetInfo(field: field, value: value);
-    if (res != null) {
-      switch (field) {
-        case 'nickname':
-          userInfo.value.nickname = res;
-          break;
-        case 'account':
-          userInfo.value.account = res;
-          break;
-      }
-      userInfo.refresh();
-    }
-  }
-
   void confirm() async {
-    loading.value = true;
+    final form = formKey.currentState;
+    if (form == null) return;
+    if (!form.saveAndValidate()) {
+      return;
+    }
     try {
-      await Apis.updateUserInfo(
-        userID: userInfo.value.userID!,
-        nickname: userInfo.value.nickname,
-        faceURL: userInfo.value.faceURL,
-        account: userInfo.value.account,
-      );
+      final nickname = form.getRawValue('nickname');
+      final account = form.getRawValue('account');
+      if (userFullInfo.account != account ||
+          userFullInfo.nickname != nickname ||
+          userFullInfo.faceURL != faceURL.value) {
+        loading.value = true;
+        await Apis.updateUserInfo(
+          userID: OpenIM.iMManager.userID,
+          account: account,
+          nickname: nickname,
+          faceURL: faceURL.value,
+        );
+      }
       AppNavigator.startMain();
     } catch (e) {
       Logger.print("---------update user info error-------$e");
@@ -54,12 +50,12 @@ class SetSelfInfoLogic extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    userInfo = Rx(imLogic.userInfo.value);
-    ever(imLogic.userInfo, (value) {
-      userInfo.update((val) {
-        val?.nickname = value.nickname;
-        val?.faceURL = value.faceURL;
-        val?.account = value.account;
+    userFullInfo = Get.arguments['userFullInfo'];
+    faceURL.value = userFullInfo.faceURL ?? '';
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      formKey.currentState?.patchValue({
+        "nickname": userFullInfo.nickname,
+        "account": userFullInfo.account,
       });
     });
   }

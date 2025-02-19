@@ -14,7 +14,6 @@ import '../../routes/app_navigator.dart';
 import '../../widgets/screen_lock_title.dart';
 
 class HomeLogic extends SuperController {
-  final pushLogic = Get.find<PushController>();
   final imLogic = Get.find<IMController>();
   final cacheLogic = Get.find<CacheController>();
   final initLogic = Get.find<AppController>();
@@ -23,8 +22,6 @@ class HomeLogic extends SuperController {
   final unhandledFriendApplicationCount = 0.obs;
   final unhandledGroupApplicationCount = 0.obs;
   final unhandledCount = 0.obs;
-  final defaultApplet = Rxn<AppletInfo>();
-  final appletList = <AppletInfo>[].obs;
   String? _lockScreenPwd;
   bool _isShowScreenLock = false;
   bool? _isAutoLogin;
@@ -42,6 +39,9 @@ class HomeLogic extends SuperController {
   bool get discoveryVisible =>
       initLogic.clientConfigMap[ClientConfigs.appDiscoveryVisible] ==
       ClientConfigs.commonAllow;
+
+  String? get defaultAppletIcon => initLogic.defaultApplet.value?.icon;
+  String? get defaultAppletName => initLogic.defaultApplet.value?.name;
 
   switchTab(index) {
     this.index.value = index;
@@ -90,29 +90,8 @@ class HomeLogic extends SuperController {
     unhandledCount.value = unhandledFriendApplicationCount.value + i;
   }
 
-  void _initApplet() async {
-    if (initLogic.miniProgramVisible) {
-      final applet = DataSp.getApplet();
-      if (applet != null) {
-        defaultApplet.value = applet;
-        defaultApplet.refresh();
-      } else {
-        final list = await Apis.getAppletList();
-        for (var item in list) {
-          if (item.isDefault == 1) {
-            defaultApplet.value = item;
-            defaultApplet.refresh();
-            DataSp.putApplet(item);
-          }
-        }
-        appletList.addAll(list);
-      }
-    }
-  }
-
   @override
   void onInit() {
-    _initApplet();
     _isAutoLogin = Get.arguments != null ? Get.arguments['isAutoLogin'] : false;
     if (_isAutoLogin == true) {
       WidgetsBinding.instance.addPostFrameCallback((_) => _showLockScreenPwd());
@@ -138,7 +117,7 @@ class HomeLogic extends SuperController {
 
     Apis.kickoffController.stream.listen((event) {
       DataSp.removeLoginCertificate();
-      PushController.logout();
+      // PushController.logout();
       AppNavigator.startLogin();
     });
 
@@ -200,7 +179,7 @@ class HomeLogic extends SuperController {
             await DataSp.removeLoginCertificate();
             await DataSp.clearLockScreenPassword();
             await DataSp.closeBiometric();
-            PushController.logout();
+            // PushController.logout();
           });
           AppNavigator.startLogin();
         },

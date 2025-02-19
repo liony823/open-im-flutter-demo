@@ -43,6 +43,8 @@ class AppView extends StatelessWidget {
     );
 
     EasyLoading.instance
+      ..toastPosition = EasyLoadingToastPosition.top
+      ..contentPadding = EdgeInsets.symmetric(vertical: 6.w, horizontal: 16.w)
       ..userInteractions = false
       ..indicatorSize = 50
       ..backgroundColor = Styles.c_0C1C33

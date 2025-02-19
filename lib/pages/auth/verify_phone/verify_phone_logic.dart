@@ -16,7 +16,7 @@ class VerifyPhoneLogic extends GetxController {
   late String phoneNumber;
   late String areaCode;
   late String password;
-  late int usedFor;
+  late int usedFor; // 1: 手机注册 2: 忘记密码 3: 手机登录
   String? invitationCode;
   RegisterType? registerType;
 
@@ -50,7 +50,6 @@ class VerifyPhoneLogic extends GetxController {
       asyncFunction: () => Apis.requestVerificationCode(
             areaCode: areaCode,
             phoneNumber: phoneNumber,
-            email: null,
             usedFor: usedFor,
             invitationCode: invitationCode,
           ));
@@ -70,13 +69,6 @@ class VerifyPhoneLogic extends GetxController {
       loading.value = true;
       await checkVerificationCode(value);
 
-      // 忘记密码逻辑
-      if (usedFor == 2) {
-        loading.value = false;
-
-        return;
-      }
-
       LoginCertificate? result;
       // 手机注册逻辑
       if (usedFor == 1) {
@@ -91,29 +83,14 @@ class VerifyPhoneLogic extends GetxController {
         );
       }
 
-      // 手机登陆逻辑
-      if (usedFor == 3) {
-        result = await Apis.login(
-          areaCode: areaCode,
-          phoneNumber: phoneNumber,
-          password: password,
-          verificationCode: value,
-        );
-      }
-
+      final userInfo = await Apis.queryMyFullInfo(userID: result?.userID);
       loading.value = false;
-      if (null == IMUtils.emptyStrToNull(result?.imToken) ||
-          null == IMUtils.emptyStrToNull(result?.chatToken)) {
-        AppNavigator.startLogin();
-        return;
-      }
-
       final certificate = result!;
-
       await DataSp.putLoginCertificate(certificate);
       await imLogic.login(certificate.userID, certificate.imToken);
+      // PushController.login(certificate.userID);
       Logger.print('---------im login success-------');
-      AppNavigator.startSetSelfInfo();
+      AppNavigator.startSetSelfInfo(userInfo);
     } catch (e) {
       shake();
     } finally {

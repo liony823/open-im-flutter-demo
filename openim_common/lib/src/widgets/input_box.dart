@@ -423,7 +423,7 @@ class _VerifyCodedButtonState extends State<VerifyCodedButton> {
   @override
   Widget build(BuildContext context) =>
       (_isEnabled ? StrRes.sendVerificationCode : '${_seconds}S').toText
-        ..style = Styles.ts_0089FF_17
+        ..style = Styles.ts_0089FF_16
         ..onTap = () {
           if (_isEnabled) {
             widget.onTapCallback?.call().then((start) {

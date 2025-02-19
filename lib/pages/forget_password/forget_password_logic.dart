@@ -4,7 +4,6 @@ import 'package:openim/pages/auth/login/login_logic.dart';
 import 'package:openim/routes/app_navigator.dart';
 import 'package:openim_common/openim_common.dart';
 
-
 class ForgetPasswordLogic extends GetxController {
   final phoneCtrl = TextEditingController();
   final verificationCodeCtrl = TextEditingController();
@@ -28,7 +27,8 @@ class ForgetPasswordLogic extends GetxController {
   }
 
   _onChanged() {
-    enabled.value = phoneCtrl.text.trim().isNotEmpty && verificationCodeCtrl.text.trim().isNotEmpty;
+    enabled.value = phoneCtrl.text.trim().isNotEmpty &&
+        verificationCodeCtrl.text.trim().isNotEmpty;
   }
 
   void openCountryCodePicker() async {
@@ -37,7 +37,8 @@ class ForgetPasswordLogic extends GetxController {
   }
 
   Future<bool> getVerificationCode() async {
-    if (phone?.isNotEmpty == true && !IMUtils.isMobile(areaCode.value, phoneCtrl.text)) {
+    if (phone?.isNotEmpty == true &&
+        !IMUtils.isMobile(areaCode.value, phoneCtrl.text)) {
       IMViews.showToast(StrRes.plsEnterRightPhone);
       return false;
     }
@@ -55,7 +56,6 @@ class ForgetPasswordLogic extends GetxController {
       asyncFunction: () => Apis.requestVerificationCode(
             areaCode: areaCode.value,
             phoneNumber: phone,
-            email: email,
             usedFor: 2,
           ));
 
@@ -63,7 +63,6 @@ class ForgetPasswordLogic extends GetxController {
       asyncFunction: () => Apis.checkVerificationCode(
             areaCode: areaCode.value,
             phoneNumber: phone,
-            email: email,
             verificationCode: verificationCodeCtrl.text,
             usedFor: 2,
           ));
@@ -73,7 +72,6 @@ class ForgetPasswordLogic extends GetxController {
     AppNavigator.startResetPassword(
       areaCode: areaCode.value,
       phoneNumber: phone,
-      email: email,
       verificationCode: verificationCodeCtrl.text,
     );
   }

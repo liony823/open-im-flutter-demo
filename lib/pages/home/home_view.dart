@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:openim_common/openim_common.dart';
 
@@ -49,9 +50,15 @@ class HomePage extends StatelessWidget {
         PersistentTabConfig(
           screen: AppletPage(),
           item: ItemConfig(
-            icon: _buildIcon(EvaIcons.globe, Styles.c_0089FF),
-            inactiveIcon: _buildIcon(EvaIcons.globe2Outline, Styles.c_8E9AB0),
-            title: StrRes.miniProgram,
+            icon: logic.defaultAppletIcon != null
+                ? _buildAppletIcon(logic.defaultAppletIcon!)
+                : _buildIcon(EvaIcons.globe, Styles.c_0089FF),
+            inactiveIcon: logic.defaultAppletIcon != null
+                ? _buildAppletIcon(logic.defaultAppletIcon!)
+                : _buildIcon(EvaIcons.globe2Outline, Styles.c_8E9AB0),
+            title: logic.defaultAppletName != null
+                ? logic.defaultAppletName!
+                : StrRes.miniProgram,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
         ),
@@ -78,9 +85,13 @@ class HomePage extends StatelessWidget {
   Icon _buildIcon(IconData icon, Color color) {
     return Icon(
       icon,
-      size: 24,
+      size: 24.w,
       color: color,
     );
+  }
+
+  Widget _buildAppletIcon(String icon) {
+    return ImageUtil.networkImage(url: icon, width: 26.w, height: 26.h);
   }
 
   Widget _setupIcon(Widget icon, int unReadCount) {

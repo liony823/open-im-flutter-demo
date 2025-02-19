@@ -14,11 +14,16 @@ class AppletPage extends StatelessWidget {
     return Scaffold(
       appBar: TitleBar.workbench(),
       backgroundColor: Styles.c_F8F9FA,
-      body: _buildH5Body(),
+      body: Obx(() {
+        if (logic.applet.value != null) {
+          return _buildH5Body(logic.applet.value!.url!);
+        }
+        return const SizedBox.shrink();
+      }),
     );
   }
 
-  Widget _buildH5Body() {
-    return H5Container(url: logic.applet.value!.url!);
+  Widget _buildH5Body(String url) {
+    return H5Container(url: url);
   }
 }

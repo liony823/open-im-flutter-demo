@@ -90,7 +90,7 @@ Page resource error:
           );
         },
       )
-      ..loadRequest(Uri.parse('https://openim.io'));
+      ..loadRequest(Uri.parse(widget.url));
 
     if (!Platform.isMacOS) {
       controller.setBackgroundColor(const Color(0x80000000));

@@ -52,7 +52,7 @@ class ChangePwdLogic extends GetxController {
       await LoadingView.singleton.wrap(asyncFunction: () async {
         await OpenIM.iMManager.logout();
         await DataSp.removeLoginCertificate();
-        PushController.logout();
+        // PushController.logout();
       });
       AppNavigator.startLogin();
     }

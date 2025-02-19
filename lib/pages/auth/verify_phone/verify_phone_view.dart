@@ -73,7 +73,8 @@ class VerifyPhonePage extends StatelessWidget {
               onTapCallback: () => logic.requestVerificationCode(),
             ),
             170.verticalSpace,
-            Obx(() => Button(
+            Obx(() => AdaptiveButton(
+                  loading: logic.loading.value,
                   text: StrRes.nextStep,
                   enabled: logic.enabled.value,
                   onTap: () => logic.completed(logic.codeEditCtrl.text),

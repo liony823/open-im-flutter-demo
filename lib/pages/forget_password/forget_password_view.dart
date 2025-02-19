@@ -20,7 +20,7 @@ class ForgetPasswordPage extends StatelessWidget {
                   ..style = Styles.ts_0089FF_20_semibold,
                 29.verticalSpace,
                 InputBox.account(
-                  label: "email",
+                  label: StrRes.phoneNumber,
                   code: logic.areaCode.value,
                   onAreaCode: logic.openCountryCodePicker,
                   controller: logic.phoneCtrl,
@@ -33,7 +33,7 @@ class ForgetPasswordPage extends StatelessWidget {
                   onSendVerificationCode: logic.getVerificationCode,
                 ),
                 130.verticalSpace,
-                Button(
+                AdaptiveButton(
                   text: StrRes.nextStep,
                   enabled: logic.enabled.value,
                   onTap: logic.nextStep,

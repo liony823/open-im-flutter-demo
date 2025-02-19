@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter_openim_sdk/flutter_openim_sdk.dart';
 import 'package:get/get.dart';
+import 'package:openim/core/controller/app_controller.dart';
 import 'package:openim/pages/conversation/conversation_logic.dart';
 import 'package:openim_common/openim_common.dart';
 
@@ -9,8 +9,9 @@ import '../../core/controller/im_controller.dart';
 import '../../routes/app_navigator.dart';
 
 class SplashLogic extends GetxController {
+  final appLogic = Get.find<AppController>();
   final imLogic = Get.find<IMController>();
-  final pushLogic = Get.find<PushController>();
+  // final pushLogic = Get.find<PushController>();
 
   String? get userID => DataSp.userID;
 
@@ -36,13 +37,14 @@ class SplashLogic extends GetxController {
       Logger.print('---------login---------- userID: $userID, token: $token');
       await imLogic.login(userID!, token!);
       Logger.print('---------im login success-------');
-      PushController.login(
-        userID!,
-        onTokenRefresh: (token) {
-          OpenIM.iMManager.updateFcmToken(
-              fcmToken: token, expireTime: DateTime.now().add(Duration(days: 90)).millisecondsSinceEpoch);
-        },
-      );
+      await appLogic.initClientConfig();
+      // PushController.login(
+      //   userID!,
+      //   onTokenRefresh: (token) {
+      //     OpenIM.iMManager.updateFcmToken(
+      //         fcmToken: token, expireTime: DateTime.now().add(Duration(days: 90)).millisecondsSinceEpoch);
+      //   },
+      // );
       Logger.print('---------push login success----');
       final result = await ConversationLogic.getConversationFirstPage();
 

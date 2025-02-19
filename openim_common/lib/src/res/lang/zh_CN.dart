@@ -15,7 +15,7 @@ const Map<String, String> zh_CN = {
   "passwordFormatError": "密码格式错误, 请输入6-18位字母或数字",
   "account": "用户名",
   "plsEnterAccount": "请输入您的用户名",
-  "accountFormatError": "用户名格式错误, 请输入字母开头, 字母、数字、下划线组合, 4-20个字符",
+  "accountFormatError": "用户名格式错误, 请输入4-12位，不能包含非法字符",
   "plsEnterNickname": "请输入您的昵称",
   "nicknameFormatError": "昵称格式错误, 请输入2-20个字符",
   "forgetPassword": "忘记密码？",
@@ -47,7 +47,7 @@ const Map<String, String> zh_CN = {
   'plsEnterRightEmail': '请输入正确的邮箱',
   'plsEnterRightAccount': '请输入正确的账号',
   'plsEnterRightPhoneOrEmail': '请输入正确的邮箱或手机号',
-  "enterVerificationCode": "输入%s验证码",
+  "enterVerificationCode": "输入验证码",
   "setPassword": "设置密码",
   "plsConfirmPasswordAgain": "请再次确认您的密码",
   "confirmPassword": "确认密码",
@@ -56,7 +56,7 @@ const Map<String, String> zh_CN = {
   "plsSetAvatar": "点击更换头像",
   "plsEnterYourNickname": "请输入您的昵称",
   "setInfo": "设置信息",
-  "loginPwdFormat": "6～20位，至少包含数字、字母",
+  "loginPwdFormat": "6～18位，至少包含数字、字母",
   "passwordLogin": "密码登录",
   'through': '通过%s',
   "home": "消息",
@@ -653,7 +653,7 @@ const Map<String, String> zh_CN = {
   "err_20101": "token 不存在",
 
   // 网络错误
-  "networkError":"网络连接超时，请检查网络或者代理",
+  "networkError": "网络连接超时，请检查网络或者代理",
   "connectionTimeout": "网络连接超时，请检查网络或者代理",
   "sendTimeout": "网络请求超时，请检查网络或者代理",
   "receiveTimeout": "网络请求超时，请检查网络或者代理",
@@ -662,9 +662,8 @@ const Map<String, String> zh_CN = {
   "connectionError": "与服务器无法建立连接，请检查网络或者代理",
   "unknown": "服务器错误，请联系管理员",
 
-
   // 发现页
   "friendShare": "好友分享",
   "scanQrCode": "扫一扫",
-  "signRedEnvelope":"签到红包",
+  "signRedEnvelope": "签到红包",
 };

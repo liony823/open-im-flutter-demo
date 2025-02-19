@@ -157,6 +157,7 @@ class LoginPage extends StatelessWidget {
                 areaCode: logic.areaCode.value,
               ),
               name: "phone",
+              textInputAction: TextInputAction.next,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return StrRes.plsEnterPhoneNumber.tr;
@@ -170,6 +171,8 @@ class LoginPage extends StatelessWidget {
               labelIcon: EvaIcons.lockOutline,
               hintText: StrRes.plsEnterPassword,
               name: "password",
+              textInputAction: TextInputAction.done,
+              onSubmitted: (_) => logic.login(),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return StrRes.plsEnterPassword.tr;
@@ -199,6 +202,7 @@ class LoginPage extends StatelessWidget {
               label: StrRes.account,
               labelIcon: EvaIcons.personOutline,
               hintText: StrRes.plsEnterAccount,
+              textInputAction: TextInputAction.next,
               name: "account",
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -212,7 +216,9 @@ class LoginPage extends StatelessWidget {
               label: StrRes.password,
               labelIcon: EvaIcons.lockOutline,
               hintText: StrRes.plsEnterPassword,
+              textInputAction: TextInputAction.done,
               name: "password",
+              onSubmitted: (_) => logic.login(),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return StrRes.plsEnterPassword.tr;
@@ -246,7 +252,7 @@ class LoginPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         CupertinoButton(
-          onPressed: () {},
+          onPressed: AppNavigator.startForgetPassword,
           child: StrRes.forgetPassword.toText..style = Styles.ts_0089FF_12,
         ),
         CupertinoButton(

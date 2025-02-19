@@ -20,6 +20,7 @@ class FormInput extends StatefulWidget {
       this.obscureText = true,
       this.suffixIcon,
       this.prefixIcon,
+      this.onSubmitted,
       this.validator});
 
   const FormInput.phone(
@@ -37,6 +38,7 @@ class FormInput extends StatefulWidget {
       this.obscureText = false,
       this.suffixIcon,
       this.prefixIcon,
+      this.onSubmitted,
       this.validator});
 
   const FormInput(
@@ -54,6 +56,7 @@ class FormInput extends StatefulWidget {
       this.obscureText = false,
       this.suffixIcon,
       this.prefixIcon,
+      this.onSubmitted,
       this.validator});
 
   final String name;
@@ -70,7 +73,7 @@ class FormInput extends StatefulWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
-
+  final void Function(String?)? onSubmitted;
   @override
   State<FormInput> createState() => _FormInputState();
 }
@@ -128,6 +131,7 @@ class _FormInputState extends State<FormInput> {
           keyboardType: widget.keyboardType,
           obscureText: obscureText,
           validator: widget.validator,
+          onSubmitted: widget.onSubmitted,
           decoration: InputDecoration(
             suffixIcon: suffixIcon,
             prefixIcon: widget.prefixIcon,

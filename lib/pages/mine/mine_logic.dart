@@ -33,7 +33,7 @@ class MineLogic extends GetxController {
         await LoadingView.singleton.wrap(asyncFunction: () async {
           await imLogic.logout();
           await DataSp.removeLoginCertificate();
-          PushController.logout();
+          // PushController.logout();
           Get.find<HomeLogic>().conversationsAtFirstPage.clear();
         });
         AppNavigator.startLogin();
@@ -49,7 +49,7 @@ class MineLogic extends GetxController {
     }
     Get.snackbar(StrRes.accountWarn, tips ?? StrRes.accountException);
     await DataSp.removeLoginCertificate();
-    PushController.logout();
+    // PushController.logout();
     AppNavigator.startLogin();
   }
 

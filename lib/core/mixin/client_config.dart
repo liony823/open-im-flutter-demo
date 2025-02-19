@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 mixin ClientConfig {
   final clientConfigMap = <String, dynamic>{}.obs;
+  final defaultApplet = Rxn<AppletInfo>();
+  final appletList = <AppletInfo>[].obs;
 
   // 当前登录类型
   String get loginType =>
@@ -26,7 +28,7 @@ mixin ClientConfig {
   bool get miniProgramVisible =>
       clientConfigMap[ClientConfigs.appMiniProgramVisible] ==
       ClientConfigs.commonAllow;
-  
+
   // 发现页
   bool get discoveryVisible =>
       clientConfigMap[ClientConfigs.appDiscoveryVisible] ==
@@ -38,10 +40,39 @@ mixin ClientConfig {
       ClientConfigs.commonAllow;
 
   // 好友分享
-  bool get momentsVisible =>  clientConfigMap[ClientConfigs.appMomentsVisible] == ClientConfigs.commonAllow;
+  bool get momentsVisible =>
+      clientConfigMap[ClientConfigs.appMomentsVisible] ==
+      ClientConfigs.commonAllow;
 
-  void initClientConfig() async {
+  Future<void> _initApplet() async {
+    final applet = DataSp.getApplet();
+    if (applet != null) {
+      defaultApplet.value = applet;
+      defaultApplet.refresh();
+    }
+    final list = await Apis.getAppletList();
+    for (var item in list) {
+      if (item.isDefault == 1) {
+        defaultApplet.update((applet) {
+          applet?.appID = item.appID;
+          applet?.icon = item.icon;
+          applet?.isDefault = item.isDefault;
+          applet?.name = item.name;
+          applet?.url = item.url;
+          applet?.status = item.status;
+        });
+        DataSp.putApplet(item);
+      }
+    }
+    appletList.addAll(list);
+  }
+
+  Future<void> initClientConfig() async {
     final config = await Apis.getClientConfig();
     clientConfigMap.value = config;
+
+    if (miniProgramVisible) {
+      await _initApplet();
+    }
   }
 }

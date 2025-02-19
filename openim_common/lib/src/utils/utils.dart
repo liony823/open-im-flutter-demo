@@ -38,7 +38,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:uri_to_file/uri_to_file.dart';
 import 'package:intl/intl.dart' hide TextDirection;
-import 'package:flutter/foundation.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 class IntervalDo {
   DateTime? last;
@@ -349,6 +349,12 @@ class IMUtils {
     } else {
       return context.isTablet ? 9 : 1;
     }
+  }
+
+  static Future<String> getDeviceName() async {
+    final deviceInfoPlugin = DeviceInfoPlugin();
+    final deviceInfo = await deviceInfoPlugin.deviceInfo;
+    return deviceInfo.data['name'];
   }
 
   static String? generateMD5(String? data) {
@@ -1762,7 +1768,7 @@ class IMUtils {
   }
 
   static bool isValidPassword(String password) => RegExp(
-        r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\S]{6,20}$',
+        r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\S]{6,18}$',
       ).hasMatch(password);
 
   static TextInputFormatter getPasswordFormatter() =>

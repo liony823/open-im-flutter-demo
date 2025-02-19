@@ -98,12 +98,16 @@ class RegisterLogic extends GetxController
       if (loginType == ClientConfigs.appLoginWithAutoRegister) {
         result = await Apis.register(
           nickname: IMUtils.generateRandomString(6),
-          password: Config.secret,
+          password: "",
           registerType: RegisterType.autoDevice,
         );
       }
 
+      final userInfo = await Apis.queryMyFullInfo(userID: result?.userID);
+      await appLogic.initClientConfig();
+
       loading.value = false;
+
       if (null == IMUtils.emptyStrToNull(result?.imToken) ||
           null == IMUtils.emptyStrToNull(result?.chatToken)) {
         AppNavigator.startLogin();
@@ -115,7 +119,7 @@ class RegisterLogic extends GetxController
       await DataSp.putLoginCertificate(certificate);
       await imLogic.login(certificate.userID, certificate.imToken);
       Logger.print('---------im login success-------');
-      AppNavigator.startSetSelfInfo();
+      AppNavigator.startSetSelfInfo(userInfo);
     } catch (e) {
       Logger.print("e: $e");
     } finally {

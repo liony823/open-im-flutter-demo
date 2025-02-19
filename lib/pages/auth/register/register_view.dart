@@ -32,8 +32,9 @@ class RegisterPage extends StatelessWidget {
                           right: Padding(
                             padding: EdgeInsets.only(right: 16.w),
                             child: SwapLangButton(
-                              text: context.maybeLocale?.language.namesNative
-                                  .firstOrNull,
+                              text: context
+                                  .maybeLocale?.language.namesNative.firstOrNull
+                                  ?.replaceFirst(RegExp(r'\([^)]*\)'), ''),
                               onTap: logic.toLanguage,
                             ),
                           )),
@@ -171,6 +172,7 @@ class RegisterPage extends StatelessWidget {
       labelIcon: EvaIcons.phoneOutline,
       hintText: StrRes.plsEnterPhoneNumber,
       name: "phone",
+      textInputAction: TextInputAction.next,
       prefixIcon: InputPhoneCode(
         onOpenPicker: logic.showPhoneCodePicker,
         areaCode: logic.areaCode.value,
@@ -191,6 +193,7 @@ class RegisterPage extends StatelessWidget {
       labelIcon: EvaIcons.personOutline,
       hintText: StrRes.plsEnterAccount,
       name: "account",
+      textInputAction: TextInputAction.next,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return StrRes.plsEnterAccount;
@@ -211,11 +214,12 @@ class RegisterPage extends StatelessWidget {
         labelIcon: EvaIcons.lockOutline,
         hintText: StrRes.plsEnterPassword,
         name: "password",
+        textInputAction: TextInputAction.next,
         validator: (value) {
           if (value == null || value.isEmpty) {
             return StrRes.plsEnterPassword;
           }
-          if (!PASSWORD_REG.hasMatch(value)) {
+          if (!IMUtils.isValidPassword(value)) {
             return StrRes.passwordFormatError;
           }
           return null;
@@ -226,6 +230,8 @@ class RegisterPage extends StatelessWidget {
         labelIcon: EvaIcons.lockOutline,
         hintText: StrRes.plsConfirmPasswordAgain,
         name: "confirmPassword",
+        textInputAction: TextInputAction.done,
+        onSubmitted: (_) => logic.register(),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return StrRes.plsConfirmPasswordAgain;
