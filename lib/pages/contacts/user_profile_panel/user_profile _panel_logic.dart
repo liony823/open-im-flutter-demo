@@ -161,7 +161,9 @@ class UserProfilePanelLogic extends GetxController {
     final blackList = await OpenIM.iMManager.friendshipManager.getBlacklist();
 
     final isFriendship = friendInfo != null;
-    final isBlack = blackList.firstWhereOrNull((e) => e.userID == friendInfo?.userID) != null;
+    final isBlack =
+        blackList.firstWhereOrNull((e) => e.userID == friendInfo?.userID) !=
+            null;
 
     if (friendInfo == null) {
       final user = (await OpenIM.iMManager.userManager.getUsersInfoWithCache(
@@ -237,9 +239,13 @@ class UserProfilePanelLogic extends GetxController {
     if (isGroupMemberPage) {
       final list = await OpenIM.iMManager.groupManager.getGroupMembersInfo(
         groupID: groupID!,
-        userIDList: [userInfo.value.userID!, if (!isMyself) OpenIM.iMManager.userID],
+        userIDList: [
+          userInfo.value.userID!,
+          if (!isMyself) OpenIM.iMManager.userID
+        ],
       );
-      final other = list.firstWhereOrNull((e) => e.userID == userInfo.value.userID);
+      final other =
+          list.firstWhereOrNull((e) => e.userID == userInfo.value.userID);
       groupMembersInfo = other;
       groupUserNickname.value = other?.nickname ?? '';
       joinGroupTime.value = other?.joinTime ?? 0;
@@ -249,18 +255,23 @@ class UserProfilePanelLogic extends GetxController {
       hasAdminPermission.value = other?.roleLevel == GroupRoleLevel.admin;
 
       if (!isMyself) {
-        var me = list.firstWhereOrNull((e) => e.userID == OpenIM.iMManager.userID);
+        var me =
+            list.firstWhereOrNull((e) => e.userID == OpenIM.iMManager.userID);
 
         iAmOwner.value = me?.roleLevel == GroupRoleLevel.owner;
 
         iHasMutePermissions.value = me?.roleLevel == GroupRoleLevel.owner ||
-            (me?.roleLevel == GroupRoleLevel.admin && other?.roleLevel == GroupRoleLevel.member);
+            (me?.roleLevel == GroupRoleLevel.admin &&
+                other?.roleLevel == GroupRoleLevel.member);
 
         iHaveAdminOrOwnerPermission.value =
-            me?.roleLevel == GroupRoleLevel.owner || me?.roleLevel == GroupRoleLevel.admin;
+            me?.roleLevel == GroupRoleLevel.owner ||
+                me?.roleLevel == GroupRoleLevel.admin;
       }
 
-      if (null != other && null != other.muteEndTime && other.muteEndTime! > 0) {
+      if (null != other &&
+          null != other.muteEndTime &&
+          other.muteEndTime! > 0) {
         _calMuteTime(other.muteEndTime!);
       }
     }
@@ -275,14 +286,14 @@ class UserProfilePanelLogic extends GetxController {
         );
         var inviterUserInfo = list.firstOrNull;
         joinGroupMethod.value = sprintf(
-          StrRes.byInviteJoinGroup,
+          t.byInviteJoinGroup,
           [inviterUserInfo?.nickname ?? ''],
         );
       }
     } else if (other?.joinSource == 3) {
-      joinGroupMethod.value = StrRes.byIDJoinGroup;
+      joinGroupMethod.value = t.byIDJoinGroup;
     } else if (other?.joinSource == 4) {
-      joinGroupMethod.value = StrRes.byQrcodeJoinGroup;
+      joinGroupMethod.value = t.byQrcodeJoinGroup;
     }
   }
 

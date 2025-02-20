@@ -14,18 +14,18 @@ class FriendRequestsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.newFriend),
+      appBar: TitleBar.back(title: t.newFriend),
       backgroundColor: Styles.c_F8F9FA,
       body: Obx(() => ListView.builder(
             padding: EdgeInsets.only(top: 10.h),
             itemCount: logic.applicationList.length,
             itemBuilder: (_, index) =>
-                _buildItemView(logic.applicationList[index]),
+                _buildItemView(context, logic.applicationList[index]),
           )),
     );
   }
 
-  Widget _buildItemView(FriendApplicationInfo info) {
+  Widget _buildItemView(BuildContext context, FriendApplicationInfo info) {
     final isISendRequest = info.fromUserID == OpenIM.iMManager.userID;
     String? name = isISendRequest ? info.toNickname : info.fromNickname;
     String? faceURL = isISendRequest ? info.toFaceURL : info.fromFaceURL;
@@ -34,7 +34,7 @@ class FriendRequestsPage extends StatelessWidget {
     return Container(
       height: 68.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Styles.c_FFFFFF,
         border: BorderDirectional(
           bottom: BorderSide(
@@ -71,18 +71,19 @@ class FriendRequestsPage extends StatelessWidget {
               ..height = 20.h,
           if (info.isWaitingHandle && !isISendRequest)
             Button(
-              text: StrRes.lookOver,
+              text: context.t.lookOver,
               textStyle: Styles.ts_FFFFFF_14,
               onTap: () => logic.acceptFriendApplication(info),
               height: 28.h,
               padding: EdgeInsets.symmetric(horizontal: 13.w),
             ),
           if (info.isWaitingHandle && isISendRequest)
-            StrRes.waitingForVerification.toText..style = Styles.ts_8E9AB0_14,
+            (context.t.waitingForVerification).toText
+              ..style = Styles.ts_8E9AB0_14,
           if (info.isRejected)
-            StrRes.rejected.toText..style = Styles.ts_8E9AB0_14,
+            (context.t.rejected).toText..style = Styles.ts_8E9AB0_14,
           if (info.isAgreed)
-            StrRes.approved.toText..style = Styles.ts_8E9AB0_14,
+            (context.t.approved).toText..style = Styles.ts_8E9AB0_14,
         ],
       ),
     );

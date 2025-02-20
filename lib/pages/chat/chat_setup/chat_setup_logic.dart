@@ -31,11 +31,14 @@ class ChatSetupLogic extends GetxController {
   @override
   void onInit() {
     conversationInfo = Rx(Get.arguments['conversationInfo']);
-    final sourceID = conversationInfo.value.conversationType == ConversationType.single
-        ? conversationInfo.value.userID
-        : conversationInfo.value.groupID;
+    final sourceID =
+        conversationInfo.value.conversationType == ConversationType.single
+            ? conversationInfo.value.userID
+            : conversationInfo.value.groupID;
     OpenIM.iMManager.conversationManager
-        .getOneConversation(sourceID: sourceID!, sessionType: conversationInfo.value.conversationType!)
+        .getOneConversation(
+            sourceID: sourceID!,
+            sessionType: conversationInfo.value.conversationType!)
         .then((value) {
       conversationInfo.value = value;
     });
@@ -80,17 +83,18 @@ class ChatSetupLogic extends GetxController {
 
   void clearChatHistory() async {
     var confirm = await Get.dialog(CustomDialog(
-      title: StrRes.confirmClearChatHistory,
-      rightText: StrRes.clearAll,
+      title: t.confirmClearChatHistory,
+      rightText: t.clearAll,
     ));
     if (confirm == true) {
       await LoadingView.singleton.wrap(
-        asyncFunction: () => OpenIM.iMManager.conversationManager.clearConversationAndDeleteAllMsg(
+        asyncFunction: () => OpenIM.iMManager.conversationManager
+            .clearConversationAndDeleteAllMsg(
           conversationID: conversationID,
         ),
       );
       chatLogic.clearAllMessage();
-      IMViews.showToast(StrRes.clearSuccessfully);
+      IMViews.showToast(t.clearSuccessfully);
     }
   }
 

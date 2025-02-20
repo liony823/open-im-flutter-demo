@@ -103,7 +103,7 @@ class IMUtils {
 
   static void copy({required String text}) {
     Clipboard.setData(ClipboardData(text: text));
-    IMViews.showToast(StrRes.copySuccessfully);
+    IMViews.showToast(t.copySuccessfully);
   }
 
   static List<ISuspensionBean> convertToAZList(List<ISuspensionBean> list) {
@@ -430,7 +430,7 @@ class IMUtils {
 
   static String getChatTimeline(int ms, [String formatToday = 'HH:mm']) {
     final dateTime = DateTime.fromMillisecondsSinceEpoch(ms);
-    final languageCode = Get.locale?.languageCode ?? 'zh';
+    final languageCode = LocaleSettings.currentLocale.languageCode;
     final isChinese = languageCode == 'zh';
     final now = DateTime.now();
     final formatter = DateFormat(formatToday);
@@ -452,13 +452,13 @@ class IMUtils {
     if (isSameWeek(dateTime, now)) {
       final weekDay = DateFormat('EEEE').format(dateTime);
       final weekDayChinese = {
-        'Monday': StrRes.monday,
-        'Tuesday': StrRes.tuesday,
-        'Wednesday': StrRes.wednesday,
-        'Thursday': StrRes.thursday,
-        'Friday': StrRes.friday,
-        'Saturday': StrRes.saturday,
-        'Sunday': StrRes.sunday,
+        'Monday': t.monday,
+        'Tuesday': t.tuesday,
+        'Wednesday': t.wednesday,
+        'Thursday': t.thursday,
+        'Friday': t.friday,
+        'Saturday': t.saturday,
+        'Sunday': t.sunday,
       };
       return '${isChinese ? weekDayChinese[weekDay]! : weekDay} ${formatter.format(dateTime)}';
     }
@@ -531,7 +531,7 @@ class IMUtils {
   }
 
   static Map<String, List<Message>> groupingMessage(List<Message> list) {
-    var languageCode = Get.locale?.languageCode ?? 'zh';
+    var languageCode = LocaleSettings.currentLocale.languageCode;
     var group = <String, List<Message>>{};
     for (var message in list) {
       var dateTime = DateTime.fromMillisecondsSinceEpoch(message.sendTime!);
@@ -555,7 +555,7 @@ class IMUtils {
     int hours = (mss % (60 * 60 * 24)) ~/ (60 * 60);
     int minutes = (mss % (60 * 60)) ~/ 60;
     int seconds = mss % 60;
-    return "${_combTime(days, StrRes.day)}${_combTime(hours, StrRes.hours)}${_combTime(minutes, StrRes.minute)}${_combTime(seconds, StrRes.seconds)}";
+    return "${_combTime(days, t.day)}${_combTime(hours, t.hours)}${_combTime(minutes, t.minute)}${_combTime(seconds, t.seconds)}";
   }
 
   static String _combTime(int value, String unit) =>
@@ -635,7 +635,7 @@ class IMUtils {
 
   static String getGroupMemberShowName(GroupMembersInfo membersInfo) {
     return membersInfo.userID == OpenIM.iMManager.userID
-        ? StrRes.you
+        ? t.you
         : membersInfo.nickname!;
   }
 
@@ -660,7 +660,7 @@ class IMUtils {
             {
               final ntf = GroupNotification.fromJson(map);
 
-              final label = StrRes.createGroupNtf;
+              final label = t.createGroupNtf;
               text = sprintf(label, [getGroupMemberShowName(ntf.opUser!)]);
             }
             break;
@@ -672,7 +672,7 @@ class IMUtils {
                 return isConversation ? ntf.group!.notification! : null;
               }
 
-              final label = StrRes.editGroupInfoNtf;
+              final label = t.editGroupInfoNtf;
               text = sprintf(label, [getGroupMemberShowName(ntf.opUser!)]);
             }
             break;
@@ -680,7 +680,7 @@ class IMUtils {
             {
               final ntf = QuitGroupNotification.fromJson(map);
 
-              final label = StrRes.quitGroupNtf;
+              final label = t.quitGroupNtf;
               text = sprintf(label, [getGroupMemberShowName(ntf.quitUser!)]);
             }
             break;
@@ -688,7 +688,7 @@ class IMUtils {
             {
               final ntf = InvitedJoinGroupNotification.fromJson(map);
 
-              final label = StrRes.invitedJoinGroupNtf;
+              final label = t.invitedJoinGroupNtf;
               final b = ntf.invitedUserList
                   ?.map((e) => getGroupMemberShowName(e))
                   .toList()
@@ -701,7 +701,7 @@ class IMUtils {
             {
               final ntf = KickedGroupMemeberNotification.fromJson(map);
 
-              final label = StrRes.kickedGroupNtf;
+              final label = t.kickedGroupNtf;
               final b = ntf.kickedUserList!
                   .map((e) => getGroupMemberShowName(e))
                   .toList()
@@ -713,7 +713,7 @@ class IMUtils {
             {
               final ntf = EnterGroupNotification.fromJson(map);
 
-              final label = StrRes.joinGroupNtf;
+              final label = t.joinGroupNtf;
               text = sprintf(label, [getGroupMemberShowName(ntf.entrantUser!)]);
             }
             break;
@@ -721,7 +721,7 @@ class IMUtils {
             {
               final ntf = GroupNotification.fromJson(map);
 
-              final label = StrRes.dismissGroupNtf;
+              final label = t.dismissGroupNtf;
               text = sprintf(label, [getGroupMemberShowName(ntf.opUser!)]);
             }
             break;
@@ -729,7 +729,7 @@ class IMUtils {
             {
               final ntf = GroupRightsTransferNoticication.fromJson(map);
 
-              final label = StrRes.transferredGroupNtf;
+              final label = t.transferredGroupNtf;
               text = sprintf(label, [
                 getGroupMemberShowName(ntf.opUser!),
                 getGroupMemberShowName(ntf.newGroupOwner!)
@@ -740,7 +740,7 @@ class IMUtils {
             {
               final ntf = MuteMemberNotification.fromJson(map);
 
-              final label = StrRes.muteMemberNtf;
+              final label = t.muteMemberNtf;
               final c = ntf.mutedSeconds;
               text = sprintf(label, [
                 getGroupMemberShowName(ntf.mutedUser!),
@@ -753,7 +753,7 @@ class IMUtils {
             {
               final ntf = MuteMemberNotification.fromJson(map);
 
-              final label = StrRes.muteCancelMemberNtf;
+              final label = t.muteCancelMemberNtf;
               text = sprintf(label, [
                 getGroupMemberShowName(ntf.mutedUser!),
                 getGroupMemberShowName(ntf.opUser!)
@@ -764,7 +764,7 @@ class IMUtils {
             {
               final ntf = MuteMemberNotification.fromJson(map);
 
-              final label = StrRes.muteGroupNtf;
+              final label = t.muteGroupNtf;
               text = sprintf(label, [getGroupMemberShowName(ntf.opUser!)]);
             }
             break;
@@ -772,29 +772,29 @@ class IMUtils {
             {
               final ntf = MuteMemberNotification.fromJson(map);
 
-              final label = StrRes.muteCancelGroupNtf;
+              final label = t.muteCancelGroupNtf;
               text = sprintf(label, [getGroupMemberShowName(ntf.opUser!)]);
             }
             break;
           case MessageType.friendApplicationApprovedNotification:
             {
-              text = StrRes.friendAddedNtf;
+              text = t.friendAddedNtf;
             }
             break;
           case MessageType.burnAfterReadingNotification:
             {
               final ntf = BurnAfterReadingNotification.fromJson(map);
               if (ntf.isPrivate == true) {
-                text = StrRes.openPrivateChatNtf;
+                text = t.openPrivateChatNtf;
               } else {
-                text = StrRes.closePrivateChatNtf;
+                text = t.closePrivateChatNtf;
               }
             }
             break;
           case MessageType.groupMemberInfoChangedNotification:
             final ntf = GroupMemberInfoChangedNotification.fromJson(map);
-            text = sprintf(StrRes.memberInfoChangedNtf,
-                [getGroupMemberShowName(ntf.opUser!)]);
+            text = sprintf(
+                t.memberInfoChangedNtf, [getGroupMemberShowName(ntf.opUser!)]);
             break;
           case MessageType.groupInfoSetAnnouncementNotification:
             if (isConversation) {
@@ -804,7 +804,7 @@ class IMUtils {
             break;
           case MessageType.groupInfoSetNameNotification:
             final ntf = GroupNotification.fromJson(map);
-            text = sprintf(StrRes.whoModifyGroupName,
+            text = sprintf(t.whoModifyGroupName,
                 [getGroupMemberShowName(ntf.opUser!), ntf.group?.groupName]);
             break;
         }
@@ -840,25 +840,25 @@ class IMUtils {
           }
           break;
         case MessageType.picture:
-          content = '[${StrRes.picture}]';
+          content = '[${t.picture}]';
           break;
         case MessageType.voice:
-          content = '[${StrRes.voice}]';
+          content = '[${t.voice}]';
           break;
         case MessageType.video:
-          content = '[${StrRes.video}]';
+          content = '[${t.video}]';
           break;
         case MessageType.file:
-          content = '[${StrRes.file}]';
+          content = '[${t.file}]';
           break;
         case MessageType.location:
-          content = '[${StrRes.location}]';
+          content = '[${t.location}]';
           break;
         case MessageType.merger:
-          content = '[${StrRes.chatRecord}]';
+          content = '[${t.chatRecord}]';
           break;
         case MessageType.card:
-          content = '[${StrRes.carte}]';
+          content = '[${t.carte}]';
           break;
         case MessageType.quote:
           content = message.quoteElem?.text ?? '';
@@ -869,37 +869,37 @@ class IMUtils {
           var info = RevokedInfo.fromJson(map);
           if (message.isSingleChat) {
             if (isSelf) {
-              content = '${StrRes.you} ${StrRes.revokeMsg}';
+              content = '${t.you} ${t.revokeMsg}';
             } else {
-              content = '${message.senderNickname} ${StrRes.revokeMsg}';
+              content = '${message.senderNickname} ${t.revokeMsg}';
             }
           } else {
             if (info.revokerID == info.sourceMessageSendID) {
               if (isSelf) {
-                content = '${StrRes.you} ${StrRes.revokeMsg}';
+                content = '${t.you} ${t.revokeMsg}';
               } else {
-                content = '${message.senderNickname} ${StrRes.revokeMsg}';
+                content = '${message.senderNickname} ${t.revokeMsg}';
               }
             } else {
               late String revoker;
               late String sender;
               if (info.revokerID == OpenIM.iMManager.userID) {
-                revoker = StrRes.you;
+                revoker = t.you;
               } else {
                 revoker = info.revokerNickname!;
               }
               if (info.sourceMessageSendID == OpenIM.iMManager.userID) {
-                sender = StrRes.you;
+                sender = t.you;
               } else {
                 sender = info.sourceMessageSenderNickname!;
               }
 
-              content = sprintf(StrRes.aRevokeBMsg, [revoker, sender]);
+              content = sprintf(t.aRevokeBMsg, [revoker, sender]);
             }
           }
           break;
         case MessageType.customFace:
-          content = '[${StrRes.emoji}]';
+          content = '[${t.emoji}]';
           break;
         case MessageType.custom:
           var data = message.customElem!.data;
@@ -909,42 +909,41 @@ class IMUtils {
           switch (customType) {
             case CustomMessageType.call:
               var type = map['data']['type'];
-              content =
-                  '[${type == 'video' ? StrRes.callVideo : StrRes.callVoice}]';
+              content = '[${type == 'video' ? t.callVideo : t.callVoice}]';
               break;
             case CustomMessageType.emoji:
-              content = '[${StrRes.emoji}]';
+              content = '[${t.emoji}]';
               break;
             case CustomMessageType.tag:
               if (null != customData['textElem']) {
                 final textElem = TextElem.fromJson(customData['textElem']);
                 content = textElem.content;
               } else if (null != customData['soundElem']) {
-                content = '[${StrRes.voice}]';
+                content = '[${t.voice}]';
               } else {
-                content = '[${StrRes.unsupportedMessage}]';
+                content = '[${t.unsupportedMessage}]';
               }
               break;
             case CustomMessageType.meeting:
-              content = '[${StrRes.meetingMessage}]';
+              content = '[${t.meetingMessage}]';
               break;
             case CustomMessageType.blockedByFriend:
-              content = StrRes.blockedByFriendHint;
+              content = t.blockedByFriendHint;
               break;
             case CustomMessageType.deletedByFriend:
               content = sprintf(
-                StrRes.deletedByFriendHint,
+                t.deletedByFriendHint,
                 [''],
               );
               break;
             case CustomMessageType.removedFromGroup:
-              content = StrRes.removedFromGroupHint;
+              content = t.removedFromGroupHint;
               break;
             case CustomMessageType.groupDisbanded:
-              content = StrRes.groupDisbanded;
+              content = t.groupDisbanded;
               break;
             default:
-              content = '[${StrRes.unsupportedMessage}]';
+              content = '[${t.unsupportedMessage}]';
               break;
           }
           break;
@@ -954,7 +953,7 @@ class IMUtils {
           content = oa.text!;
           break;
         default:
-          content = '[${StrRes.unsupportedMessage}]';
+          content = '[${t.unsupportedMessage}]';
           break;
       }
     } catch (e, s) {
@@ -962,7 +961,7 @@ class IMUtils {
       Logger.print('Stack trace:\n $s');
     }
     content = content?.replaceAll("\n", " ");
-    return content ?? '[${StrRes.unsupportedMessage}]';
+    return content ?? '[${t.unsupportedMessage}]';
   }
 
   static dynamic parseCustomMessage(Message message) {
@@ -984,25 +983,25 @@ class IMUtils {
                     case 'beHangup':
                     case 'hangup':
                       content =
-                          sprintf(StrRes.callDuration, [seconds2HMS(duration)]);
+                          sprintf(t.callDuration, [seconds2HMS(duration)]);
                       break;
                     case 'cancel':
-                      content = StrRes.cancelled;
+                      content = t.cancelled;
                       break;
                     case 'beCanceled':
-                      content = StrRes.cancelledByCaller;
+                      content = t.cancelledByCaller;
                       break;
                     case 'reject':
-                      content = StrRes.rejected;
+                      content = t.rejected;
                       break;
                     case 'beRejected':
-                      content = StrRes.rejectedByCaller;
+                      content = t.rejectedByCaller;
                       break;
                     case 'timeout':
-                      content = StrRes.callTimeout;
+                      content = t.callTimeout;
                       break;
                     case 'networkError':
-                      content = StrRes.networkAnomaly;
+                      content = t.networkAnomaly;
                       break;
                     default:
                       break;
@@ -1064,7 +1063,7 @@ class IMUtils {
   }
 
   static String getAtNickname(String atUserID, String atNickname) {
-    return atUserID == 'atAllTag' ? StrRes.everyone : atNickname;
+    return atUserID == 'atAllTag' ? t.everyone : atNickname;
   }
 
   static void previewUrlPicture(
@@ -1694,7 +1693,7 @@ class IMUtils {
 
   static String getWorkMomentsTimeline(int ms) {
     final locTimeMs = DateTime.now().millisecondsSinceEpoch;
-    final languageCode = Get.locale?.languageCode ?? 'zh';
+    final languageCode = LocaleSettings.currentLocale.languageCode;
     final isZH = languageCode == 'zh';
 
     if (DateUtil.isToday(ms, locMs: locTimeMs)) {
@@ -1753,17 +1752,20 @@ class IMUtils {
   }
 
   static String getTimeFormat1() {
-    bool isZh = Get.locale!.languageCode.toLowerCase().contains("zh");
+    final languageCode = LocaleSettings.currentLocale.languageCode;
+    final isZh = languageCode.toLowerCase().contains("zh");
     return isZh ? 'yyyy年MM月dd日' : 'yyyy/MM/dd';
   }
 
   static String getTimeFormat2() {
-    bool isZh = Get.locale!.languageCode.toLowerCase().contains("zh");
+    final languageCode = LocaleSettings.currentLocale.languageCode;
+    final isZh = languageCode.toLowerCase().contains("zh");
     return isZh ? 'yyyy年MM月dd日 HH时mm分' : 'yyyy/MM/dd HH:mm';
   }
 
   static String getTimeFormat3() {
-    bool isZh = Get.locale!.languageCode.toLowerCase().contains("zh");
+    final languageCode = LocaleSettings.currentLocale.languageCode;
+    final isZh = languageCode.toLowerCase().contains("zh");
     return isZh ? 'MM月dd日 HH时mm分' : 'MM/dd HH:mm';
   }
 

@@ -15,7 +15,7 @@ class SetSelfInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: StrRes.plsCompleteInfo.toText
+          title: (context.t.plsCompleteInfo).toText
             ..style = Styles.ts_0C1C33_17_semibold,
         ),
         body: Center(
@@ -24,20 +24,21 @@ class SetSelfInfoPage extends StatelessWidget {
                 child: Column(
                   children: [
                     48.verticalSpace,
-                    _buildAvatarView(),
+                    _buildAvatarView(context),
                     24.verticalSpace,
-                    _buildItemView(
+                    _buildItemView(context,
                         name: 'account',
-                        title: StrRes.account,
+                        title: context.t.account,
                         autoFocus: true),
                     _buildItemView(
+                      context,
                       name: 'nickname',
-                      title: StrRes.nickname,
+                      title: context.t.nickname,
                     ),
                     24.verticalSpace,
                     AdaptiveButton(
                       margin: EdgeInsets.symmetric(horizontal: 24.w),
-                      text: StrRes.confirm,
+                      text: context.t.confirm,
                       loading: logic.loading.value,
                       onTap: logic.confirm,
                     )
@@ -63,7 +64,7 @@ class SetSelfInfoPage extends StatelessWidget {
         ),
       );
 
-  Widget _buildAvatarView() => GestureDetector(
+  Widget _buildAvatarView(BuildContext context) => GestureDetector(
         onTap: () => logic.openPhotoSheet(),
         child: Column(
           spacing: 12.w,
@@ -81,14 +82,14 @@ class SetSelfInfoPage extends StatelessWidget {
                 // Positioned(child: _buildAvatarMask()),
               ],
             ),
-            StrRes.plsSetAvatar.toText
+            (context.t.plsSetAvatar).toText
               ..style = Styles.ts_0089FF_16_medium
               ..textAlign = TextAlign.center,
           ],
         ),
       );
 
-  Widget _buildItemView(
+  Widget _buildItemView(BuildContext context,
           {required String name, String title = '', bool autoFocus = false}) =>
       Container(
         height: 52.h,
@@ -111,18 +112,18 @@ class SetSelfInfoPage extends StatelessWidget {
                 validator: (value) {
                   if (name == 'account') {
                     if (value == null || value.isEmpty) {
-                      return StrRes.plsEnterAccount;
+                      return context.t.plsEnterAccount;
                     }
                     if (!ACCOUNT_REG.hasMatch(value)) {
-                      return StrRes.accountFormatError;
+                      return context.t.accountFormatError;
                     }
                   }
                   if (name == 'nickname') {
                     if (value == null || value.isEmpty) {
-                      return StrRes.plsEnterNickname;
+                      return context.t.plsEnterNickname;
                     }
                     if (!NICKNAME_REG.hasMatch(value)) {
-                      return StrRes.nicknameFormatError;
+                      return context.t.nicknameFormatError;
                     }
                   }
                   return null;

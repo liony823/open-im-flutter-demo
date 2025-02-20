@@ -39,12 +39,12 @@ class ForgetPasswordLogic extends GetxController {
   Future<bool> getVerificationCode() async {
     if (phone?.isNotEmpty == true &&
         !IMUtils.isMobile(areaCode.value, phoneCtrl.text)) {
-      IMViews.showToast(StrRes.plsEnterRightPhone);
+      IMViews.showToast(t.plsEnterRightPhone);
       return false;
     }
 
     if (email?.isNotEmpty == true && !phoneCtrl.text.isEmail) {
-      IMViews.showToast(StrRes.plsEnterRightEmail);
+      IMViews.showToast(t.plsEnterRightEmail);
       return false;
     }
 

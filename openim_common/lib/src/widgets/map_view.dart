@@ -22,7 +22,7 @@ class MapView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.location),
+      appBar: TitleBar.back(title: t.location),
       body: Column(
         children: [
           Expanded(
@@ -106,15 +106,15 @@ class MapView extends StatelessWidget {
 
   String _mapLabel(ml.AvailableMap map) {
     if (map.mapType == ml.MapType.google) {
-      return StrRes.googleMap;
+      return t.googleMap;
     } else if (map.mapType == ml.MapType.apple) {
-      return StrRes.appleMap;
+      return t.appleMap;
     } else if (map.mapType == ml.MapType.baidu) {
-      return StrRes.baiduMap;
+      return t.baiduMap;
     } else if (map.mapType == ml.MapType.amap) {
-      return StrRes.amapMap;
+      return t.amapMap;
     } else if (map.mapType == ml.MapType.tencent) {
-      return StrRes.tencentMap;
+      return t.tencentMap;
     }
     return map.mapName;
   }

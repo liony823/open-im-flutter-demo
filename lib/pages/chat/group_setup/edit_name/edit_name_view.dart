@@ -21,9 +21,9 @@ class EditGroupNamePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               67.verticalSpace,
-              StrRes.editGroupName.toText..style = Styles.ts_0C1C33_20,
+              t['editGroupName'].toText..style = Styles.ts_0C1C33_20,
               10.verticalSpace,
-              StrRes.editGroupTips.toText..style = Styles.ts_8E9AB0_16,
+              t['editGroupTips'].toText..style = Styles.ts_8E9AB0_16,
               37.verticalSpace,
               Row(
                 children: [
@@ -54,7 +54,7 @@ class EditGroupNamePage extends StatelessWidget {
               const Expanded(child: SizedBox.shrink()),
               Button(
                 margin: EdgeInsets.symmetric(horizontal: 100.w),
-                text: StrRes.save,
+                text: t.save,
                 onTap: logic.save,
               ),
               const Expanded(child: SizedBox.shrink()),
@@ -64,7 +64,7 @@ class EditGroupNamePage extends StatelessWidget {
     return Scaffold(
       appBar: TitleBar.back(
         title: logic.title,
-        right: StrRes.save.toText
+        right: (context.t.save).toText
           ..style = Styles.ts_0C1C33_17
           ..onTap = logic.save,
       ),

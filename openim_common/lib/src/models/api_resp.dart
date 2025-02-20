@@ -31,6 +31,6 @@ class ApiResp {
 
 class ApiError {
   static String getMsg(int errorCode) {
-    return "err_$errorCode".tr;
+    return "err_$errorCode";
   }
 }

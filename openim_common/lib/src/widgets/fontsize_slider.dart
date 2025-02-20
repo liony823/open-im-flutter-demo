@@ -23,7 +23,7 @@ class FontSizeSlider extends StatelessWidget {
       ),
       child: Column(
         children: [
-          _buildIndicatorLabel(),
+          _buildIndicatorLabel(context),
           SfSliderTheme(
             data: SfSliderThemeData(
               activeTrackHeight: 1,
@@ -59,20 +59,20 @@ class FontSizeSlider extends StatelessWidget {
     );
   }
 
-  Widget _buildIndicatorLabel() => Stack(
+  Widget _buildIndicatorLabel(BuildContext context) => Stack(
         children: [
-          StrRes.little.toText
+          (context.t.little).toText
             ..style = Styles.ts_0C1C33_12
             ..onTap = () => onChanged?.call(.0),
           Align(
             alignment: Alignment.center,
-            child: StrRes.standard.toText
+            child: (context.t.standard).toText
               ..style = Styles.ts_0C1C33_17
               ..onTap = () => onChanged?.call(1.0),
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: StrRes.big.toText
+            child: (context.t.big).toText
               ..style = Styles.ts_0C1C33_20
               ..onTap = () => onChanged?.call(2.0),
           ),

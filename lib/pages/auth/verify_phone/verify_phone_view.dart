@@ -18,10 +18,10 @@ class VerifyPhonePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            StrRes.enterVerificationCode.toText
+            (context.t.enterVerificationCode).toText
               ..style = Styles.ts_0089FF_24_semibold,
             10.verticalSpace,
-            '${logic.areaCode} ${logic.phoneNumber} ${sprintf(StrRes.defaultVerificationCode, [
+            '${logic.areaCode} ${logic.phoneNumber} ${sprintf(context.t.defaultVerificationCode, [
                   '666666'
                 ])}'
                 .toText
@@ -75,7 +75,7 @@ class VerifyPhonePage extends StatelessWidget {
             170.verticalSpace,
             Obx(() => AdaptiveButton(
                   loading: logic.loading.value,
-                  text: StrRes.nextStep,
+                  text: context.t.nextStep,
                   enabled: logic.enabled.value,
                   onTap: () => logic.completed(logic.codeEditCtrl.text),
                 )),

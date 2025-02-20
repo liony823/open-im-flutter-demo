@@ -35,14 +35,14 @@ class LoginLogic extends GetxController
 
   void toUserAgreement() {
     AppNavigator.startWebView(
-      title: StrRes.userAgreement,
+      title: t.userAgreement,
       content: appLogic.userAgreement,
     );
   }
 
   void toPrivacyPolicy() {
     AppNavigator.startWebView(
-      title: StrRes.privacyPolicy,
+      title: t.privacyPolicy,
       content: appLogic.privacyPolicy,
     );
   }

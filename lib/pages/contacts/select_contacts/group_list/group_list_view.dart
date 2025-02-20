@@ -17,7 +17,7 @@ class SelectContactsFromGroupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.myGroup),
+      appBar: TitleBar.back(title: t.myGroup),
       backgroundColor: Styles.c_F8F9FA,
       body: Column(
         children: [
@@ -47,7 +47,8 @@ class SelectContactsFromGroupPage extends StatelessWidget {
                               child: ChatRadio(checked: logic.isSelectAll),
                             )),
                         10.horizontalSpace,
-                        StrRes.selectAll.toText..style = Styles.ts_0C1C33_17,
+                        (context.t.selectAll).toText
+                          ..style = Styles.ts_0C1C33_17,
                       ],
                     ),
                   ),
@@ -99,7 +100,7 @@ class SelectContactsFromGroupPage extends StatelessWidget {
                           ..style = Styles.ts_0C1C33_17
                           ..maxLines = 1
                           ..overflow = TextOverflow.ellipsis,
-                        sprintf(StrRes.nPerson, [info.memberCount]).toText
+                        sprintf(t.nPerson, [info.memberCount]).toText
                           ..style = Styles.ts_8E9AB0_14,
                       ],
                     ),

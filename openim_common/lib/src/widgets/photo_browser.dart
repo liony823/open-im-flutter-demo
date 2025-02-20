@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
-import 'package:media_kit_video/media_kit_video_controls/media_kit_video_controls.dart' as media_kit_video_controls;
+import 'package:media_kit_video/media_kit_video_controls/media_kit_video_controls.dart'
+    as media_kit_video_controls;
 import 'package:openim_common/openim_common.dart';
 
 import 'custom_mk_controls.dart';
@@ -20,7 +21,12 @@ class MediaSource {
   final bool isVideo;
   final String? tag;
 
-  MediaSource({required this.thumbnail, this.url, this.file, this.isVideo = false, this.tag});
+  MediaSource(
+      {required this.thumbnail,
+      this.url,
+      this.file,
+      this.isVideo = false,
+      this.tag});
 }
 
 class MediaBrowser extends StatefulWidget {
@@ -43,8 +49,10 @@ class MediaBrowser extends StatefulWidget {
   State<MediaBrowser> createState() => _MediaBrowserState();
 }
 
-class _MediaBrowserState extends State<MediaBrowser> with TickerProviderStateMixin {
-  GlobalKey<ExtendedImageSlidePageState> slidePagekey = GlobalKey<ExtendedImageSlidePageState>();
+class _MediaBrowserState extends State<MediaBrowser>
+    with TickerProviderStateMixin {
+  GlobalKey<ExtendedImageSlidePageState> slidePagekey =
+      GlobalKey<ExtendedImageSlidePageState>();
 
   final List<int> _cachedIndexes = <int>[];
   int currentIndex = 0;
@@ -57,7 +65,8 @@ class _MediaBrowserState extends State<MediaBrowser> with TickerProviderStateMix
   @override
   void initState() {
     currentIndex = widget.initialIndex;
-    _doubleClickAnimationController = AnimationController(duration: const Duration(milliseconds: 150), vsync: this);
+    _doubleClickAnimationController = AnimationController(
+        duration: const Duration(milliseconds: 150), vsync: this);
     super.initState();
   }
 
@@ -134,7 +143,8 @@ class _MediaBrowserState extends State<MediaBrowser> with TickerProviderStateMix
                         heroTag: s.tag,
                         autoPlay: widget.onAutoPlay?.call(index) ?? false,
                         muted: widget.muted,
-                        onDownload: (url, file) => widget.onSave?.call(currentIndex),
+                        onDownload: (url, file) =>
+                            widget.onSave?.call(currentIndex),
                       ),
                       heroBuilderForSlidingPage: (Widget result) {
                         return Hero(
@@ -145,9 +155,10 @@ class _MediaBrowserState extends State<MediaBrowser> with TickerProviderStateMix
                               HeroFlightDirection flightDirection,
                               BuildContext fromHeroContext,
                               BuildContext toHeroContext) {
-                            final Hero hero = (flightDirection == HeroFlightDirection.pop
-                                ? fromHeroContext.widget
-                                : toHeroContext.widget) as Hero;
+                            final Hero hero =
+                                (flightDirection == HeroFlightDirection.pop
+                                    ? fromHeroContext.widget
+                                    : toHeroContext.widget) as Hero;
 
                             return hero.child;
                           },
@@ -170,7 +181,8 @@ class _MediaBrowserState extends State<MediaBrowser> with TickerProviderStateMix
                               enableSlideOutPage: true,
                               fit: BoxFit.contain,
                               mode: ExtendedImageMode.gesture,
-                              initGestureConfigHandler: (ExtendedImageState state) {
+                              initGestureConfigHandler:
+                                  (ExtendedImageState state) {
                                 return GestureConfig(
                                   minScale: 0.9,
                                   animationMinScale: 0.7,
@@ -182,11 +194,14 @@ class _MediaBrowserState extends State<MediaBrowser> with TickerProviderStateMix
                                 );
                               },
                               onDoubleTap: (state) {
-                                final Offset? pointerDownPosition = state.pointerDownPosition;
-                                final double? begin = state.gestureDetails!.totalScale;
+                                final Offset? pointerDownPosition =
+                                    state.pointerDownPosition;
+                                final double? begin =
+                                    state.gestureDetails!.totalScale;
                                 double end;
 
-                                _doubleClickAnimation?.removeListener(_doubleClickAnimationListener);
+                                _doubleClickAnimation?.removeListener(
+                                    _doubleClickAnimationListener);
 
                                 _doubleClickAnimationController.stop();
 
@@ -200,17 +215,21 @@ class _MediaBrowserState extends State<MediaBrowser> with TickerProviderStateMix
 
                                 _doubleClickAnimationListener = () {
                                   state.handleDoubleTap(
-                                      scale: _doubleClickAnimation!.value, doubleTapPosition: pointerDownPosition);
+                                      scale: _doubleClickAnimation!.value,
+                                      doubleTapPosition: pointerDownPosition);
                                 };
                                 _doubleClickAnimation =
-                                    _doubleClickAnimationController.drive(Tween<double>(begin: begin, end: end));
+                                    _doubleClickAnimationController.drive(
+                                        Tween<double>(begin: begin, end: end));
 
-                                _doubleClickAnimation!.addListener(_doubleClickAnimationListener);
+                                _doubleClickAnimation!
+                                    .addListener(_doubleClickAnimationListener);
 
                                 _doubleClickAnimationController.forward();
                               },
                               loadStateChanged: (state) {
-                                if (state.extendedImageLoadState == LoadState.loading) {
+                                if (state.extendedImageLoadState ==
+                                    LoadState.loading) {
                                   return Stack(
                                     alignment: AlignmentDirectional.center,
                                     children: [
@@ -223,7 +242,8 @@ class _MediaBrowserState extends State<MediaBrowser> with TickerProviderStateMix
                                       ),
                                     ],
                                   );
-                                } else if (state.extendedImageLoadState == LoadState.failed) {
+                                } else if (state.extendedImageLoadState ==
+                                    LoadState.failed) {
                                   state.imageProvider.evict();
 
                                   return ImageRes.pictureError.toImage;
@@ -292,7 +312,8 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
         player.open(Media(widget.url!));
       }
     }();
-    media_kit_video_controls.kDefaultMaterialVideoControlsThemeDataFullscreen.copyWith();
+    media_kit_video_controls.kDefaultMaterialVideoControlsThemeDataFullscreen
+        .copyWith();
   }
 
   @override
@@ -306,9 +327,12 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
     return Stack(
       children: [
         MaterialVideoControlsTheme(
-          normal: media_kit_video_controls.kDefaultMaterialVideoControlsThemeData.copyWith(
+          normal: media_kit_video_controls
+              .kDefaultMaterialVideoControlsThemeData
+              .copyWith(
             bottomButtonBarMargin: const EdgeInsets.only(bottom: 70),
-            seekBarMargin: const EdgeInsets.only(bottom: 60, left: 24, right: 24),
+            seekBarMargin:
+                const EdgeInsets.only(bottom: 60, left: 24, right: 24),
             seekBarThumbColor: Colors.white,
             seekBarPositionColor: Colors.white,
             bottomButtonBar: [
@@ -322,7 +346,8 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
                   }),
             ],
           ),
-          fullscreen: media_kit_video_controls.kDefaultMaterialVideoControlsThemeDataFullscreen,
+          fullscreen: media_kit_video_controls
+              .kDefaultMaterialVideoControlsThemeDataFullscreen,
           child: Video(
             controller: controller,
             fit: BoxFit.contain,
@@ -349,7 +374,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
 
                 widget.onDownload?.call(widget.url, file?.file);
               },
-              child: Text(StrRes.download),
+              child: Text(t.download),
             ),
           ],
           cancelButton: CupertinoActionSheetAction(
@@ -357,7 +382,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
               Navigator.pop(context);
             },
             isDestructiveAction: true,
-            child: Text(StrRes.cancel),
+            child: Text(t.cancel),
           ),
         );
       },

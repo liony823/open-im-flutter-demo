@@ -771,14 +771,13 @@ class ChatLogic extends SuperController {
                   return true;
                 }
 
-                IMViews.showToast(StrRes.supportsTypeHint);
+                IMViews.showToast(t.supportsTypeHint);
 
                 return false;
               }
 
               if (entity.videoDuration > const Duration(seconds: 5 * 60)) {
-                IMViews.showToast(
-                    sprintf(StrRes.selectVideoLimit, [5]) + StrRes.minute);
+                IMViews.showToast(sprintf(t.selectVideoLimit, [5]) + t.minute);
                 return false;
               }
               return true;
@@ -799,14 +798,13 @@ class ChatLogic extends SuperController {
   void onTapCamera() async {
     final AssetEntity? entity = await CameraPicker.pickFromCamera(
       Get.context!,
-      locale: Get.locale,
       pickerConfig: CameraPickerConfig(
         enableAudio: true,
         enableRecording: true,
         enableScaledPreview: false,
         maximumRecordingDuration: 60.seconds,
         onMinimumRecordDurationNotMet: () {
-          IMViews.showToast(StrRes.tapTooShort);
+          IMViews.showToast(t.tapTooShort);
         },
       ),
     );
@@ -933,7 +931,7 @@ class ChatLogic extends SuperController {
       }
 
       return TextSpan(
-        text: '${StrRes.directedTo}:',
+        text: '${t.directedTo}:',
         style: Styles.ts_8E9AB0_14,
         children: temp,
       );
@@ -1192,7 +1190,7 @@ class ChatLogic extends SuperController {
     _lastCursorIndex = cursor;
   }
 
-  String? get subTile => typing.value ? StrRes.typing : onlineStatusDesc.value;
+  String? get subTile => typing.value ? t.typing : onlineStatusDesc.value;
 
   bool showOnlineStatus() => !typing.value && onlineStatusDesc.isNotEmpty;
 
@@ -1211,7 +1209,7 @@ class ChatLogic extends SuperController {
       var width = message.pictureElem?.sourcePicture?.width;
       var height = message.pictureElem?.sourcePicture?.height;
       cacheLogic.addFavoriteFromUrl(url, width, height);
-      IMViews.showToast(StrRes.addSuccessfully);
+      IMViews.showToast(t.addSuccessfully);
     } else if (message.contentType == MessageType.customFace) {
       var index = message.faceElem?.index;
       var data = message.faceElem?.data;
@@ -1222,7 +1220,7 @@ class ChatLogic extends SuperController {
         var width = map['width'];
         var height = map['height'];
         cacheLogic.addFavoriteFromUrl(url, width, height);
-        IMViews.showToast(StrRes.addSuccessfully);
+        IMViews.showToast(t.addSuccessfully);
       }
     }
   }
@@ -1389,8 +1387,8 @@ class ChatLogic extends SuperController {
     if (status != null) {
       onlineStatus.value = status.status == 1;
       onlineStatusDesc.value = status.status == 0
-          ? StrRes.offline
-          : _onlineStatusDes(status.platformIDs!) + StrRes.online;
+          ? t.offline
+          : _onlineStatusDes(status.platformIDs!) + t.online;
     }
   }
 
@@ -1684,7 +1682,7 @@ class ChatLogic extends SuperController {
 
   void call() {
     if (rtcIsBusy) {
-      IMViews.showToast(StrRes.callingBusy);
+      IMViews.showToast(t.callingBusy);
       return;
     }
 
@@ -1753,9 +1751,9 @@ class ChatLogic extends SuperController {
     switch (syncStatus.value) {
       case IMSdkStatus.syncStart:
       case IMSdkStatus.synchronizing:
-        return StrRes.synchronizing;
+        return t.synchronizing;
       case IMSdkStatus.syncFailed:
-        return StrRes.syncFailed;
+        return t.syncFailed;
       default:
         return null;
     }
@@ -1848,7 +1846,7 @@ class ChatLogic extends SuperController {
   recommendFriendCarte(UserInfo userInfo) async {
     final result = await AppNavigator.startSelectContacts(
       action: SelAction.recommend,
-      ex: '[${StrRes.carte}]${userInfo.nickname}',
+      ex: '[${t.carte}]${userInfo.nickname}',
     );
     if (null != result) {
       final customEx = result['customEx'];

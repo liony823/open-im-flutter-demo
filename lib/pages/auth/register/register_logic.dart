@@ -31,14 +31,14 @@ class RegisterLogic extends GetxController
 
   void toUserAgreement() {
     AppNavigator.startWebView(
-      title: StrRes.userAgreement,
+      title: t.userAgreement,
       content: appLogic.userAgreement,
     );
   }
 
   void toPrivacyPolicy() {
     AppNavigator.startWebView(
-      title: StrRes.privacyPolicy,
+      title: t.privacyPolicy,
       content: appLogic.privacyPolicy,
     );
   }
@@ -124,7 +124,8 @@ class RegisterLogic extends GetxController
       final certificate = result!;
 
       await DataSp.putLoginCertificate(certificate);
-      await imLogic.login(certificate.userID, certificate.imToken, params['password']);
+      await imLogic.login(
+          certificate.userID, certificate.imToken, params['password']);
       Logger.print('---------im login success-------');
       AppNavigator.startSetSelfInfo(userInfo);
     } catch (e) {

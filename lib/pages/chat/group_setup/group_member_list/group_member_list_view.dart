@@ -19,18 +19,16 @@ class GroupMemberListPage extends StatelessWidget {
     return Obx(() => Scaffold(
           appBar: TitleBar.back(
             title: logic.opType == GroupMemberOpType.del
-                ? StrRes.removeGroupMember
-                : StrRes.groupMember,
+                ? context.t.removeGroupMember
+                : context.t.groupMember,
             right: logic.opType == GroupMemberOpType.view
                 ? PopButton(
                     popCtrl: logic.poController,
                     horizontalMargin: 1.w,
                     menus: [
-                      PopMenuInfo(
-                          text: StrRes.addMember, onTap: logic.addMember),
+                      PopMenuInfo(text: context.t.addMember, onTap: logic.addMember),
                       if (logic.isOwnerOrAdmin)
-                        PopMenuInfo(
-                            text: StrRes.delMember, onTap: logic.delMember),
+                        PopMenuInfo(text: context.t.delMember, onTap: logic.delMember),
                     ],
                     child: ImageRes.moreBlack.toImage
                       ..width = 28.w
@@ -69,7 +67,8 @@ class GroupMemberListPage extends StatelessWidget {
                           textStyle: Styles.ts_FFFFFF_21,
                         ),
                         10.horizontalSpace,
-                        StrRes.everyone.toText..style = Styles.ts_0C1C33_17,
+                        (context.t.everyone).toText
+                          ..style = Styles.ts_0C1C33_17,
                       ],
                     ),
                   ),
@@ -85,17 +84,17 @@ class GroupMemberListPage extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: logic.memberList.length,
                     itemBuilder: (_, index) =>
-                        Obx(() => _buildItemView(logic.memberList[index])),
+                        Obx(() => _buildItemView(context, logic.memberList[index])),
                   ),
                 ),
               ),
-              if (logic.isMultiSelMode) _buildCheckedConfirmView(),
+              if (logic.isMultiSelMode) _buildCheckedConfirmView(context),
             ],
           ),
         ));
   }
 
-  Widget _buildItemView(GroupMembersInfo membersInfo) =>
+  Widget _buildItemView(BuildContext context, GroupMembersInfo membersInfo) =>
       logic.hiddenMember(membersInfo)
           ? const SizedBox()
           : GestureDetector(
@@ -124,15 +123,17 @@ class GroupMemberListPage extends StatelessWidget {
                         ..overflow = TextOverflow.ellipsis,
                     ),
                     if (membersInfo.roleLevel == GroupRoleLevel.owner)
-                      StrRes.groupOwner.toText..style = Styles.ts_8E9AB0_17,
+                      (context.t.groupOwner).toText
+                        ..style = Styles.ts_8E9AB0_17,
                     if (membersInfo.roleLevel == GroupRoleLevel.admin)
-                      StrRes.groupAdmin.toText..style = Styles.ts_8E9AB0_17,
+                      (context.t.groupAdmin).toText
+                        ..style = Styles.ts_8E9AB0_17,
                   ],
                 ),
               ),
             );
 
-  Widget _buildCheckedConfirmView() => Container(
+  Widget _buildCheckedConfirmView(BuildContext context) => Container(
         height: 66.h,
         decoration: BoxDecoration(
           color: Styles.c_FFFFFF,
@@ -162,7 +163,7 @@ class GroupMemberListPage extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        sprintf(StrRes.selectedPeopleCount,
+                        sprintf(context.t.selectedPeopleCount,
                             [logic.checkedList.length]).toText
                           ..style = Styles.ts_0089FF_14,
                         ImageRes.expandUpArrow.toImage
@@ -185,7 +186,7 @@ class GroupMemberListPage extends StatelessWidget {
             Button(
               height: 40.h,
               padding: EdgeInsets.symmetric(horizontal: 14.w),
-              text: sprintf(StrRes.confirmSelectedPeople, [
+              text: sprintf(t.confirmSelectedPeople, [
                 logic.checkedList.length,
                 logic.maxLength,
               ]),
@@ -217,15 +218,15 @@ class SelectedMemberListView extends StatelessWidget {
             children: [
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: BorderDirectional(
                     bottom: BorderSide(color: Styles.c_E8EAEF, width: 1),
                   ),
                 ),
                 child: Row(
                   children: [
-                    sprintf(StrRes.selectedPeopleCount,
-                        [logic.checkedList.length]).toText
+                    sprintf(context.t.selectedPeopleCount, [logic.checkedList.length])
+                        .toText
                       ..style = Styles.ts_0C1C33_17_medium,
                     const Spacer(),
                     GestureDetector(
@@ -234,7 +235,7 @@ class SelectedMemberListView extends StatelessWidget {
                       child: Container(
                         height: 52.h,
                         alignment: Alignment.center,
-                        child: StrRes.confirm.toText
+                        child: (context.t.confirm).toText
                           ..style = Styles.ts_0089FF_17,
                       ),
                     ),
@@ -246,7 +247,7 @@ class SelectedMemberListView extends StatelessWidget {
                   itemCount: logic.checkedList.length,
                   shrinkWrap: true,
                   itemBuilder: (_, index) =>
-                      _buildItemView(logic.checkedList[index]),
+                      _buildItemView(context, logic.checkedList[index]),
                 ),
               ),
             ],
@@ -254,7 +255,8 @@ class SelectedMemberListView extends StatelessWidget {
     );
   }
 
-  Widget _buildItemView(GroupMembersInfo membersInfo) => Container(
+  Widget _buildItemView(BuildContext context, GroupMembersInfo membersInfo) =>
+      Container(
         height: 64.h,
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         color: Styles.c_FFFFFF,
@@ -283,7 +285,7 @@ class SelectedMemberListView extends StatelessWidget {
                     width: 1,
                   ),
                 ),
-                child: StrRes.remove.toText..style = Styles.ts_0089FF_17,
+                child: (context.t.remove).toText..style = Styles.ts_0089FF_17,
               ),
             ),
           ],

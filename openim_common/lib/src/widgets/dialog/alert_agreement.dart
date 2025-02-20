@@ -20,7 +20,7 @@ class AlertAgreement extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.r),
       ),
-      title: StrRes.alertDialogAgreementTitle.toText
+      title: (context.t.alertDialogAgreementTitle).toText
         ..style = Styles.ts_000000_20_semibold,
       actions: [
         TextButton(
@@ -31,12 +31,12 @@ class AlertAgreement extends StatelessWidget {
             style: TextButton.styleFrom(
               foregroundColor: Styles.c_666666,
             ),
-            child: StrRes.cancel.toText),
+            child: (context.t.cancel).toText),
         TextButton(
             onPressed: () {
               Get.back(result: true);
             },
-            child: StrRes.agreementText.toText),
+            child: (context.t.agreementText).toText),
       ],
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -45,15 +45,15 @@ class AlertAgreement extends StatelessWidget {
           RichText(
               text: TextSpan(children: [
             TextSpan(
-                text: StrRes.alertDialogAgreementContent,
+                text: t.alertDialogAgreementContent,
                 style: Styles.ts_000000_14_medium),
             TextSpan(
                 recognizer: TapGestureRecognizer()..onTap = onEnterUa,
-                text: StrRes.userAgreement,
+                text: t.userAgreement,
                 style: Styles.ts_0089FF_14_medium),
             TextSpan(
                 recognizer: TapGestureRecognizer()..onTap = onEnterPP,
-                text: StrRes.privacyPolicy,
+                text: t.privacyPolicy,
                 style: Styles.ts_0089FF_14_medium),
           ])),
         ],

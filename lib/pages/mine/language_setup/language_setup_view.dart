@@ -13,13 +13,13 @@ class LanguageSetupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.languageSetup),
+      appBar: TitleBar.back(title: t.languageSetup),
       backgroundColor: Styles.c_F8F9FA,
       body: Obx(() => Column(
             children: [
               12.verticalSpace,
               _buildItemView(
-                label: StrRes.followSystem,
+                label: t.followSystem,
                 isChecked: logic.isFollowSystem.value,
                 onTap: () => logic.switchLanguage(0),
                 isTopRadius: true,
@@ -30,7 +30,7 @@ class LanguageSetupPage extends StatelessWidget {
                 height: .5,
               ),
               _buildItemView(
-                label: StrRes.chinese,
+                label: t.chinese,
                 isChecked: logic.isChinese.value,
                 onTap: () => logic.switchLanguage(1),
               ),
@@ -40,7 +40,7 @@ class LanguageSetupPage extends StatelessWidget {
                 height: .5,
               ),
               _buildItemView(
-                label: StrRes.english,
+                label: t.english,
                 isChecked: logic.isEnglish.value,
                 onTap: () => logic.switchLanguage(2),
                 isBottomRadius: true,

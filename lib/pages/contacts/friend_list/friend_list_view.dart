@@ -13,7 +13,7 @@ class FriendListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.myFriend),
+      appBar: TitleBar.back(title: t.myFriend),
       backgroundColor: Styles.c_F8F9FA,
       body: Column(
         children: [

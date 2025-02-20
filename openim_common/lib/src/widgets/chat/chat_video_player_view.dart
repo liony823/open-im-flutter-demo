@@ -36,7 +36,8 @@ class CachedVideoControllerService extends VideoControllerService {
           httpHeaders: Platform.isAndroid
               ? {}
               : {
-                  'AVURLAssetOutOfBandMIMETypeKey': 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"',
+                  'AVURLAssetOutOfBandMIMETypeKey':
+                      'video/mp4; codecs="avc1.42E01E, mp4a.40.2"',
                 });
     } else {
       Logger.print('[VideoControllerService]: Loading video from cache');
@@ -80,11 +81,13 @@ class ChatVideoPlayerView extends StatefulWidget {
   State<ChatVideoPlayerView> createState() => _ChatVideoPlayerViewState();
 }
 
-class _ChatVideoPlayerViewState extends State<ChatVideoPlayerView> with SingleTickerProviderStateMixin {
+class _ChatVideoPlayerViewState extends State<ChatVideoPlayerView>
+    with SingleTickerProviderStateMixin {
   late VideoPlayerController _videoPlayerController;
   ChewieController? _chewieController;
 
-  final _cachedVideoControllerService = CachedVideoControllerService(DefaultCacheManager());
+  final _cachedVideoControllerService =
+      CachedVideoControllerService(DefaultCacheManager());
 
   @override
   void initState() {
@@ -110,7 +113,8 @@ class _ChatVideoPlayerViewState extends State<ChatVideoPlayerView> with SingleTi
 
     if (file == null) {
       bool existFile = false;
-      if (IMUtils.isNotNullEmptyStr(_path) && (await Permissions.checkStorage())) {
+      if (IMUtils.isNotNullEmptyStr(_path) &&
+          (await Permissions.checkStorage())) {
         file = File(_path!);
         existFile = await file.exists();
         if (!existFile) {
@@ -125,7 +129,8 @@ class _ChatVideoPlayerViewState extends State<ChatVideoPlayerView> with SingleTi
         videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
       );
     } else {
-      _videoPlayerController = await _cachedVideoControllerService.getVideo(_url!);
+      _videoPlayerController =
+          await _cachedVideoControllerService.getVideo(_url!);
     }
 
     await _videoPlayerController.initialize();
@@ -144,20 +149,23 @@ class _ChatVideoPlayerViewState extends State<ChatVideoPlayerView> with SingleTi
       allowFullScreen: false,
       allowPlaybackSpeedChanging: false,
       showControlsOnInitialize: true,
-      customControls: CustomCupertinoControls(backgroundColor: Colors.black.withOpacity(0.7), iconColor: Colors.white),
+      customControls: CustomCupertinoControls(
+          backgroundColor: Colors.black.withOpacity(0.7),
+          iconColor: Colors.white),
       optionsTranslation: OptionsTranslation(
-        playbackSpeedButtonText: StrRes.playSpeed,
-        cancelButtonText: StrRes.cancel,
+        playbackSpeedButtonText: t.playSpeed,
+        cancelButtonText: t.cancel,
       ),
       additionalOptions: (context) => [
         OptionItem(
           onTap: () async {
-            final file = await _cachedVideoControllerService.getCacheFile(widget.url!);
+            final file =
+                await _cachedVideoControllerService.getCacheFile(widget.url!);
             widget.onDownload?.call(widget.url, file);
             Get.back();
           },
           iconData: Icons.download_outlined,
-          title: StrRes.download,
+          title: t.download,
         ),
       ],
       errorBuilder: (context, errorMessage) {
@@ -181,7 +189,8 @@ class _ChatVideoPlayerViewState extends State<ChatVideoPlayerView> with SingleTi
     return SafeArea(
       child: Stack(
         children: [
-          if (_chewieController != null && _chewieController!.videoPlayerController.value.isInitialized)
+          if (_chewieController != null &&
+              _chewieController!.videoPlayerController.value.isInitialized)
             Chewie(controller: _chewieController!)
           else
             _buildCoverView(context),

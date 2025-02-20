@@ -333,13 +333,11 @@ class _ControlsViewState extends State<ControlsView> {
   Widget get _userInfoView {
     String text;
     if (_callState == CallState.call) {
-      text =
-          isVideo ? StrRes.waitingVideoCallHint : StrRes.waitingVoiceCallHint;
+      text = isVideo ? t.waitingVideoCallHint : t.waitingVoiceCallHint;
     } else if (_callState == CallState.beCalled) {
-      text =
-          isVideo ? StrRes.invitedVideoCallHint : StrRes.invitedVoiceCallHint;
+      text = isVideo ? t.invitedVideoCallHint : t.invitedVoiceCallHint;
     } else if (_callState == CallState.connecting) {
-      text = StrRes.connecting;
+      text = t.connecting;
     } else {
       text = isVideo ? '' : _callingDurationStr;
     }

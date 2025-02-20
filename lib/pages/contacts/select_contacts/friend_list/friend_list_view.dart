@@ -15,7 +15,7 @@ class SelectContactsFromFriendsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.myFriend),
+      appBar: TitleBar.back(title: t.myFriend),
       backgroundColor: Styles.c_F8F9FA,
       body: Column(
         children: [
@@ -45,7 +45,8 @@ class SelectContactsFromFriendsPage extends StatelessWidget {
                               child: ChatRadio(checked: logic.isSelectAll),
                             )),
                         10.horizontalSpace,
-                        StrRes.selectAll.toText..style = Styles.ts_0C1C33_17,
+                        (context.t.selectAll).toText
+                          ..style = Styles.ts_0C1C33_17,
                       ],
                     ),
                   ),

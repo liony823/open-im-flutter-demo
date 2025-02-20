@@ -15,7 +15,7 @@ class GroupSetupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.groupChatSetup),
+      appBar: TitleBar.back(title: t.groupChatSetup),
       backgroundColor: Styles.c_F8F9FA,
       body: Obx(() => SingleChildScrollView(
             child: Column(
@@ -24,14 +24,14 @@ class GroupSetupPage extends StatelessWidget {
                 if (logic.isJoinedGroup.value) _buildMemberView(),
                 if (logic.isOwner)
                   _buildItemView(
-                    text: StrRes.groupManage,
+                    text: t.groupManage,
                     showRightArrow: true,
                     isBottomRadius: true,
                     onTap: logic.groupManage,
                   ),
                 10.verticalSpace,
                 _buildItemView(
-                  text: StrRes.messageNotDisturb,
+                  text: t.messageNotDisturb,
                   switchOn: logic.isNotDisturb,
                   showSwitchButton: true,
                   isBottomRadius: true,
@@ -39,7 +39,7 @@ class GroupSetupPage extends StatelessWidget {
                 ),
                 10.verticalSpace,
                 _buildItemView(
-                  text: StrRes.clearChatHistory,
+                  text: t.clearChatHistory,
                   textStyle: Styles.ts_FF381F_17,
                   isTopRadius: true,
                   showRightArrow: true,
@@ -47,16 +47,14 @@ class GroupSetupPage extends StatelessWidget {
                 ),
                 if (!logic.isOwner)
                   _buildItemView(
-                    text: logic.isJoinedGroup.value
-                        ? StrRes.exitGroup
-                        : StrRes.delete,
+                    text: logic.isJoinedGroup.value ? t.exitGroup : t.delete,
                     textStyle: Styles.ts_FF381F_17,
                     showRightArrow: true,
                     onTap: logic.quitGroup,
                   ),
                 if (logic.isOwner)
                   _buildItemView(
-                    text: StrRes.dismissGroup,
+                    text: t.dismissGroup,
                     textStyle: Styles.ts_FF381F_17,
                     isBottomRadius: true,
                     showRightArrow: true,
@@ -196,7 +194,7 @@ class GroupSetupPage extends StatelessWidget {
                                     color: Styles.c_E8EAEF,
                                     borderRadius: BorderRadius.circular(6.r),
                                   ),
-                                  child: StrRes.groupOwner.toText
+                                  child: (context.t.groupOwner).toText
                                     ..style = Styles.ts_8E9AB0_10
                                     ..maxLines = 1
                                     ..overflow = TextOverflow.ellipsis,
@@ -219,7 +217,8 @@ class GroupSetupPage extends StatelessWidget {
                         ImageRes.addMember.toImage
                           ..width = 48.w
                           ..height = 48.h,
-                        StrRes.addMember.toText..style = Styles.ts_8E9AB0_10,
+                        (context.t.addMember).toText
+                          ..style = Styles.ts_8E9AB0_10,
                       ],
                     ),
                   ),
@@ -230,7 +229,8 @@ class GroupSetupPage extends StatelessWidget {
                         ImageRes.delMember.toImage
                           ..width = 48.w
                           ..height = 48.h,
-                        StrRes.delMember.toText..style = Styles.ts_8E9AB0_10,
+                        (context.t.delMember).toText
+                          ..style = Styles.ts_8E9AB0_10,
                       ],
                     ),
                   ),
@@ -250,7 +250,7 @@ class GroupSetupPage extends StatelessWidget {
                 height: 46.h,
                 child: Row(
                   children: [
-                    sprintf(StrRes.viewAllGroupMembers,
+                    sprintf(t.viewAllGroupMembers,
                         [logic.groupInfo.value.memberCount]).toText
                       ..style = Styles.ts_0C1C33_17,
                     const Spacer(),

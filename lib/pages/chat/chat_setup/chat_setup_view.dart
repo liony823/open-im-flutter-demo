@@ -22,7 +22,7 @@ class ChatSetupPage extends StatelessWidget {
                 _buildBaseInfoView(),
                 17.verticalSpace,
                 _buildItemView(
-                  text: StrRes.topContacts,
+                  text: t.topContacts,
                   switchOn: logic.isPinned,
                   onChanged: (_) => logic.toggleTopContacts(),
                   showSwitchButton: true,
@@ -30,7 +30,7 @@ class ChatSetupPage extends StatelessWidget {
                 ),
                 10.verticalSpace,
                 _buildItemView(
-                  text: StrRes.clearChatHistory,
+                  text: t.clearChatHistory,
                   textStyle: Styles.ts_FF381F_17,
                   onTap: logic.clearChatHistory,
                   showRightArrow: true,

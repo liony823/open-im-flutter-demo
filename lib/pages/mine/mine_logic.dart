@@ -27,7 +27,7 @@ class MineLogic extends GetxController {
   void aboutUs() => AppNavigator.startAboutUs();
 
   void logout() async {
-    var confirm = await Get.dialog(CustomDialog(title: StrRes.logoutHint));
+    var confirm = await Get.dialog(CustomDialog(title: t.logoutHint));
     if (confirm == true) {
       try {
         await LoadingView.singleton.wrap(asyncFunction: () async {
@@ -47,7 +47,7 @@ class MineLogic extends GetxController {
     if (EasyLoading.isShow) {
       EasyLoading.dismiss();
     }
-    Get.snackbar(StrRes.accountWarn, tips ?? StrRes.accountException);
+    Get.snackbar(t.accountWarn, tips ?? t.accountException);
     await DataSp.removeLoginCertificate();
     // PushController.logout();
     AppNavigator.startLogin();
@@ -57,7 +57,7 @@ class MineLogic extends GetxController {
   void onInit() {
     kickedOfflineSub = imLogic.onKickedOfflineSubject.listen((value) {
       if (value == KickoffType.userTokenInvalid) {
-        kickedOffline(tips: StrRes.tokenInvalid);
+        kickedOffline(tips: t.tokenInvalid);
       } else {
         kickedOffline();
       }

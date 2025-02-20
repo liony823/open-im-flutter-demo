@@ -156,7 +156,7 @@ class ChatPage extends StatelessWidget {
     }
   }
 
-  CustomTypeInfo? _buildCustomTypeItemView(_, Message message) {
+  CustomTypeInfo? _buildCustomTypeItemView(BuildContext context, Message message) {
     final data = IMUtils.parseCustomMessage(message);
     if (null != data) {
       final viewType = data['viewType'];
@@ -176,13 +176,13 @@ class ChatPage extends StatelessWidget {
         return CustomTypeInfo(view, false, false);
       } else if (viewType == CustomMessageType.removedFromGroup) {
         return CustomTypeInfo(
-          StrRes.removedFromGroupHint.toText..style = Styles.ts_8E9AB0_12,
+          (context.t.removedFromGroupHint).toText..style = Styles.ts_8E9AB0_12,
           false,
           false,
         );
       } else if (viewType == CustomMessageType.groupDisbanded) {
         return CustomTypeInfo(
-          StrRes.groupDisbanded.toText..style = Styles.ts_8E9AB0_12,
+          (context.t.groupDisbanded).toText..style = Styles.ts_8E9AB0_12,
           false,
           false,
         );

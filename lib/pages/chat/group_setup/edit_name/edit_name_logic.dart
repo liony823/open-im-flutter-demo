@@ -20,7 +20,9 @@ class EditGroupNameLogic extends GetxController {
     type = Get.arguments['type'];
     faceUrl = Get.arguments['faceUrl'];
     inputCtrl = TextEditingController(
-      text: type == EditNameType.groupNickname ? groupSetupLogic.groupInfo.value.groupName : groupSetupLogic.myGroupMembersInfo.value.nickname,
+      text: type == EditNameType.groupNickname
+          ? groupSetupLogic.groupInfo.value.groupName
+          : groupSetupLogic.myGroupMembersInfo.value.nickname,
     );
     super.onInit();
   }
@@ -31,16 +33,19 @@ class EditGroupNameLogic extends GetxController {
     super.onClose();
   }
 
-  String? get title => type == EditNameType.myGroupMemberNickname ? StrRes.myGroupMemberNickname : StrRes.groupName;
+  String? get title => type == EditNameType.myGroupMemberNickname
+      ? t.myGroupMemberNickname
+      : t.groupName;
 
   void save() async {
     if (inputCtrl.text.trim().length > 16) {
-      return IMViews.showToast(StrRes.createGroupTips);
+      return IMViews.showToast(t.createGroupTips);
     }
     await LoadingView.singleton.wrap(asyncFunction: () async {
       if (type == EditNameType.groupNickname) {
-        await OpenIM.iMManager.groupManager
-            .setGroupInfo(GroupInfo(groupID: groupSetupLogic.groupInfo.value.groupID, groupName: inputCtrl.text.trim()));
+        await OpenIM.iMManager.groupManager.setGroupInfo(GroupInfo(
+            groupID: groupSetupLogic.groupInfo.value.groupID,
+            groupName: inputCtrl.text.trim()));
       } else if (type == EditNameType.myGroupMemberNickname) {
         await OpenIM.iMManager.groupManager.setGroupMemberNickname(
           groupID: groupSetupLogic.groupInfo.value.groupID,
@@ -49,7 +54,7 @@ class EditGroupNameLogic extends GetxController {
         );
       }
     });
-    IMViews.showToast(StrRes.setSuccessfully);
+    IMViews.showToast(t.setSuccessfully);
     Get.back();
   }
 }

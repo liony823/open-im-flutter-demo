@@ -15,7 +15,7 @@ class EditMyInfoPage extends StatelessWidget {
     return Scaffold(
       appBar: TitleBar.back(
         title: logic.title,
-        right: StrRes.save.toText
+        right: (context.t.save).toText
           ..style = Styles.ts_0C1C33_17
           ..onTap = logic.save,
       ),

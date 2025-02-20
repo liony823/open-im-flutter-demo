@@ -272,14 +272,14 @@ class ImageTextButton extends StatelessWidget {
 
   ImageTextButton.call({super.key, this.onTap})
       : icon = ImageRes.audioAndVideoCall,
-        text = StrRes.audioAndVideoCall,
+        text = t.audioAndVideoCall,
         color = Styles.c_FFFFFF,
         textStyle = null,
         height = null;
 
   ImageTextButton.message({super.key, this.onTap})
       : icon = ImageRes.message,
-        text = StrRes.sendMessage,
+        text = t.sendMessage,
         color = Styles.c_0089FF,
         textStyle = Styles.ts_FFFFFF_17,
         height = null;

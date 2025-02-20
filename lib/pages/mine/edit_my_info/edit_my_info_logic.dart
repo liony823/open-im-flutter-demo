@@ -34,7 +34,7 @@ class EditMyInfoLogic extends GetxController {
   _initAttr() {
     switch (editAttr) {
       case EditAttr.nickname:
-        title = StrRes.name;
+        title = t.name;
         defaultValue = imLogic.userInfo.value.nickname;
         keyboardType = TextInputType.text;
         break;
@@ -43,12 +43,12 @@ class EditMyInfoLogic extends GetxController {
       case EditAttr.telephone:
         break;
       case EditAttr.mobile:
-        title = StrRes.mobile;
+        title = t.mobile;
         defaultValue = imLogic.userInfo.value.phoneNumber;
         keyboardType = TextInputType.phone;
         break;
       case EditAttr.email:
-        title = StrRes.email;
+        title = t.email;
         defaultValue = imLogic.userInfo.value.email;
         keyboardType = TextInputType.emailAddress;
         break;

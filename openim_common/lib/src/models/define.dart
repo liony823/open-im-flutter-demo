@@ -2,7 +2,15 @@ import 'dart:io';
 
 import 'package:openim_common/openim_common.dart';
 
-enum OperationType { participants, roomSettings, leave, end, setting, onlyClose, kickOff } // case setting for app setting
+enum OperationType {
+  participants,
+  roomSettings,
+  leave,
+  end,
+  setting,
+  onlyClose,
+  kickOff
+} // case setting for app setting
 
 enum OperationParticipantType {
   pined,
@@ -15,7 +23,14 @@ enum OperationParticipantType {
   muteAll,
 }
 
-enum RoomSetting { allowParticipantUnMute, allowParticipantVideo, onlyHostCanShareScreen, defaultMuted, lockMeeting, audioEncouragement }
+enum RoomSetting {
+  allowParticipantUnMute,
+  allowParticipantVideo,
+  onlyHostCanShareScreen,
+  defaultMuted,
+  lockMeeting,
+  audioEncouragement
+}
 
 enum MeetingStatus {
   scheduled,
@@ -63,19 +78,19 @@ extension WeekdaysExt on Weekdays {
   String get title {
     switch (this) {
       case Weekdays.monday:
-        return StrRes.monday;
+        return t.monday;
       case Weekdays.tuesday:
-        return StrRes.tuesday;
+        return t.tuesday;
       case Weekdays.wednesday:
-        return StrRes.wednesday;
+        return t.wednesday;
       case Weekdays.thursday:
-        return StrRes.thursday;
+        return t.thursday;
       case Weekdays.friday:
-        return StrRes.friday;
+        return t.friday;
       case Weekdays.saturday:
-        return StrRes.saturday;
+        return t.saturday;
       case Weekdays.sunday:
-        return StrRes.sunday;
+        return t.sunday;
     }
   }
 

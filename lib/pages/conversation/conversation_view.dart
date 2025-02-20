@@ -66,6 +66,7 @@ class ConversationPage extends StatelessWidget {
                   child: ScrollablePositionedList.builder(
                     itemScrollController: logic.itemScrollController,
                     itemBuilder: (_, index) => _buildConversationItemView(
+                      context,
                       logic.list.elementAt(index),
                     ),
                     itemCount: logic.list.length,
@@ -78,7 +79,7 @@ class ConversationPage extends StatelessWidget {
         ));
   }
 
-  Widget _buildConversationItemView(ConversationInfo info) => Slidable(
+  Widget _buildConversationItemView(BuildContext context, ConversationInfo info) => Slidable(
         endActionPane: ActionPane(
           motion: const ScrollMotion(),
           extentRatio: logic.existUnreadMsg(info)
@@ -90,9 +91,8 @@ class ConversationPage extends StatelessWidget {
               flex: logic.isPinned(info) ? 3 : 2,
               backgroundColor: Styles.c_0089FF,
               padding: const EdgeInsets.all(1),
-              child:
-                  (logic.isPinned(info) ? StrRes.cancelTop : StrRes.top).toText
-                    ..style = Styles.ts_FFFFFF_14,
+              child: (logic.isPinned(info) ? t.cancelTop : t.top).toText
+                ..style = Styles.ts_FFFFFF_14,
             ),
             if (logic.existUnreadMsg(info))
               CustomSlidableAction(
@@ -100,7 +100,7 @@ class ConversationPage extends StatelessWidget {
                 flex: 3,
                 backgroundColor: Styles.c_8E9AB0,
                 padding: const EdgeInsets.all(1),
-                child: StrRes.markHasRead.toText
+                child: (context.t.markHasRead).toText
                   ..style = Styles.ts_FFFFFF_14
                   ..maxLines = 1,
               ),
@@ -109,7 +109,7 @@ class ConversationPage extends StatelessWidget {
               flex: 2,
               backgroundColor: Styles.c_FF381F,
               padding: const EdgeInsets.all(1),
-              child: StrRes.delete.toText..style = Styles.ts_FFFFFF_14,
+              child: (context.t.delete).toText..style = Styles.ts_FFFFFF_14,
             ),
           ],
         ),
@@ -169,7 +169,7 @@ class ConversationPage extends StatelessWidget {
                                     if (logic.isNotDisturb(info) &&
                                         logic.getUnreadCount(info) > 0)
                                       TextSpan(
-                                        text: '[${sprintf(StrRes.nPieces, [
+                                        text: '[${sprintf(t.nPieces, [
                                               logic.getUnreadCount(info)
                                             ])}] ',
                                         style: Styles.ts_8E9AB0_14,

@@ -16,7 +16,7 @@ class GroupListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.myGroup),
+      appBar: TitleBar.back(title: t.myGroup),
       backgroundColor: Styles.c_F8F9FA,
       body: Column(
         children: [
@@ -31,7 +31,7 @@ class GroupListPage extends StatelessWidget {
           ),
           Obx(
             () => CustomTabBar(
-              labels: [StrRes.iCreatedGroup, StrRes.iJoinedGroup],
+              labels: [t.iCreatedGroup, t.iJoinedGroup],
               index: logic.index.value,
               onTabChanged: (i) => logic.switchTab(i),
               showUnderline: true,
@@ -101,7 +101,7 @@ class GroupListPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     (info.groupName ?? '').toText..style = Styles.ts_0C1C33_17,
-                    sprintf(StrRes.nPerson, [info.memberCount]).toText
+                    sprintf(t.nPerson, [info.memberCount]).toText
                       ..style = Styles.ts_8E9AB0_14,
                   ],
                 ),

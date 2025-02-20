@@ -28,7 +28,8 @@ class ConversationLogic extends GetxController {
   bool reInstall = false;
 
   final ItemScrollController itemScrollController = ItemScrollController();
-  final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
+  final ItemPositionsListener itemPositionsListener =
+      ItemPositionsListener.create();
 
   int scrollIndex = -1;
   final onChangeConversations = <ConversationInfo>[];
@@ -48,17 +49,20 @@ class ConversationLogic extends GetxController {
       if (status == IMSdkStatus.syncStart) {
         reInstall = appReInstall;
         if (reInstall) {
-          EasyLoading.showProgress(0, status: StrRes.synchronizing);
+          EasyLoading.showProgress(0, status: t.synchronizing);
         }
       }
 
-      Logger.print('IM SDK Status: $status, reinstall: $reInstall, progress: $progress');
+      Logger.print(
+          'IM SDK Status: $status, reinstall: $reInstall, progress: $progress');
 
       if (status == IMSdkStatus.syncProgress && reInstall) {
         final p = (progress!).toDouble() / 100.0;
 
-        EasyLoading.showProgress(p, status: '${StrRes.synchronizing}(${(p * 100.0).truncate()}%)');
-      } else if (status == IMSdkStatus.syncEnded || status == IMSdkStatus.syncFailed) {
+        EasyLoading.showProgress(p,
+            status: '${t.synchronizing}(${(p * 100.0).truncate()}%)');
+      } else if (status == IMSdkStatus.syncEnded ||
+          status == IMSdkStatus.syncFailed) {
         EasyLoading.dismiss();
         if (reInstall) {
           onRefresh();
@@ -81,7 +85,8 @@ class ConversationLogic extends GetxController {
       onChangeConversations.addAll(newList);
     }
     for (var newValue in newList) {
-      Logger.print('======== conversation changed: ${newValue.toJson()} ========');
+      Logger.print(
+          '======== conversation changed: ${newValue.toJson()} ========');
       list.removeWhere((e) => e.conversationID == newValue.conversationID);
     }
 
@@ -132,7 +137,8 @@ class ConversationLogic extends GetxController {
   }
 
   void deleteConversation(ConversationInfo info) async {
-    await OpenIM.iMManager.conversationManager.deleteConversationAndDeleteAllMsg(
+    await OpenIM.iMManager.conversationManager
+        .deleteConversationAndDeleteAllMsg(
       conversationID: info.conversationID,
     );
     list.remove(info);
@@ -151,7 +157,7 @@ class ConversationLogic extends GetxController {
 
   String? getPrefixTag(ConversationInfo info) {
     if (info.groupAtType == GroupAtType.groupNotification) {
-      return '[${StrRes.groupAc}]';
+      return '[${t.groupAc}]';
     }
 
     return null;
@@ -171,14 +177,15 @@ class ConversationLogic extends GetxController {
 
       final text = IMUtils.parseNtf(info.latestMsg!, isConversation: true);
       if (text != null) return text;
-      if (info.isSingleChat || info.latestMsg!.sendID == OpenIM.iMManager.userID)
+      if (info.isSingleChat ||
+          info.latestMsg!.sendID == OpenIM.iMManager.userID)
         return IMUtils.parseMsg(info.latestMsg!, isConversation: true);
 
       return "${info.latestMsg!.senderNickname}: ${IMUtils.parseMsg(info.latestMsg!, isConversation: true)} ";
     } catch (e, s) {
       Logger.print('------e:$e s:$s');
     }
-    return '[${StrRes.unsupportedMessage}]';
+    return '[${t.unsupportedMessage}]';
   }
 
   String? getAvatar(ConversationInfo info) {
@@ -250,13 +257,13 @@ class ConversationLogic extends GetxController {
       case IMSdkStatus.syncStart:
       case IMSdkStatus.synchronizing:
       case IMSdkStatus.syncProgress:
-        return StrRes.synchronizing;
+        return t.synchronizing;
       case IMSdkStatus.syncFailed:
-        return StrRes.syncFailed;
+        return t.syncFailed;
       case IMSdkStatus.connecting:
-        return StrRes.connecting;
+        return t.connecting;
       case IMSdkStatus.connectionFailed:
-        return StrRes.connectionFailed;
+        return t.connectionFailed;
       case IMSdkStatus.connectionSucceeded:
       case IMSdkStatus.syncEnded:
         return null;
@@ -264,9 +271,11 @@ class ConversationLogic extends GetxController {
   }
 
   bool get isFailedSdkStatus =>
-      imStatus.value == IMSdkStatus.connectionFailed || imStatus.value == IMSdkStatus.syncFailed;
+      imStatus.value == IMSdkStatus.connectionFailed ||
+      imStatus.value == IMSdkStatus.syncFailed;
 
-  void _sortConversationList() => OpenIM.iMManager.conversationManager.simpleSort(list);
+  void _sortConversationList() =>
+      OpenIM.iMManager.conversationManager.simpleSort(list);
 
   void onRefresh() async {
     late List<ConversationInfo> list;
@@ -285,7 +294,8 @@ class ConversationLogic extends GetxController {
   }
 
   static Future<List<ConversationInfo>> getConversationFirstPage() async {
-    final result = await OpenIM.iMManager.conversationManager.getConversationListSplit(offset: 0, count: 400);
+    final result = await OpenIM.iMManager.conversationManager
+        .getConversationListSplit(offset: 0, count: 400);
 
     return result;
   }
@@ -305,20 +315,23 @@ class ConversationLogic extends GetxController {
     final temp = <ConversationInfo>[];
 
     while (true) {
-      var result = await OpenIM.iMManager.conversationManager.getConversationListSplit(
+      var result =
+          await OpenIM.iMManager.conversationManager.getConversationListSplit(
         offset: temp.length,
         count: pageSize,
       );
       if (onChangeConversations.isNotEmpty) {
         final bSet = Set.from(onChangeConversations);
 
-        Logger.print('replace conversation: [${onChangeConversations.length}], $bSet');
+        Logger.print(
+            'replace conversation: [${onChangeConversations.length}], $bSet');
 
         for (int i = 0; i < result.length; i++) {
           final info = result[i];
 
           if (bSet.contains(info)) {
-            result[i] = onChangeConversations[onChangeConversations.indexOf(info)];
+            result[i] =
+                onChangeConversations[onChangeConversations.indexOf(info)];
           }
         }
       }
@@ -367,7 +380,8 @@ class ConversationLogic extends GetxController {
     if (scrollIndex == 0) {
       itemScrollController.jumpTo(index: 0);
     } else {
-      itemScrollController.scrollTo(index: scrollIndex, duration: const Duration(milliseconds: 300));
+      itemScrollController.scrollTo(
+          index: scrollIndex, duration: const Duration(milliseconds: 300));
     }
   }
 
@@ -376,7 +390,8 @@ class ConversationLogic extends GetxController {
     required int sessionType,
   }) =>
       LoadingView.singleton.wrap(
-          asyncFunction: () => OpenIM.iMManager.conversationManager.getOneConversation(
+          asyncFunction: () =>
+              OpenIM.iMManager.conversationManager.getOneConversation(
                 sourceID: sourceID,
                 sessionType: sessionType,
               ));
@@ -436,11 +451,14 @@ class ConversationLogic extends GetxController {
 
   scan() => AppNavigator.startScan();
 
-  addFriend() => AppNavigator.startAddContactsBySearch(searchType: SearchType.user);
+  addFriend() =>
+      AppNavigator.startAddContactsBySearch(searchType: SearchType.user);
 
-  createGroup() => AppNavigator.startCreateGroup(defaultCheckedList: [OpenIM.iMManager.userInfo]);
+  createGroup() => AppNavigator.startCreateGroup(
+      defaultCheckedList: [OpenIM.iMManager.userInfo]);
 
-  addGroup() => AppNavigator.startAddContactsBySearch(searchType: SearchType.group);
+  addGroup() =>
+      AppNavigator.startAddContactsBySearch(searchType: SearchType.group);
 
   void globalSearch() => AppNavigator.startGlobalSearch();
 }

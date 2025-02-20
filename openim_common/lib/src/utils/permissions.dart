@@ -22,7 +22,8 @@ class Permissions {
     if (await Permission.camera.request().isGranted) {
       onGranted?.call();
     }
-    if (await Permission.camera.isPermanentlyDenied || await Permission.camera.isDenied) {
+    if (await Permission.camera.isPermanentlyDenied ||
+        await Permission.camera.isDenied) {
       _showPermissionDeniedDialog(Permission.camera.title);
     }
   }
@@ -52,7 +53,8 @@ class Permissions {
     if (await Permission.manageExternalStorage.request().isGranted) {
       onGranted?.call();
     }
-    if (await Permission.storage.isPermanentlyDenied || await Permission.storage.isDenied) {
+    if (await Permission.storage.isPermanentlyDenied ||
+        await Permission.storage.isDenied) {
       _showPermissionDeniedDialog(Permission.storage.title);
     }
   }
@@ -61,7 +63,8 @@ class Permissions {
     if (await Permission.microphone.request().isGranted) {
       onGranted?.call();
     }
-    if (await Permission.microphone.isPermanentlyDenied || await Permission.microphone.isDenied) {
+    if (await Permission.microphone.isPermanentlyDenied ||
+        await Permission.microphone.isDenied) {
       _showPermissionDeniedDialog(Permission.microphone.title);
     }
   }
@@ -70,7 +73,8 @@ class Permissions {
     if (await Permission.location.request().isGranted) {
       onGranted?.call();
     }
-    if (await Permission.location.isPermanentlyDenied || await Permission.location.isDenied) {
+    if (await Permission.location.isPermanentlyDenied ||
+        await Permission.location.isDenied) {
       _showPermissionDeniedDialog(Permission.location.title);
     }
   }
@@ -79,7 +83,8 @@ class Permissions {
     if (await Permission.speech.request().isGranted) {
       onGranted?.call();
     }
-    if (await Permission.speech.isPermanentlyDenied || await Permission.speech.isDenied) {
+    if (await Permission.speech.isPermanentlyDenied ||
+        await Permission.speech.isDenied) {
       _showPermissionDeniedDialog(Permission.speech.title);
     }
   }
@@ -93,7 +98,8 @@ class Permissions {
         if (await Permission.photos.request().isGranted) {
           onGranted?.call();
         }
-        if (await Permission.photos.isPermanentlyDenied || await Permission.photos.isDenied) {
+        if (await Permission.photos.isPermanentlyDenied ||
+            await Permission.photos.isDenied) {
           _showPermissionDeniedDialog(Permission.photos.title);
         }
       }
@@ -101,7 +107,8 @@ class Permissions {
       if (await Permission.photos.request().isGranted) {
         onGranted?.call();
       }
-      if (await Permission.photos.isPermanentlyDenied || await Permission.photos.isDenied) {
+      if (await Permission.photos.isPermanentlyDenied ||
+          await Permission.photos.isDenied) {
         _showPermissionDeniedDialog(Permission.photos.title);
       }
     }
@@ -111,7 +118,8 @@ class Permissions {
     if (await Permission.notification.request().isGranted) {
       return true;
     }
-    if (await Permission.notification.isPermanentlyDenied || await Permission.notification.isDenied) {
+    if (await Permission.notification.isPermanentlyDenied ||
+        await Permission.notification.isDenied) {
       _showPermissionDeniedDialog(Permission.notification.title);
     }
 
@@ -214,7 +222,8 @@ class Permissions {
     }
   }
 
-  static Future<Map<Permission, PermissionStatus>> request(List<Permission> permissions) async {
+  static Future<Map<Permission, PermissionStatus>> request(
+      List<Permission> permissions) async {
     Map<Permission, PermissionStatus> statuses = await permissions.request();
     return statuses;
   }
@@ -224,22 +233,22 @@ class Permissions {
       context: Get.context!,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(StrRes.permissionDeniedTitle),
+          title: Text(t.permissionDeniedTitle),
           content: Text(
-            sprintf(StrRes.permissionDeniedHint, [tips]),
+            sprintf(t.permissionDeniedHint, [tips]),
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text(StrRes.cancel),
+              child: Text(t.cancel),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text(StrRes.determine),
+              child: Text(t.determine),
               onPressed: () {
                 Navigator.of(context).pop();
                 openAppSettings();
@@ -256,15 +265,15 @@ extension PermissionExt on Permission {
   String get title {
     switch (this) {
       case Permission.storage:
-        return StrRes.externalStorage;
+        return t.externalStorage;
       case Permission.photos:
-        return StrRes.gallery;
+        return t.gallery;
       case Permission.camera:
-        return StrRes.camera;
+        return t.camera;
       case Permission.microphone:
-        return StrRes.microphone;
+        return t.microphone;
       case Permission.notification:
-        return StrRes.notification;
+        return t.notification;
       default:
         return '';
     }

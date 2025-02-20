@@ -35,17 +35,17 @@ class UserAgreementWithPrivacyPolicy extends StatelessWidget {
             text: TextSpan(
               style: Styles.ts_999999_12,
               children: [
-                TextSpan(text: StrRes.agreementText),
+                TextSpan(text: t.agreementText),
                 TextSpan(
                     recognizer: TapGestureRecognizer()
                       ..onTap = onTapUserAgreement,
-                    text: StrRes.userAgreement,
+                    text: t.userAgreement,
                     style: Styles.ts_333333_12),
-                TextSpan(text: StrRes.and, style: Styles.ts_999999_12),
+                TextSpan(text: t.and, style: Styles.ts_999999_12),
                 TextSpan(
                     recognizer: TapGestureRecognizer()
                       ..onTap = onTapPrivacyPolicy,
-                    text: StrRes.privacyPolicy,
+                    text: t.privacyPolicy,
                     style: Styles.ts_333333_12),
               ],
             ),

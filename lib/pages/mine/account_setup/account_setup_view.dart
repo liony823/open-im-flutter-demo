@@ -15,7 +15,7 @@ class AccountSetupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TitleBar.back(
-        title: StrRes.accountSetup,
+        title: t.accountSetup,
       ),
       backgroundColor: Styles.c_F8F9FA,
       body: Obx(() => SingleChildScrollView(
@@ -23,20 +23,20 @@ class AccountSetupPage extends StatelessWidget {
               children: [
                 10.verticalSpace,
                 _buildItemView(
-                  label: StrRes.notDisturbMode,
+                  label: t.notDisturbMode,
                   switchOn: logic.isGlobalNotDisturb,
                   onChanged: (_) => logic.toggleNotDisturbMode(),
                   showSwitchButton: true,
                   isTopRadius: true,
                 ),
                 _buildItemView(
-                  label: StrRes.allowRing,
+                  label: t.allowRing,
                   switchOn: logic.isAllowBeep,
                   onChanged: (_) => logic.toggleBeep(),
                   showSwitchButton: true,
                 ),
                 _buildItemView(
-                  label: StrRes.allowVibrate,
+                  label: t.allowVibrate,
                   switchOn: logic.isAllowVibration,
                   onChanged: (_) => logic.toggleVibration(),
                   showSwitchButton: true,
@@ -44,19 +44,19 @@ class AccountSetupPage extends StatelessWidget {
                 ),
                 10.verticalSpace,
                 _buildItemView(
-                  label: StrRes.forbidAddMeToFriend,
+                  label: t.forbidAddMeToFriend,
                   switchOn: !logic.isAllowAddFriend,
                   onChanged: (_) => logic.toggleForbidAddMeToFriend(),
                   showSwitchButton: true,
                   isTopRadius: true,
                 ),
                 _buildItemView(
-                  label: StrRes.blacklist,
+                  label: t.blacklist,
                   onTap: logic.blacklist,
                   showRightArrow: true,
                 ),
                 _buildItemView(
-                  label: StrRes.languageSetup,
+                  label: t.languageSetup,
                   value: logic.curLanguage.value,
                   onTap: logic.languageSetting,
                   showRightArrow: true,
@@ -64,18 +64,18 @@ class AccountSetupPage extends StatelessWidget {
                 ),
                 10.verticalSpace,
                 _buildItemView(
-                  label: StrRes.unlockSettings,
+                  label: t.unlockSettings,
                   onTap: logic.unlockSetup,
                   showRightArrow: true,
                   isTopRadius: true,
                 ),
                 _buildItemView(
-                  label: StrRes.changePassword,
+                  label: t.changePassword,
                   showRightArrow: true,
                   onTap: logic.changePwd,
                 ),
                 _buildItemView(
-                  label: StrRes.clearChatHistory,
+                  label: t.clearChatHistory,
                   textStyle: Styles.ts_FF381F_17,
                   onTap: logic.clearChatHistory,
                   showRightArrow: true,

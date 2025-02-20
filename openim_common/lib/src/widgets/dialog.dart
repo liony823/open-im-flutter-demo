@@ -57,7 +57,7 @@ class CustomDialog extends StatelessWidget {
                   children: [
                     _button(
                       bgColor: Styles.c_FFFFFF,
-                      text: leftText ?? StrRes.cancel,
+                      text: leftText ?? t.cancel,
                       textStyle: Styles.ts_0C1C33_17,
                       onTap: onTapLeft ?? () => Get.back(result: false),
                     ),
@@ -68,7 +68,7 @@ class CustomDialog extends StatelessWidget {
                     ),
                     _button(
                       bgColor: Styles.c_FFFFFF,
-                      text: rightText ?? StrRes.determine,
+                      text: rightText ?? t.determine,
                       textStyle: Styles.ts_0089FF_17,
                       onTap: onTapRight ?? () => Get.back(result: true),
                     ),
@@ -133,8 +133,7 @@ class ForwardHintDialog extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                (list.length == 1 ? StrRes.sentTo : StrRes.sentSeparatelyTo)
-                    .toText
+                (list.length == 1 ? t.sentTo : t.sentSeparatelyTo).toText
                   ..style = Styles.ts_0C1C33_17_medium,
                 5.verticalSpace,
                 list.length == 1
@@ -189,11 +188,11 @@ class ForwardHintDialog extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    StrRes.cancel.toText
+                    (context.t.cancel).toText
                       ..style = Styles.ts_0C1C33_17
                       ..onTap = () => Get.back(),
                     26.horizontalSpace,
-                    StrRes.determine.toText
+                    (context.t.determine).toText
                       ..style = Styles.ts_0089FF_17
                       ..onTap = () => Get.back(result: true),
                   ],

@@ -40,7 +40,8 @@ class HttpUtil {
     dio.options.receiveTimeout = const Duration(seconds: 30);
   }
 
-  static String get operationID => DateTime.now().millisecondsSinceEpoch.toString();
+  static String get operationID =>
+      DateTime.now().millisecondsSinceEpoch.toString();
 
   static Future post(
     String path, {
@@ -80,7 +81,7 @@ class HttpUtil {
     } catch (error) {
       if (error is DioException) {
         if (error.type != DioExceptionType.cancel) {
-          if (showErrorToast) IMViews.showToast(error.type.name.toString().tr);
+          if (showErrorToast) IMViews.showToast(error.type.name.toString());
         }
       }
       return Future.error(error);
@@ -102,8 +103,11 @@ class HttpUtil {
     final bytes = await File(compressPath ?? path).readAsBytes();
     final mf = MultipartFile.fromBytes(bytes, filename: fileName);
 
-    var formData =
-        FormData.fromMap({'operationID': '${DateTime.now().millisecondsSinceEpoch}', 'fileType': 1, 'file': mf});
+    var formData = FormData.fromMap({
+      'operationID': '${DateTime.now().millisecondsSinceEpoch}',
+      'fileType': 1,
+      'file': mf
+    });
 
     var resp = await dio.post<Map<String, dynamic>>(
       "${Config.imApiUrl}/third/minio_upload",
@@ -150,12 +154,14 @@ class HttpUtil {
           onCompletion?.call();
           intervalDo.drop(
               fun: () async {
-                saveFileToGallerySaver(File(cachePath), showTaost: EasyLoading.isShow);
+                saveFileToGallerySaver(File(cachePath),
+                    showTaost: EasyLoading.isShow);
               },
               milliseconds: 1500);
         }
         if (count == total) {
-          saveFileToGallerySaver(File(cachePath), showTaost: EasyLoading.isShow);
+          saveFileToGallerySaver(File(cachePath),
+              showTaost: EasyLoading.isShow);
         }
       },
     );
@@ -165,12 +171,13 @@ class HttpUtil {
     var byteData = await image.toByteData(format: ImageByteFormat.png);
     if (byteData != null) {
       Uint8List uint8list = byteData.buffer.asUint8List();
-      var result = await ImageGallerySaverPlus.saveImage(Uint8List.fromList(uint8list));
+      var result =
+          await ImageGallerySaverPlus.saveImage(Uint8List.fromList(uint8list));
       if (result != null) {
-        var tips = StrRes.saveSuccessfully;
+        var tips = t.saveSuccessfully;
         if (Platform.isAndroid) {
           final filePath = result['filePath'].split('//').last;
-          tips = '${StrRes.saveSuccessfully}:$filePath';
+          tips = '${t.saveSuccessfully}:$filePath';
         }
         IMViews.showToast(tips);
       }
@@ -201,10 +208,10 @@ class HttpUtil {
           onCompletion?.call();
           final result = await ImageGallerySaverPlus.saveFile(cachePath);
           if (result != null) {
-            var tips = StrRes.saveSuccessfully;
+            var tips = t.saveSuccessfully;
             if (Platform.isAndroid) {
               final filePath = result['filePath'].split('//').last;
-              tips = '${StrRes.saveSuccessfully}:$filePath';
+              tips = '${t.saveSuccessfully}:$filePath';
             }
             IMViews.showToast(tips);
           }
@@ -213,17 +220,19 @@ class HttpUtil {
     );
   }
 
-  static Future saveFileToGallerySaver(File file, {String? name, bool showTaost = true}) async {
+  static Future saveFileToGallerySaver(File file,
+      {String? name, bool showTaost = true}) async {
     Permissions.storage(() async {
-      var tips = StrRes.saveSuccessfully;
+      var tips = t.saveSuccessfully;
       Logger.print('saveFileToGallerySaver: ${file.path}');
       final imageBytes = await file.readAsBytes();
 
-      final result = await ImageGallerySaverPlus.saveImage(imageBytes, name: name);
+      final result =
+          await ImageGallerySaverPlus.saveImage(imageBytes, name: name);
       if (result != null && showTaost) {
         if (Platform.isAndroid) {
           final filePath = result['filePath'].split('//').last;
-          tips = '${StrRes.saveSuccessfully}:$filePath';
+          tips = '${t.saveSuccessfully}:$filePath';
         }
         IMViews.showToast(tips);
       }

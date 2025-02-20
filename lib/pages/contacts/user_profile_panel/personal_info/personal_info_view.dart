@@ -14,7 +14,7 @@ class PersonalInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TitleBar.back(
-        title: StrRes.personalInfo,
+        title: t.personalInfo,
       ),
       backgroundColor: Styles.c_F8F9FA,
       body: SingleChildScrollView(
@@ -25,25 +25,25 @@ class PersonalInfoPage extends StatelessWidget {
             _buildCornerBgView(
               children: [
                 _buildItemView(
-                  label: StrRes.avatar,
+                  label: t.avatar,
                   isAvatar: true,
                   value: logic.nickname,
                   url: logic.faceURL,
                 ),
                 _buildItemView(
-                  label: StrRes.name,
+                  label: t.name,
                   value: logic.nickname,
                 ),
                 _buildItemView(
-                  label: StrRes.gender,
-                  value: logic.isMale ? StrRes.man : StrRes.woman,
+                  label: t.gender,
+                  value: logic.isMale ? t.man : t.woman,
                 ),
                 _buildItemView(
-                  label: StrRes.englishName,
+                  label: t.englishName,
                   value: logic.englishName,
                 ),
                 _buildItemView(
-                  label: StrRes.birthDay,
+                  label: t.birthDay,
                   value: logic.birth,
                 ),
               ],
@@ -52,12 +52,12 @@ class PersonalInfoPage extends StatelessWidget {
             _buildCornerBgView(
               children: [
                 _buildItemView(
-                  label: StrRes.mobile,
+                  label: t.mobile,
                   value: logic.phoneNumber,
                   onTap: logic.clickPhoneNumber,
                 ),
                 _buildItemView(
-                  label: StrRes.email,
+                  label: t.email,
                   value: logic.email,
                   onTap: logic.clickEmail,
                 ),

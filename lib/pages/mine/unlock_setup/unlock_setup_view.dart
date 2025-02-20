@@ -14,13 +14,13 @@ class UnlockSetupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.unlockSettings),
+      appBar: TitleBar.back(title: t.unlockSettings),
       backgroundColor: Styles.c_F8F9FA,
       body: Obx(() => Column(
             children: [
               12.verticalSpace,
               _buildItemView(
-                label: StrRes.password,
+                label: t.password,
                 switchOn: logic.passwordEnabled.value,
                 onChanged: (_) => logic.togglePwdLock(),
                 isTopRadius: true,
@@ -37,7 +37,7 @@ class UnlockSetupPage extends StatelessWidget {
                   (logic.isSupportedBiometric.value &&
                       logic.canCheckBiometrics.value))
                 _buildItemView(
-                  label: StrRes.biometrics,
+                  label: t.biometrics,
                   switchOn: logic.biometricsEnabled.value,
                   onChanged: (_) => logic.toggleBiometricLock(),
                   isBottomRadius: true,

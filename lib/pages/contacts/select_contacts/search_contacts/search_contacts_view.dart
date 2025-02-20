@@ -88,7 +88,7 @@ class SelectContactsFromSearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             44.verticalSpace,
-            StrRes.searchNotFound.toText..style = Styles.ts_8E9AB0_17,
+            (t.searchNotFound).toText..style = Styles.ts_8E9AB0_17,
           ],
         ),
       );

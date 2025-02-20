@@ -79,7 +79,7 @@ class _UpgradeViewV2State extends State<UpgradeViewV2> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                StrRes.upgradeFind,
+                t.upgradeFind,
                 style: TextStyle(
                   color: const Color(0xFF333333),
                   fontSize: 18.sp,
@@ -90,7 +90,7 @@ class _UpgradeViewV2State extends State<UpgradeViewV2> {
                 height: 10.h,
               ),
               Text(
-                sprintf(StrRes.upgradeVersion, [
+                sprintf(t.upgradeVersion, [
                   '${widget.upgradeInfo.buildVersion!} + ${widget.upgradeInfo.buildVersionNo!}',
                   '${widget.packageInfo.version} + ${widget.packageInfo.buildNumber}'
                 ]),
@@ -103,7 +103,7 @@ class _UpgradeViewV2State extends State<UpgradeViewV2> {
                 height: 10.h,
               ),
               Text(
-                StrRes.upgradeDescription,
+                t.upgradeDescription,
                 style: TextStyle(
                   color: const Color(0xFF333333),
                   fontSize: 16.sp,
@@ -128,15 +128,15 @@ class _UpgradeViewV2State extends State<UpgradeViewV2> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     _buildButton(
-                      text: StrRes.upgradeIgnore,
+                      text: t.upgradeIgnore,
                       onTap: widget.onIgnore ?? () => Get.back(),
                     ),
                     _buildButton(
-                      text: StrRes.upgradeLater,
+                      text: t.upgradeLater,
                       onTap: widget.onLater ?? () => Get.back(),
                     ),
                     _buildButton(
-                      text: StrRes.upgradeNow,
+                      text: t.upgradeNow,
                       onTap: _startDownload,
                     ),
                   ],
@@ -146,7 +146,7 @@ class _UpgradeViewV2State extends State<UpgradeViewV2> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     _buildButton(
-                      text: StrRes.upgradeNow,
+                      text: t.upgradeNow,
                       onTap: _startDownload,
                     )
                   ],
@@ -158,7 +158,8 @@ class _UpgradeViewV2State extends State<UpgradeViewV2> {
                     child: LinearPercentIndicator(
                       lineHeight: 20.h,
                       percent: _progress,
-                      center: "${(_progress * 100).toInt()}%".toText..style = TextStyle(fontSize: 12.sp),
+                      center: "${(_progress * 100).toInt()}%".toText
+                        ..style = TextStyle(fontSize: 12.sp),
                       linearStrokeCap: LinearStrokeCap.roundAll,
                       backgroundColor: Colors.grey.withOpacity(0.5),
                       progressColor: Colors.blueAccent,

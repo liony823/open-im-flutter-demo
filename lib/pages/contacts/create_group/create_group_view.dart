@@ -16,7 +16,7 @@ class CreateGroupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return TouchCloseSoftKeyboard(
       child: Scaffold(
-        appBar: TitleBar.back(title: StrRes.createGroup),
+        appBar: TitleBar.back(title: t.createGroup),
         backgroundColor: Styles.c_F8F9FA,
         body: SingleChildScrollView(
           child: SizedBox(
@@ -24,7 +24,7 @@ class CreateGroupPage extends StatelessWidget {
             child: Column(
               children: [
                 _buildGroupBaseInfoView(),
-                _buildGroupMemberView(),
+                _buildGroupMemberView(context),
                 const Spacer(),
                 Container(
                   color: Styles.c_FFFFFF,
@@ -33,7 +33,7 @@ class CreateGroupPage extends StatelessWidget {
                     vertical: 12.h,
                   ),
                   child: Button(
-                    text: StrRes.completeCreation,
+                    text: t.completeCreation,
                     onTap: logic.completeCreation,
                   ),
                 ),
@@ -75,7 +75,7 @@ class CreateGroupPage extends StatelessWidget {
                     inputFormatters: [LengthLimitingTextInputFormatter(16)],
                     decoration: InputDecoration(
                       hintStyle: Styles.ts_8E9AB0_17,
-                      hintText: StrRes.plsEnterGroupNameHint,
+                      hintText: t.plsEnterGroupNameHint,
                       border: InputBorder.none,
                     ),
                   ),
@@ -84,7 +84,7 @@ class CreateGroupPage extends StatelessWidget {
             )),
       );
 
-  Widget _buildGroupMemberView() => Obx(() => Container(
+  Widget _buildGroupMemberView(BuildContext context) => Obx(() => Container(
         decoration: BoxDecoration(
           color: Styles.c_FFFFFF,
           borderRadius: BorderRadius.circular(6.r),
@@ -96,9 +96,9 @@ class CreateGroupPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
               child: Row(
                 children: [
-                  StrRes.groupMember.toText..style = Styles.ts_8E9AB0_17,
+                  (context.t.groupMember).toText..style = Styles.ts_8E9AB0_17,
                   const Spacer(),
-                  sprintf(StrRes.nPerson, [logic.allList.length]).toText
+                  sprintf(t.nPerson, [logic.allList.length]).toText
                     ..style = Styles.ts_8E9AB0_17,
                 ],
               ),

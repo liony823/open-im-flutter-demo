@@ -39,7 +39,7 @@ class SearchGroupMemberPage extends StatelessWidget {
                     if (logic.hiddenMembers(info)) {
                       return const SizedBox();
                     } else {
-                      return _buildItemView(info);
+                      return _buildItemView(context, info);
                     }
                   },
                 ),
@@ -48,7 +48,8 @@ class SearchGroupMemberPage extends StatelessWidget {
     );
   }
 
-  Widget _buildItemView(GroupMembersInfo membersInfo) => GestureDetector(
+  Widget _buildItemView(BuildContext context, GroupMembersInfo membersInfo) =>
+      GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () => logic.clickMember(membersInfo),
         child: Container(
@@ -71,9 +72,9 @@ class SearchGroupMemberPage extends StatelessWidget {
                 ),
               ),
               if (membersInfo.roleLevel == GroupRoleLevel.owner)
-                StrRes.groupOwner.toText..style = Styles.ts_8E9AB0_17,
+                (context.t.groupOwner).toText..style = Styles.ts_8E9AB0_17,
               if (membersInfo.roleLevel == GroupRoleLevel.admin)
-                StrRes.groupAdmin.toText..style = Styles.ts_8E9AB0_17,
+                (context.t.groupAdmin).toText..style = Styles.ts_8E9AB0_17,
             ],
           ),
         ),
@@ -85,7 +86,7 @@ class SearchGroupMemberPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             44.verticalSpace,
-            StrRes.searchNotFound.toText..style = Styles.ts_8E9AB0_17,
+            (t.searchNotFound).toText..style = Styles.ts_8E9AB0_17,
           ],
         ),
       );

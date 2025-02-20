@@ -14,7 +14,7 @@ class ProcessGroupRequestsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.newGroup),
+      appBar: TitleBar.back(title: t.newGroup),
       backgroundColor: Styles.c_F8F9FA,
       body: Container(
         color: Styles.c_FFFFFF,
@@ -41,7 +41,7 @@ class ProcessGroupRequestsPage extends StatelessWidget {
                       ..style = Styles.ts_0C1C33_17,
                     RichText(
                       text: TextSpan(
-                        text: StrRes.applyJoin,
+                        text: t.applyJoin,
                         style: Styles.ts_8E9AB0_14,
                         children: [
                           WidgetSpan(child: 2.horizontalSpace),
@@ -83,19 +83,19 @@ class ProcessGroupRequestsPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                sprintf(StrRes.sourceFrom, [logic.sourceFrom]).toText
+                sprintf(t.sourceFrom, [logic.sourceFrom]).toText
                   ..style = Styles.ts_8E9AB0_14
               ],
             ),
             12.verticalSpace,
             Row(
               children: [
-                Flexible(child: _buildRejectButton()),
+                Flexible(child: _buildRejectButton(context)),
                 12.horizontalSpace,
                 Flexible(
                   child: Button(
                     onTap: logic.approve,
-                    text: StrRes.accept,
+                    text: t.accept,
                     textStyle: Styles.ts_FFFFFF_17,
                   ),
                 ),
@@ -107,7 +107,7 @@ class ProcessGroupRequestsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildRejectButton() => Material(
+  Widget _buildRejectButton(BuildContext context) => Material(
         child: Ink(
           height: 44.h,
           decoration: BoxDecoration(
@@ -122,7 +122,7 @@ class ProcessGroupRequestsPage extends StatelessWidget {
             onTap: logic.reject,
             child: Container(
               alignment: Alignment.center,
-              child: StrRes.reject.toText..style = Styles.ts_0C1C33_17,
+              child: (context.t.reject).toText..style = Styles.ts_0C1C33_17,
             ),
           ),
         ),

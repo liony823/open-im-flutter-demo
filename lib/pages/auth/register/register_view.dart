@@ -28,7 +28,7 @@ class RegisterPage extends StatelessWidget {
                     spacing: 32.w,
                     children: [
                       TitleBar.back(
-                          leftTitle: StrRes.registerTitle,
+                          leftTitle: context.t.registerTitle,
                           backgroundColor: Colors.transparent,
                           right: Padding(
                             padding: EdgeInsets.only(right: 16.w),
@@ -39,7 +39,7 @@ class RegisterPage extends StatelessWidget {
                               onTap: logic.toLanguage,
                             ),
                           )),
-                      _buildFormView(),
+                      _buildFormView(context),
                     ],
                   ),
                 )),
@@ -57,14 +57,14 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  Widget _buildFormView() {
+  Widget _buildFormView(BuildContext context) {
     if (logic.loginType == ClientConfigs.appLoginWithUserAndPhone) {
       return Column(
         spacing: 24.w,
         children: [
           LoginTabBar(controller: logic.tabController!, tabs: [
-            StrRes.registerWithUser,
-            StrRes.registerWithPhone,
+            context.t.registerWithUser,
+            context.t.registerWithPhone,
           ]),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
@@ -78,10 +78,10 @@ class RegisterPage extends StatelessWidget {
                       child: TabBarView(
                           controller: logic.tabController,
                           children: [
-                            _buildUserForm(),
-                            _buildPhoneForm(),
+                            _buildUserForm(context),
+                            _buildPhoneForm(context),
                           ])),
-                  ..._buildCommonForm(),
+                  ..._buildCommonForm(context),
                 ],
               ),
             ),
@@ -93,7 +93,7 @@ class RegisterPage extends StatelessWidget {
         spacing: 26.w,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          LoginTab(title: StrRes.registerWithPhone),
+          LoginTab(title: context.t.registerWithPhone),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
             child: FormBuilder(
@@ -101,8 +101,8 @@ class RegisterPage extends StatelessWidget {
               child: Column(
                 spacing: 26.w,
                 children: [
-                  _buildPhoneForm(),
-                  ..._buildCommonForm(),
+                  _buildPhoneForm(context),
+                  ..._buildCommonForm(context),
                 ],
               ),
             ),
@@ -114,7 +114,7 @@ class RegisterPage extends StatelessWidget {
         spacing: 26.w,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          LoginTab(title: StrRes.registerWithUser),
+          LoginTab(title: context.t.registerWithUser),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
             child: FormBuilder(
@@ -122,8 +122,8 @@ class RegisterPage extends StatelessWidget {
               child: Column(
                 spacing: 26.w,
                 children: [
-                  _buildUserForm(),
-                  ..._buildCommonForm(),
+                  _buildUserForm(context),
+                  ..._buildCommonForm(context),
                 ],
               ),
             ),
@@ -135,11 +135,11 @@ class RegisterPage extends StatelessWidget {
         spacing: 26.w,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          LoginTab(title: StrRes.loginWithAutoRegister),
-          _buildAutoRegisterForm(),
+          LoginTab(title: context.t.loginWithAutoRegister),
+          _buildAutoRegisterForm(context),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: _buildRegisterButton(),
+            child: _buildRegisterButton(context),
           ),
         ],
       );
@@ -148,7 +148,7 @@ class RegisterPage extends StatelessWidget {
   }
 
   /// 自动注册登录
-  Widget _buildAutoRegisterForm() {
+  Widget _buildAutoRegisterForm(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
       child: SizedBox(
@@ -159,7 +159,7 @@ class RegisterPage extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 36.w, vertical: 18.h),
             child: Center(
-              child: StrRes.loginWithAutoRegisterHint.toText
+              child: (context.t.loginWithAutoRegisterHint).toText
                 ..style = Styles.ts_000033_14_medium,
             ),
           ),
@@ -169,11 +169,11 @@ class RegisterPage extends StatelessWidget {
   }
 
   /// 手机号登录
-  Widget _buildPhoneForm() {
+  Widget _buildPhoneForm(BuildContext context) {
     return FormInput.phone(
-      label: StrRes.phoneNumber,
+      label: context.t.phoneNumber,
       labelIcon: EvaIcons.phoneOutline,
-      hintText: StrRes.plsEnterPhoneNumber,
+      hintText: context.t.plsEnterPhoneNumber,
       name: "phone",
       textInputAction: TextInputAction.next,
       prefixIcon: InputPhoneCode(
@@ -182,7 +182,7 @@ class RegisterPage extends StatelessWidget {
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return StrRes.plsEnterPhoneNumber;
+          return context.t.plsEnterPhoneNumber;
         }
         return null;
       },
@@ -190,83 +190,83 @@ class RegisterPage extends StatelessWidget {
   }
 
   /// 用户名登录
-  Widget _buildUserForm() {
+  Widget _buildUserForm(BuildContext context) {
     return FormInput(
-      label: StrRes.account,
+      label: context.t.account,
       labelIcon: EvaIcons.personOutline,
-      hintText: StrRes.plsEnterAccount,
+      hintText: context.t.plsEnterAccount,
       name: "account",
       textInputAction: TextInputAction.next,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return StrRes.plsEnterAccount;
+          return context.t.plsEnterAccount;
         }
         if (!ACCOUNT_REG.hasMatch(value)) {
-          return StrRes.accountFormatError;
+          return context.t.accountFormatError;
         }
         return null;
       },
     );
   }
 
-  List<Widget> _buildCommonForm() {
+  List<Widget> _buildCommonForm(BuildContext context) {
     return [
       FormInput.password(
         controller: logic.passwordController,
-        label: StrRes.password,
+        label: context.t.password,
         labelIcon: EvaIcons.lockOutline,
-        hintText: StrRes.plsEnterPassword,
+        hintText: context.t.plsEnterPassword,
         name: "password",
         textInputAction: TextInputAction.next,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return StrRes.plsEnterPassword;
+            return context.t.plsEnterPassword;
           }
           if (!IMUtils.isValidPassword(value)) {
-            return StrRes.passwordFormatError;
+            return context.t.passwordFormatError;
           }
           return null;
         },
       ),
       FormInput.password(
-        label: StrRes.confirmPassword,
+        label: context.t.confirmPassword,
         labelIcon: EvaIcons.lockOutline,
-        hintText: StrRes.plsConfirmPasswordAgain,
+        hintText: context.t.plsConfirmPasswordAgain,
         name: "confirmPassword",
         textInputAction: TextInputAction.done,
         onSubmitted: (_) => logic.register(),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return StrRes.plsConfirmPasswordAgain;
+            return context.t.plsConfirmPasswordAgain;
           }
           if (value != logic.passwordController.text.trim()) {
-            return StrRes.twicePwdNoSame;
+            return context.t.twicePwdNoSame;
           }
           return null;
         },
       ),
       if (logic.inviteCodeVisible)
         FormInput(
-          label: StrRes.invitationCode,
+          label: context.t.invitationCode,
           labelIcon: EvaIcons.emailOutline,
-          hintText: StrRes.plsEnterInvitationCode,
+          hintText: context.t.plsEnterInvitationCode,
           name: "inviteCode",
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return StrRes.plsEnterInvitationCode;
+              return context.t.plsEnterInvitationCode;
             }
             return null;
           },
         ),
       // 16.verticalSpace,
-      _buildRegisterButton(),
+      _buildRegisterButton(context),
     ];
   }
 
   /// 登录按钮
-  Widget _buildRegisterButton() {
+  Widget _buildRegisterButton(BuildContext context) {
     return AdaptiveButton(
-      text: StrRes.registerNow,
+      text: context.t.registerNow,
       onTap: logic.register,
       loading: logic.loading.value,
     );

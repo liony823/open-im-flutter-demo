@@ -85,7 +85,7 @@ class _SearchBoxState extends State<SearchBox> {
               enabled: widget.enabled,
               textInputAction: TextInputAction.search,
               decoration: InputDecoration(
-                hintText: widget.hintText ?? StrRes.search,
+                hintText: widget.hintText ?? t.search,
                 hintStyle: widget.hintStyle ?? Styles.ts_8E9AB0_17,
                 isDense: true,
                 contentPadding: EdgeInsets.zero,

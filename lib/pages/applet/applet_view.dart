@@ -16,7 +16,8 @@ class AppletPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: StrRes.miniProgram.toText..style = Styles.ts_0C1C33_17_semibold,
+        title: (context.t.miniProgram).toText
+          ..style = Styles.ts_0C1C33_17_semibold,
         actions: [
           IconButton(
             onPressed: logic.showAppletsModal,
@@ -47,7 +48,7 @@ class AppletPage extends StatelessWidget {
           children: [
             ImageRes.noNetwork.toImage..width = 176.w,
             16.verticalSpace,
-            StrRes.tapApplet.toText..style = Styles.ts_999999_14,
+            (context.t.tapApplet).toText..style = Styles.ts_999999_14,
           ],
         );
       }),

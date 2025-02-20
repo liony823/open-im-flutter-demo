@@ -40,7 +40,7 @@ class BottomSheetView extends StatelessWidget {
             ),
             10.verticalSpace,
             _itemBgView(
-              label: StrRes.cancel,
+              label: t.cancel,
               onTap: isOverlaySheet ? onCancel : () => Get.back(),
               borderRadius: BorderRadius.circular(6.r),
               alignment: MainAxisAlignment.center,

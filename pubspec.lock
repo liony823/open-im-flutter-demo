@@ -350,6 +350,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.2"
+  csv:
+    dependency: transitive
+    description:
+      name: csv
+      sha256: c6aa2679b2a18cb57652920f674488d89712efaf4d3fdf2e537215b35fc19d6c
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "6.0.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -1266,6 +1274,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.6.7"
+  json2yaml:
+    dependency: transitive
+    description:
+      name: json2yaml
+      sha256: da94630fbc56079426fdd167ae58373286f603371075b69bf46d848d63ba3e51
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.1"
   json_annotation:
     dependency: transitive
     description:
@@ -2221,6 +2237,30 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  slang:
+    dependency: transitive
+    description:
+      name: slang
+      sha256: "2778b88f05ffc23fd0a37436f607bf2a541d0b6b922e69a8ea5bbd50c2427d18"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.4.1"
+  slang_flutter:
+    dependency: transitive
+    description:
+      name: slang_flutter
+      sha256: "819637a23348adbc4f4e8faee3f274d8908f9af31d57bf1e277cd730b14bacde"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.4.0"
+  slang_gpt:
+    dependency: transitive
+    description:
+      name: slang_gpt
+      sha256: "70dd913d7337eb56fddded77dcb76a32617a7294541062385d29f4e1a85c14f0"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.11.0"
   sound_mode:
     dependency: "direct main"
     description:

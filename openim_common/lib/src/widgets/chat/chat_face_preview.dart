@@ -12,7 +12,7 @@ class ChatFacePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.emoji),
+      appBar: TitleBar.back(title: t.emoji),
       backgroundColor: Styles.c_FFFFFF,
       body: Center(
         child: _networkGestureImage(url),
@@ -42,9 +42,11 @@ class ChatFacePreview extends StatelessWidget {
             case LoadState.loading:
               {
                 final ImageChunkEvent? loadingProgress = state.loadingProgress;
-                final double? progress = loadingProgress?.expectedTotalBytes != null
-                    ? loadingProgress!.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                    : null;
+                final double? progress =
+                    loadingProgress?.expectedTotalBytes != null
+                        ? loadingProgress!.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null;
 
                 return SizedBox(
                   width: 15.0,

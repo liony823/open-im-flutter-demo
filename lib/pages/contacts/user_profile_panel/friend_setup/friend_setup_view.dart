@@ -15,14 +15,15 @@ class FriendSetupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TitleBar.back(
-        title: StrRes.friendSetup,
+        title: t.friendSetup,
       ),
       backgroundColor: Styles.c_F8F9FA,
       body: Column(
         children: [
           10.verticalSpace,
           _buildItemView(
-            label: StrRes.setupRemark,
+            context,
+            label: t.setupRemark,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(6.r),
               topLeft: Radius.circular(6.r),
@@ -31,7 +32,8 @@ class FriendSetupPage extends StatelessWidget {
             onTap: logic.setFriendRemark,
           ),
           _buildItemView(
-            label: StrRes.recommendToFriend,
+            context,
+            label: t.recommendToFriend,
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(6.r),
               bottomRight: Radius.circular(6.r),
@@ -41,7 +43,8 @@ class FriendSetupPage extends StatelessWidget {
           ),
           10.verticalSpace,
           Obx(() => _buildItemView(
-                label: StrRes.addToBlacklist,
+                context,
+                label: t.addToBlacklist,
                 showSwitchButton: true,
                 switchOn:
                     logic.userProfilesLogic.userInfo.value.isBlacklist == true,
@@ -49,6 +52,7 @@ class FriendSetupPage extends StatelessWidget {
               )),
           10.verticalSpace,
           _buildItemView(
+            context,
             isDelFriendButton: true,
             onTap: logic.deleteFromFriendList,
           )
@@ -57,7 +61,7 @@ class FriendSetupPage extends StatelessWidget {
     );
   }
 
-  Widget _buildItemView({
+  Widget _buildItemView(BuildContext context, {
     String? label,
     bool showRightArrow = false,
     bool showSwitchButton = false,
@@ -81,7 +85,7 @@ class FriendSetupPage extends StatelessWidget {
               alignment: isDelFriendButton ? Alignment.center : null,
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: isDelFriendButton
-                  ? (StrRes.unfriend.toText..style = Styles.ts_FF381F_17)
+                  ? ((context.t.unfriend).toText..style = Styles.ts_FF381F_17)
                   : Row(
                       children: [
                         (label ?? '').toText..style = Styles.ts_0C1C33_17,

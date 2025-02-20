@@ -23,25 +23,25 @@ class ContactsPage extends StatelessWidget {
             children: [
               _buildItemView(
                 assetsName: ImageRes.newFriend,
-                label: StrRes.newFriend,
+                label: t.newFriend,
                 count: logic.friendApplicationCount,
                 onTap: logic.newFriend,
               ),
               _buildItemView(
                 assetsName: ImageRes.newGroup,
-                label: StrRes.newGroupRequest,
+                label: t.newGroupRequest,
                 count: logic.groupApplicationCount,
                 onTap: logic.newGroup,
               ),
               10.verticalSpace,
               _buildItemView(
                 assetsName: ImageRes.myFriend,
-                label: StrRes.myFriend,
+                label: t.myFriend,
                 onTap: logic.myFriend,
               ),
               _buildItemView(
                 assetsName: ImageRes.myGroup,
-                label: StrRes.myGroup,
+                label: t.myGroup,
                 onTap: logic.myGroup,
               ),
             ],

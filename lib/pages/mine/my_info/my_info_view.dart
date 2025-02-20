@@ -17,7 +17,7 @@ class MyInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TitleBar.back(
-        title: StrRes.myInfo,
+        title: t.myInfo,
       ),
       backgroundColor: Styles.c_F8F9FA,
       body: Obx(() => SingleChildScrollView(
@@ -27,26 +27,24 @@ class MyInfoPage extends StatelessWidget {
                 _buildCornerBgView(
                   children: [
                     _buildItemView(
-                      label: StrRes.avatar,
+                      label: t.avatar,
                       isAvatar: true,
                       value: imLogic.userInfo.value.nickname,
                       url: imLogic.userInfo.value.faceURL,
                       onTap: logic.openPhotoSheet,
                     ),
                     _buildItemView(
-                      label: StrRes.name,
+                      label: t.name,
                       value: imLogic.userInfo.value.nickname,
                       onTap: logic.editMyName,
                     ),
                     _buildItemView(
-                      label: StrRes.gender,
-                      value: imLogic.userInfo.value.isMale
-                          ? StrRes.man
-                          : StrRes.woman,
+                      label: t.gender,
+                      value: imLogic.userInfo.value.isMale ? t.man : t.woman,
                       onTap: logic.selectGender,
                     ),
                     _buildItemView(
-                      label: StrRes.birthDay,
+                      label: t.birthDay,
                       value: DateUtil.formatDateMs(
                         imLogic.userInfo.value.birth ?? 0,
                         format: IMUtils.getTimeFormat1(),
@@ -59,12 +57,12 @@ class MyInfoPage extends StatelessWidget {
                 _buildCornerBgView(
                   children: [
                     _buildItemView(
-                      label: StrRes.mobile,
+                      label: t.mobile,
                       value: imLogic.userInfo.value.phoneNumber,
                       showRightArrow: false,
                     ),
                     _buildItemView(
-                      label: StrRes.email,
+                      label: t.email,
                       value: imLogic.userInfo.value.email,
                       onTap: logic.editEmail,
                     ),

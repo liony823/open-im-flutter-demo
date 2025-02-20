@@ -49,8 +49,7 @@ mixin WorldMixin {
   }
 
   WorldCountry? getCurrentCountry() {
-    Locale locale = Get.locale ?? const Locale('en', 'US'); // 获取区域设置
-    String? countryCode = locale.countryCode; // 获取国家代码
+    String? countryCode = LocaleSettings.currentLocale.countryCode; // 获取国家代码
     if (countryCode != null) {
       final country =
           WorldCountry.maybeFromCodeShort(countryCode.toLowerCase());

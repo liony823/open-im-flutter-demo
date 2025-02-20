@@ -75,22 +75,22 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
               popCtrl: popCtrl,
               menus: [
                 PopMenuInfo(
-                  text: StrRes.scan,
+                  text: t.scan,
                   icon: ImageRes.popMenuScan,
                   onTap: onScan,
                 ),
                 PopMenuInfo(
-                  text: StrRes.addFriend,
+                  text: t.addFriend,
                   icon: ImageRes.popMenuAddFriend,
                   onTap: onAddFriend,
                 ),
                 PopMenuInfo(
-                  text: StrRes.addGroup,
+                  text: t.addGroup,
                   icon: ImageRes.popMenuAddGroup,
                   onTap: onAddGroup,
                 ),
                 PopMenuInfo(
-                  text: StrRes.createGroup,
+                  text: t.createGroup,
                   icon: ImageRes.popMenuCreateGroup,
                   onTap: onCreateGroup,
                 ),
@@ -167,7 +167,7 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
         left = SizedBox(
             width: showCallBtn ? 48.w : 24.w,
             child: isMultiModel
-                ? (StrRes.cancel.toText
+                ? ((t.cancel).toText
                   ..style = Styles.ts_0C1C33_17
                   ..onTap = onCloseMultiModel)
                 : (ImageRes.backBlack.toImage
@@ -234,8 +234,8 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
     Function()? onClickAddContacts,
   })  : height = 44.h,
         backgroundColor = Styles.c_FFFFFF,
-        center = Spacer(),
-        left = StrRes.contacts.toText..style = Styles.ts_0C1C33_20_semibold,
+        center = const Spacer(),
+        left = (t.contacts).toText..style = Styles.ts_0C1C33_20_semibold,
         right = Row(
           children: [
             16.horizontalSpace,
@@ -252,7 +252,7 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
   })  : height = 44.h,
         backgroundColor = Styles.c_FFFFFF,
         center = null,
-        left = StrRes.workbench.toText..style = Styles.ts_0C1C33_20_semibold,
+        left = (t.workbench).toText..style = Styles.ts_0C1C33_20_semibold,
         right = null;
 
   TitleBar.search({

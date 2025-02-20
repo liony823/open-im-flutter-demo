@@ -1,0 +1,10 @@
+base_locale: zh-CN
+fallback_strategy: base_locale
+input_directory: lib/i18n/translations
+output_directory: lib/i18n
+output_file_name: localized.g.dart
+class_name: Localized
+maps:
+  # ...
+interfaces:
+  # ...

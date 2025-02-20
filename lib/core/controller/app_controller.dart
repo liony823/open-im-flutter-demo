@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:audio_session/audio_session.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_new_badger/flutter_new_badger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_openim_sdk/flutter_openim_sdk.dart' as im;
@@ -196,20 +195,6 @@ class AppController extends GetxController with UpgradeManger, ClientConfig {
     closeSubject();
     _audioPlayer.dispose();
     super.onClose();
-  }
-
-  Locale? getLocale() {
-    var local = Get.locale;
-    var index = DataSp.getLanguage() ?? 0;
-    switch (index) {
-      case 1:
-        local = const Locale('zh', 'CN');
-        break;
-      case 2:
-        local = const Locale('en', 'US');
-        break;
-    }
-    return local;
   }
 
   @override

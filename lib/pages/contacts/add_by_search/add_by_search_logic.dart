@@ -102,7 +102,7 @@ class AddContactsBySearchLogic extends GetxController {
   String getMatchContent(UserFullInfo userInfo) {
     final keyword = searchCtrl.text;
 
-    return sprintf(StrRes.searchNicknameIs, [userInfo.nickname]);
+    return sprintf(t.searchNicknameIs, [userInfo.nickname]);
   }
 
   String? getShowName(dynamic info) {
@@ -131,21 +131,21 @@ class AddContactsBySearchLogic extends GetxController {
 
   String getShowTitle(info) {
     if (!isSearchUser) {
-      return sprintf(StrRes.searchGroupNicknameIs, [getShowName(info)]);
+      return sprintf(t.searchGroupNicknameIs, [getShowName(info)]);
     }
 
     UserFullInfo userFullInfo = info;
     String? tips, content;
     if (int.tryParse(searchKey) != null) {
       if (searchKey.length == 11) {
-        tips = StrRes.phoneNumber;
+        tips = t.phoneNumber;
         content = userFullInfo.phoneNumber ?? searchKey;
       } else {
-        tips = StrRes.userID;
+        tips = t.userID;
         content = userFullInfo.userID;
       }
     } else {
-      tips = StrRes.searchNicknameIs;
+      tips = t.searchNicknameIs;
       content = getShowName(info);
     }
     return "$tips:$content";

@@ -35,10 +35,14 @@ class GroupMemberListLogic extends GetxController {
   late StreamSubscription mISub;
 
   bool get isMultiSelMode =>
-      opType == GroupMemberOpType.call || opType == GroupMemberOpType.at || opType == GroupMemberOpType.del;
+      opType == GroupMemberOpType.call ||
+      opType == GroupMemberOpType.at ||
+      opType == GroupMemberOpType.del;
 
   bool get excludeSelfFromList =>
-      opType == GroupMemberOpType.call || opType == GroupMemberOpType.at || opType == GroupMemberOpType.transferRight;
+      opType == GroupMemberOpType.call ||
+      opType == GroupMemberOpType.at ||
+      opType == GroupMemberOpType.transferRight;
 
   bool get isDelMember => opType == GroupMemberOpType.del;
 
@@ -125,7 +129,8 @@ class GroupMemberListLogic extends GetxController {
     }
   }
 
-  bool isChecked(GroupMembersInfo membersInfo) => checkedList.contains(membersInfo);
+  bool isChecked(GroupMembersInfo membersInfo) =>
+      checkedList.contains(membersInfo);
 
   clickMember(GroupMembersInfo membersInfo) async {
     if (opType == GroupMemberOpType.transferRight) {
@@ -145,7 +150,7 @@ class GroupMemberListLogic extends GetxController {
 
   static _transferGroupRight(GroupMembersInfo membersInfo) async {
     var confirm = await Get.dialog(CustomDialog(
-      title: sprintf(StrRes.confirmTransferGroupToUser, [membersInfo.nickname]),
+      title: sprintf(t.confirmTransferGroupToUser, [membersInfo.nickname]),
     ));
     if (confirm == true) {
       Get.back(result: membersInfo);
@@ -156,7 +161,8 @@ class GroupMemberListLogic extends GetxController {
     checkedList.remove(membersInfo);
   }
 
-  viewMemberInfo(GroupMembersInfo membersInfo) => AppNavigator.startUserProfilePane(
+  viewMemberInfo(GroupMembersInfo membersInfo) =>
+      AppNavigator.startUserProfilePane(
         userID: membersInfo.userID!,
         groupID: membersInfo.groupID,
         nickname: membersInfo.nickname,
@@ -196,7 +202,7 @@ class GroupMemberListLogic extends GetxController {
 
   static _buildEveryoneMemberInfo() => GroupMembersInfo(
         userID: OpenIM.iMManager.conversationManager.atAllTag,
-        nickname: StrRes.everyone,
+        nickname: t.everyone,
       );
 
   void selectEveryone() {

@@ -30,7 +30,8 @@ class SearchGroupMemberLogic extends GetxController {
     searchCtrl.addListener(_clearInput);
     mISub = imLogic.memberInfoChangedSubject.listen((e) {
       if (e.groupID == groupInfo.groupID) {
-        final member = memberList.firstWhereOrNull((el) => el.userID == e.userID);
+        final member =
+            memberList.firstWhereOrNull((el) => el.userID == e.userID);
         if (null != member && e.roleLevel != member.roleLevel) {
           member.roleLevel = e.roleLevel;
           memberList.refresh();
@@ -48,7 +49,8 @@ class SearchGroupMemberLogic extends GetxController {
     super.onClose();
   }
 
-  bool get isSearchNotResult => searchCtrl.text.trim().isNotEmpty && memberList.isEmpty;
+  bool get isSearchNotResult =>
+      searchCtrl.text.trim().isNotEmpty && memberList.isEmpty;
 
   _clearInput() {
     final key = searchCtrl.text.trim();
@@ -57,7 +59,8 @@ class SearchGroupMemberLogic extends GetxController {
     }
   }
 
-  Future<List<GroupMembersInfo>> _request(int offset) => LoadingView.singleton.wrap(
+  Future<List<GroupMembersInfo>> _request(int offset) =>
+      LoadingView.singleton.wrap(
         asyncFunction: () => OpenIM.iMManager.groupManager.searchGroupMembers(
           groupID: groupInfo.groupID,
           isSearchMemberNickname: true,
@@ -95,11 +98,14 @@ class SearchGroupMemberLogic extends GetxController {
   }
 
   bool hiddenMembers(GroupMembersInfo info) {
-    if (opType == GroupMemberOpType.transferRight || opType == GroupMemberOpType.at || opType == GroupMemberOpType.call) {
+    if (opType == GroupMemberOpType.transferRight ||
+        opType == GroupMemberOpType.at ||
+        opType == GroupMemberOpType.call) {
       return info.userID == OpenIM.iMManager.userID;
     } else if (opType == GroupMemberOpType.del) {
       final logic = Get.find<GroupSetupLogic>();
-      return logic.isAdmin && info.roleLevel != GroupRoleLevel.member || logic.isOwner && info.roleLevel == GroupRoleLevel.owner;
+      return logic.isAdmin && info.roleLevel != GroupRoleLevel.member ||
+          logic.isOwner && info.roleLevel == GroupRoleLevel.owner;
     }
     return false;
   }
@@ -107,7 +113,9 @@ class SearchGroupMemberLogic extends GetxController {
   clickMember(GroupMembersInfo membersInfo) {
     if (opType == GroupMemberOpType.transferRight) {
       _transferGroupRight(membersInfo);
-    } else if (opType == GroupMemberOpType.at || opType == GroupMemberOpType.call || opType == GroupMemberOpType.del) {
+    } else if (opType == GroupMemberOpType.at ||
+        opType == GroupMemberOpType.call ||
+        opType == GroupMemberOpType.del) {
       Get.back(result: membersInfo);
     } else {
       viewMemberInfo(membersInfo);
@@ -116,14 +124,15 @@ class SearchGroupMemberLogic extends GetxController {
 
   static _transferGroupRight(GroupMembersInfo membersInfo) async {
     var confirm = await Get.dialog(CustomDialog(
-      title: sprintf(StrRes.confirmTransferGroupToUser, [membersInfo.nickname]),
+      title: sprintf(t.confirmTransferGroupToUser, [membersInfo.nickname]),
     ));
     if (confirm == true) {
       Get.back(result: membersInfo);
     }
   }
 
-  viewMemberInfo(GroupMembersInfo membersInfo) => AppNavigator.startUserProfilePane(
+  viewMemberInfo(GroupMembersInfo membersInfo) =>
+      AppNavigator.startUserProfilePane(
         userID: membersInfo.userID!,
         groupID: membersInfo.groupID,
         nickname: membersInfo.nickname,

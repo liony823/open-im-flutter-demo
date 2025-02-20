@@ -67,13 +67,13 @@ class IMViews {
         mainAxisAlignment: MainAxisAlignment.start,
         items: [
           SheetItem(
-            label: StrRes.callVoice,
+            label: t.callVoice,
             icon: ImageRes.callVoice,
             alignment: MainAxisAlignment.start,
             onTap: () => onTapSheetItem.call(0),
           ),
           SheetItem(
-            label: StrRes.callVideo,
+            label: t.callVideo,
             icon: ImageRes.callVideo,
             alignment: MainAxisAlignment.start,
             onTap: () => onTapSheetItem.call(1),
@@ -92,12 +92,12 @@ class IMViews {
         mainAxisAlignment: MainAxisAlignment.start,
         items: [
           SheetItem(
-            label: StrRes.callVoice,
+            label: t.callVoice,
             icon: ImageRes.callVoice,
             onTap: () => onTapSheetItem.call(0),
           ),
           SheetItem(
-            label: StrRes.callVideo,
+            label: t.callVideo,
             icon: ImageRes.callVideo,
             onTap: () => onTapSheetItem.call(1),
           ),
@@ -133,7 +133,7 @@ class IMViews {
           ...items,
           if (fromGallery)
             SheetItem(
-              label: StrRes.toolboxAlbum,
+              label: t.toolboxAlbum,
               onTap: () async {
                 final List<AssetEntity>? assets =
                     await AssetPicker.pickAssets(Get.context!,
@@ -145,7 +145,7 @@ class IMViews {
                                 return true;
                               }
 
-                              IMViews.showToast(StrRes.supportsTypeHint);
+                              IMViews.showToast(t.supportsTypeHint);
 
                               return false;
                             }));
@@ -160,18 +160,17 @@ class IMViews {
             ),
           if (fromCamera)
             SheetItem(
-              label: StrRes.toolboxCamera,
+              label: t.toolboxCamera,
               onTap: () async {
                 final AssetEntity? entity = await CameraPicker.pickFromCamera(
                   Get.context!,
-                  locale: Get.locale,
                   pickerConfig: CameraPickerConfig(
                     enableAudio: true,
                     enableRecording: true,
                     enableScaledPreview: false,
                     maximumRecordingDuration: 60.seconds,
                     onMinimumRecordDurationNotMet: () {
-                      IMViews.showToast(StrRes.tapTooShort);
+                      IMViews.showToast(t.tapTooShort);
                     },
                   ),
                 );
@@ -249,7 +248,7 @@ class IMViews {
       BottomSheetView(
         items: [
           SheetItem(
-            label: StrRes.download,
+            label: t.download,
             onTap: () {
               Permissions.storage(() => onDownload?.call());
             },
@@ -262,7 +261,7 @@ class IMViews {
 
   static TextSpan getTimelineTextSpan(int ms) {
     int locTimeMs = DateTime.now().millisecondsSinceEpoch;
-    var languageCode = Get.locale?.languageCode ?? 'zh';
+    var languageCode = LocaleSettings.currentLocale.languageCode;
 
     if (DateUtil.isToday(ms, locMs: locTimeMs)) {
       return TextSpan(
@@ -325,7 +324,7 @@ class IMViews {
           topRight: Radius.circular(8.0.r),
         ),
         inputDecoration: InputDecoration(
-          labelText: StrRes.search,
+          labelText: t.search,
           prefixIcon: const Icon(Icons.search),
           border: OutlineInputBorder(
             borderSide: BorderSide(
@@ -362,8 +361,8 @@ class IMViews {
       itemExtent: 45.h,
       cancelTextStyle: Styles.ts_0C1C33_17,
       confirmTextStyle: Styles.ts_0089FF_17,
-      cancelText: StrRes.cancel,
-      confirmText: StrRes.confirm,
+      cancelText: t.cancel,
+      confirmText: t.confirm,
       selecteds: selected,
       builderHeader: (_) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,

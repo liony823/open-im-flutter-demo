@@ -15,32 +15,27 @@ class ChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppView(
-      builder: (locale, builder) => GetMaterialApp(
+      builder: (builder) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         enableLog: true,
         builder: builder,
         logWriterCallback: Logger.print,
         theme: MyTheme.lightTheme,
         darkTheme: MyTheme.darkTheme,
-        translations: TranslationService(),
         localizationsDelegates: const [
           TypedLocaleDelegate(),
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        fallbackLocale: TranslationService.fallbackLocale,
-        locale: locale,
-        localeResolutionCallback: (locale, list) {
-          Get.locale ??= locale;
-          return locale;
-        },
+        locale: TranslationProvider.of(context).flutterLocale,
         supportedLocales: [
-          const Locale.fromSubtags(languageCode: "bs", scriptCode: "Cyrl"),
-          const Locale.fromSubtags(languageCode: "bs", scriptCode: "Latn"),
+          ...AppLocaleUtils.supportedLocales,
+          // const Locale.fromSubtags(languageCode: "bs", scriptCode: "Cyrl"),
+          // const Locale.fromSubtags(languageCode: "bs", scriptCode: "Latn"),
           // Classic, string only based locale, or:
-          const TypedLocale(LangPor(), country: "PT"), // Loose typed.
-          const IsoLocale(LangPor(), country: CountryBra()), // Strict typed.
+          // const TypedLocale(LangPor(), country: "PT"), // Loose typed.
+          // const IsoLocale(LangPor(), country: CountryBra()), // Strict typed.
           for (final locale in kMaterialSupportedLanguages) Locale(locale),
         ],
         getPages: AppPages.routes,

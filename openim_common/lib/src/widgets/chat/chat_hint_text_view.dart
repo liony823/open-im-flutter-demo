@@ -42,7 +42,7 @@ class ChatHintTextView extends StatelessWidget {
                       )),
                 children: [
                   TextSpan(
-                    text: sprintf(StrRes.createGroupNtf, ['']),
+                    text: sprintf(t.createGroupNtf, ['']),
                     style: Styles.ts_8E9AB0_12,
                   ),
                 ],
@@ -67,7 +67,7 @@ class ChatHintTextView extends StatelessWidget {
                       )),
                 children: [
                   TextSpan(
-                    text: sprintf(StrRes.editGroupInfoNtf, ['']),
+                    text: sprintf(t.editGroupInfoNtf, ['']),
                     style: Styles.ts_8E9AB0_12,
                   ),
                 ],
@@ -92,7 +92,7 @@ class ChatHintTextView extends StatelessWidget {
                       )),
                 children: [
                   TextSpan(
-                    text: sprintf(StrRes.quitGroupNtf, ['']),
+                    text: sprintf(t.quitGroupNtf, ['']),
                     style: Styles.ts_8E9AB0_12,
                   ),
                 ],
@@ -119,7 +119,7 @@ class ChatHintTextView extends StatelessWidget {
             final b = bMap.keys.join('、');
             String pattern = '(${[a, ...bMap.keys].join('|')})';
 
-            final text = sprintf(StrRes.invitedJoinGroupNtf, [a, b]);
+            final text = sprintf(t.invitedJoinGroupNtf, [a, b]);
             final List<InlineSpan> children = <InlineSpan>[];
             text.splitMapJoin(
               RegExp(pattern),
@@ -171,7 +171,7 @@ class ChatHintTextView extends StatelessWidget {
             final b = bMap.keys.join('、');
             String pattern = '(${[a, ...bMap.keys].join('|')})';
 
-            final text = sprintf(StrRes.kickedGroupNtf, [b, a]);
+            final text = sprintf(t.kickedGroupNtf, [b, a]);
             final List<InlineSpan> children = <InlineSpan>[];
             text.splitMapJoin(
               RegExp(pattern),
@@ -221,7 +221,7 @@ class ChatHintTextView extends StatelessWidget {
                       )),
                 children: [
                   TextSpan(
-                    text: sprintf(StrRes.joinGroupNtf, ['']),
+                    text: sprintf(t.joinGroupNtf, ['']),
                     style: Styles.ts_8E9AB0_12,
                   ),
                 ],
@@ -246,7 +246,7 @@ class ChatHintTextView extends StatelessWidget {
                       )),
                 children: [
                   TextSpan(
-                    text: sprintf(StrRes.dismissGroupNtf, ['']),
+                    text: sprintf(t.dismissGroupNtf, ['']),
                     style: Styles.ts_8E9AB0_12,
                   ),
                 ],
@@ -259,7 +259,7 @@ class ChatHintTextView extends StatelessWidget {
 
             final a = ntf.opUser!.userID;
             final b = ntf.newGroupOwner!.userID;
-            final text = sprintf(StrRes.transferredGroupNtf, [a, b]);
+            final text = sprintf(t.transferredGroupNtf, [a, b]);
             final List<InlineSpan> children = <InlineSpan>[];
             text.splitMapJoin(
               RegExp('($a|$b)'),
@@ -298,7 +298,7 @@ class ChatHintTextView extends StatelessWidget {
             final a = ntf.opUser!.userID;
             final b = ntf.mutedUser!.userID;
             final c = IMUtils.mutedTime(ntf.mutedSeconds!);
-            final text = sprintf(StrRes.muteMemberNtf, [b, a, c]);
+            final text = sprintf(t.muteMemberNtf, [b, a, c]);
             final List<InlineSpan> children = <InlineSpan>[];
             text.splitMapJoin(
               RegExp('($a|$b)'),
@@ -335,7 +335,7 @@ class ChatHintTextView extends StatelessWidget {
             final ntf = MuteMemberNotification.fromJson(map);
             final a = ntf.opUser!.userID;
             final b = ntf.mutedUser!.userID;
-            final text = sprintf(StrRes.muteCancelMemberNtf, [b, a]);
+            final text = sprintf(t.muteCancelMemberNtf, [b, a]);
             final List<InlineSpan> children = <InlineSpan>[];
             text.splitMapJoin(
               RegExp('($a|$b)'),
@@ -385,7 +385,7 @@ class ChatHintTextView extends StatelessWidget {
                       )),
                 children: [
                   TextSpan(
-                    text: sprintf(StrRes.muteGroupNtf, ['']),
+                    text: sprintf(t.muteGroupNtf, ['']),
                     style: Styles.ts_8E9AB0_12,
                   ),
                 ],
@@ -410,7 +410,7 @@ class ChatHintTextView extends StatelessWidget {
                       )),
                 children: [
                   TextSpan(
-                    text: sprintf(StrRes.muteCancelGroupNtf, ['']),
+                    text: sprintf(t.muteCancelGroupNtf, ['']),
                     style: Styles.ts_8E9AB0_12,
                   ),
                 ],
@@ -419,15 +419,16 @@ class ChatHintTextView extends StatelessWidget {
           }
         case MessageType.friendApplicationApprovedNotification:
           {
-            return StrRes.friendAddedNtf.toText..style = Styles.ts_8E9AB0_12;
+            return (context.t.friendAddedNtf).toText
+              ..style = Styles.ts_8E9AB0_12;
           }
         case MessageType.burnAfterReadingNotification:
           {
             final ntf = BurnAfterReadingNotification.fromJson(map);
 
             return (ntf.isPrivate == true
-                    ? StrRes.openPrivateChatNtf
-                    : StrRes.closePrivateChatNtf)
+                    ? t.openPrivateChatNtf
+                    : t.closePrivateChatNtf)
                 .toText
               ..style = Styles.ts_8E9AB0_12;
           }
@@ -448,7 +449,7 @@ class ChatHintTextView extends StatelessWidget {
                     )),
               children: [
                 TextSpan(
-                  text: sprintf(StrRes.memberInfoChangedNtf, ['']),
+                  text: sprintf(t.memberInfoChangedNtf, ['']),
                   style: Styles.ts_8E9AB0_12,
                 ),
               ],
@@ -470,8 +471,8 @@ class ChatHintTextView extends StatelessWidget {
                     )),
               children: [
                 TextSpan(
-                  text: sprintf(StrRes.whoModifyGroupName,
-                      ['', ntf.group?.groupName ?? ""]),
+                  text: sprintf(
+                      t.whoModifyGroupName, ['', ntf.group?.groupName ?? ""]),
                   style: Styles.ts_8E9AB0_12,
                 ),
               ],

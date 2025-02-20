@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:openim_common/openim_common.dart';
 import 'package:world_countries/world_countries.dart';
 
 const sortedCountryCodeList = [
@@ -49,13 +50,15 @@ class LanguageLogic extends GetxController {
   }
 
   bool isCurrentLanguage(NaturalLanguage language) {
-    final currentLanguage = Get.locale?.languageCode ?? "en";
-    return currentLanguage == language.codeShort.toLowerCase();
+    return LocaleSettings.currentLocale.languageCode ==
+        language.codeShort.toLowerCase();
   }
 
   void onSelectLanguage(NaturalLanguage language) {
     _currentTypedLocale.value = TypedLocale.withTranslationsCache(language);
-    Get.updateLocale(language.toLocale());
+    final appLocale = language.toLocale();
+    Logger.print('appLocale: $appLocale');
+    LocaleSettings.setLocaleRaw(appLocale.toString());
   }
 
   String getTranslatedBaseLanguage(NaturalLanguage language) {

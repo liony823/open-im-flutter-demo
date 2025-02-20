@@ -17,11 +17,11 @@ class GlobalSearchLogic extends CommonSearchLogic {
   final fileMessageList = <Message>[].obs;
   final index = 0.obs;
   final tabs = [
-    StrRes.globalSearchAll,
-    StrRes.globalSearchContacts,
-    StrRes.globalSearchGroup,
-    StrRes.globalSearchChatHistory,
-    StrRes.globalSearchChatFile,
+    t.globalSearchAll,
+    t.globalSearchContacts,
+    t.globalSearchGroup,
+    t.globalSearchChatHistory,
+    t.globalSearchChatFile,
   ];
 
   int textMessagePageIndex = 1;
@@ -68,11 +68,15 @@ abstract class CommonSearchLogic extends GetxController {
 
   String get searchKey => searchCtrl.text.trim();
 
-  Future<List<FriendInfo>> searchFriend() => Apis.searchFriendInfo(searchCtrl.text.trim())
-      .then((list) => list.map((e) => FriendInfo.fromJson(e.toJson())).toList());
+  Future<List<FriendInfo>> searchFriend() =>
+      Apis.searchFriendInfo(searchCtrl.text.trim()).then(
+          (list) => list.map((e) => FriendInfo.fromJson(e.toJson())).toList());
 
-  Future<List<GroupInfo>> searchGroup() => OpenIM.iMManager.groupManager
-      .searchGroups(keywordList: [searchCtrl.text.trim()], isSearchGroupName: true, isSearchGroupID: true);
+  Future<List<GroupInfo>> searchGroup() =>
+      OpenIM.iMManager.groupManager.searchGroups(
+          keywordList: [searchCtrl.text.trim()],
+          isSearchGroupName: true,
+          isSearchGroupID: true);
 
   Future<SearchResult> searchTextMessage({
     int pageIndex = 1,

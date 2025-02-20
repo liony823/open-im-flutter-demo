@@ -16,7 +16,7 @@ class AddContactsBySearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TitleBar.back(
-        title: logic.isSearchUser ? StrRes.addFriend : StrRes.addGroup,
+        title: logic.isSearchUser ? t.addFriend : t.addGroup,
       ),
       backgroundColor: Styles.c_FFFFFF,
       body: Column(
@@ -24,9 +24,8 @@ class AddContactsBySearchPage extends StatelessWidget {
           SearchBox(
             focusNode: logic.focusNode,
             controller: logic.searchCtrl,
-            hintText: logic.isSearchUser
-                ? StrRes.searchByPhoneAndUid
-                : StrRes.searchIDAddGroup,
+            hintText:
+                logic.isSearchUser ? t.searchIDAddFriend : t.searchIDAddGroup,
             enabled: true,
             autofocus: true,
             margin: EdgeInsets.symmetric(horizontal: 17.w, vertical: 10.h),
@@ -50,9 +49,11 @@ class AddContactsBySearchPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        StrRes.scan.toText..style = Styles.ts_0C1C33_17_medium,
+                        (context.t.scan).toText
+                          ..style = Styles.ts_0C1C33_17_medium,
                         8.verticalSpace,
-                        StrRes.scanHint.toText..style = Styles.ts_8E9AB0_12,
+                        (context.t.scanHint).toText
+                          ..style = Styles.ts_8E9AB0_12,
                       ],
                     ),
                   ],
@@ -122,8 +123,7 @@ class AddContactsBySearchPage extends StatelessWidget {
 
   Widget _buildNotFoundView() => Container(
         padding: EdgeInsets.symmetric(vertical: 12.h),
-        child: (logic.isSearchUser ? StrRes.noFoundUser : StrRes.noFoundGroup)
-            .toText
+        child: (logic.isSearchUser ? t.noFoundUser : t.noFoundGroup).toText
           ..style = Styles.ts_8E9AB0_17,
       );
 }

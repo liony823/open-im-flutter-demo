@@ -15,8 +15,8 @@ class FavoriteManagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
           appBar: TitleBar.back(
-            title: StrRes.favoriteFace,
-            right: StrRes.favoriteManage.toText
+            title: t.favoriteFace,
+            right: (context.t.favoriteManage).toText
               ..onTap = logic.manage
               ..style = Styles.ts_0C1C33_17,
           ),
@@ -86,17 +86,17 @@ class FavoriteManagePage extends StatelessWidget {
         ),
         child: Row(
           children: [
-            sprintf(StrRes.favoriteCount,
-                [logic.cacheLogic.favoriteList.length]).toText
+            sprintf(t.favoriteCount, [logic.cacheLogic.favoriteList.length])
+                .toText
               ..style = Styles.ts_8E9AB0_16,
             const Spacer(),
             if (logic.isMultiModel.value)
               GestureDetector(
                 onTap: logic.delete,
                 behavior: HitTestBehavior.translucent,
-                child: sprintf(StrRes.favoriteDel, [logic.selectedList.length])
-                    .toText
-                  ..style = Styles.ts_0089FF_16,
+                child:
+                    sprintf(t.favoriteDel, [logic.selectedList.length]).toText
+                      ..style = Styles.ts_0089FF_16,
               ),
           ],
         ),

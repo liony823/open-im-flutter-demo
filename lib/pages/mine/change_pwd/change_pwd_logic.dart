@@ -20,23 +20,23 @@ class ChangePwdLogic extends GetxController {
 
   void confirm() async {
     if (oldPwdCtrl.text.isEmpty) {
-      IMViews.showToast(StrRes.plsEnterOldPwd);
+      IMViews.showToast(t.plsEnterOldPwd);
       return;
     }
     if (!IMUtils.isValidPassword(newPwdCtrl.text)) {
-      IMViews.showToast(StrRes.wrongPasswordFormat);
+      IMViews.showToast(t.wrongPasswordFormat);
       return;
     }
     if (newPwdCtrl.text.isEmpty) {
-      IMViews.showToast(StrRes.plsEnterNewPwd);
+      IMViews.showToast(t.plsEnterNewPwd);
       return;
     }
     if (againPwdCtrl.text.isEmpty) {
-      IMViews.showToast(StrRes.plsEnterConfirmPwd);
+      IMViews.showToast(t.plsEnterConfirmPwd);
       return;
     }
     if (newPwdCtrl.text != againPwdCtrl.text) {
-      IMViews.showToast(StrRes.twicePwdNoSame);
+      IMViews.showToast(t.twicePwdNoSame);
       return;
     }
 
@@ -48,7 +48,7 @@ class ChangePwdLogic extends GetxController {
       ),
     );
     if (result) {
-      IMViews.showToast(StrRes.changedSuccessfully);
+      IMViews.showToast(t.changedSuccessfully);
       await LoadingView.singleton.wrap(asyncFunction: () async {
         await OpenIM.iMManager.logout();
         await DataSp.removeLoginCertificate();

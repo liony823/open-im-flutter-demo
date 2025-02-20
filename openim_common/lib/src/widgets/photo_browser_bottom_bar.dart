@@ -50,7 +50,7 @@ class PhotoBrowserBottomBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               if (onlySave == false)
-                _buildItem(ImageRes.forwardIcon.toImage, StrRes.menuForward,
+                _buildItem(ImageRes.forwardIcon.toImage, t.menuForward,
                     onPressed: () {
                   Navigator.of(context).pop();
                   onPressedButton?.call(OperateType.forward);
@@ -59,7 +59,7 @@ class PhotoBrowserBottomBar extends StatelessWidget {
                   ImageRes.saveIcon.toImage
                     ..width = 20
                     ..height = 20,
-                  StrRes.save, onPressed: () {
+                  t.save, onPressed: () {
                 Navigator.of(context).pop();
                 onPressedButton?.call(OperateType.save);
               })
@@ -74,7 +74,7 @@ class PhotoBrowserBottomBar extends StatelessWidget {
             child: CupertinoButton(
                 padding: EdgeInsets.zero,
                 minSize: 40.h,
-                child: Text(StrRes.cancel, style: Styles.ts_0C1C33_12),
+                child: Text(t.cancel, style: Styles.ts_0C1C33_12),
                 onPressed: () {
                   Navigator.of(context).pop();
                 }),

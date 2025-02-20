@@ -15,8 +15,8 @@ class ChangePwdPage extends StatelessWidget {
     return TouchCloseSoftKeyboard(
       child: Scaffold(
         appBar: TitleBar.back(
-          title: StrRes.changePassword,
-          right: StrRes.determine.toText
+          title: t.changePassword,
+          right: (context.t.determine).toText
             ..style = Styles.ts_0C1C33_17
             ..onTap = logic.confirm,
         ),
@@ -26,7 +26,7 @@ class ChangePwdPage extends StatelessWidget {
             children: [
               12.verticalSpace,
               _buildItemView(
-                label: StrRes.oldPwd,
+                label: t.oldPwd,
                 controller: logic.oldPwdCtrl,
                 autofocus: true,
                 isTopRadius: true,
@@ -37,7 +37,7 @@ class ChangePwdPage extends StatelessWidget {
                 height: .5,
               ),
               _buildItemView(
-                label: StrRes.newPwd,
+                label: t.newPwd,
                 controller: logic.newPwdCtrl,
               ),
               Container(
@@ -46,7 +46,7 @@ class ChangePwdPage extends StatelessWidget {
                 height: .5,
               ),
               _buildItemView(
-                label: StrRes.confirmNewPwd,
+                label: t.confirmNewPwd,
                 controller: logic.againPwdCtrl,
                 isBottomRadius: true,
               ),

@@ -45,7 +45,7 @@ class _ChatVoiceRecordLayoutState extends State<ChatVoiceRecordLayout> {
     } else {
       if (sec == 0) {
         File(path).delete();
-        IMViews.showToast(StrRes.talkTooShort);
+        IMViews.showToast(t.talkTooShort);
       } else {
         widget.onCompleted?.call(sec, path);
       }
@@ -122,8 +122,8 @@ class _ChatVoiceRecordLayoutState extends State<ChatVoiceRecordLayout> {
                         ..style = Styles.ts_FFFFFF_12,
                       Expanded(child: _lottieAnimWidget),
                       (_isCancelSend
-                              ? StrRes.liftFingerToCancelSend
-                              : StrRes.releaseToSendSwipeUpToCancel)
+                              ? t.liftFingerToCancelSend
+                              : t.releaseToSendSwipeUpToCancel)
                           .toText
                         ..style = Styles.ts_FFFFFF_12,
                     ],

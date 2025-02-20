@@ -351,7 +351,7 @@ class _ChatItemViewState extends State<ChatItemView> {
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: widget.onClickItemView,
-        child: child ?? ChatText(text: StrRes.unsupportedMessage),
+        child: child ?? ChatText(text: t.unsupportedMessage),
       ),
     );
   }
@@ -360,35 +360,35 @@ class _ChatItemViewState extends State<ChatItemView> {
         if (widget.enabledCopyMenu)
           MenuInfo(
             icon: ImageRes.menuCopy,
-            text: StrRes.menuCopy,
+            text: t.menuCopy,
             enabled: widget.enabledCopyMenu,
             onTap: widget.onTapCopyMenu,
           ),
         if (widget.enabledDelMenu)
           MenuInfo(
             icon: ImageRes.menuDel,
-            text: StrRes.menuDel,
+            text: t.menuDel,
             enabled: widget.enabledDelMenu,
             onTap: widget.onTapDelMenu,
           ),
         if (widget.enabledForwardMenu)
           MenuInfo(
             icon: ImageRes.menuForward,
-            text: StrRes.menuForward,
+            text: t.menuForward,
             enabled: widget.enabledForwardMenu,
             onTap: widget.onTapForwardMenu,
           ),
         if (widget.enabledRevokeMenu)
           MenuInfo(
             icon: ImageRes.menuRevoke,
-            text: StrRes.menuRevoke,
+            text: t.menuRevoke,
             enabled: widget.enabledRevokeMenu,
             onTap: widget.onTapRevokeMenu,
           ),
         if (widget.enabledAddEmojiMenu)
           MenuInfo(
             icon: ImageRes.menuAddFace,
-            text: StrRes.menuAdd,
+            text: t.menuAdd,
             enabled: widget.enabledAddEmojiMenu,
             onTap: widget.onTapAddEmojiMenu,
           ),

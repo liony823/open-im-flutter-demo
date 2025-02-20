@@ -23,7 +23,8 @@ class AboutUsLogic extends GetxController {
     final appName = packageInfo.appName;
     final buildNumber = packageInfo.buildNumber;
 
-    displayVersion.value = '$appName $version+$buildNumber SDK: ${OpenIM.version}';
+    displayVersion.value =
+        '$appName $version+$buildNumber SDK: ${OpenIM.version}';
   }
 
   void checkUpdate() {
@@ -31,7 +32,7 @@ class AboutUsLogic extends GetxController {
   }
 
   void copyVersion() {
-    IMViews.showToast(StrRes.copySuccessfully);
+    IMViews.showToast(t.copySuccessfully);
     Clipboard.setData(ClipboardData(text: displayVersion.value));
   }
 

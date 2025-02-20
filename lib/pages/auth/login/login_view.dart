@@ -45,9 +45,10 @@ class LoginPage extends StatelessWidget {
                   ..width = 64.w
                   ..height = 64.h,
                 16.verticalSpace,
-                StrRes.welcome.toText..style = Styles.ts_0089FF_17_semibold,
+                (context.t["welcome"] as String).toText
+                  ..style = Styles.ts_0089FF_17_semibold,
                 52.verticalSpace,
-                _buildFormView(),
+                _buildFormView(context),
                 UserAgreementWithPrivacyPolicy(
                   isChecked: logic.isAgreementChecked.value,
                   onCheck: logic.onAgreementChecked,
@@ -60,17 +61,17 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _buildFormView() {
+  Widget _buildFormView(BuildContext context) {
     if (logic.loginType == ClientConfigs.appLoginWithUserAndPhone) {
       return Expanded(
           child: Column(
         spacing: 24.w,
         children: [
           LoginTabBar(controller: logic.tabController!, tabs: [
-            StrRes.loginWithUser,
-            StrRes.loginWithPhone,
+            context.t.loginWithUser,
+            context.t.loginWithPhone,
           ]),
-          Expanded(child: _buildLoginWithUserAndPhoneTabView()),
+          Expanded(child: _buildLoginWithUserAndPhoneTabView(context)),
         ],
       ));
     } else if (logic.loginType == ClientConfigs.appLoginWithPhone) {
@@ -79,8 +80,8 @@ class LoginPage extends StatelessWidget {
         spacing: 24.w,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          LoginTab(title: StrRes.loginWithPhone),
-          _buildPhoneForm(),
+          LoginTab(title: context.t.loginWithPhone),
+          _buildPhoneForm(context),
         ],
       ));
     } else if (logic.loginType == ClientConfigs.appLoginWithUser) {
@@ -89,8 +90,8 @@ class LoginPage extends StatelessWidget {
         spacing: 24.w,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          LoginTab(title: StrRes.loginWithUser),
-          _buildUserForm(),
+          LoginTab(title: context.t.loginWithUser),
+          _buildUserForm(context),
         ],
       ));
     } else if (logic.loginType == ClientConfigs.appLoginWithAutoRegister) {
@@ -99,11 +100,11 @@ class LoginPage extends StatelessWidget {
         spacing: 24.w,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          LoginTab(title: StrRes.loginWithAutoRegister),
-          _buildAutoRegisterForm(),
+          LoginTab(title: context.t.loginWithAutoRegister),
+          _buildAutoRegisterForm(context),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: _buildLoginButton(),
+            child: _buildLoginButton(context),
           ),
         ],
       ));
@@ -112,18 +113,18 @@ class LoginPage extends StatelessWidget {
   }
 
   /// 用户名和手机号登录tabview
-  Widget _buildLoginWithUserAndPhoneTabView() {
+  Widget _buildLoginWithUserAndPhoneTabView(BuildContext context) {
     return TabBarView(
       controller: logic.tabController,
       children: [
-        _buildUserForm(),
-        _buildPhoneForm(),
+        _buildUserForm(context),
+        _buildPhoneForm(context),
       ],
     );
   }
 
   /// 自动注册登录
-  Widget _buildAutoRegisterForm() {
+  Widget _buildAutoRegisterForm(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
       child: SizedBox(
@@ -134,7 +135,7 @@ class LoginPage extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 36.w, vertical: 18.h),
             child: Center(
-              child: StrRes.loginWithAutoRegisterHint.toText
+              child: (context.t["loginWithAutoRegisterHint"] as String).toText
                 ..style = Styles.ts_000033_14_medium,
             ),
           ),
@@ -144,7 +145,7 @@ class LoginPage extends StatelessWidget {
   }
 
   /// 手机号登录
-  Widget _buildPhoneForm() {
+  Widget _buildPhoneForm(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
       child: FormBuilder(
@@ -152,9 +153,9 @@ class LoginPage extends StatelessWidget {
         child: Column(
           children: [
             FormInput.phone(
-              label: StrRes.phoneNumber,
+              label: context.t.phoneNumber,
               labelIcon: EvaIcons.phoneOutline,
-              hintText: StrRes.plsEnterPhoneNumber,
+              hintText: context.t.plsEnterPhoneNumber,
               prefixIcon: InputPhoneCode(
                 onOpenPicker: logic.showPhoneCodePicker,
                 areaCode: logic.areaCode.value,
@@ -163,30 +164,30 @@ class LoginPage extends StatelessWidget {
               textInputAction: TextInputAction.next,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return StrRes.plsEnterPhoneNumber.tr;
+                  return context.t.plsEnterPhoneNumber;
                 }
                 return null;
               },
             ),
             34.verticalSpace,
             FormInput.password(
-              label: StrRes.password,
+              label: context.t.password,
               labelIcon: EvaIcons.lockOutline,
-              hintText: StrRes.plsEnterPassword,
+              hintText: context.t.plsEnterPassword,
               name: "password",
               textInputAction: TextInputAction.done,
               onSubmitted: (_) => logic.login(),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return StrRes.plsEnterPassword.tr;
+                  return context.t.plsEnterPassword;
                 }
                 return null;
               },
             ),
             12.verticalSpace,
-            _buildFormBottomView(),
+            _buildFormBottomView(context),
             24.verticalSpace,
-            _buildLoginButton()
+            _buildLoginButton(context)
           ],
         ),
       ),
@@ -194,7 +195,7 @@ class LoginPage extends StatelessWidget {
   }
 
   /// 用户名登录
-  Widget _buildUserForm() {
+  Widget _buildUserForm(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       child: FormBuilder(
@@ -223,7 +224,8 @@ class LoginPage extends StatelessWidget {
                         Row(
                           spacing: 8.w,
                           children: [
-                            StrRes.account.toText..style = Styles.ts_999999_10,
+                            context.t["account"].toText
+                              ..style = Styles.ts_999999_10,
                             (item.account ?? '').toText
                               ..style = Styles.ts_333333_14,
                           ],
@@ -231,7 +233,8 @@ class LoginPage extends StatelessWidget {
                         Row(
                           spacing: 8.w,
                           children: [
-                            StrRes.nickname.toText..style = Styles.ts_999999_10,
+                            context.t["nickname"].toText
+                              ..style = Styles.ts_999999_10,
                             (item.nickname ?? '').toText
                               ..style = Styles.ts_333333_12,
                           ],
@@ -253,14 +256,14 @@ class LoginPage extends StatelessWidget {
               builder: (context, controller, focusNode) => FormInput(
                 controller: controller,
                 focusNode: focusNode,
-                label: StrRes.account,
+                label: context.t.account,
                 labelIcon: EvaIcons.personOutline,
-                hintText: StrRes.plsEnterAccount,
+                hintText: context.t.plsEnterAccount,
                 textInputAction: TextInputAction.next,
                 name: "account",
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return StrRes.plsEnterAccount.tr;
+                    return context.t.plsEnterAccount;
                   }
                   return null;
                 },
@@ -268,23 +271,23 @@ class LoginPage extends StatelessWidget {
             ),
             34.verticalSpace,
             FormInput.password(
-              label: StrRes.password,
+              label: context.t.password,
               labelIcon: EvaIcons.lockOutline,
-              hintText: StrRes.plsEnterPassword,
+              hintText: context.t.plsEnterPassword,
               textInputAction: TextInputAction.done,
               name: "password",
               onSubmitted: (_) => logic.login(),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return StrRes.plsEnterPassword.tr;
+                  return context.t.plsEnterPassword;
                 }
                 return null;
               },
             ),
             12.verticalSpace,
-            _buildFormBottomView(),
+            _buildFormBottomView(context),
             24.verticalSpace,
-            _buildLoginButton(),
+            _buildLoginButton(context),
           ],
         ),
       ),
@@ -292,29 +295,31 @@ class LoginPage extends StatelessWidget {
   }
 
   /// 登录按钮
-  Widget _buildLoginButton() {
+  Widget _buildLoginButton(BuildContext context) {
     return AdaptiveButton(
-      text: StrRes.login,
+      text: context.t.login,
       onTap: logic.login,
       loading: logic.loading.value,
     );
   }
 
   /// 忘记密码和立即注册
-  Widget _buildFormBottomView() {
+  Widget _buildFormBottomView(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         CupertinoButton(
           onPressed: AppNavigator.startForgetPassword,
-          child: StrRes.forgetPassword.toText..style = Styles.ts_0089FF_12,
+          child: (context.t["forgetPassword"] as String).toText
+            ..style = Styles.ts_0089FF_12,
         ),
         CupertinoButton(
             onPressed: () {
               AppNavigator.startRegister();
             },
-            child: StrRes.registerNow.toText..style = Styles.ts_2F54EB_12),
+            child: (context.t["registerNow"] as String).toText
+              ..style = Styles.ts_2F54EB_12),
       ],
     );
   }

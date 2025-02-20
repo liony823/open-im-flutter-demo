@@ -21,7 +21,6 @@ export 'src/models/user_info.dart';
 export 'src/models/define.dart';
 export 'src/models/signaling_info.dart';
 export 'src/res/images.dart';
-export 'src/res/strings.dart';
 export 'src/res/styles.dart';
 export 'src/res/my_theme.dart';
 export 'src/urls.dart';
@@ -117,3 +116,6 @@ export 'src/widgets/form_input.dart';
 export 'src/widgets/rectdicator.dart';
 export 'src/widgets/dialog/alert_agreement.dart';
 export 'src/controller/push_controller.dart';
+
+
+export 'i18n/localized.g.dart';

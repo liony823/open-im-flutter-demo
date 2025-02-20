@@ -31,23 +31,23 @@ class MinePage extends StatelessWidget {
             10.verticalSpace,
             _buildItemView(
               icon: ImageRes.myInfo,
-              label: StrRes.myInfo,
+              label: t.myInfo,
               onTap: logic.viewMyInfo,
               isTopRadius: true,
             ),
             _buildItemView(
               icon: ImageRes.accountSetup,
-              label: StrRes.accountSetup,
+              label: t.accountSetup,
               onTap: logic.accountSetup,
             ),
             _buildItemView(
               icon: ImageRes.aboutUs,
-              label: StrRes.aboutUs,
+              label: t.aboutUs,
               onTap: logic.aboutUs,
             ),
             _buildItemView(
               icon: ImageRes.logout,
-              label: StrRes.logout,
+              label: t.logout,
               onTap: logic.logout,
               isBottomRadius: true,
             ),

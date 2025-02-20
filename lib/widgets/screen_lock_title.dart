@@ -13,12 +13,12 @@ class ScreenLockTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Text(StrRes.plsEnterPassword, style: Styles.ts_FFFFFF_17),
+      Text(t.plsEnterPassword, style: Styles.ts_FFFFFF_17),
       StreamBuilder(
         builder: (context, AsyncSnapshot<String?> snapshot) {
           if (snapshot.hasData) {
             return Text(
-              sprintf(StrRes.lockPwdErrorHint, [snapshot.data]),
+              sprintf(t.lockPwdErrorHint, [snapshot.data]),
               style: Styles.ts_FF381F_17,
             );
           }

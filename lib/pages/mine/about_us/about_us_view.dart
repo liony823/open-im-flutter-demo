@@ -17,7 +17,7 @@ class AboutUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.aboutUs),
+      appBar: TitleBar.back(title: t.aboutUs),
       backgroundColor: Styles.c_F8F9FA,
       body: Column(
         children: [
@@ -54,7 +54,7 @@ class AboutUsPage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
                       children: [
-                        StrRes.checkNewVersion.toText
+                        (context.t.checkNewVersion).toText
                           ..style = Styles.ts_0C1C33_17,
                         const Spacer(),
                         ImageRes.rightArrow.toImage
@@ -72,7 +72,7 @@ class AboutUsPage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
                       children: [
-                        StrRes.uploadErrorLog.toText
+                        (context.t.uploadErrorLog).toText
                           ..style = Styles.ts_0C1C33_17,
                         const Spacer(),
                         ImageRes.rightArrow.toImage
@@ -84,13 +84,13 @@ class AboutUsPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   behavior: HitTestBehavior.translucent,
-                  onTap: _showInputDialog,
+                  onTap: () => _showInputDialog(context),
                   child: Container(
                     height: 57.h,
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
                       children: [
-                        StrRes.uploadLogWithLine.toText
+                        (context.t.uploadLogWithLine).toText
                           ..style = Styles.ts_0C1C33_17,
                         const Spacer(),
                         ImageRes.rightArrow.toImage
@@ -108,12 +108,12 @@ class AboutUsPage extends StatelessWidget {
     );
   }
 
-  void _showInputDialog() {
+  void _showInputDialog(BuildContext context) {
     showDialog(
         context: Get.context!,
         builder: (ctx) {
           return CupertinoAlertDialog(
-            title: StrRes.setLines.toText..style = Styles.ts_0C1C33_17,
+            title: (context.t.setLines).toText..style = Styles.ts_0C1C33_17,
             content: CupertinoTextField(
               controller: logic.lineTextController,
               placeholder: logic.lineTextController.text,
@@ -121,7 +121,7 @@ class AboutUsPage extends StatelessWidget {
             ),
             actions: [
               CupertinoButton(
-                child: StrRes.confirm.toText..style = Styles.ts_0C1C33_17,
+                child: (context.t.confirm).toText..style = Styles.ts_0C1C33_17,
                 onPressed: () {
                   navigator?.pop();
                   final lineStr = logic.lineTextController.text.trim();

@@ -15,17 +15,17 @@ class GroupRequestsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleBar.back(title: StrRes.newGroupRequest),
+      appBar: TitleBar.back(title: t.newGroupRequest),
       backgroundColor: Styles.c_F8F9FA,
       body: Obx(() => ListView.builder(
             padding: EdgeInsets.only(top: 10.h),
             itemCount: logic.list.length,
-            itemBuilder: (_, index) => _buildItemView(logic.list[index]),
+            itemBuilder: (_, index) => _buildItemView(context, logic.list[index]),
           )),
     );
   }
 
-  Widget _buildItemView(GroupApplicationInfo info) {
+  Widget _buildItemView(BuildContext context, GroupApplicationInfo info) {
     final isISendRequest = info.userID == OpenIM.iMManager.userID;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
@@ -59,7 +59,7 @@ class GroupRequestsPage extends StatelessWidget {
                       if (!logic.isInvite(info))
                         RichText(
                           text: TextSpan(
-                            text: StrRes.applyJoin,
+                            text: context.t.applyJoin,
                             style: Styles.ts_8E9AB0_14,
                             children: [
                               WidgetSpan(child: 2.horizontalSpace),
@@ -78,7 +78,7 @@ class GroupRequestsPage extends StatelessWidget {
                             children: [
                               WidgetSpan(child: 2.horizontalSpace),
                               TextSpan(
-                                text: StrRes.invite,
+                                text: context.t.invite,
                                 style: Styles.ts_8E9AB0_14,
                               ),
                               WidgetSpan(child: 2.horizontalSpace),
@@ -88,7 +88,7 @@ class GroupRequestsPage extends StatelessWidget {
                               ),
                               WidgetSpan(child: 2.horizontalSpace),
                               TextSpan(
-                                text: StrRes.joinIn,
+                                text: context.t.joinIn,
                                 style: Styles.ts_8E9AB0_14,
                               ),
                               WidgetSpan(child: 2.horizontalSpace),
@@ -102,11 +102,10 @@ class GroupRequestsPage extends StatelessWidget {
                       if (null != IMUtils.emptyStrToNull(info.reqMsg))
                         Padding(
                           padding: EdgeInsets.only(top: 4.h),
-                          child:
-                              sprintf(StrRes.applyReason, [info.reqMsg!]).toText
-                                ..style = Styles.ts_8E9AB0_14
-                                ..maxLines = 1
-                                ..overflow = TextOverflow.ellipsis,
+                          child: sprintf(context.t.applyReason, [info.reqMsg!]).toText
+                            ..style = Styles.ts_8E9AB0_14
+                            ..maxLines = 1
+                            ..overflow = TextOverflow.ellipsis,
                         ),
                     ],
                   ),
@@ -120,18 +119,19 @@ class GroupRequestsPage extends StatelessWidget {
               ..height = 20.h,
           if (info.handleResult == 0 && !isISendRequest)
             Button(
-              text: StrRes.lookOver,
+              text: t.lookOver,
               textStyle: Styles.ts_FFFFFF_14,
               height: 28.h,
               padding: EdgeInsets.symmetric(horizontal: 13.w),
               onTap: () => logic.handle(info),
             ),
           if (info.handleResult == 0 && isISendRequest)
-            StrRes.waitingForVerification.toText..style = Styles.ts_8E9AB0_14,
+            (context.t.waitingForVerification).toText
+              ..style = Styles.ts_8E9AB0_14,
           if (info.handleResult == -1)
-            StrRes.rejected.toText..style = Styles.ts_8E9AB0_14,
+            (context.t.rejected).toText..style = Styles.ts_8E9AB0_14,
           if (info.handleResult == 1)
-            StrRes.approved.toText..style = Styles.ts_8E9AB0_14,
+            (context.t.approved).toText..style = Styles.ts_8E9AB0_14,
         ],
       ),
     );

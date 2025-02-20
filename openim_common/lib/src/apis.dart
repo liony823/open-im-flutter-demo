@@ -354,7 +354,7 @@ class Apis {
         'invitationCode': invitationCode
       },
     ).then((value) {
-      IMViews.showToast(StrRes.sentSuccessfully);
+      IMViews.showToast(t.sentSuccessfully);
       return true;
     }).catchError((e, s) {
       Logger.print('e:$e s:$s');
@@ -500,11 +500,11 @@ class Apis {
 
   static void _catchError(Object e, StackTrace s, {bool forceBack = true}) {
     if (e is ApiException) {
-      var msg = '${e.code}'.tr;
+      var msg = '${e.code}';
       if (msg.isEmpty || e.code.toString() == msg) {
         msg = e.message ?? 'Unkonw error';
       } else if (e.code == 1004) {
-        msg = sprintf(msg, [StrRes.meeting]);
+        msg = sprintf(msg, [t.meeting]);
       }
 
       IMViews.showToast(msg);

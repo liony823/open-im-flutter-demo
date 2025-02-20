@@ -15,7 +15,7 @@ class ChatRevokeView extends StatelessWidget {
 
   bool get _isISend => message.sendID == OpenIM.iMManager.userID;
 
-  String get _who => _isISend ? StrRes.you : message.senderNickname ?? '';
+  String get _who => _isISend ? t.you : message.senderNickname ?? '';
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +31,14 @@ class ChatRevokeView extends StatelessWidget {
     } else {
       if (info.revokerID == OpenIM.iMManager.userID) {
         revoker = info.revokerID!;
-        value[revoker] = StrRes.you;
+        value[revoker] = t.you;
       } else {
         revoker = info.revokerID!;
         value[revoker] = info.revokerNickname!;
       }
       if (info.sourceMessageSendID == OpenIM.iMManager.userID) {
         sender = info.sourceMessageSendID!;
-        value[sender] = StrRes.you;
+        value[sender] = t.you;
       } else {
         sender = info.sourceMessageSendID!;
         value[sender] = info.sourceMessageSenderNickname!;
@@ -47,7 +47,7 @@ class ChatRevokeView extends StatelessWidget {
 
     final List<InlineSpan> children = <InlineSpan>[];
     if (sender != null) {
-      final text = sprintf(StrRes.aRevokeBMsg, [revoker, sender]);
+      final text = sprintf(t.aRevokeBMsg, [revoker, sender]);
       text.splitMapJoin(
         RegExp('($revoker|$sender)'),
         onMatch: (match) {
@@ -85,7 +85,7 @@ class ChatRevokeView extends StatelessWidget {
                 ),
         ))
         ..add(TextSpan(
-          text: StrRes.revokeMsg,
+          text: t.revokeMsg,
           style: Styles.ts_8E9AB0_12,
         ));
     }

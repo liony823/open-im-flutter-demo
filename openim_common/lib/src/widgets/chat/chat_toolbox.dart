@@ -25,39 +25,39 @@ class ChatToolBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       ToolboxItemInfo(
-        text: StrRes.toolboxAlbum,
+        text: t.toolboxAlbum,
         icon: ImageRes.toolboxAlbum,
         onTap: () => Permissions.photos(onTapAlbum),
       ),
       ToolboxItemInfo(
-        text: StrRes.toolboxCamera,
+        text: t.toolboxCamera,
         icon: ImageRes.toolboxCamera,
         onTap: () => Permissions.cameraAndMicrophone(onTapCamera),
       ),
       if (onTapCall != null)
         ToolboxItemInfo(
-          text: StrRes.toolboxCall,
+          text: t.toolboxCall,
           icon: ImageRes.toolboxCall,
           onTap: () => Permissions.cameraAndMicrophone(onTapCall),
         ),
       ToolboxItemInfo(
-        text: StrRes.toolboxFile,
+        text: t.toolboxFile,
         icon: ImageRes.toolboxFile,
         onTap: () => Permissions.storage(onTapFile),
       ),
       ToolboxItemInfo(
-        text: StrRes.toolboxCard,
+        text: t.toolboxCard,
         icon: ImageRes.toolboxCard,
         onTap: onTapCard,
       ),
       ToolboxItemInfo(
-        text: StrRes.toolboxLocation,
+        text: t.toolboxLocation,
         icon: ImageRes.toolboxLocation,
         onTap: () => Permissions.location(onTapLocation),
       ),
       if (onTapDirectionalMessage != null)
         ToolboxItemInfo(
-          text: StrRes.toolboxDirectionalMessage,
+          text: t.toolboxDirectionalMessage,
           icon: ImageRes.toolboxDirectionalMessage,
           onTap: onTapDirectionalMessage,
         ),

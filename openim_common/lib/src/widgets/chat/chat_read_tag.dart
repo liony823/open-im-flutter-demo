@@ -28,7 +28,7 @@ class ChatReadTagView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (message.isSingleChat) {
-      return (isRead ? StrRes.hasRead : StrRes.unread).toText
+      return (isRead ? t.hasRead : t.unread).toText
         ..style = (isRead ? Styles.ts_8E9AB0_12 : Styles.ts_0089FF_12);
     } else {
       if (_needReadMemberCount == 0) return const SizedBox();
@@ -36,11 +36,10 @@ class ChatReadTagView extends StatelessWidget {
       return GestureDetector(
         onTap: onTap,
         behavior: HitTestBehavior.translucent,
-        child: (isAllRead
-                ? StrRes.allRead
-                : sprintf(StrRes.nPersonUnRead, [_unreadCount]))
-            .toText
-          ..style = (isAllRead ? Styles.ts_8E9AB0_12 : Styles.ts_0089FF_12),
+        child:
+            (isAllRead ? t.allRead : sprintf(t.nPersonUnRead, [_unreadCount]))
+                .toText
+              ..style = (isAllRead ? Styles.ts_8E9AB0_12 : Styles.ts_0089FF_12),
       );
     }
   }

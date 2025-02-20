@@ -19,7 +19,8 @@ enum SelAction {
   recommend,
 }
 
-class SelectContactsLogic extends GetxController implements OrganizationMultiSelBridge {
+class SelectContactsLogic extends GetxController
+    implements OrganizationMultiSelBridge {
   final checkedList = <String, dynamic>{}.obs; // 已经选中的
   final defaultCheckedIDList = <String>{}.obs; // 默认选中，且不能修改
   List<String>? excludeIDList; // 剔除某些数据
@@ -58,10 +59,15 @@ class SelectContactsLogic extends GetxController implements OrganizationMultiSel
   @override
   bool get isMultiModel => action != SelAction.carte;
 
-  bool get hiddenGroup => action == SelAction.carte || action == SelAction.crateGroup || action == SelAction.addMember;
+  bool get hiddenGroup =>
+      action == SelAction.carte ||
+      action == SelAction.crateGroup ||
+      action == SelAction.addMember;
 
   bool get hiddenConversations =>
-      action == SelAction.carte || action == SelAction.crateGroup || action == SelAction.addMember;
+      action == SelAction.carte ||
+      action == SelAction.crateGroup ||
+      action == SelAction.addMember;
 
   _queryConversationList() async {
     if (!hiddenConversations) {
@@ -69,14 +75,18 @@ class SelectContactsLogic extends GetxController implements OrganizationMultiSel
 
       final futures = cons.map((con) async {
         if (con.isGroupChat) {
-          final result = await OpenIM.iMManager.groupManager.isJoinedGroup(groupID: con.groupID!);
+          final result = await OpenIM.iMManager.groupManager
+              .isJoinedGroup(groupID: con.groupID!);
           return result ? con : null;
         }
-        return con.conversationType == ConversationType.notification ? null : con;
+        return con.conversationType == ConversationType.notification
+            ? null
+            : con;
       }).toList();
 
       final results = await Future.wait(futures);
-      final filteredCons = results.where((con) => con != null).cast<ConversationInfo>().toList();
+      final filteredCons =
+          results.where((con) => con != null).cast<ConversationInfo>().toList();
 
       conversationList.addAll(filteredCons);
     }
@@ -125,7 +135,8 @@ class SelectContactsLogic extends GetxController implements OrganizationMultiSel
   bool isDefaultChecked(info) => defaultCheckedIDList.contains(parseID(info));
 
   @override
-  Function()? onTap(dynamic info) => isDefaultChecked(info) ? null : () => toggleChecked(info);
+  Function()? onTap(dynamic info) =>
+      isDefaultChecked(info) ? null : () => toggleChecked(info);
 
   @override
   removeItem(dynamic info) {
@@ -211,7 +222,7 @@ class SelectContactsLogic extends GetxController implements OrganizationMultiSel
   confirmSelectedItem(dynamic info) async {
     if (action == SelAction.carte) {
       final sure = await Get.dialog(CustomDialog(
-        title: StrRes.sendCarteConfirmHint,
+        title: t.sendCarteConfirmHint,
       ));
       if (sure == true) {
         Get.back(result: UserInfo.fromJson(info.toJson()));
@@ -222,5 +233,6 @@ class SelectContactsLogic extends GetxController implements OrganizationMultiSel
   bool get enabledConfirmButton => checkedList.isNotEmpty;
 
   @override
-  Widget get checkedConfirmView => isMultiModel ? CheckedConfirmView() : const SizedBox();
+  Widget get checkedConfirmView =>
+      isMultiModel ? CheckedConfirmView() : const SizedBox();
 }

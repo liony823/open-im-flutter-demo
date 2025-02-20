@@ -34,14 +34,14 @@ class UserProfilePanelPage extends StatelessWidget {
               SingleChildScrollView(
                 child: Column(
                   children: [
-                    _buildBaseInfoView(),
-                    if (logic.isGroupMemberPage) _buildEnterGroupMethodView(),
+                    _buildBaseInfoView(context),
+                    if (logic.isGroupMemberPage) _buildEnterGroupMethodView(context),
                     if (logic.isFriendship ||
                         logic.isMyself ||
                         logic.isGroupMemberPage &&
                             !logic.notAllowLookGroupMemberProfiles.value)
                       _buildItemView(
-                        label: StrRes.personalInfo,
+                        label: t.personalInfo,
                         showRightArrow: true,
                         onTap: logic.viewPersonalInfo,
                       ),
@@ -59,7 +59,7 @@ class UserProfilePanelPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBaseInfoView() => Container(
+  Widget _buildBaseInfoView(BuildContext context) => Container(
         color: Styles.c_FFFFFF,
         height: 80.h,
         margin: EdgeInsets.only(bottom: 10.h),
@@ -123,7 +123,7 @@ class UserProfilePanelPage extends StatelessWidget {
                             ..height = 21.h
                             ..color = Styles.c_FFFFFF,
                           2.horizontalSpace,
-                          StrRes.add.toText..style = Styles.ts_FFFFFF_14,
+                          (context.t.add).toText..style = Styles.ts_FFFFFF_14,
                         ],
                       ),
                     ),
@@ -134,7 +134,7 @@ class UserProfilePanelPage extends StatelessWidget {
         ),
       );
 
-  Widget _buildEnterGroupMethodView() {
+  Widget _buildEnterGroupMethodView(BuildContext context) {
     if (logic.joinGroupTime.value == 0 && logic.joinGroupMethod.value.isEmpty) {
       return Container();
     }
@@ -148,7 +148,7 @@ class UserProfilePanelPage extends StatelessWidget {
         children: [
           if (logic.joinGroupTime.value > 0)
             _buildTabRowView(
-              label: StrRes.joinGroupDate,
+              label: t.joinGroupDate,
               value: DateUtil.formatDateMs(
                 logic.joinGroupTime.value,
                 format: DateFormats.zh_y_mo_d,
@@ -156,7 +156,7 @@ class UserProfilePanelPage extends StatelessWidget {
             ),
           if (logic.joinGroupMethod.value.isNotEmpty)
             _buildTabRowView(
-              label: StrRes.joinGroupMethod,
+              label: t.joinGroupMethod,
               value: logic.joinGroupMethod.value,
             ),
         ],

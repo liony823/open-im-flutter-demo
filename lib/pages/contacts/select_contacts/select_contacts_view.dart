@@ -36,12 +36,12 @@ class SelectContactsPage extends StatelessWidget {
                       delegate: SliverChildListDelegate(
                         [
                           _buildCategoryItemView(
-                            label: StrRes.myFriend,
+                            label: t.myFriend,
                             onTap: logic.selectFromMyFriend,
                           ),
                           if (!logic.hiddenGroup)
                             _buildCategoryItemView(
-                              label: StrRes.myGroup,
+                              label: t.myGroup,
                               onTap: logic.selectFromMyGroup,
                             ),
                         ],
@@ -54,7 +54,7 @@ class SelectContactsPage extends StatelessWidget {
                           height: 29.h,
                           alignment: Alignment.centerLeft,
                           margin: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: StrRes.recentConversations.toText
+                          child: (context.t.recentConversations).toText
                             ..style = Styles.ts_8E9AB0_12,
                         ),
                       ),
@@ -171,7 +171,7 @@ class CheckedConfirmView extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          sprintf(StrRes.selectedPeopleCount,
+                          sprintf(t.selectedPeopleCount,
                               [logic.checkedList.length]).toText
                             ..style = Styles.ts_0089FF_14,
                           ImageRes.expandUpArrow.toImage
@@ -192,7 +192,7 @@ class CheckedConfirmView extends StatelessWidget {
                 height: 40.h,
                 enabled: logic.enabledConfirmButton,
                 padding: EdgeInsets.symmetric(horizontal: 14.w),
-                text: sprintf(StrRes.confirmSelectedPeople, [
+                text: sprintf(t.confirmSelectedPeople, [
                   logic.checkedList.length,
                   '999',
                 ]),
@@ -224,15 +224,15 @@ class SelectedContactsListView extends StatelessWidget {
             children: [
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: BorderDirectional(
                     bottom: BorderSide(color: Styles.c_E8EAEF, width: 1),
                   ),
                 ),
                 child: Row(
                   children: [
-                    sprintf(StrRes.selectedPeopleCount,
-                        [logic.checkedList.length]).toText
+                    sprintf(t.selectedPeopleCount, [logic.checkedList.length])
+                        .toText
                       ..style = Styles.ts_0C1C33_17_medium,
                     const Spacer(),
                     GestureDetector(
@@ -241,7 +241,7 @@ class SelectedContactsListView extends StatelessWidget {
                       child: Container(
                         height: 52.h,
                         alignment: Alignment.center,
-                        child: StrRes.confirm.toText
+                        child: (context.t.confirm).toText
                           ..style = Styles.ts_0089FF_17,
                       ),
                     ),
@@ -252,7 +252,7 @@ class SelectedContactsListView extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: logic.checkedList.length,
                   shrinkWrap: true,
-                  itemBuilder: (_, index) => _buildItemView(index),
+                  itemBuilder: (_, index) => _buildItemView(context, index),
                 ),
               ),
             ],
@@ -260,7 +260,7 @@ class SelectedContactsListView extends StatelessWidget {
     );
   }
 
-  Widget _buildItemView(int index) {
+  Widget _buildItemView(BuildContext context, int index) {
     final info = logic.checkedList.values.elementAt(index);
     String? name;
     String? faceURL;
@@ -303,7 +303,7 @@ class SelectedContactsListView extends StatelessWidget {
                   width: 1,
                 ),
               ),
-              child: StrRes.remove.toText..style = Styles.ts_0089FF_17,
+              child: (context.t.remove).toText..style = Styles.ts_0089FF_17,
             ),
           ),
         ],

@@ -14,29 +14,29 @@ class ProcessFriendRequestsLogic extends GetxController {
   void acceptFriendApplication() async {
     LoadingView.singleton
         .wrap(
-            asyncFunction: () =>
-                OpenIM.iMManager.friendshipManager.acceptFriendApplication(userID: applicationInfo.fromUserID!))
+            asyncFunction: () => OpenIM.iMManager.friendshipManager
+                .acceptFriendApplication(userID: applicationInfo.fromUserID!))
         .then(_addSuccessfully)
-        .catchError((_) => IMViews.showToast(StrRes.addFailed));
+        .catchError((_) => IMViews.showToast(t.addFailed));
   }
 
   void refuseFriendApplication() async {
     LoadingView.singleton
         .wrap(
-            asyncFunction: () =>
-                OpenIM.iMManager.friendshipManager.refuseFriendApplication(userID: applicationInfo.fromUserID!))
+            asyncFunction: () => OpenIM.iMManager.friendshipManager
+                .refuseFriendApplication(userID: applicationInfo.fromUserID!))
         .then(_rejectSuccessfully)
-        .catchError((_) => IMViews.showToast(StrRes.rejectFailed));
+        .catchError((_) => IMViews.showToast(t.rejectFailed));
   }
 
   _addSuccessfully(_) {
-    IMViews.showToast(StrRes.addSuccessfully);
+    IMViews.showToast(t.addSuccessfully);
     Get.back(result: 1);
     return _;
   }
 
   _rejectSuccessfully(_) {
-    IMViews.showToast(StrRes.rejectSuccessfully);
+    IMViews.showToast(t.rejectSuccessfully);
     Get.back(result: -1);
     return _;
   }

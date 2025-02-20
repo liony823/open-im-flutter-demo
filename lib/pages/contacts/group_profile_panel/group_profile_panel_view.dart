@@ -29,7 +29,7 @@ class GroupProfilePanelPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Row(
                   children: [
-                    StrRes.groupID.toText..style = Styles.ts_0C1C33_17,
+                    (context.t.groupID).toText..style = Styles.ts_0C1C33_17,
                     12.horizontalSpace,
                     logic.groupInfo.value.groupID.toText
                       ..style = Styles.ts_8E9AB0_17,
@@ -41,9 +41,7 @@ class GroupProfilePanelPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                 color: Styles.c_FFFFFF,
                 child: Button(
-                  text: logic.isJoined.value
-                      ? StrRes.enterGroup
-                      : StrRes.applyJoin,
+                  text: logic.isJoined.value ? t.enterGroup : t.applyJoin,
                   onTap: logic.enterGroup,
                 ),
               ),
@@ -104,13 +102,13 @@ class GroupProfilePanelPage extends StatelessWidget {
           children: [
             RichText(
               text: TextSpan(
-                text: StrRes.groupMember,
+                text: t.groupMember,
                 style: Styles.ts_0C1C33_17,
                 children: [
                   WidgetSpan(child: 12.horizontalSpace),
                   TextSpan(
-                    text: sprintf(
-                        StrRes.nPerson, [logic.groupInfo.value.memberCount]),
+                    text:
+                        sprintf(t.nPerson, [logic.groupInfo.value.memberCount]),
                     style: Styles.ts_8E9AB0_17,
                   ),
                 ],

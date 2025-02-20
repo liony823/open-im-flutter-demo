@@ -88,7 +88,8 @@ mixin OpenIMLive {
     });
   }
 
-  Stream<CallEvent> get _stream => signalingSubject.stream /*.where((event) => LiveClient.dispatchSignaling(event))*/;
+  Stream<CallEvent> get _stream => signalingSubject
+      .stream /*.where((event) => LiveClient.dispatchSignaling(event))*/;
 
   _signalingListener() => _stream.listen(
         (event) async {
@@ -97,8 +98,11 @@ mixin OpenIMLive {
             _playSound();
             final mediaType = event.data.invitation!.mediaType;
             final sessionType = event.data.invitation!.sessionType;
-            final callType = mediaType == 'audio' ? CallType.audio : CallType.video;
-            final callObj = sessionType == ConversationType.single ? CallObj.single : CallObj.group;
+            final callType =
+                mediaType == 'audio' ? CallType.audio : CallType.video;
+            final callObj = sessionType == ConversationType.single
+                ? CallObj.single
+                : CallObj.group;
 
             if (Platform.isAndroid && _isRunningBackground) {
               _beCalledEvent = event;
@@ -145,7 +149,8 @@ mixin OpenIMLive {
             _stopSound();
           } else if (event.state == CallState.beAccepted) {
             _stopSound();
-          } else if (event.state == CallState.otherReject || event.state == CallState.otherAccepted) {
+          } else if (event.state == CallState.otherReject ||
+              event.state == CallState.otherAccepted) {
             _stopSound();
           } else if (event.state == CallState.timeout) {
             insertSignalingMessageSubject.add(event);
@@ -237,25 +242,29 @@ mixin OpenIMLive {
     _stopSound();
     if (error is PlatformException) {
       if (int.parse(error.code) == SDKErrorCode.hasBeenBlocked) {
-        IMViews.showToast(StrRes.callFail);
+        IMViews.showToast(t.callFail);
         return;
       }
     }
-    IMViews.showToast(StrRes.networkError);
+    IMViews.showToast(t.networkError);
   }
 
   onRoomDisconnected(SignalingInfo signalingInfo) {}
 
   Future<SignalingCertificate> onDialSingle(SignalingInfo signaling) async {
-    final data = {'customType': CustomMessageType.callingInvite, 'data': signaling.invitation!.toJson()};
-    final message = await OpenIM.iMManager.messageManager
-        .createCustomMessage(data: jsonEncode(data), extension: '', description: '');
+    final data = {
+      'customType': CustomMessageType.callingInvite,
+      'data': signaling.invitation!.toJson()
+    };
+    final message = await OpenIM.iMManager.messageManager.createCustomMessage(
+        data: jsonEncode(data), extension: '', description: '');
     OpenIM.iMManager.messageManager.sendMessage(
         message: message,
         offlinePushInfo: OfflinePushInfo(),
         userID: signaling.invitation!.inviteeUserIDList!.first,
         isOnlineOnly: true);
-    final certificate = await Apis.getTokenForRTC(signaling.invitation!.roomID!, OpenIM.iMManager.userID);
+    final certificate = await Apis.getTokenForRTC(
+        signaling.invitation!.roomID!, OpenIM.iMManager.userID);
 
     return certificate;
   }
@@ -264,15 +273,19 @@ mixin OpenIMLive {
     _beCalledEvent = null; // ios bug
     _autoPickup = false;
     _stopSound();
-    final data = {'customType': CustomMessageType.callingAccept, 'data': signaling.invitation!.toJson()};
-    final message = await OpenIM.iMManager.messageManager
-        .createCustomMessage(data: jsonEncode(data), extension: '', description: '');
+    final data = {
+      'customType': CustomMessageType.callingAccept,
+      'data': signaling.invitation!.toJson()
+    };
+    final message = await OpenIM.iMManager.messageManager.createCustomMessage(
+        data: jsonEncode(data), extension: '', description: '');
     OpenIM.iMManager.messageManager.sendMessage(
         message: message,
         offlinePushInfo: OfflinePushInfo(),
         userID: signaling.invitation!.inviterUserID,
         isOnlineOnly: true);
-    final certificate = await Apis.getTokenForRTC(signaling.invitation!.roomID!, OpenIM.iMManager.userID);
+    final certificate = await Apis.getTokenForRTC(
+        signaling.invitation!.roomID!, OpenIM.iMManager.userID);
 
     return certificate;
   }
@@ -281,35 +294,52 @@ mixin OpenIMLive {
     _stopSound();
     insertSignalingMessageSubject.add(CallEvent(CallState.reject, signaling));
 
-    final data = {'customType': CustomMessageType.callingReject, 'data': signaling.invitation!.toJson()};
-    final message = await OpenIM.iMManager.messageManager
-        .createCustomMessage(data: jsonEncode(data), extension: '', description: '');
-    final recvUserID = signaling.invitation!.inviterUserID == OpenIM.iMManager.userID
-        ? signaling.invitation!.inviteeUserIDList!.first
-        : signaling.invitation!.inviterUserID;
-    return OpenIM.iMManager.messageManager
-        .sendMessage(message: message, offlinePushInfo: OfflinePushInfo(), userID: recvUserID, isOnlineOnly: true);
+    final data = {
+      'customType': CustomMessageType.callingReject,
+      'data': signaling.invitation!.toJson()
+    };
+    final message = await OpenIM.iMManager.messageManager.createCustomMessage(
+        data: jsonEncode(data), extension: '', description: '');
+    final recvUserID =
+        signaling.invitation!.inviterUserID == OpenIM.iMManager.userID
+            ? signaling.invitation!.inviteeUserIDList!.first
+            : signaling.invitation!.inviterUserID;
+    return OpenIM.iMManager.messageManager.sendMessage(
+        message: message,
+        offlinePushInfo: OfflinePushInfo(),
+        userID: recvUserID,
+        isOnlineOnly: true);
   }
 
   onTapCancel(SignalingInfo signaling) async {
     _stopSound();
     insertSignalingMessageSubject.add(CallEvent(CallState.cancel, signaling));
 
-    final data = {'customType': CustomMessageType.callingCancel, 'data': signaling.invitation!.toJson()};
-    final message = await OpenIM.iMManager.messageManager
-        .createCustomMessage(data: jsonEncode(data), extension: '', description: '');
-    final recvUserID = signaling.invitation!.inviterUserID == OpenIM.iMManager.userID
-        ? signaling.invitation!.inviteeUserIDList!.first
-        : signaling.invitation!.inviterUserID;
-    OpenIM.iMManager.messageManager
-        .sendMessage(message: message, offlinePushInfo: OfflinePushInfo(), userID: recvUserID, isOnlineOnly: true);
+    final data = {
+      'customType': CustomMessageType.callingCancel,
+      'data': signaling.invitation!.toJson()
+    };
+    final message = await OpenIM.iMManager.messageManager.createCustomMessage(
+        data: jsonEncode(data), extension: '', description: '');
+    final recvUserID =
+        signaling.invitation!.inviterUserID == OpenIM.iMManager.userID
+            ? signaling.invitation!.inviteeUserIDList!.first
+            : signaling.invitation!.inviterUserID;
+    OpenIM.iMManager.messageManager.sendMessage(
+        message: message,
+        offlinePushInfo: OfflinePushInfo(),
+        userID: recvUserID,
+        isOnlineOnly: true);
     return true;
   }
 
   onTimeoutCancelled(SignalingInfo signaling) async {
-    final data = {'customType': CustomMessageType.callingCancel, 'data': signaling.invitation!.toJson()};
-    final message = await OpenIM.iMManager.messageManager
-        .createCustomMessage(data: jsonEncode(data), extension: '', description: '');
+    final data = {
+      'customType': CustomMessageType.callingCancel,
+      'data': signaling.invitation!.toJson()
+    };
+    final message = await OpenIM.iMManager.messageManager.createCustomMessage(
+        data: jsonEncode(data), extension: '', description: '');
 
     OpenIM.iMManager.messageManager.sendMessage(
         message: message,
@@ -322,14 +352,21 @@ mixin OpenIMLive {
 
   onTapHangup(SignalingInfo signaling, int duration, bool isPositive) async {
     if (isPositive) {
-      final data = {'customType': CustomMessageType.callingHungup, 'data': signaling.invitation!.toJson()};
-      final message = await OpenIM.iMManager.messageManager
-          .createCustomMessage(data: jsonEncode(data), extension: '', description: '');
-      final recvUserID = signaling.invitation!.inviterUserID == OpenIM.iMManager.userID
-          ? signaling.invitation!.inviteeUserIDList!.first
-          : signaling.invitation!.inviterUserID;
-      OpenIM.iMManager.messageManager
-          .sendMessage(message: message, offlinePushInfo: OfflinePushInfo(), userID: recvUserID, isOnlineOnly: true);
+      final data = {
+        'customType': CustomMessageType.callingHungup,
+        'data': signaling.invitation!.toJson()
+      };
+      final message = await OpenIM.iMManager.messageManager.createCustomMessage(
+          data: jsonEncode(data), extension: '', description: '');
+      final recvUserID =
+          signaling.invitation!.inviterUserID == OpenIM.iMManager.userID
+              ? signaling.invitation!.inviteeUserIDList!.first
+              : signaling.invitation!.inviterUserID;
+      OpenIM.iMManager.messageManager.sendMessage(
+          message: message,
+          offlinePushInfo: OfflinePushInfo(),
+          userID: recvUserID,
+          isOnlineOnly: true);
     }
     _stopSound();
 
@@ -342,7 +379,7 @@ mixin OpenIMLive {
 
   onBusyLine() {
     _stopSound();
-    IMViews.showToast(StrRes.busyVideoCallHint);
+    IMViews.showToast(t.busyVideoCallHint);
   }
 
   onJoin() {}
@@ -362,7 +399,8 @@ mixin OpenIMLive {
     return list.firstOrNull;
   }
 
-  Future<List<GroupMembersInfo>> onSyncGroupMemberInfo(groupID, userIDList) async {
+  Future<List<GroupMembersInfo>> onSyncGroupMemberInfo(
+      groupID, userIDList) async {
     var list = await OpenIM.iMManager.groupManager.getGroupMembersInfo(
       groupID: groupID,
       userIDList: userIDList,
@@ -412,7 +450,8 @@ mixin OpenIMLive {
         receiverID = inviteeUserID;
       }
 
-      var msg = await OpenIM.iMManager.messageManager.insertSingleMessageToLocalStorage(
+      var msg = await OpenIM.iMManager.messageManager
+          .insertSingleMessageToLocalStorage(
         receiverID: inviteeUserID,
         senderID: inviterUserID,
         message: message
@@ -440,7 +479,9 @@ class SignalingMessageEvent {
 
   bool get isSingleChat => sessionType == ConversationType.single;
 
-  bool get isGroupChat => sessionType == ConversationType.group || sessionType == ConversationType.superGroup;
+  bool get isGroupChat =>
+      sessionType == ConversationType.group ||
+      sessionType == ConversationType.superGroup;
 }
 
 extension MessageMangerExt on MessageManager {

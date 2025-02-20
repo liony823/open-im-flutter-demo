@@ -15,8 +15,7 @@ class LanguagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: StrRes.languageSetup.toText
-            ..style = Styles.ts_0C1C33_17_semibold,
+          title: (context.t.languageSetup).toText..style = Styles.ts_0C1C33_17_semibold,
         ),
         body: ListView.builder(
           padding: EdgeInsets.symmetric(vertical: 16.w),

@@ -19,25 +19,29 @@ class ProcessGroupRequestsLogic extends GetxController {
 
   String get groupName => groupRequestsLogic.getGroupName(applicationInfo);
 
-  String get inviterNickname => groupRequestsLogic.getInviterNickname(applicationInfo);
+  String get inviterNickname =>
+      groupRequestsLogic.getInviterNickname(applicationInfo);
 
-  GroupMembersInfo? getMemberInfo(inviterUserID) => groupRequestsLogic.getMemberInfo(inviterUserID);
+  GroupMembersInfo? getMemberInfo(inviterUserID) =>
+      groupRequestsLogic.getMemberInfo(inviterUserID);
 
-  UserInfo? getUserInfo(inviterUserID) => groupRequestsLogic.getUserInfo(inviterUserID);
+  UserInfo? getUserInfo(inviterUserID) =>
+      groupRequestsLogic.getUserInfo(inviterUserID);
 
   String get sourceFrom {
     if (applicationInfo.joinSource == 2) {
-      return '$inviterNickname${StrRes.byMemberInvite}';
+      return '$inviterNickname${t.byMemberInvite}';
     } else if (applicationInfo.joinSource == 4) {
-      return StrRes.byScanQrcode;
+      return t.byScanQrcode;
     }
-    return StrRes.bySearch;
+    return t.bySearch;
   }
 
   void approve() {
     LoadingView.singleton
         .wrap(
-            asyncFunction: () => OpenIM.iMManager.groupManager.acceptGroupApplication(
+            asyncFunction: () =>
+                OpenIM.iMManager.groupManager.acceptGroupApplication(
                   groupID: applicationInfo.groupID!,
                   userID: applicationInfo.userID!,
                   handleMsg: "reason",
@@ -49,20 +53,21 @@ class ProcessGroupRequestsLogic extends GetxController {
   void reject() {
     LoadingView.singleton
         .wrap(
-            asyncFunction: () => OpenIM.iMManager.groupManager.refuseGroupApplication(
+            asyncFunction: () =>
+                OpenIM.iMManager.groupManager.refuseGroupApplication(
                   groupID: applicationInfo.groupID!,
                   userID: applicationInfo.userID!,
                   handleMsg: "reason",
                 ))
         .then((value) => Get.back(result: -1))
         .catchError(_parse)
-        .catchError((_) => IMViews.showToast(StrRes.rejectFailed));
+        .catchError((_) => IMViews.showToast(t.rejectFailed));
   }
 
   _parse(e) {
     if (e is PlatformException) {
       if (e.code == '${SDKErrorCode.groupApplicationHasBeenProcessed}') {
-        IMViews.showToast(StrRes.groupRequestHandled);
+        IMViews.showToast(t.groupRequestHandled);
         return;
       }
     }

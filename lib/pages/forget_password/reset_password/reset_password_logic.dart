@@ -33,15 +33,16 @@ class ResetPasswordLogic extends GetxController {
   }
 
   _onChanged() {
-    enabled.value = pwdCtrl.text.trim().isNotEmpty && pwdAgainCtrl.text.trim().isNotEmpty;
+    enabled.value =
+        pwdCtrl.text.trim().isNotEmpty && pwdAgainCtrl.text.trim().isNotEmpty;
   }
 
   bool _checkingInput() {
     if (!IMUtils.isValidPassword(pwdCtrl.text)) {
-      IMViews.showToast(StrRes.wrongPasswordFormat);
+      IMViews.showToast(t.wrongPasswordFormat);
       return false;
     } else if (pwdCtrl.text != pwdAgainCtrl.text) {
-      IMViews.showToast(StrRes.twicePwdNoSame);
+      IMViews.showToast(t.twicePwdNoSame);
       return false;
     }
     return true;
@@ -59,7 +60,7 @@ class ResetPasswordLogic extends GetxController {
   confirmTheChanges() async {
     if (_checkingInput()) {
       await resetPassword();
-      IMViews.showToast(StrRes.changedSuccessfully);
+      IMViews.showToast(t.changedSuccessfully);
       AppNavigator.startBackLogin();
     }
   }

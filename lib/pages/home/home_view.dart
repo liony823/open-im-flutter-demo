@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
             inactiveIcon: _setupIcon(
                 _buildIcon(EvaIcons.messageCircleOutline, Styles.c_8E9AB0),
                 logic.unreadMsgCount.value),
-            title: StrRes.home,
+            title: t.home,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
         ),
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
             inactiveIcon: _setupIcon(
                 _buildIcon(EvaIcons.peopleOutline, Styles.c_8E9AB0),
                 logic.unhandledCount.value),
-            title: StrRes.contacts,
+            title: t.contacts,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
         ),
@@ -58,7 +58,7 @@ class HomePage extends StatelessWidget {
                 : _buildIcon(EvaIcons.globe2Outline, Styles.c_8E9AB0),
             title: logic.defaultAppletName != null
                 ? logic.defaultAppletName!
-                : StrRes.miniProgram,
+                : t.miniProgram,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
         ),
@@ -67,7 +67,7 @@ class HomePage extends StatelessWidget {
           item: ItemConfig(
             icon: _buildIcon(EvaIcons.compass, Styles.c_0089FF),
             inactiveIcon: _buildIcon(EvaIcons.compassOutline, Styles.c_8E9AB0),
-            title: StrRes.feed,
+            title: t.feed,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
         ),
@@ -76,7 +76,7 @@ class HomePage extends StatelessWidget {
           item: ItemConfig(
             icon: _buildIcon(EvaIcons.person, Styles.c_0089FF),
             inactiveIcon: _buildIcon(EvaIcons.personOutline, Styles.c_8E9AB0),
-            title: StrRes.mine,
+            title: t.mine,
             textStyle: Styles.ts_0089FF_10_semibold,
           ),
         )

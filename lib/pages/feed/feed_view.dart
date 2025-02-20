@@ -16,7 +16,7 @@ class FeedPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Styles.c_F6F6F6,
       appBar: AppBar(
-        title: StrRes.feed.toText..style = Styles.ts_0C1C33_17_semibold,
+        title: (context.t.feed).toText..style = Styles.ts_0C1C33_17_semibold,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -28,18 +28,18 @@ class FeedPage extends StatelessWidget {
                 if (logic.appMomentsVisible)
                   _buildItemView(
                       img: ImageRes.feedMoments.toImage..width = 28.w,
-                      label: StrRes.friendShare,
+                      label: t.friendShare,
                       showDivider: true),
                 _buildItemView(
                   img: ImageRes.feedScan.toImage..width = 28.w,
-                  label: StrRes.scanQrCode,
+                  label: t.scanQrCode,
                 ),
               ],
             )),
             16.verticalSpace,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: StrRes.workbench.toText..style = Styles.ts_999999_17,
+              child: (context.t.workbench).toText..style = Styles.ts_999999_17,
             ),
             _buildCard(
                 child: Column(
@@ -47,7 +47,7 @@ class FeedPage extends StatelessWidget {
                 if (logic.appSignRedEnvelopeVisible)
                   _buildItemView(
                     img: ImageRes.feedHongbao.toImage..width = 28.w,
-                    label: StrRes.signRedEnvelope,
+                    label: t.signRedEnvelope,
                     showDivider: true,
                   ),
                 for (var item in logic.appletList)

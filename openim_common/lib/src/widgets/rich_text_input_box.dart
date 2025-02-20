@@ -155,7 +155,7 @@ class _RichTextInputBoxState extends State<RichTextInputBox> {
                 SizedBox(
                   width: 78.w,
                   child: Button(
-                    text: StrRes.send,
+                    text: t.send,
                     height: 36.h,
                     enabled: widget.enabled,
                     onTap: widget.onSend,

@@ -45,8 +45,8 @@ class MyInfoLogic extends GetxController {
   }
 
   void openDatePicker() {
-    var appLocale = Get.locale;
-    var isZh = appLocale!.languageCode.toLowerCase().contains("zh");
+    var appLocale = LocaleSettings.currentLocale.languageCode;
+    var isZh = appLocale.toLowerCase().contains("zh");
     DatePicker.showDatePicker(
       Get.context!,
       locale: isZh ? LocaleType.zh : LocaleType.en,
@@ -69,11 +69,11 @@ class MyInfoLogic extends GetxController {
       BottomSheetView(
         items: [
           SheetItem(
-            label: StrRes.man,
+            label: t.man,
             onTap: () => _updateGender(1),
           ),
           SheetItem(
-            label: StrRes.woman,
+            label: t.woman,
             onTap: () => _updateGender(2),
           ),
         ],

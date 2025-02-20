@@ -50,8 +50,9 @@ class AccountSetupLogic extends GetxController {
 
   void toggleNotDisturbMode() async {
     var status = isGlobalNotDisturb ? 0 : 2;
-    await LoadingView.singleton
-        .wrap(asyncFunction: () => OpenIM.iMManager.userManager.setGlobalRecvMessageOpt(status: status));
+    await LoadingView.singleton.wrap(
+        asyncFunction: () => OpenIM.iMManager.userManager
+            .setGlobalRecvMessageOpt(status: status));
     imLogic.userInfo.update((val) {
       val?.globalRecvMsgOpt = status;
     });
@@ -103,7 +104,7 @@ class AccountSetupLogic extends GetxController {
 
   void clearChatHistory() async {
     var confirm = await Get.dialog(CustomDialog(
-      title: StrRes.confirmClearChatHistory,
+      title: t.confirmClearChatHistory,
     ));
     if (confirm == true) {
       LoadingView.singleton.wrap(asyncFunction: () async {
@@ -118,13 +119,13 @@ class AccountSetupLogic extends GetxController {
     var index = DataSp.getLanguage() ?? 0;
     switch (index) {
       case 1:
-        curLanguage.value = StrRes.chinese;
+        curLanguage.value = t.chinese;
         break;
       case 2:
-        curLanguage.value = StrRes.english;
+        curLanguage.value = t.english;
         break;
       default:
-        curLanguage.value = StrRes.followSystem;
+        curLanguage.value = t.followSystem;
         break;
     }
   }

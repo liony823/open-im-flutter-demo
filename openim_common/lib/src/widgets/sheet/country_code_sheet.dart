@@ -16,7 +16,7 @@
 
 //   factory CountryCode.fromCountry(Country country) {
 //     return CountryCode(
-//       name: country.name.toString().tr,
+//       name: country.name.toString(),
 //       nativeName: country.nativeName ?? country.name.toString(),
 //       code: country.calling.toString(),
 //     );
@@ -48,7 +48,7 @@
 //           Container(
 //             padding: const EdgeInsets.symmetric(vertical: 16),
 //             child: Text(
-//               'selectCountryCode'.tr,
+//               'selectCountryCode',
 //               style: const TextStyle(
 //                 fontSize: 16,
 //                 fontWeight: FontWeight.bold,

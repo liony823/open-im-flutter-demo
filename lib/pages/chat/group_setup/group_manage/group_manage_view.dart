@@ -15,13 +15,13 @@ class GroupManagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TitleBar.back(
-        title: StrRes.groupManage,
+        title: t.groupManage,
       ),
       backgroundColor: Styles.c_F8F9FA,
       body: Column(
         children: [
           _buildItemView(
-            text: StrRes.transferGroupOwnerRight,
+            text: t.transferGroupOwnerRight,
             onTap: logic.transferGroupOwnerRight,
             showRightArrow: true,
             isTopRadius: true,

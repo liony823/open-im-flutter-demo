@@ -16,26 +16,26 @@ class ResetPasswordPage extends StatelessWidget {
         child: Obx(() => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                StrRes.forgetPassword.toText
+                (context.t.forgetPassword).toText
                   ..style = Styles.ts_0089FF_20_semibold,
                 29.verticalSpace,
                 InputBox.password(
-                  label: StrRes.password,
-                  hintText: StrRes.plsEnterPassword,
+                  label: t.password,
+                  hintText: t.plsEnterPassword,
                   controller: logic.pwdCtrl,
-                  formatHintText: StrRes.loginPwdFormat,
+                  formatHintText: t.loginPwdFormat,
                   inputFormatters: [IMUtils.getPasswordFormatter()],
                 ),
                 17.verticalSpace,
                 InputBox.password(
-                  label: StrRes.confirmPassword,
-                  hintText: StrRes.plsConfirmPasswordAgain,
+                  label: t.confirmPassword,
+                  hintText: t.plsConfirmPasswordAgain,
                   controller: logic.pwdAgainCtrl,
                   inputFormatters: [IMUtils.getPasswordFormatter()],
                 ),
                 129.verticalSpace,
                 AdaptiveButton(
-                  text: StrRes.confirmTheChanges,
+                  text: t.confirmTheChanges,
                   enabled: logic.enabled.value,
                   onTap: logic.confirmTheChanges,
                 ),

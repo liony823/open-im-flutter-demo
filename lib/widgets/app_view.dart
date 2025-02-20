@@ -10,7 +10,7 @@ import '../core/controller/app_controller.dart';
 
 class AppView extends StatelessWidget {
   const AppView({super.key, required this.builder});
-  final Widget Function(Locale? locale, TransitionBuilder builder) builder;
+  final Widget Function(TransitionBuilder builder) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class AppView extends StatelessWidget {
           minTextAdapt: true,
           splitScreenMode: true,
           fontSizeResolver: (fontSize, _) => fontSize.toDouble(),
-          builder: (_, child) => builder(ctrl.getLocale(), _builder()),
+          builder: (_, child) => builder(_builder()),
         ),
       ),
     );

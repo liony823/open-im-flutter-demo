@@ -220,7 +220,7 @@ class _ChatWebViewMapState extends State<ChatWebViewMap> {
       await showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          title: StrRes.plsSelectLocation.toText
+          title: (context.t.plsSelectLocation).toText
             ..style = Styles.ts_0C1C33_17_semibold,
           actions: [
             GestureDetector(
@@ -228,7 +228,7 @@ class _ChatWebViewMapState extends State<ChatWebViewMap> {
               behavior: HitTestBehavior.translucent,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                child: StrRes.determine.toText
+                child: (context.t.determine).toText
                   ..style = Styles.ts_0089FF_17_semibold,
               ),
             ),
@@ -252,7 +252,7 @@ class _ChatWebViewMapState extends State<ChatWebViewMap> {
         onTap: () async {
           Get.back();
         },
-        title: StrRes.location,
+        title: t.location,
       ),
       body: SafeArea(
         child: Stack(

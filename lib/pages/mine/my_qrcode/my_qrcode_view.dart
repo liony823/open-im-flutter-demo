@@ -16,7 +16,7 @@ class MyQrcodePage extends StatelessWidget {
     return Obx(
       () => Scaffold(
         appBar: TitleBar.back(
-          title: StrRes.qrcode,
+          title: t.qrcode,
         ),
         backgroundColor: Styles.c_F8F9FA,
         body: Container(
@@ -64,7 +64,7 @@ class MyQrcodePage extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Column(
                       children: [
-                        StrRes.qrcodeHint.toText
+                        (context.t.qrcodeHint).toText
                           ..style = Styles.ts_8E9AB0_16
                           ..textAlign = TextAlign.center,
                         20.verticalSpace,

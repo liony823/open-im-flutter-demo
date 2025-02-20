@@ -14,6 +14,7 @@ class Config {
   static Future init(Function() runApp) async {
     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+    LocaleSettings.useDeviceLocale();
     await DataSp.init();
     await initServerConfig();
     FlutterNativeSplash.remove();
@@ -63,7 +64,7 @@ class Config {
 
   static OfflinePushInfo get offlinePushInfo => OfflinePushInfo(
         title: _appName,
-        desc: StrRes.offlineMessage,
+        desc: t.offlineMessage,
         iOSBadgeCount: true,
       );
 
@@ -112,7 +113,8 @@ class Config {
     if (null != server) {
       url = server['wsUrl'];
     }
-    return url ?? (_isIP ? "ws://$serverIp:10001" : "wss://$serverIp/msg_gateway");
+    return url ??
+        (_isIP ? "ws://$serverIp:10001" : "wss://$serverIp/msg_gateway");
   }
 
   static int get logLevel {
@@ -124,18 +126,17 @@ class Config {
     return level == null ? 5 : int.parse(level);
   }
 
-
-
   static Future<bool> pingServer(String host) async {
     try {
-      final url = IP_REG.hasMatch(host) ? 'http://$host:10008' : 'https://$host/chat';
+      final url =
+          IP_REG.hasMatch(host) ? 'http://$host:10008' : 'https://$host/chat';
       return await Apis.pingServer(url);
     } catch (e) {
       return false;
     }
   }
 
-  static presetServer(Map<String,dynamic> config)async {
+  static presetServer(Map<String, dynamic> config) async {
     if (config['server'] != null) {
       final servers = List<Map<String, dynamic>>.from(config['server']);
       for (var server in servers) {
@@ -145,12 +146,17 @@ class Config {
 
           final config = {
             'logLevel': server['logLevel'],
-            'chatTokenUrl': IP_REG.hasMatch(ip) ? 'http://$ip:10009' : 'https://$ip/chat',
-            'authUrl': IP_REG.hasMatch(ip) ? 'http://$ip:10008' : 'https://$ip/chat',
-            'apiUrl': IP_REG.hasMatch(ip) ? 'http://$ip:10002' : 'https://$ip/api',
-            'wsUrl': IP_REG.hasMatch(ip) ? 'ws://$ip:10001' : 'wss://$ip/msg_gateway',
+            'chatTokenUrl':
+                IP_REG.hasMatch(ip) ? 'http://$ip:10009' : 'https://$ip/chat',
+            'authUrl':
+                IP_REG.hasMatch(ip) ? 'http://$ip:10008' : 'https://$ip/chat',
+            'apiUrl':
+                IP_REG.hasMatch(ip) ? 'http://$ip:10002' : 'https://$ip/api',
+            'wsUrl': IP_REG.hasMatch(ip)
+                ? 'ws://$ip:10001'
+                : 'wss://$ip/msg_gateway',
           };
- 
+
           DataSp.putServerConfig(config);
           DataSp.putServerIP(ip);
           return;
