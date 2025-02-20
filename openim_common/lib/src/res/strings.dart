@@ -1212,5 +1212,5 @@ class StrRes {
   // 发现页
   static String get friendShare => 'friendShare'.tr;
   static String get scanQrCode => 'scanQrCode'.tr;
-  static String get signRedEnvelope => 'signRedPacket'.tr;
+  static String get signRedEnvelope => 'signRedEnvelope'.tr;
 }

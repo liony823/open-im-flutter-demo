@@ -64,6 +64,7 @@ mixin ClientConfig {
         DataSp.putApplet(item);
       }
     }
+    list.sort((a, b) => (a.priority ?? 0).compareTo(b.priority ?? 0));
     appletList.addAll(list);
   }
 
