@@ -60,7 +60,7 @@ abstract class AppRoutes {
   static const selectContactsFromTag = '/select_contacts_from_tag';
   static const oaNotificationList = "/oa_notification_list";
 
-  static const ua = '/ua';
+  static const webview = '/webview';
   static const language = '/language';
 }
 

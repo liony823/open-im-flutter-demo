@@ -8,6 +8,7 @@ class FormInput extends StatefulWidget {
   const FormInput.password(
       {super.key,
       required this.name,
+      this.focusNode,
       this.controller,
       this.label,
       this.labelIcon,
@@ -26,6 +27,7 @@ class FormInput extends StatefulWidget {
   const FormInput.phone(
       {super.key,
       required this.name,
+      this.focusNode,
       this.controller,
       this.label,
       this.labelIcon,
@@ -44,6 +46,7 @@ class FormInput extends StatefulWidget {
   const FormInput(
       {super.key,
       required this.name,
+      this.focusNode,
       this.controller,
       this.label,
       this.labelIcon,
@@ -60,6 +63,7 @@ class FormInput extends StatefulWidget {
       this.validator});
 
   final String name;
+  final FocusNode? focusNode;
   final TextEditingController? controller;
   final String? label;
   final IconData? labelIcon;
@@ -127,6 +131,7 @@ class _FormInputState extends State<FormInput> {
         FormBuilderTextField(
           name: widget.name,
           controller: widget.controller,
+          focusNode: widget.focusNode,
           textInputAction: widget.textInputAction,
           keyboardType: widget.keyboardType,
           obscureText: obscureText,

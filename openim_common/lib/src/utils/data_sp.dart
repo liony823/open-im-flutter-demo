@@ -3,6 +3,7 @@ import 'package:openim_common/openim_common.dart';
 import 'package:sprintf/sprintf.dart';
 
 class DataSp {
+  static const _accounts = 'accounts';
   static const _loginCertificate = 'loginCertificate';
   static const _loginAccount = 'loginAccount';
   static const _server = "server";
@@ -207,5 +208,35 @@ class DataSp {
     return SpUtil().getObj(getKey(_applet), ((Map<dynamic, dynamic> map) {
       return AppletInfo.fromJson(map as Map<String, dynamic>);
     }));
+  }
+
+  static List<UserFullInfo> getAccounts() {
+    return SpUtil()
+            .getObjList(_accounts, (v) => UserFullInfo.fromJson(v.cast())) ??
+        [];
+  }
+
+  static Future<bool>? addAccounts(UserFullInfo user) {
+    var list = List<UserFullInfo>.from(getAccounts());
+    final index = list.indexWhere((e) => e.userID == user.userID);
+    if (index == -1) {
+      list.add(user);
+    } else {
+      list[index] = user;
+    }
+    return SpUtil().putObjectList(_accounts, list);
+  }
+
+  static Future<bool>? removeAccounts(String userID) {
+    final list = List<UserFullInfo>.from(getAccounts());
+    final index = list.indexWhere((e) => e.userID == userID);
+    if (index != -1) {
+      list.removeAt(index);
+    }
+    return SpUtil().putObjectList(_accounts, list);
+  }
+
+  static Future<bool>? clearAccounts() {
+    return SpUtil().remove(_accounts);
   }
 }

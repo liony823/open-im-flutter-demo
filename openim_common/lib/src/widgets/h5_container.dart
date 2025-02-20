@@ -9,24 +9,39 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 class H5Container extends StatefulWidget {
-  const H5Container({super.key, required this.url, this.title});
+  const H5Container({
+    super.key,
+    this.url,
+    this.html,
+    this.title,
+    this.controller,
+    this.progress,
+  });
 
-  final String url;
+  final String? url;
   final String? title;
+  final String? html;
+  final WebViewController? controller;
+  final double? progress;
 
   @override
   State<H5Container> createState() => _H5ContainerState();
 }
 
 class _H5ContainerState extends State<H5Container> {
-  late final WebViewController _controller;
+  late WebViewController _controller;
 
-  double progress = 0;
+  double _progress = 0;
 
   @override
   void initState() {
     super.initState();
     Logger.print('H5Container: ${widget.url}');
+
+    if (widget.controller != null) {
+      _controller = widget.controller!;
+      return;
+    }
 
     late final PlatformWebViewControllerCreationParams params;
     if (WebViewPlatform.instance is WebKitWebViewPlatform) {
@@ -38,7 +53,8 @@ class _H5ContainerState extends State<H5Container> {
       params = const PlatformWebViewControllerCreationParams();
     }
 
-    final WebViewController controller = WebViewController.fromPlatformCreationParams(params);
+    final WebViewController controller =
+        WebViewController.fromPlatformCreationParams(params);
 
     controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -47,7 +63,7 @@ class _H5ContainerState extends State<H5Container> {
           onProgress: (int progress) {
             debugPrint('WebView is loading (progress : $progress%)');
             setState(() {
-              this.progress = progress / 100;
+              _progress = progress / 100;
             });
           },
           onPageStarted: (String url) {
@@ -89,8 +105,13 @@ Page resource error:
             SnackBar(content: Text(message.message)),
           );
         },
-      )
-      ..loadRequest(Uri.parse(widget.url));
+      );
+
+    if (widget.html != null) {
+      controller.loadHtmlString(widget.html!);
+    } else if (widget.url != null) {
+      controller.loadRequest(Uri.parse(widget.url!));
+    }
 
     if (!Platform.isMacOS) {
       controller.setBackgroundColor(const Color(0x80000000));
@@ -98,10 +119,22 @@ Page resource error:
 
     if (controller.platform is AndroidWebViewController) {
       AndroidWebViewController.enableDebugging(true);
-      (controller.platform as AndroidWebViewController).setMediaPlaybackRequiresUserGesture(false);
+      (controller.platform as AndroidWebViewController)
+          .setMediaPlaybackRequiresUserGesture(false);
     }
 
     _controller = controller;
+  }
+
+  @override
+  void didUpdateWidget(H5Container oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.url != widget.url) {
+      _controller.loadRequest(Uri.parse(widget.url!));
+    }
+    if (oldWidget.html != widget.html) {
+      _controller.loadHtmlString(widget.html!);
+    }
   }
 
   @override
@@ -111,7 +144,7 @@ Page resource error:
 
   @override
   Widget build(BuildContext context) {
-    Logger.print('H5Container: ${widget.url}');
+    final progress = widget.progress ?? _progress;
     return Scaffold(
       appBar: widget.title != null ? TitleBar.back(title: widget.title) : null,
       body: Stack(
@@ -120,7 +153,8 @@ Page resource error:
           progress < 1.0
               ? LinearProgressIndicator(
                   value: progress,
-                  color: Colors.blue,
+                  color: Styles.c_0089FF,
+                  minHeight: 2,
                 )
               : const SizedBox(),
         ],

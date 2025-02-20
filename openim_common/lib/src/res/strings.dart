@@ -1213,4 +1213,7 @@ class StrRes {
   static String get friendShare => 'friendShare'.tr;
   static String get scanQrCode => 'scanQrCode'.tr;
   static String get signRedEnvelope => 'signRedEnvelope'.tr;
+
+  // 小程序页
+  static String get tapApplet => 'tapApplet'.tr;
 }

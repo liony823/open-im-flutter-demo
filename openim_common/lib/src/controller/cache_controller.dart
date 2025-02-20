@@ -7,14 +7,74 @@ import 'package:openim_common/openim_common.dart';
 import 'package:uuid/uuid.dart';
 
 class CacheController extends GetxController {
+  final accountList = <UserFullInfo>[].obs;
   final favoriteList = <EmojiInfo>[].obs;
   final callRecordList = <CallRecords>[].obs;
+  Box<UserFullInfo>? accountBox;
   Box? favoriteBox;
   Box? callRecordBox;
   bool _isInitFavoriteList = false;
   bool _isInitCallRecords = false;
 
+  bool _isInitAccountList = false;
+
   String get userID => DataSp.getLoginCertificate()!.userID;
+
+  Future<void> addAccount(List<UserFullInfo> userList) async {
+    for (var user in userList) {
+      accountBox?.put(user.userID, user);
+      final index = accountList.indexWhere((e) => e.userID == user.userID);
+      if (index > -1) {
+        user.password = accountList[index].password;
+        accountList[index] = user;
+      } else {
+        accountList.add(user);
+      }
+    }
+    _sortAccountList();
+  }
+
+  Future<void> updateAccount(UserFullInfo user) async {
+    final index = accountList.indexWhere((e) => e.userID == user.userID);
+    if (index > -1) {
+      user.password = accountList[index].password;
+      accountList[index] = user;
+      await accountBox?.put(user.userID, user);
+      _sortAccountList();
+    }
+  }
+
+  Future<void> delAccount(String userID) async {
+    accountList.removeWhere((element) => element.userID == userID);
+    await accountBox?.delete(userID);
+  }
+
+  _initAccount() async {
+    if (!_isInitAccountList) {
+      _isInitAccountList = true;
+      var list = accountBox?.values.toList();
+      if (list != null && list.isNotEmpty) {
+        accountList.assignAll(list);
+      }
+      // 如果 Hive 中没有数据，则从 SharedPreferences 获取
+      final spAccounts = DataSp.getAccounts();
+      for (var account in spAccounts) {
+        final index = accountList
+            .indexWhere((element) => (element.userID == account.userID));
+        if (index <= -1) {
+          await addAccount([account]);
+        }
+      }
+      await DataSp.clearAccounts();
+
+      _sortAccountList();
+    }
+  }
+
+  _sortAccountList() {
+    accountList.sort((a, b) => b.createTime!.compareTo(a.createTime!));
+    accountList.sort((a, b) => a.nickname!.compareTo(b.nickname!));
+  }
 
   void addFavoriteFromUrl(String? url, int? width, int? height) {
     var emoji = EmojiInfo(url: url, width: width, height: height);
@@ -101,12 +161,14 @@ class CacheController extends GetxController {
   }
 
   deleteCallRecords(CallRecords records) async {
-    callRecordList.removeWhere((element) => element.userID == records.userID && element.date == records.date);
+    callRecordList.removeWhere((element) =>
+        element.userID == records.userID && element.date == records.date);
     await callRecordBox?.put(userID, callRecordList.value);
   }
 
   @override
   void onClose() {
+    _isInitAccountList = false;
     _isInitFavoriteList = false;
     _isInitCallRecords = false;
     Hive.close();
@@ -115,11 +177,15 @@ class CacheController extends GetxController {
 
   @override
   void onInit() async {
+    Hive.registerAdapter(UserFullInfoAdapter());
     Hive.registerAdapter(EmojiInfoAdapter());
     Hive.registerAdapter(CallRecordsAdapter());
 
+    accountBox = await Hive.openBox<UserFullInfo>('accountList');
     favoriteBox = await Hive.openBox<List>('favoriteEmoji');
     callRecordBox = await Hive.openBox<List>('callRecords');
+
+    _initAccount();
     super.onInit();
   }
 }

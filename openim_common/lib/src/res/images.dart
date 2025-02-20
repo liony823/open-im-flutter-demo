@@ -182,7 +182,8 @@ class ImageRes {
   static const toolboxCard1 = "$_dir/ic_toolbox_card1.webp";
   static const toolboxFile1 = "$_dir/ic_toolbox_file1.webp";
   static const toolboxLocation1 = "$_dir/ic_toolbox_location1.webp";
-  static const toolboxDirectionalMessage = "$_dir/ic_toolbox_directional_message.webp";
+  static const toolboxDirectionalMessage =
+      "$_dir/ic_toolbox_directional_message.webp";
   static const tagIcon = "$_dir/ic_tag_icon.webp";
   static const momentsIcon = "$_dir/ic_moments.webp";
   static const forwardIcon = '$_dir/ic_forward_icon.webp';
@@ -191,4 +192,10 @@ class ImageRes {
   static const feedMoments = "$_dir/feed_share.png";
   static const feedScan = "$_dir/feed_scan.png";
   static const feedHongbao = "$_dir/feed_hongbao.png";
+
+  static const noCollect = "$_dir/no_collect.png";
+  static const noMessage = "$_dir/no_message.png";
+  static const noNetwork = "$_dir/no_network.png";
+  static const noRecord = "$_dir/no_record.png";
+  static const pauseNetwork = "$_dir/pause_network.png";
 }

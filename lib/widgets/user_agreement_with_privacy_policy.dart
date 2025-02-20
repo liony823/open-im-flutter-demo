@@ -1,19 +1,21 @@
-import 'package:openim/pages/ua/ua_logic.dart';
-import 'package:openim/routes/app_navigator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:openim_common/openim_common.dart';
 
-class AgreeUA extends StatelessWidget {
-  const AgreeUA({
+class UserAgreementWithPrivacyPolicy extends StatelessWidget {
+  const UserAgreementWithPrivacyPolicy({
     super.key,
     required this.isChecked,
     required this.onCheck,
+    required this.onTapUserAgreement,
+    required this.onTapPrivacyPolicy,
   });
 
   final bool isChecked;
   final Function(bool?) onCheck;
+  final Function() onTapUserAgreement;
+  final Function() onTapPrivacyPolicy;
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +38,13 @@ class AgreeUA extends StatelessWidget {
                 TextSpan(text: StrRes.agreementText),
                 TextSpan(
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () =>
-                          AppNavigator.startUa(type: UaType.userAgreement),
+                      ..onTap = onTapUserAgreement,
                     text: StrRes.userAgreement,
                     style: Styles.ts_333333_12),
                 TextSpan(text: StrRes.and, style: Styles.ts_999999_12),
                 TextSpan(
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () =>
-                          AppNavigator.startUa(type: UaType.privacyPolicy),
+                      ..onTap = onTapPrivacyPolicy,
                     text: StrRes.privacyPolicy,
                     style: Styles.ts_333333_12),
               ],

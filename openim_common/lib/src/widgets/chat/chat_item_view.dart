@@ -160,7 +160,9 @@ class ChatItemView extends StatefulWidget {
   final Function(String? text)? onVisibleTrulyText;
   final Function(bool show)? onPopMenuShowChanged;
   final Function()? onClickItemView;
-  final ValueChanged<({String userID, String name, String? faceURL, String? groupID})> onTapUserProfile;
+  final ValueChanged<
+          ({String userID, String name, String? faceURL, String? groupID})>
+      onTapUserProfile;
 
   final Function()? onFailedToResend;
 
@@ -227,7 +229,8 @@ class _ChatItemViewState extends State<ChatItemView> {
     );
   }
 
-  Widget get _child => widget.itemViewBuilder?.call(context, _message) ?? _buildChildView();
+  Widget get _child =>
+      widget.itemViewBuilder?.call(context, _message) ?? _buildChildView();
 
   Widget _buildChildView() {
     Widget? child;
@@ -330,7 +333,9 @@ class _ChatItemViewState extends State<ChatItemView> {
       timelineStr: widget.timelineStr,
       timeStr: IMUtils.getChatTimeline(_message.sendTime!, 'HH:mm:ss'),
       hasRead: _message.isRead!,
-      isSending: _message.isVideoType ? false : _message.status == MessageStatus.sending,
+      isSending: _message.isVideoType
+          ? false
+          : _message.status == MessageStatus.sending,
       isSendFailed: _message.status == MessageStatus.failed,
       isBubbleBg: child == null ? true : isBubbleBg,
       menus: widget.showLongPressMenu ? _menusItem : [],

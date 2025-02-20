@@ -1,6 +1,6 @@
 import 'package:flutter_openim_sdk/flutter_openim_sdk.dart';
 import 'package:get/get.dart';
-import 'package:openim/pages/ua/ua_logic.dart';
+import 'package:openim/pages/webview/webview_logic.dart';
 import 'package:openim_common/openim_common.dart';
 
 import '../pages/chat/group_setup/edit_name/edit_name_logic.dart';
@@ -383,12 +383,20 @@ class AppNavigator {
         'userFullInfo': userFullInfo,
       });
 
-  static void startUa({required UaType type}) {
-    Get.toNamed(AppRoutes.ua, arguments: {'type': type});
-  }
-
   static void startLanguage() {
     Get.toNamed(AppRoutes.language);
+  }
+
+  static void startWebView({
+    String? title,
+    String? url,
+    String? content,
+  }) {
+    Get.toNamed(AppRoutes.webview, arguments: {
+      'title': title,
+      'url': url,
+      'content': content,
+    });
   }
 
   //   static void startSetSelfInfo({

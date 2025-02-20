@@ -39,7 +39,7 @@ class FeedPage extends StatelessWidget {
             16.verticalSpace,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: StrRes.workbench.toText..style = Styles.ts_999999_20,
+              child: StrRes.workbench.toText..style = Styles.ts_999999_17,
             ),
             _buildCard(
                 child: Column(
@@ -48,6 +48,7 @@ class FeedPage extends StatelessWidget {
                   _buildItemView(
                     img: ImageRes.feedHongbao.toImage..width = 28.w,
                     label: StrRes.signRedEnvelope,
+                    showDivider: true,
                   ),
                 for (var item in logic.appletList)
                   _buildItemView(
@@ -56,6 +57,8 @@ class FeedPage extends StatelessWidget {
                       width: 28.w,
                     ),
                     label: item.name ?? '',
+                    showDivider: item.appID != logic.appletList.last.appID,
+                    onTap: () => logic.switchApplet(item),
                   ),
               ],
             ))
@@ -79,39 +82,44 @@ class FeedPage extends StatelessWidget {
   Widget _buildItemView(
       {required Widget img,
       required String label,
+      VoidCallback? onTap,
       int unReadCount = 0,
       bool showDivider = false}) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.w),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              img,
-              14.horizontalSpace,
-              label.toText..style = Styles.ts_0C1C33_17_semibold,
-              const Spacer(),
-              if (unReadCount > 0) UnreadCountView(count: unReadCount),
-              10.horizontalSpace,
-              Icon(
-                EvaIcons.chevronRightOutline,
-                size: 22.w,
-              )
-            ],
-          ),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.w),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  img,
+                  14.horizontalSpace,
+                  label.toText..style = Styles.ts_0C1C33_17_semibold,
+                  const Spacer(),
+                  if (unReadCount > 0) UnreadCountView(count: unReadCount),
+                  10.horizontalSpace,
+                  Icon(
+                    EvaIcons.chevronRightOutline,
+                    size: 22.w,
+                  )
+                ],
+              ),
+            ),
+            if (showDivider) _buildDivider(),
+          ],
         ),
-        if (showDivider) _buildDivider(),
-      ],
+      ),
     );
   }
 
   Widget _buildDivider() {
-    return Divider(
+    return const Divider(
       thickness: 1,
       height: 1,
-      indent: 24.w,
-      endIndent: 24.w,
       color: Styles.c_EDEDED,
     );
   }

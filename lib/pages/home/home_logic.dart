@@ -47,6 +47,11 @@ class HomeLogic extends SuperController {
     this.index.value = index;
   }
 
+  switchApplet(applet) {
+    initLogic.setDefaultApplet(applet);
+    tabController.jumpToTab(2);
+  }
+
   scrollToUnreadMessage() {
     onScrollToUnreadMessage?.call();
   }

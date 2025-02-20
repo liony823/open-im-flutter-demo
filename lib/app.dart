@@ -54,9 +54,9 @@ class ChatApp extends StatelessWidget {
 class InitBinding extends Bindings {
   @override
   void dependencies() {
+    Get.put<CacheController>(CacheController());
     Get.put<IMController>(IMController());
     // Get.put<PushController>(PushController());
-    Get.put<CacheController>(CacheController());
     Get.put<DownloadController>(DownloadController());
   }
 }

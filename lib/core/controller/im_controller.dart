@@ -12,6 +12,7 @@ import 'package:openim_live/openim_live.dart';
 import '../im_callback.dart';
 
 class IMController extends GetxController with IMCallback, OpenIMLive {
+  final cacheController = Get.find<CacheController>();
   late Rx<UserFullInfo> userInfo;
   late String atAllTag;
 
@@ -53,14 +54,21 @@ class IMController extends GetxController with IMCallback, OpenIMLive {
         onConnectSuccess: () {
           imSdkStatus(IMSdkStatus.connectionSucceeded);
         },
-        onKickedOffline: kickedOffline,
-        onUserTokenExpired: kickedOffline,
-        onUserTokenInvalid: userTokenInvalid,
+        onKickedOffline: () {
+          kickedOffline();
+        },
+        onUserTokenExpired: () {
+          kickedOffline();
+        },
+        onUserTokenInvalid: () {
+          userTokenInvalid();
+        },
       ),
     );
 
     OpenIM.iMManager
-      ..setUploadLogsListener(OnUploadLogsListener(onUploadProgress: uploadLogsProgress))
+      ..setUploadLogsListener(
+          OnUploadLogsListener(onUploadProgress: uploadLogsProgress))
       ..userManager.setUserListener(OnUserListener(
           onSelfInfoUpdated: (u) {
             selfInfoUpdated(u);
@@ -90,7 +98,8 @@ class IMController extends GetxController with IMCallback, OpenIMLive {
                 customType == CustomMessageType.callingReject ||
                 customType == CustomMessageType.callingCancel ||
                 customType == CustomMessageType.callingHungup) {
-              final signaling = SignalingInfo(invitation: InvitationInfo.fromJson(map['data']));
+              final signaling = SignalingInfo(
+                  invitation: InvitationInfo.fromJson(map['data']));
               signaling.userID = signaling.invitation?.inviterUserID;
 
               switch (customType) {
@@ -167,7 +176,7 @@ class IMController extends GetxController with IMCallback, OpenIMLive {
     initializedSubject.sink.add(initialized);
   }
 
-  Future login(String userID, String token) async {
+  Future login(String userID, String token, String? password) async {
     try {
       var user = await OpenIM.iMManager.login(
         userID: userID,
@@ -176,6 +185,14 @@ class IMController extends GetxController with IMCallback, OpenIMLive {
       );
       ApiService().setToken(token);
       userInfo = UserFullInfo.fromJson(user.toJson()).obs;
+      if (password != null) {
+        cacheController.addAccount([
+          UserFullInfo(
+            userID: userID,
+            password: password,
+          )
+        ]);
+      }
       _queryMyFullInfo();
       _queryAtAllTag();
     } catch (e, s) {
@@ -197,6 +214,7 @@ class IMController extends GetxController with IMCallback, OpenIMLive {
   void _queryMyFullInfo() async {
     final data = await Apis.queryMyFullInfo();
     if (data is UserFullInfo) {
+      cacheController.updateAccount(data);
       userInfo.update((val) {
         val?.allowAddFriend = data.allowAddFriend;
         val?.allowBeep = data.allowBeep;

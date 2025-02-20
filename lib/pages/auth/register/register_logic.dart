@@ -1,7 +1,7 @@
 import "package:openim/core/controller/app_controller.dart";
 import "package:openim/core/controller/im_controller.dart";
 import "package:openim/core/mixin/world.dart";
-import "package:openim/pages/ua/ua_logic.dart";
+import "package:openim/pages/webview/webview_logic.dart";
 import "package:openim/routes/app_navigator.dart";
 import "package:openim/utils/dialog.dart";
 import "package:flutter/material.dart";
@@ -30,11 +30,17 @@ class RegisterLogic extends GetxController
   }
 
   void toUserAgreement() {
-    AppNavigator.startUa(type: UaType.userAgreement);
+    AppNavigator.startWebView(
+      title: StrRes.userAgreement,
+      content: appLogic.userAgreement,
+    );
   }
 
   void toPrivacyPolicy() {
-    AppNavigator.startUa(type: UaType.privacyPolicy);
+    AppNavigator.startWebView(
+      title: StrRes.privacyPolicy,
+      content: appLogic.privacyPolicy,
+    );
   }
 
   void toLanguage() {
@@ -56,7 +62,10 @@ class RegisterLogic extends GetxController
       params = formKey.currentState!.value;
     }
     if (!isAgreementChecked.value) {
-      final b = await DialogUtils.showAlertAgreement();
+      final b = await DialogUtils.showAlertAgreement(
+        toUserAgreement,
+        toPrivacyPolicy,
+      );
       onAgreementChecked(b);
     }
 
@@ -104,8 +113,6 @@ class RegisterLogic extends GetxController
       }
 
       final userInfo = await Apis.queryMyFullInfo(userID: result?.userID);
-      await appLogic.initClientConfig();
-
       loading.value = false;
 
       if (null == IMUtils.emptyStrToNull(result?.imToken) ||
@@ -117,7 +124,7 @@ class RegisterLogic extends GetxController
       final certificate = result!;
 
       await DataSp.putLoginCertificate(certificate);
-      await imLogic.login(certificate.userID, certificate.imToken);
+      await imLogic.login(certificate.userID, certificate.imToken, params['password']);
       Logger.print('---------im login success-------');
       AppNavigator.startSetSelfInfo(userInfo);
     } catch (e) {

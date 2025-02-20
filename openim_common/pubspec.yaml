@@ -68,7 +68,6 @@ dependencies:
   should_rebuild: ^1.0.1
   record: ^5.1.1
   mime: ^1.0.4
-  flutter_keyboard_visibility: ^5.4.0
   rotated_corner_decoration: ^2.1.0
   chewie: 1.8.5
   video_player: ^2.9.1
@@ -92,10 +91,14 @@ dependencies:
   getuiflut: ^0.2.32
   google_api_availability: ^5.0.0
   flutter_svg: ^2.0.16
-  flutter_inappwebview: ^6.1.5
   eva_icons_flutter: ^3.1.0
   world_countries: ^2.0.2
   flutter_form_builder: ^9.6.0
+  flutter_typeahead: ^5.2.0
+  flutter_keyboard_visibility: ^6.0.0
+  slang: ^4.4.1
+  slang_flutter: ^4.4.0
+
   
   flutter_easyloading: 
     git:
@@ -113,6 +116,7 @@ dev_dependencies:
   flutter_lints: ^3.0.1
   hive_generator: ^2.0.0
   build_runner: ^2.3.3
+  slang_build_runner: ^4.4.2
   flutter_native_splash: ^2.2.19
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

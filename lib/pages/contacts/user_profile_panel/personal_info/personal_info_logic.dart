@@ -53,7 +53,6 @@ class PersonalInfoLogic extends GetxController {
         val?.gender = info.gender;
         val?.englishName = info.englishName;
         val?.birth = info.birth;
-        val?.telephone = info.telephone;
         val?.phoneNumber = info.phoneNumber;
         val?.email = info.email;
       });
@@ -72,7 +71,6 @@ class PersonalInfoLogic extends GetxController {
 
   String? get birth => _birth == null ? '-' : DateUtil.formatDateMs(_birth!, format: IMUtils.getTimeFormat1());
 
-  String? get telephone => IMUtils.emptyStrToNull(userFullInfo.value.telephone) ?? '-';
 
   String? get phoneNumber => IMUtils.emptyStrToNull(userFullInfo.value.phoneNumber) ?? '-';
 
@@ -80,7 +78,6 @@ class PersonalInfoLogic extends GetxController {
 
   clickPhoneNumber() => _callSystemPhone(userFullInfo.value.phoneNumber);
 
-  clickTel() => _callSystemPhone(userFullInfo.value.telephone);
 
   clickEmail() => _callSystemEmail(userFullInfo.value.email);
 

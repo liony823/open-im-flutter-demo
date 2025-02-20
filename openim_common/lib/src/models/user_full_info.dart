@@ -1,36 +1,71 @@
+import 'package:hive/hive.dart';
+
+part 'user_full_info.g.dart';
+
+@HiveType(typeId: 6)
 class UserFullInfo {
+  @HiveField(0)
   String? userID;
+  @HiveField(1)
   String? password;
+  @HiveField(2)
   String? account;
+  @HiveField(3)
   String? phoneNumber;
+  @HiveField(4)
   String? areaCode;
+  @HiveField(5)
   String? nickname;
+  @HiveField(6)
   String? remark;
+  @HiveField(7)
   String? englishName;
+  @HiveField(8)
   String? faceURL;
+  @HiveField(9)
   int? gender;
+  @HiveField(10)
   String? mobileAreaCode;
+  @HiveField(11)
   String? mobile;
-  String? telephone;
+  @HiveField(12)
   int? level;
+  @HiveField(13)
   int? birth;
+  @HiveField(14)
   String? email;
+  @HiveField(15)
   int? order;
+  @HiveField(16)
   int? status;
+  @HiveField(17)
   int? allowAddFriend;
+  @HiveField(18)
   int? allowBeep;
+  @HiveField(19)
   int? allowVibration;
+  @HiveField(20)
   int? forbidden;
+  @HiveField(21)
   String? ex;
+  @HiveField(22)
   String? station;
+  @HiveField(23)
   int? globalRecvMsgOpt;
+  @HiveField(24)
   bool isFriendship = false;
+  @HiveField(25)
   bool isBlacklist = false;
-  List<DepartmentInfo>? departmentList;
+  @HiveField(26)
+  int? createTime;
+  @HiveField(27)
+  int? registerType;
 
   bool get isMale => gender == 1;
 
-  String get showName => remark?.isNotEmpty == true ? remark! : (nickname?.isNotEmpty == true ? nickname! : userID!);
+  String get showName => remark?.isNotEmpty == true
+      ? remark!
+      : (nickname?.isNotEmpty == true ? nickname! : userID!);
 
   UserFullInfo({
     this.userID,
@@ -45,7 +80,6 @@ class UserFullInfo {
     this.gender,
     this.mobileAreaCode,
     this.mobile,
-    this.telephone,
     this.level,
     this.birth,
     this.email,
@@ -60,7 +94,8 @@ class UserFullInfo {
     this.globalRecvMsgOpt,
     this.isFriendship = false,
     this.isBlacklist = false,
-    this.departmentList,
+    this.registerType,
+    this.createTime,
   });
 
   UserFullInfo.fromJson(Map<String, dynamic> json) {
@@ -76,7 +111,6 @@ class UserFullInfo {
     gender = json['gender'];
     mobileAreaCode = json['mobileAreaCode'];
     mobile = json['mobile'];
-    telephone = json['telephone'];
     level = json['level'];
     birth = json['birth'];
     email = json['email'];
@@ -91,9 +125,8 @@ class UserFullInfo {
     globalRecvMsgOpt = json['globalRecvMsgOpt'];
     isFriendship = json['isFriendship'] ?? false;
     isBlacklist = json['isBlacklist'] ?? false;
-    departmentList = json['departmentList'] == null
-        ? null
-        : (json['departmentList'] as List).map((e) => DepartmentInfo.fromJson(e)).toList();
+    createTime = json['createTime'];
+    registerType = json['registerType'];
   }
 
   Map<String, dynamic> toJson() {
@@ -109,7 +142,6 @@ class UserFullInfo {
     data['faceURL'] = faceURL;
     data['gender'] = gender;
     data['mobileAreaCode'] = mobileAreaCode;
-    data['telephone'] = telephone;
     data['level'] = level;
     data['birth'] = birth;
     data['email'] = email;
@@ -124,7 +156,8 @@ class UserFullInfo {
     data['globalRecvMsgOpt'] = globalRecvMsgOpt;
     data['isFriendship'] = isFriendship;
     data['isBlacklist'] = isBlacklist;
-    data['departmentList'] = departmentList?.map((e) => e.toJson()).toList();
+    data['createTime'] = createTime;
+    data['registerType'] = registerType;
     return data;
   }
 }

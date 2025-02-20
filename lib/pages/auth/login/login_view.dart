@@ -1,6 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:openim/routes/app_navigator.dart';
-import 'package:openim/widgets/agree_ua.dart';
+import 'package:openim/widgets/user_agreement_with_privacy_policy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -8,8 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:world_countries/helpers.dart';
-import '../widgets/input_phone_code.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'login_logic.dart';
+import '../widgets/input_phone_code.dart';
 import '../widgets/login_tab.dart';
 import '../widgets/login_tabbar.dart';
 
@@ -45,11 +46,13 @@ class LoginPage extends StatelessWidget {
                   ..height = 64.h,
                 16.verticalSpace,
                 StrRes.welcome.toText..style = Styles.ts_0089FF_17_semibold,
-                64.verticalSpace,
+                52.verticalSpace,
                 _buildFormView(),
-                AgreeUA(
+                UserAgreementWithPrivacyPolicy(
                   isChecked: logic.isAgreementChecked.value,
                   onCheck: logic.onAgreementChecked,
+                  onTapUserAgreement: logic.toUserAgreement,
+                  onTapPrivacyPolicy: logic.toPrivacyPolicy,
                 )
               ],
             )),
@@ -193,23 +196,75 @@ class LoginPage extends StatelessWidget {
   /// 用户名登录
   Widget _buildUserForm() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       child: FormBuilder(
         key: logic.userFormKey,
         child: Column(
           children: [
-            FormInput(
-              label: StrRes.account,
-              labelIcon: EvaIcons.personOutline,
-              hintText: StrRes.plsEnterAccount,
-              textInputAction: TextInputAction.next,
-              name: "account",
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return StrRes.plsEnterAccount.tr;
-                }
-                return null;
-              },
+            TypeAheadField<UserFullInfo>(
+              suggestionsCallback: (search) => logic.getUserList(search),
+              onSelected: (UserFullInfo item) => logic.onUserSelected(item),
+              itemBuilder: (context, item) => Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6).w,
+                child: Row(
+                  children: [
+                    AvatarView(
+                      url: item.faceURL,
+                      text: item.nickname,
+                      isCircle: true,
+                      width: 32.w,
+                      height: 32.h,
+                    ),
+                    16.horizontalSpace,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          spacing: 8.w,
+                          children: [
+                            StrRes.account.toText..style = Styles.ts_999999_10,
+                            (item.account ?? '').toText
+                              ..style = Styles.ts_333333_14,
+                          ],
+                        ),
+                        Row(
+                          spacing: 8.w,
+                          children: [
+                            StrRes.nickname.toText..style = Styles.ts_999999_10,
+                            (item.nickname ?? '').toText
+                              ..style = Styles.ts_333333_12,
+                          ],
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () => logic.onUserClose(item),
+                      icon: Icon(
+                        EvaIcons.close,
+                        size: 20.w,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              emptyBuilder: (context) => const SizedBox.shrink(),
+              builder: (context, controller, focusNode) => FormInput(
+                controller: controller,
+                focusNode: focusNode,
+                label: StrRes.account,
+                labelIcon: EvaIcons.personOutline,
+                hintText: StrRes.plsEnterAccount,
+                textInputAction: TextInputAction.next,
+                name: "account",
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return StrRes.plsEnterAccount.tr;
+                  }
+                  return null;
+                },
+              ),
             ),
             34.verticalSpace,
             FormInput.password(

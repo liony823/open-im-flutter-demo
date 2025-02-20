@@ -127,7 +127,7 @@ class Apis {
           "areaCode": areaCode,
           'phoneNumber': phoneNumber,
           'email': email,
-          'password': IMUtils.generateMD5(password),
+          'password': password,
           'verifyCode': verificationCode,
           'platform': IMUtils.getPlatform(),
         },

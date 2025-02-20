@@ -9,8 +9,8 @@ import 'package:openim/pages/auth/verify_phone/verify_phone_binding.dart';
 import 'package:openim/pages/auth/verify_phone/verify_phone_view.dart';
 import 'package:openim/pages/language/language_binding.dart';
 import 'package:openim/pages/language/language_view.dart';
-import 'package:openim/pages/ua/ua_binding.dart';
-import 'package:openim/pages/ua/ua_view.dart';
+import 'package:openim/pages/webview/webview_binding.dart';
+import 'package:openim/pages/webview/webview_view.dart';
 
 import '../pages/chat/chat_binding.dart';
 import '../pages/chat/chat_setup/chat_setup_binding.dart';
@@ -391,9 +391,9 @@ class AppPages {
       binding: OANotificationBinding(),
     ),
     _pageBuilder(
-      name: AppRoutes.ua,
-      page: () => UaPage(),
-      binding: UaBinding(),
+      name: AppRoutes.webview,
+      page: () => WebviewPage(),
+      binding: WebviewBinding(),
     ),
     _pageBuilder(
       name: AppRoutes.language,

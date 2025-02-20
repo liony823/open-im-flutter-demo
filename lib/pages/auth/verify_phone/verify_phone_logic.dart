@@ -87,7 +87,7 @@ class VerifyPhoneLogic extends GetxController {
       loading.value = false;
       final certificate = result!;
       await DataSp.putLoginCertificate(certificate);
-      await imLogic.login(certificate.userID, certificate.imToken);
+      await imLogic.login(certificate.userID, certificate.imToken, password);
       // PushController.login(certificate.userID);
       Logger.print('---------im login success-------');
       AppNavigator.startSetSelfInfo(userInfo);

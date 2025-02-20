@@ -21,7 +21,7 @@ class SplashLogic extends GetxController {
 
   @override
   void onInit() {
-    initializedSub = imLogic.initializedSubject.listen((value) {
+    initializedSub = imLogic.initializedSubject.listen((value) async {
       Logger.print('---------------------initialized---------------------');
       if (null != userID && null != token) {
         _login();
@@ -35,9 +35,9 @@ class SplashLogic extends GetxController {
   _login() async {
     try {
       Logger.print('---------login---------- userID: $userID, token: $token');
-      await imLogic.login(userID!, token!);
-      Logger.print('---------im login success-------');
+      await imLogic.login(userID!, token!, null);
       await appLogic.initClientConfig();
+      Logger.print('---------im login success-------');
       // PushController.login(
       //   userID!,
       //   onTokenRefresh: (token) {

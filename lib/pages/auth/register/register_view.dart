@@ -1,5 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:openim/widgets/agree_ua.dart';
+import 'package:openim/routes/app_navigator.dart';
+import 'package:openim/widgets/user_agreement_with_privacy_policy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,9 +46,11 @@ class RegisterPage extends StatelessWidget {
             bottomSheet: Padding(
               padding: EdgeInsets.only(
                   top: 12.w, bottom: context.mediaQueryPadding.bottom + 12.w),
-              child: AgreeUA(
+              child: UserAgreementWithPrivacyPolicy(
                 isChecked: logic.isAgreementChecked.value,
                 onCheck: logic.onAgreementChecked,
+                onTapUserAgreement: logic.toUserAgreement,
+                onTapPrivacyPolicy: logic.toPrivacyPolicy,
               ),
             ),
           )),

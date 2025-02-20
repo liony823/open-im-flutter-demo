@@ -666,4 +666,7 @@ const Map<String, String> zh_CN = {
   "friendShare": "好友分享",
   "scanQrCode": "扫一扫",
   "signRedEnvelope": "签到红包",
+
+  // 小程序页
+  "tapApplet": "点击输入小程序码"
 };

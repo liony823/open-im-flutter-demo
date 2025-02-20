@@ -44,7 +44,20 @@ mixin ClientConfig {
       clientConfigMap[ClientConfigs.appMomentsVisible] ==
       ClientConfigs.commonAllow;
 
+  void setDefaultApplet(AppletInfo applet) {
+    defaultApplet.update((val) {
+      val?.appID = applet.appID;
+      val?.icon = applet.icon;
+      val?.isDefault = applet.isDefault;
+      val?.name = applet.name;
+      val?.url = applet.url;
+      val?.status = applet.status;
+    });
+    DataSp.putApplet(applet);
+  }
+
   Future<void> _initApplet() async {
+    appletList.clear();
     final applet = DataSp.getApplet();
     if (applet != null) {
       defaultApplet.value = applet;
@@ -53,16 +66,28 @@ mixin ClientConfig {
     final list = await Apis.getAppletList();
     for (var item in list) {
       if (item.isDefault == 1) {
-        defaultApplet.update((applet) {
-          applet?.appID = item.appID;
-          applet?.icon = item.icon;
-          applet?.isDefault = item.isDefault;
-          applet?.name = item.name;
-          applet?.url = item.url;
-          applet?.status = item.status;
-        });
-        DataSp.putApplet(item);
+        if (defaultApplet.value != null &&
+            defaultApplet.value!.appID != item.appID) {
+          defaultApplet.update((applet) {
+            applet?.icon = item.icon;
+            applet?.isDefault = item.isDefault;
+            applet?.name = item.name;
+            applet?.url = item.url;
+            applet?.status = item.status;
+          });
+        } else {
+          defaultApplet.update((applet) {
+            applet?.icon = item.icon;
+            applet?.isDefault = item.isDefault;
+            applet?.name = item.name;
+            applet?.url = item.url;
+            applet?.status = item.status;
+          });
+        }
       }
+    }
+    if (defaultApplet.value != null) {
+      DataSp.putApplet(defaultApplet.value!);
     }
     list.sort((a, b) => (a.priority ?? 0).compareTo(b.priority ?? 0));
     appletList.addAll(list);

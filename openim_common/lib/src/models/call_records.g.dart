@@ -1,4 +1,10 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
 part of 'call_records.dart';
+
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
 
 class CallRecordsAdapter extends TypeAdapter<CallRecords> {
   @override
@@ -50,5 +56,7 @@ class CallRecordsAdapter extends TypeAdapter<CallRecords> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CallRecordsAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is CallRecordsAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
