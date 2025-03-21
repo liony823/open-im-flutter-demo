@@ -701,6 +701,8 @@ class Localized implements BaseTranslations<AppLocale, Localized> {
 	String get scanQrCode => '扫一扫';
 	String get signRedEnvelope => '签到红包';
 	String get tapApplet => '点击输入小程序码';
+	String get appletCode => '小程序码';
+	String get plsEnterAppletCode => '请输入小程序码';
 }
 
 /// Flat map(s) containing all translations.
@@ -1372,6 +1374,8 @@ extension on Localized {
 			case 'scanQrCode': return '扫一扫';
 			case 'signRedEnvelope': return '签到红包';
 			case 'tapApplet': return '点击输入小程序码';
+			case 'appletCode': return '小程序码';
+			case 'plsEnterAppletCode': return '请输入小程序码';
 			default: return null;
 		}
 	}

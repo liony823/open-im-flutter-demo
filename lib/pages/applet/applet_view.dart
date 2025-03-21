@@ -44,12 +44,20 @@ class AppletPage extends StatelessWidget {
             progress: logic.progress.value,
           );
         }
-        return Column(
-          children: [
-            ImageRes.noNetwork.toImage..width = 176.w,
-            16.verticalSpace,
-            (context.t.tapApplet).toText..style = Styles.ts_999999_14,
-          ],
+        return Center(
+          child: Column(
+            spacing: 24.w,
+            children: [
+              48.verticalSpace,
+              ImageRes.noNetwork.toImage..width = 176.w,
+              TextButton(
+                onPressed: logic.showSearchAppletModal,
+                child: (context.t.tapApplet).toText
+                  ..style = Styles.ts_0C1C33_14
+                  ..textAlign = TextAlign.center,
+              ),
+            ],
+          ),
         );
       }),
     );

@@ -117,5 +117,5 @@ export 'src/widgets/rectdicator.dart';
 export 'src/widgets/dialog/alert_agreement.dart';
 export 'src/controller/push_controller.dart';
 
-
+export 'src/widgets/dialog/search_applet.dart';
 export 'i18n/localized.g.dart';

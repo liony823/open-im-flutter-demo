@@ -466,7 +466,7 @@ class Apis {
   static Future<AppletInfo?> getApplet(String appID) async {
     try {
       final data = await HttpUtil.post(
-        Urls.getApplets,
+        Urls.getApplet,
         data: {"appID": appID},
         options: chatTokenOptions,
       );

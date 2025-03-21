@@ -152,22 +152,28 @@ class LoginPage extends StatelessWidget {
         key: logic.phoneFormKey,
         child: Column(
           children: [
-            FormInput.phone(
-              label: context.t.phoneNumber,
-              labelIcon: EvaIcons.phoneOutline,
-              hintText: context.t.plsEnterPhoneNumber,
-              prefixIcon: InputPhoneCode(
-                onOpenPicker: logic.showPhoneCodePicker,
-                areaCode: logic.areaCode.value,
+            TypeAheadField<UserFullInfo>(
+              suggestionsCallback: (search) => logic.getUserList(search),
+              onSelected: (UserFullInfo item) => logic.onUserSelected(item),
+              itemBuilder: (context, item) =>
+                  _buildTypeAheadItem(item, context),
+              builder: (context, controller, focusNode) => FormInput.phone(
+                label: context.t.phoneNumber,
+                labelIcon: EvaIcons.phoneOutline,
+                hintText: context.t.plsEnterPhoneNumber,
+                prefixIcon: InputPhoneCode(
+                  onOpenPicker: logic.showPhoneCodePicker,
+                  areaCode: logic.areaCode.value,
+                ),
+                name: "phone",
+                textInputAction: TextInputAction.next,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return context.t.plsEnterPhoneNumber;
+                  }
+                  return null;
+                },
               ),
-              name: "phone",
-              textInputAction: TextInputAction.next,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return context.t.plsEnterPhoneNumber;
-                }
-                return null;
-              },
             ),
             34.verticalSpace,
             FormInput.password(
@@ -205,53 +211,8 @@ class LoginPage extends StatelessWidget {
             TypeAheadField<UserFullInfo>(
               suggestionsCallback: (search) => logic.getUserList(search),
               onSelected: (UserFullInfo item) => logic.onUserSelected(item),
-              itemBuilder: (context, item) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6).w,
-                child: Row(
-                  children: [
-                    AvatarView(
-                      url: item.faceURL,
-                      text: item.nickname,
-                      isCircle: true,
-                      width: 32.w,
-                      height: 32.h,
-                    ),
-                    16.horizontalSpace,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          spacing: 8.w,
-                          children: [
-                            context.t["account"].toText
-                              ..style = Styles.ts_999999_10,
-                            (item.account ?? '').toText
-                              ..style = Styles.ts_333333_14,
-                          ],
-                        ),
-                        Row(
-                          spacing: 8.w,
-                          children: [
-                            context.t["nickname"].toText
-                              ..style = Styles.ts_999999_10,
-                            (item.nickname ?? '').toText
-                              ..style = Styles.ts_333333_12,
-                          ],
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () => logic.onUserClose(item),
-                      icon: Icon(
-                        EvaIcons.close,
-                        size: 20.w,
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              itemBuilder: (context, item) =>
+                  _buildTypeAheadItem(item, context),
               emptyBuilder: (context) => const SizedBox.shrink(),
               builder: (context, controller, focusNode) => FormInput(
                 controller: controller,
@@ -290,6 +251,51 @@ class LoginPage extends StatelessWidget {
             _buildLoginButton(context),
           ],
         ),
+      ),
+    );
+  }
+
+  Padding _buildTypeAheadItem(UserFullInfo item, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6).w,
+      child: Row(
+        children: [
+          AvatarView(
+            url: item.faceURL,
+            text: item.nickname,
+            isCircle: true,
+            width: 32.w,
+            height: 32.h,
+          ),
+          16.horizontalSpace,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                spacing: 8.w,
+                children: [
+                  (context.t.account).toText..style = Styles.ts_999999_10,
+                  (item.account ?? '').toText..style = Styles.ts_333333_14,
+                ],
+              ),
+              Row(
+                spacing: 8.w,
+                children: [
+                  (context.t.nickname).toText..style = Styles.ts_999999_10,
+                  (item.nickname ?? '').toText..style = Styles.ts_333333_12,
+                ],
+              ),
+            ],
+          ),
+          const Spacer(),
+          IconButton(
+            onPressed: () => logic.onUserClose(item),
+            icon: Icon(
+              EvaIcons.close,
+              size: 20.w,
+            ),
+          )
+        ],
       ),
     );
   }

@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyC0BhV-mo84LvOuqWf2bS966jlf0f8mh74</string>
+	<string>AIzaSyChpP9EzM_d52iDTUxErsWCMp2Giy-2Ok4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>299075855003</string>
+	<string>95669497678</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>io.openim.flutter.base</string>
+	<string>im.feihong.app.NotificationService</string>
 	<key>PROJECT_ID</key>
-	<string>im-fer-c3347</string>
+	<string>feihong-im</string>
 	<key>STORAGE_BUCKET</key>
-	<string>im-fer-c3347.firebasestorage.app</string>
+	<string>feihong-im.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:299075855003:ios:23b06300e33d984309dc3e</string>
+	<string>1:95669497678:ios:51840430962ad66961b81f</string>
 </dict>
 </plist>

@@ -666,6 +666,8 @@
     "scanQrCode": "扫一扫",
     "signRedEnvelope": "签到红包",
   
-    "tapApplet": "点击输入小程序码"
+    "tapApplet": "点击输入小程序码",
+    "appletCode": "小程序码",
+    "plsEnterAppletCode": "请输入小程序码"
   }
   

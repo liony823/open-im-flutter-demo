@@ -1,177 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:openim_common/openim_common.dart';
+import 'package:vibration/vibration.dart';
+
+enum ButtonType {
+  primary,
+  secondary,
+  text,
+  link,
+}
 
 enum ButtonSize {
   small,
-  medium,
+  middle,
   large,
-}
-
-class AdaptiveButton extends StatelessWidget {
-  const AdaptiveButton({
-    super.key,
-    this.text,
-    this.child,
-    this.onTap,
-    this.enabled = true,
-    this.loading = false,
-    this.block = true,
-    this.size = ButtonSize.large,
-    this.margin,
-    this.padding,
-    this.radius = 8.0,
-    this.height,
-    this.enabledColor,
-    this.disabledColor = CupertinoColors.tertiarySystemFill,
-    this.textStyle,
-    this.disabledTextStyle,
-  });
-
-  const AdaptiveButton.small({
-    super.key,
-    this.text,
-    this.child,
-    this.onTap,
-    this.enabled = true,
-    this.loading = false,
-    this.block = true,
-    this.size = ButtonSize.small,
-    this.margin,
-    this.padding,
-    this.radius = 8.0,
-    this.height,
-    this.enabledColor,
-    this.disabledColor = CupertinoColors.quaternarySystemFill,
-    this.textStyle,
-    this.disabledTextStyle,
-  });
-
-  /// 按钮文本
-  final String? text;
-
-  final Widget? child;
-
-  final double? height;
-
-  /// 点击回调
-  final VoidCallback? onTap;
-
-  /// 是否启用
-  final bool enabled;
-
-  /// 是否显示加载中
-  final bool loading;
-
-  /// 是否占满宽度
-  final bool block;
-
-  /// 按钮大小样式
-  final ButtonSize size;
-
-  /// 外边距
-  final EdgeInsetsGeometry? margin;
-
-  /// 内边距
-  final EdgeInsetsGeometry? padding;
-
-  /// 圆角大小
-  final double radius;
-
-  /// 启用状态下的背景色
-  final Color? enabledColor;
-
-  /// 禁用状态下的背景色
-  final Color? disabledColor;
-
-  /// 文本样式
-  final TextStyle? textStyle;
-
-  /// 禁用状态下的文本样式
-  final TextStyle? disabledTextStyle;
-
-  @override
-  Widget build(BuildContext context) {
-    final platform = Theme.of(context).platform;
-    double h = 44.h;
-    if (size == ButtonSize.small) {
-      h = 32.h;
-    } else if (size == ButtonSize.large) {
-      h = 50.h;
-    }
-    if (platform == TargetPlatform.iOS) {
-      CupertinoButtonSize sizeStyle = CupertinoButtonSize.medium;
-      if (size == ButtonSize.small) {
-        sizeStyle = CupertinoButtonSize.small;
-      } else if (size == ButtonSize.medium) {
-        sizeStyle = CupertinoButtonSize.medium;
-      } else if (size == ButtonSize.large) {
-        sizeStyle = CupertinoButtonSize.large;
-      }
-      return Container(
-        width: block ? double.infinity : null,
-        height: height ?? h,
-        margin: margin,
-        child: CupertinoButton(
-          onPressed: !enabled
-              ? null
-              : () {
-                  if (loading) return;
-                  onTap?.call();
-                },
-          pressedOpacity: 0.8,
-          padding: padding ?? EdgeInsets.symmetric(horizontal: 16.w),
-          color: enabledColor ?? Styles.c_0089FF,
-          disabledColor: disabledColor ?? CupertinoColors.quaternarySystemFill,
-          sizeStyle: sizeStyle,
-          borderRadius: BorderRadius.circular(radius.r),
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            layoutBuilder: (child, List<Widget> previousChildren) => Stack(
-              alignment: Alignment.center,
-              children: [
-                ...previousChildren,
-                if (child != null) child,
-              ],
-            ),
-            child: loading
-                ? SizedBox(
-                    width: 18.w,
-                    height: 18.h,
-                    child: CircularProgressIndicator(
-                      color: Styles.c_FFFFFF,
-                      strokeWidth: 3.0.r,
-                    ),
-                  )
-                : child ??
-                    Text(text ?? '',
-                        style: enabled
-                            ? (textStyle ?? Styles.ts_FFFFFF_17_semibold)
-                            : (disabledTextStyle ??
-                                textStyle ??
-                                Styles.ts_FFFFFF_17_semibold)),
-          ),
-        ),
-      );
-    }
-
-    return Button(
-      text: text,
-      onTap: onTap,
-      enabled: enabled,
-      loading: loading,
-      height: height,
-      margin: margin,
-      padding: padding,
-      radius: radius,
-      enabledColor: enabledColor,
-      disabledColor: disabledColor,
-      textStyle: textStyle,
-      disabledTextStyle: disabledTextStyle,
-      child: child,
-    );
-  }
 }
 
 class Button extends StatelessWidget {
@@ -179,71 +21,158 @@ class Button extends StatelessWidget {
     super.key,
     this.text,
     this.child,
-    this.enabled = true,
-    this.enabledColor,
-    this.disabledColor,
-    this.radius,
-    this.textStyle,
-    this.disabledTextStyle,
     this.onTap,
+    this.enabled = true,
+    this.loading = false,
+    this.block = true,
+    this.size = ButtonSize.middle,
+    this.type = ButtonType.primary,
     this.margin,
     this.padding,
+    this.radius = 6.0,
     this.height,
-    this.loading = false,
+    this.icon,
+    this.color,
+    this.textStyle,
+    this.disabledTextStyle,
   });
-  final Color? enabledColor;
-  final Color? disabledColor;
-  final double? radius;
-  final TextStyle? textStyle;
-  final TextStyle? disabledTextStyle;
+
   final String? text;
   final Widget? child;
-  final double? height;
-  final Function()? onTap;
-  final EdgeInsetsGeometry? margin;
-  final EdgeInsetsGeometry? padding;
+  final Widget? icon;
+  final VoidCallback? onTap;
   final bool enabled;
   final bool loading;
+  final bool block;
+  final ButtonSize size;
+  final ButtonType type;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
+  final double radius;
+  final double? height;
+  final Color? color;
+  final TextStyle? textStyle;
+  final TextStyle? disabledTextStyle;
+
+  double _getHeight() {
+    switch (size) {
+      case ButtonSize.small:
+        return 32.h;
+      case ButtonSize.middle:
+        return 44.h;
+      case ButtonSize.large:
+        return 50.h;
+    }
+  }
+
+  Color _getBackgroundColor() {
+    if (!enabled) {
+      return Styles.c_0089FF.withValues(alpha: .5);
+    }
+
+    if (type == ButtonType.primary) {
+      return color ?? Styles.c_0089FF;
+    }
+
+    if (type == ButtonType.secondary) {
+      return Colors.transparent;
+    }
+
+    return Colors.transparent;
+  }
+
+  TextStyle _getTextStyle() {
+    if (!enabled) {
+      return disabledTextStyle ??
+          Styles.ts_FFFFFF_17_semibold
+              .copyWith(color: Styles.c_FFFFFF.withValues(alpha: .5));
+    }
+
+    if (type == ButtonType.primary) {
+      return textStyle ?? Styles.ts_FFFFFF_17_semibold;
+    }
+
+    if (type == ButtonType.secondary) {
+      return textStyle ??
+          Styles.ts_FFFFFF_17_semibold.copyWith(color: Styles.c_0089FF);
+    }
+
+    if (type == ButtonType.link) {
+      return textStyle ??
+          Styles.ts_FFFFFF_17_semibold.copyWith(
+              color: Styles.c_0089FF, decoration: TextDecoration.underline);
+    }
+
+    return textStyle ?? Styles.ts_0089FF_17_semibold;
+  }
+
+  BoxBorder? _getBorder() {
+    if (type == ButtonType.secondary) {
+      return Border.all(
+        color:
+            enabled ? Styles.c_0089FF : Styles.c_0089FF.withValues(alpha: .5),
+        width: 1,
+      );
+    }
+    return null;
+  }
+
+  void _onTap() async {
+    if (!enabled || loading) return;
+    onTap?.call();
+    final hasVibrator = await Vibration.hasVibrator();
+    if (hasVibrator == true) {
+      Vibration.vibrate();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    double height = this.height ?? 44.h;
+    final buttonHeight = height ?? _getHeight();
+
     return Container(
+      width: block ? double.infinity : null,
+      height: buttonHeight,
       margin: margin,
       child: Material(
-        type: MaterialType.transparency,
+        color: Colors.transparent,
         child: Ink(
-          height: height,
           decoration: BoxDecoration(
-            color: enabled
-                ? enabledColor ?? Styles.c_0089FF
-                : disabledColor ?? Styles.c_0089FF.withValues(alpha: 0.5),
-            borderRadius: BorderRadius.circular(radius ?? 4.r),
+            color: _getBackgroundColor(),
+            borderRadius: BorderRadius.circular(radius.r),
+            border: _getBorder(),
           ),
           child: InkWell(
-            onTap: enabled ? onTap : null,
-            borderRadius: BorderRadius.circular(radius ?? 4.r),
+            onTap: _onTap,
+            borderRadius: BorderRadius.circular(radius.r),
             child: Container(
-              alignment: Alignment.center,
-              padding: padding,
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                layoutBuilder: (child, List<Widget> previousChildren) => Stack(
-                  children: [
-                    ...previousChildren,
-                    if (child != null) child,
-                  ],
-                ),
-                child: loading
-                    ? const CircularProgressIndicator(
-                        color: Styles.c_FFFFFF,
+              padding: padding ?? EdgeInsets.symmetric(horizontal: 16.w),
+              child: Row(
+                mainAxisSize: block ? MainAxisSize.max : MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (loading) ...[
+                    SizedBox(
+                      width: 18.w,
+                      height: 18.h,
+                      child: CircularProgressIndicator(
+                        color: _getTextStyle().color,
                         strokeWidth: 2.0,
-                      )
-                    : child ??
-                        Text(
-                          text ?? '',
-                          style: textStyle ?? Styles.ts_FFFFFF_17_semibold,
-                          maxLines: 1,
-                        ),
+                      ),
+                    ),
+                    8.horizontalSpace,
+                  ],
+                  if (icon != null && !loading) ...[
+                    icon!,
+                    8.horizontalSpace,
+                  ],
+                  child ??
+                      Text(
+                        text ?? '',
+                        style: _getTextStyle(),
+                        maxLines: 1,
+                      ),
+                ],
               ),
             ),
           ),
@@ -253,60 +182,89 @@ class Button extends StatelessWidget {
   }
 }
 
-class ImageTextButton extends StatelessWidget {
-  const ImageTextButton({
+// 为了保持向后兼容，保留 AdaptiveButton 类名但使用新的 Button 实现
+class AdaptiveButton extends Button {
+  const AdaptiveButton({
     super.key,
-    required this.icon,
-    required this.text,
-    this.textStyle,
-    this.color,
-    this.height,
-    this.onTap,
-  });
-  final String icon;
-  final String text;
-  final TextStyle? textStyle;
-  final Color? color;
-  final double? height;
-  final Function()? onTap;
+    super.text,
+    super.child,
+    super.onTap,
+    super.enabled = true,
+    super.loading = false,
+    super.block = true,
+    super.size = ButtonSize.large,
+    super.margin,
+    super.padding,
+    super.radius = 8.0,
+    super.height,
+    Color? enabledColor,
+    Color? disabledColor,
+    super.textStyle,
+    super.disabledTextStyle,
+  }) : super(
+          color: enabledColor,
+          type: ButtonType.primary,
+        );
 
-  ImageTextButton.call({super.key, this.onTap})
-      : icon = ImageRes.audioAndVideoCall,
-        text = t.audioAndVideoCall,
-        color = Styles.c_FFFFFF,
-        textStyle = null,
-        height = null;
+  const AdaptiveButton.small({
+    super.key,
+    super.text,
+    super.child,
+    super.onTap,
+    super.enabled = true,
+    super.loading = false,
+    super.block = true,
+    super.margin,
+    super.padding,
+    super.radius = 8.0,
+    super.height,
+    Color? enabledColor,
+    Color? disabledColor,
+    super.textStyle,
+    super.disabledTextStyle,
+  }) : super(
+          size: ButtonSize.small,
+          color: enabledColor,
+          type: ButtonType.primary,
+        );
+}
 
-  ImageTextButton.message({super.key, this.onTap})
-      : icon = ImageRes.message,
-        text = t.sendMessage,
-        color = Styles.c_0089FF,
-        textStyle = Styles.ts_FFFFFF_17,
-        height = null;
+// ImageTextButton 重构
+class ImageTextButton extends Button {
+  ImageTextButton({
+    super.key,
+    required String icon,
+    required String text,
+    super.textStyle,
+    super.color,
+    super.height,
+    super.onTap,
+  }) : super(
+          text: text,
+          icon: icon.toImage
+            ..width = 20.w
+            ..height = 20.h,
+          radius: 6,
+        );
 
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: Ink(
-        height: height ?? 46.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6.r),
-          color: color,
-        ),
-        child: InkWell(
-          onTap: onTap,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              icon.toImage
-                ..width = 20.w
-                ..height = 20.h,
-              6.horizontalSpace,
-              text.toText..style = textStyle ?? Styles.ts_0C1C33_17,
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  ImageTextButton.call({super.key, super.onTap})
+      : super(
+          text: t.audioAndVideoCall,
+          icon: ImageRes.audioAndVideoCall.toImage
+            ..width = 20.w
+            ..height = 20.h,
+          color: Styles.c_FFFFFF,
+          radius: 6,
+        );
+
+  ImageTextButton.message({super.key, super.onTap})
+      : super(
+          text: t.sendMessage,
+          icon: ImageRes.message.toImage
+            ..width = 20.w
+            ..height = 20.h,
+          color: Styles.c_0089FF,
+          textStyle: Styles.ts_FFFFFF_17,
+          radius: 6,
+        );
 }

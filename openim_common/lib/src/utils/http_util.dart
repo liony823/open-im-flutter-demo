@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get/get.dart' as Get;
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:openim_common/openim_common.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
@@ -81,7 +80,7 @@ class HttpUtil {
     } catch (error) {
       if (error is DioException) {
         if (error.type != DioExceptionType.cancel) {
-          if (showErrorToast) IMViews.showToast(error.type.name.toString());
+          if (showErrorToast) IMViews.showToast(t[error.type.name.toString()]);
         }
       }
       return Future.error(error);

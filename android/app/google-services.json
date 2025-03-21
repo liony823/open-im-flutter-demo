@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "299075855003",
-    "project_id": "im-fer-c3347",
-    "storage_bucket": "im-fer-c3347.firebasestorage.app"
+    "project_number": "95669497678",
+    "project_id": "feihong-im",
+    "storage_bucket": "feihong-im.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:299075855003:android:292449dc34ad498109dc3e",
+        "mobilesdk_app_id": "1:95669497678:android:f6b668183ec7cb4f61b81f",
         "android_client_info": {
-          "package_name": "io.openim.flutter.demo"
+          "package_name": "com.feihong.im"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCw-ohvxFisvm3Yrb4kCzPBuL0YfZkzI9Q"
+          "current_key": "AIzaSyB1gG00bbqikC9fuxhLmY3_dW7gtMcdwv0"
         }
       ],
       "services": {

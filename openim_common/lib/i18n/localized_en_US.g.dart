@@ -322,7 +322,7 @@ class LocalizedEnUs extends Localized {
 	@override String get loginPwdFormat => '6 to 18 digits, at least numbers and letters';
 	@override String get loginWithAutoRegister => 'Automatic device registration and login';
 	@override String get loginWithAutoRegisterHint => 'Whether to register an account and log in according to your mobile phone device number';
-	@override String get loginWithPhone => 'Mobile phone number login';
+	@override String get loginWithPhone => 'Mobile login';
 	@override String get loginWithUser => 'Username login';
 	@override String get logout => 'Log out';
 	@override String get logoutHint => 'Are you sure you want to log out?';
@@ -993,7 +993,7 @@ extension on LocalizedEnUs {
 			case 'loginPwdFormat': return '6 to 18 digits, at least numbers and letters';
 			case 'loginWithAutoRegister': return 'Automatic device registration and login';
 			case 'loginWithAutoRegisterHint': return 'Whether to register an account and log in according to your mobile phone device number';
-			case 'loginWithPhone': return 'Mobile phone number login';
+			case 'loginWithPhone': return 'Mobile login';
 			case 'loginWithUser': return 'Username login';
 			case 'logout': return 'Log out';
 			case 'logoutHint': return 'Are you sure you want to log out?';
