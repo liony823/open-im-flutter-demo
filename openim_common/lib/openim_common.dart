@@ -22,7 +22,7 @@ export 'src/models/define.dart';
 export 'src/models/signaling_info.dart';
 export 'src/res/images.dart';
 export 'src/res/styles.dart';
-export 'src/res/my_theme.dart';
+export 'src/res/theme.dart';
 export 'src/urls.dart';
 export 'src/utils/regex.dart';
 export 'src/utils/data_sp.dart';

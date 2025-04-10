@@ -20,8 +20,8 @@ class ChatApp extends StatelessWidget {
         enableLog: true,
         builder: builder,
         logWriterCallback: Logger.print,
-        theme: MyTheme.lightTheme,
-        darkTheme: MyTheme.darkTheme,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
         localizationsDelegates: const [
           TypedLocaleDelegate(),
           GlobalMaterialLocalizations.delegate,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:openim_common/openim_common.dart';
 
-class MyTheme {
+class AppTheme {
   static const fontFamily = 'NotoSans';
 
   static ThemeData lightTheme = ThemeData(

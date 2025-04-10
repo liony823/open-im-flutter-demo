@@ -72,7 +72,7 @@ class HttpUtil {
         return resp.data;
       } else {
         if (showErrorToast) {
-          IMViews.showToast(ApiError.getMsg(resp.errCode));
+          IMViews.showToast(t["err_${resp.errCode.toString()}"]);
         }
 
         return Future.error((resp.errCode, resp.errMsg));
